@@ -2,12 +2,14 @@ const Users= require('../models/user')
 const bcrypt =require('bcrypt')
 const jwt=require('jsonwebtoken')
 const sendMail= require('./sendMail')
+const sendAccept= require('./sendAccept')
+const path = require('path')
 const {google} = require('googleapis')
+
 const {OAuth2} = google.auth
 const {CLIENT_URL} = process.env
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
-
 const userCtrl = {
  //Register
  register: async (req, res) => {
@@ -32,7 +34,7 @@ const userCtrl = {
             name, email, password: passwordHash
         }
         const user1 = new Users(newUser);
-        const save = await user1.save();
+         await user1.save();
 /*
         const activation_token = createActivationToken(newUser)
 
@@ -45,23 +47,47 @@ const userCtrl = {
         return res.status(500).json({msg: err.message})
     }
 },
+//Accept instructeur
+AcceptInstr: async (req, res) => {
+    try {
+
+      const user=  await Users.findOne({_id: req.params.id})
+
+       // if(!user) return res.status(400).json({msg: "This email does not exist."})
+
+        const access_token = createAccessToken({id: user._id})
+        const url = `${CLIENT_URL}/user/acceptInstr/${access_token}`
+
+        sendAccept(user.email, url, "Accéder à votre compte")
+        res.json({msg: "Instructeur accepté."})
+        
+
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //Register instructeur
 registerInstructeur: async (req, res) => {
     try {
-        const {name, email,specialite,cv,skills,description,formation} = req.body
-        if(!name || !email )
+        const {name, email,specialite,skills,description,formation} = req.body
+        const {file} = req;
+
+       if(!name || !email )
             return res.status(400).json({msg: "Please fill in all fields."})
 
         if(!validateEmail(email))
             return res.status(400).json({msg: "Invalid emails."})
+            
         const newUser = {
-            name, email,specialite,cv,skills,description,formation
+            name, email,specialite,skills,description,formation,
+            cv: (file && file.path )|| null,
+
         }
       
         const user = new Users(newUser);
         user.role="instructeur";
-        const save = await user.save();
-                res.json({msg: "Register Success! Please activate your email to start."})
+         await user.save();
+                res.json({msg: "Candidature envoyée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -159,7 +185,8 @@ resetPassword: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
-//User information
+
+//User information profil
 getUserInfor: async (req, res) => {
     try {
         const user = await Users.findById(req.user.id).select('-password')
@@ -169,7 +196,7 @@ getUserInfor: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
-//Users All informations
+//Users All informations Admin
 getUsersAllInfor: async (req, res) => {
     try {
         const users = await Users.find().select('-password')
@@ -191,9 +218,12 @@ logout: async (req, res) => {
 //update user
 updateUser: async (req, res) => {
     try {
-        const {name, avatar} = req.body
+        const {name} = req.body
+        const {file} =req
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            name, avatar
+            name,
+            avatar: (file && file.path )|| null,
+
         })
 
         res.json({msg: "Update Success!"})
@@ -201,6 +231,28 @@ updateUser: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//update password instructeur
+updatePsswordInstr: async (req, res) => {
+    try {
+        const {password} = req.body
+        
+        if(!password)
+            return res.status(400).json({msg: "Please fill in all fields."})
+
+        if(password.length < 6)
+            return res.status(400).json({msg: "Password must be at least 6 characters."})
+
+        const passwordHash = await bcrypt.hash(password, 12)
+       
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            password: passwordHash        })
+
+        res.json({msg: "Update Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+
 //Update users role
 updateUsersRole: async (req, res) => {
     try {
@@ -327,9 +379,7 @@ facebookLogin: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 }
-
 }
-
 
 
 

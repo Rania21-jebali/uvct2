@@ -3,21 +3,17 @@ const express=require('express')
 const mongoose=require('mongoose')
 const cors= require('cors')
 const cookieParser= require('cookie-parser')
-const fileUpload= require('express-fileupload')
-
-
 const app = express()
+const multer = require('multer')
 app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
-app.use(fileUpload({
-    useTempFiles: true
-}))
+
+
 //Routes
 app.use('/user',require('./routes/user'))
-
-
-
+app.use('/',require('./controllers/upload'))
+app.use(express.static('public'));
 
 // Connect to mongoose
 const URI = process.env.MONGOBD_URL

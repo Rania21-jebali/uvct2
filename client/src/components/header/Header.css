@@ -1,0 +1,50 @@
+
+.header:hover{
+    display: block;
+}
+.row2{
+    background-color:white;
+    margin-left: 20px;
+}
+.links{
+    text-align: center;
+    
+}
+.button-connexion{
+    background-color:white;
+    color:var(--primary-color);
+    border-color:var(--primary-color);
+    margin-right: 10px;
+}
+.button-connexion:hover{
+    color:var(--primary-color);
+}
+.button-inscription:hover{
+    color:var(--primary-color);
+}
+.button-inscription{
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    margin-right: 20px;
+}
+.link-postuler-enseigner{
+    color: black;
+    font-size: large;
+}
+.dropdown:hover .dropdown-menu{
+display: block;
+}
+.flex-auto{
+    flex: auto;
+}
+
+.nav-menu{
+    margin-left: 180px;
+}
+.link-postuler-enseigner:hover{
+    color:var(--primary-color);
+}
+.nav-dropdown-title{
+    color: black;
+}

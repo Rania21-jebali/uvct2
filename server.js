@@ -12,6 +12,7 @@ app.use(cookieParser())
 
 //Routes
 app.use('/user',require('./routes/user'))
+
 app.use('/',require('./controllers/upload'))
 app.use(express.static('public'));
 

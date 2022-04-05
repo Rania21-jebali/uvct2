@@ -42,7 +42,7 @@ const userCtrl = {
         sendMail(email, url, "Verify your email address")
 */
 
-        res.json({msg: "Register Success! Please activate your email to start."})
+        res.json({msg: "Register Success! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -219,10 +219,13 @@ logout: async (req, res) => {
 updateUser: async (req, res) => {
     try {
         const {name} = req.body
-        const {file} =req
+       // const {file} =req
+       const {avatar} = req.body
+
         await Users.findOneAndUpdate({_id: req.user.id}, {
             name,
-            avatar: (file && file.path )|| null,
+            avatar
+            //avatar: (file && file.path )|| null,
 
         })
 

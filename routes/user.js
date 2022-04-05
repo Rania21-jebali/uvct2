@@ -28,7 +28,10 @@ router.get('/all_infor', auth, authAdmin, userCtrl.getUsersAllInfor)
 
 router.get('/logout', userCtrl.logout)
 
-router.patch('/update', auth, upload,userCtrl.updateUser)
+//router.patch('/update', auth, upload,userCtrl.updateUser)
+router.patch('/update', auth,userCtrl.updateUser)
+
+
 router.patch('/updatePasswordInstr', auth,userCtrl.updatePsswordInstr)
 
 router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)

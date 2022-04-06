@@ -44,7 +44,7 @@ function Profile() {
     }
     
 
-  /*  const changeAvatar = async(e) => {
+    const changeAvatar = async(e) => {
         e.preventDefault()
         try {
             const file = e.target.files[0]
@@ -58,10 +58,10 @@ function Profile() {
                 return setData({...data, err: "File format is incorrect." , success: ''})
 
             let formData =  new FormData()
-            formData.append('avatar', file)
+            formData.append('file', file)
 
             setLoading(true)
-            const res = await axios.post('/uploads', formData, {
+            const res = await axios.post('/api/upload_avatar', formData, {
                 headers: {'content-type': 'multipart/form-data', Authorization: token}
             })
 
@@ -71,7 +71,8 @@ function Profile() {
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
         }
-    }*/
+    }
+
    
     const updateInfor = () => {
         try {
@@ -138,17 +139,15 @@ function Profile() {
             {loading && <h3>Loading.....</h3>}
             <div className="col-left">
                 <h2>{isAdmin ? "Admin Profile": "User Profile"}</h2>
+                <Form >
+             <Form.Group className="mb-3" >
 
-                
-                <Form encType='multipart/form-data'>
-  <Form.Group className="mb-3" >
-
-  <img src={avatar ? avatar : user.avatar} alt=""/>
+            <img src={avatar ? avatar : user.avatar} alt=""/>
 
   <Form.Control type="file" 
    name="avatar"
     defaultValue={user.avatar}
-    onChange={handleChange}
+    onChange={changeAvatar}
     />
   </Form.Group>
   <Form.Group className="mb-3" >

@@ -1,9 +1,6 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React,{ useState } from 'react'
 import { Navbar,Nav,Form,FormControl,Button,Modal,NavDropdown} from 'react-bootstrap';
 import { BiCartAlt } from 'react-icons/bi';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import { useState } from 'react';
 import Connexion from '../../pages/auth/connexion/Connexion';
 import Inscrire from '../../pages/auth/inscrire/Inscrire';
 import {useSelector} from 'react-redux'
@@ -62,12 +59,8 @@ function Header() {
           aria-label="Search"
         />
       </Form>
-      <OverlayTrigger placement="bottom" >
       <Nav.Link href="/enseigner-sur-uvct" className="link-postuler-enseigner">Enseigner sur Uvct</Nav.Link>
-      </OverlayTrigger>
-      <OverlayTrigger placement="bottom" >
      <Nav.Link><BiCartAlt size="2em" color="black" href="#"/></Nav.Link>
-      </OverlayTrigger>
       {
                     isLogged
                     ? 

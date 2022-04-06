@@ -5,11 +5,14 @@ const sendMail= require('./sendMail')
 const sendAccept= require('./sendAccept')
 const path = require('path')
 const {google} = require('googleapis')
-
+const multer = require('multer')
 const {OAuth2} = google.auth
 const {CLIENT_URL} = process.env
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
+
+
+
 const userCtrl = {
  //Register
  register: async (req, res) => {
@@ -219,13 +222,26 @@ logout: async (req, res) => {
 updateUser: async (req, res) => {
     try {
         const {name} = req.body
-       // const {file} =req
-       const {avatar} = req.body
+        const {file} =req
 
         await Users.findOneAndUpdate({_id: req.user.id}, {
             name,
-            avatar
-            //avatar: (file && file.path )|| null,
+            avatar: (file && file.path )|| null,
+
+        })
+        res.json({msg: "Update Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update avatar
+updateAvatar: async (req, res) => {
+    try {
+       const {avatar} = req.body
+       const {file} =req
+
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            avatar: (file && file.path )|| null,
 
         })
 

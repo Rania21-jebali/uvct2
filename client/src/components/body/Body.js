@@ -9,8 +9,8 @@ import Home from '../../pages/home/Home';
 
 function Body() {
   
-  const auth = useSelector(state => state.auth)
-    const {isLogged, isAdmin} = auth
+  //const auth = useSelector(state => state.auth)
+   // const {isLogged, isAdmin} = auth
     return (
         <section>
             <Routes> 

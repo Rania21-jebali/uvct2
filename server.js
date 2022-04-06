@@ -5,15 +5,19 @@ const cors= require('cors')
 const cookieParser= require('cookie-parser')
 const app = express()
 const multer = require('multer')
+const fileUpload = require('express-fileupload')
 app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
-
+app.use(fileUpload({
+  useTempFiles: true
+}))
 
 //Routes
 app.use('/user',require('./routes/user'))
+app.use('/api', require('./routes/upload'))
 
-app.use('/',require('./controllers/upload'))
+
 app.use(express.static('public'));
 
 // Connect to mongoose

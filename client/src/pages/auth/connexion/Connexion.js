@@ -17,14 +17,12 @@ const initialState = {
     success: ''
 }
 
-
-
 function Connexion({userError,userSuccess}) {
     const [user, setUser] = useState(initialState)
+    const {email, password, err, success} = user
     const dispatch = useDispatch()
     const history = useNavigate()
 
-    const {email, password, err, success} = user
     const handleChangeInput = e => {
         const {name, value} = e.target
         setUser({...user, [name]:value, err: '', success: ''})

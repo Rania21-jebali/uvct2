@@ -1,7 +1,8 @@
 import './App.css';
 import React, {useEffect} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import Body from './components/body/Body';
 import Header from './components/header/Header';
 import {useDispatch, useSelector} from 'react-redux'

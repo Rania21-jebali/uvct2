@@ -1,5 +1,7 @@
 const cloudinary = require('cloudinary')
 const fs = require('fs')
+const path = require('path')
+
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -28,8 +30,26 @@ const uploadCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+    uploadCV: (req, res) => {
+        try {
+            const file = req.files.file;
+            cloudinary.v2.uploader.upload(file.tempFilePath, {
+                folder: 'CV', width: 150, height: 150, crop: "fill"
+            }, async(err, result) => {
+                if(err) throw err;
 
+                removeTmp(file.tempFilePath)
+
+                res.json({url: result.secure_url})
+                console.log({result})
+            })
+        
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }
+    
 }
 
 

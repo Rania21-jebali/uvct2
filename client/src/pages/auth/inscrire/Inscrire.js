@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import { Button,Form,Nav} from 'react-bootstrap';
-import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook } from 'react-icons/fa';
 import axios from 'axios'
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail, isLength} from '../../../components/utils/validation/Validation'
@@ -48,6 +46,7 @@ function Inscrire() {
             setUser({...user, err: err.response.data.msg, success: ''})
         }
     }
+    
 
     return (
       <div>
@@ -85,13 +84,6 @@ function Inscrire() {
      >
         S'inscrire
       </Button>
-      <Form.Label style={{textAlign:"center"}}>ou</Form.Label>
-      <Button  size="lg"  style={{backgroundColor:"white",color:"black",borderColor:"grey"}}>
-        <FcGoogle size="1.5em"/>Continuer avec Google
-      </Button>
-      <Button  size="lg" style={{backgroundColor:"white",color:"black",borderColor:"grey"}}>
-      <FaFacebook size="1.5em" color="royalblue"/>  Continuer avec Facebook
-       </Button>
        <Form.Label>Vous avez déjà un compte ?
        <Nav.Link href="#home" >Se connecter</Nav.Link> 
        </Form.Label>

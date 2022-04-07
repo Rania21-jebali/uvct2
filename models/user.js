@@ -39,9 +39,6 @@ const userSchema = new mongoose.Schema({
     formation:{
         type:String
     },
-    cv:{
-        type:String,
-    },
     status:{
         type:Boolean,
     }

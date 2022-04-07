@@ -2,13 +2,11 @@ const router= require('express').Router()
 const userCtrl= require('../controllers/userCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
-const upload = require('../controllers/upload')
-const uploadCV = require('../controllers/uploadCV')
 
 
 router.post('/register',userCtrl.register)
 
-router.post('/registerInstr',uploadCV,userCtrl.registerInstructeur)
+router.post('/registerInstr',userCtrl.registerInstructeur)
 
 router.post('/activation',userCtrl.activateEmail)
 
@@ -22,13 +20,11 @@ router.post('/reset', auth, userCtrl.resetPassword)
 
 router.get('/infor', auth, userCtrl.getUserInfor)
 
-router.post('/acceptInstr/:id', auth,authAdmin, userCtrl.AcceptInstr)
+router.post('/acceptInstr/:id',auth, authAdmin, userCtrl.AcceptInstr)
 
 router.get('/all_infor', auth, authAdmin, userCtrl.getUsersAllInfor)
 
 router.get('/logout', userCtrl.logout)
-
-router.patch('/update', auth, upload,userCtrl.updateUser)
 
 router.patch('/updatePasswordInstr', auth,userCtrl.updatePsswordInstr)
 

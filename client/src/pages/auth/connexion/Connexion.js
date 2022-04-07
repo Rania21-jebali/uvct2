@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { Button,Form,Nav} from 'react-bootstrap';
-import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import './Connexion.css';
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification';
@@ -8,6 +7,9 @@ import { Link, useNavigate  } from 'react-router-dom';
 import axios from 'axios'
 import {dispatchLogin} from '../../../redux/actions/authAction'
 import {useDispatch} from 'react-redux'
+import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+
 
 
 const initialState = {
@@ -22,7 +24,7 @@ function Connexion({userError,userSuccess}) {
     const {email, password, err, success} = user
     const dispatch = useDispatch()
     const history = useNavigate()
-
+    
     const handleChangeInput = e => {
         const {name, value} = e.target
         setUser({...user, [name]:value, err: '', success: ''})
@@ -43,6 +45,35 @@ function Connexion({userError,userSuccess}) {
             setUser({...user, err: err.response.data.msg, success: ''})
         }
     }
+    const responseGoogle = async (response) => {
+      try {
+          const res = await axios.post('/user/google_login', {tokenId: response.tokenId})
+
+          setUser({...user, error:'', success: res.data.msg})
+          localStorage.setItem('firstLogin', true)
+
+          dispatch(dispatchLogin())
+          history.push('/')
+      } catch (err) {
+          err.response.data.msg && 
+          setUser({...user, err: err.response.data.msg, success: ''})
+      }
+  }
+  const responseFacebook = async (response) => {
+    try {
+        const {accessToken, userID} = response
+        const res = await axios.post('/user/facebook_login', {accessToken, userID})
+
+        setUser({...user, error:'', success: res.data.msg})
+        localStorage.setItem('firstLogin', true)
+
+        dispatch(dispatchLogin())
+        history.push('/')
+    } catch (err) {
+        err.response.data.msg && 
+        setUser({...user, err: err.response.data.msg, success: ''})
+    }
+}
   return (
     <div>
      {err && ShowErrMsg(err)}
@@ -73,12 +104,19 @@ function Connexion({userError,userSuccess}) {
   </Button>
   <Link to='/forgot_password'>Mot de passe oublié</Link>
   <Form.Label style={{textAlign:"center"}}>ou</Form.Label>
-  <Button  size="lg" className='button-connexion-m'>
-  <FcGoogle size="1.5em"/>Continuer avec Google
-  </Button>
-  <Button  size="lg" className='button-connexion-m'>
-  <FaFacebook size="1.5em" color="royalblue"/>  Continuer avec Facebook
-  </Button>
+  <GoogleLogin
+                    clientId="516635230406-k020fmfu8b5vrfbvck0atkm7sm7ifh3j.apps.googleusercontent.com"
+                    buttonText="Continuer avec Google"
+                    onSuccess={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+                />
+  <FacebookLogin
+                buttonText="Continuer avec Google"
+                appId="5341302392569355"
+                autoLoad={false}
+                fields="name,email,picture"
+                callback={responseFacebook} 
+                />
   <Form.Label>Vous n'avez pas de compte ?
   <Nav.Link href="/" style={{color:"blueviolet"}}>S'inscrire</Nav.Link> 
  </Form.Label>
@@ -87,6 +125,5 @@ function Connexion({userError,userSuccess}) {
   </div>
   )
 }
-
 
 export default Connexion;

@@ -3,11 +3,12 @@ const bcrypt =require('bcrypt')
 const jwt=require('jsonwebtoken')
 const sendMail= require('./sendMail')
 const sendAccept= require('./sendAccept')
-const path = require('path')
 const {google} = require('googleapis')
-const multer = require('multer')
 const {OAuth2} = google.auth
 const {CLIENT_URL} = process.env
+const fetch = require('node-fetch');
+const multer = require('multer')
+const path = require('path')
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
 
@@ -73,7 +74,6 @@ AcceptInstr: async (req, res) => {
 registerInstructeur: async (req, res) => {
     try {
         const {name, email,specialite,skills,description,formation} = req.body
-        const {file} = req;
 
        if(!name || !email )
             return res.status(400).json({msg: "Please fill in all fields."})
@@ -82,9 +82,7 @@ registerInstructeur: async (req, res) => {
             return res.status(400).json({msg: "Invalid emails."})
             
         const newUser = {
-            name, email,specialite,skills,description,formation,
-            cv: (file && file.path )|| null,
-
+            name, email,specialite,skills,description,formation
         }
       
         const user = new Users(newUser);
@@ -176,7 +174,6 @@ forgotPassword: async (req, res) => {
 resetPassword: async (req, res) => {
     try {
         const {password} = req.body
-        console.log(password)
         const passwordHash = await bcrypt.hash(password, 12)
 
         await Users.findOneAndUpdate({_id: req.user.id}, {
@@ -234,22 +231,7 @@ updateUser: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
-//update avatar
-updateAvatar: async (req, res) => {
-    try {
-       const {avatar} = req.body
-       const {file} =req
 
-        await Users.findOneAndUpdate({_id: req.user.id}, {
-            avatar: (file && file.path )|| null,
-
-        })
-
-        res.json({msg: "Update Success!"})
-    } catch (err) {
-        return res.status(500).json({msg: err.message})
-    }
-},
 //update password instructeur
 updatePsswordInstr: async (req, res) => {
     try {
@@ -312,7 +294,6 @@ googleLogin: async (req, res) => {
         if(!email_verified) return res.status(400).json({msg: "Email verification failed."})
 
         const user = await Users.findOne({email})
-
         if(user){
             const isMatch = await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})

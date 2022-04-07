@@ -59,7 +59,7 @@ function Header() {
           aria-label="Search"
         />
       </Form>
-      <Nav.Link href="/enseigner-sur-uvct" className="link-postuler-enseigner">Enseigner sur Uvct</Nav.Link>
+      <Nav.Link href="/devenir-instructeur" className="link-postuler-enseigner">Enseigner sur Uvct</Nav.Link>
      <Nav.Link><BiCartAlt size="2em" color="black" href="#"/></Nav.Link>
       {
                     isLogged

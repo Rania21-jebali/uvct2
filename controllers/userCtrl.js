@@ -7,8 +7,7 @@ const {google} = require('googleapis')
 const {OAuth2} = google.auth
 const {CLIENT_URL} = process.env
 const fetch = require('node-fetch');
-const multer = require('multer')
-const path = require('path')
+
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
 
@@ -218,14 +217,11 @@ logout: async (req, res) => {
 //update user
 updateUser: async (req, res) => {
     try {
-        const {name} = req.body
-        const {file} =req
-
+        const {name, avatar} = req.body
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            name,
-            avatar: (file && file.path )|| null,
-
+            name, avatar
         })
+
         res.json({msg: "Update Success!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})

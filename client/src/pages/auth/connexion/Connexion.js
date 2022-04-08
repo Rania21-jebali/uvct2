@@ -38,7 +38,7 @@ function Connexion({userError,userSuccess}) {
             localStorage.setItem('firstLogin', true)
 
             dispatch(dispatchLogin())
-            history.push("/")
+            history.push("/profil")
 
         } catch (err) {
             err.response.data.msg && 
@@ -75,7 +75,7 @@ function Connexion({userError,userSuccess}) {
     }
 }
   return (
-    <div>
+    <div >
      {err && ShowErrMsg(err)}
       {success && ShowSuccessMsg(success)}
     <Form onSubmit={handleSubmit}>
@@ -97,10 +97,8 @@ function Connexion({userError,userSuccess}) {
   </Form.Group>
 
   <div className="d-grid gap-2">
-  <Button  className="button-connexion1" type="submit" size="lg" 
-  style={{backgroundColor:"blueviolet" , color:"white",borderColor:"blueviolet"}}
-  >
-    Connexion
+  <Button  className="btn-conx" type="submit" size="lg" >
+    Se connecter
   </Button>
   <Link to='/forgot_password'>Mot de passe oublié</Link>
   <Form.Label style={{textAlign:"center"}}>ou</Form.Label>
@@ -111,14 +109,13 @@ function Connexion({userError,userSuccess}) {
                     cookiePolicy={'single_host_origin'}
                 />
   <FacebookLogin
-                buttonText="Continuer avec Google"
                 appId="5341302392569355"
                 autoLoad={false}
                 fields="name,email,picture"
                 callback={responseFacebook} 
                 />
   <Form.Label>Vous n'avez pas de compte ?
-  <Nav.Link href="/" style={{color:"blueviolet"}}>S'inscrire</Nav.Link> 
+  <Nav.Link href="/inscrire">S'inscrire</Nav.Link> 
  </Form.Label>
   </div>
   </Form>

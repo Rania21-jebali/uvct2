@@ -6,6 +6,21 @@ import {ShowSuccessMsg, ShowErrMsg} from '../../components/utils/notifications/N
 import {fetchAllUsers, dispatchGetAllUsers} from '../../redux/actions/usersAction'
 import './Profile.css'
 import { Button,Form } from 'react-bootstrap'
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+  },
+}));
 const initialState = {
     name: '',
     password: '',
@@ -15,6 +30,8 @@ const initialState = {
 }
 
 function Profile() {
+    const classes = useStyles();
+
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const users = useSelector(state => state.users)
@@ -141,9 +158,10 @@ function Profile() {
                 <h2>{isAdmin ? "Admin Profile": "User Profile"}</h2>
                 <Form >
              <Form.Group className="mb-3" >
-
-            <img src={avatar ? avatar : user.avatar} alt=""/>
-
+             <div className={classes.root}>
+      <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
+    </div>
+            
   <Form.Control type="file" 
    name="avatar"
     defaultValue={user.avatar}
@@ -152,7 +170,7 @@ function Profile() {
   </Form.Group>
   <Form.Group className="mb-3" >
     <Form.Control type="text" placeholder="name" 
-    name="name"
+    name="name" 
     required 
     defaultValue={user.name}
     onChange={handleChange}

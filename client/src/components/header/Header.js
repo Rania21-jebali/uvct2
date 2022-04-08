@@ -4,10 +4,25 @@ import { BiCartAlt } from 'react-icons/bi';
 import Connexion from '../../pages/auth/connexion/Connexion';
 import Inscrire from '../../pages/auth/inscrire/Inscrire';
 import {useSelector} from 'react-redux'
-import { Link } from 'react-router-dom';
 import axios from 'axios'
 import './Header.css'
+import Avatar1 from '../Avatar/Avatar'
+import Popover from '@material-ui/core/Popover';
+
 function Header() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick2 = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose2 = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+//
   const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
@@ -59,25 +74,41 @@ function Header() {
           aria-label="Search"
         />
       </Form>
-      <Nav.Link href="/devenir-instructeur" className="link-postuler-enseigner">Enseigner sur Uvct</Nav.Link>
+      <Nav.Link href="/devenir-instructeur" className="link-postuler-enseigner">Devenir instructeur</Nav.Link>
      <Nav.Link><BiCartAlt size="2em" color="black" href="#"/></Nav.Link>
       {
                     isLogged
                     ? 
                     (<>
+      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick2}>
+      <Avatar1 src={user.avatar} />
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose2}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+      <Nav.Link href="/profil" >Profil</Nav.Link>
+      <Nav.Link onClick={handleLogout}>Se déconnecter</Nav.Link>
+
+      </Popover>
       
-      <Button className="button-inscription"  variant="light"
-      onClick={handleLogout}
-      >Déconnecté</Button>
-      <Link  className="button-inscription" to='/profil' >
-        {user.name} 
-      </Link>
+        
 
 </>)
                     :
         (   
           <>
-      <Button  className="button-connexion" onClick={handleShow} variant="light">Connexion</Button>
+      <Button  className="button-connexion" onClick={handleShow} variant="light">Se connecter</Button>
       <Modal show={show} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>Connectez-vous à votre compte UVCT!</Modal.Title>

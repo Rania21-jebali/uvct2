@@ -6,6 +6,8 @@ import ResetPassword from '../../pages/auth/ResetPassword/ResetPassword';
 import Profile from '../../pages/profile/Profile';
 import Home from '../../pages/home/Home';
 import DevenirInstructeur from '../../pages/auth/devenirInstructeur/DevenirInstructeur';
+import ConnexionFex from '../../pages/auth/connexion/ConnexionFex';
+import InscrireFex from '../../pages/auth/inscrire/InscrireFex';
 
 
 function Body() {
@@ -20,6 +22,9 @@ function Body() {
             <Route path="/user/reset/:token" element={<ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/profil" element={<Profile />}/>
+            <Route path="/connexion" element={<ConnexionFex />}/>
+            <Route path="/inscrire" element={<InscrireFex />}/>
+
             </Routes>
         </section>
     )

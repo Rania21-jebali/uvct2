@@ -44,26 +44,25 @@ function DevenirInstructeur() {
             setUser({...user, err: err.response.data.msg, success: ''})
         }
     }
-    
   return (
     <div className='devInst'>
     <h1> Devenir Instructeur</h1>
       {err && ShowErrMsg(err)}
-            {success && ShowSuccessMsg(success)}
+      {success && ShowSuccessMsg(success)}
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-        <Form.Label >Prénon et nom</Form.Label>
+        <Form.Group  >
+        <Form.Label >Prénom et nom</Form.Label>
         <Form.Control type="Normal text"
-         placeholder="Prénon et nom" 
+         placeholder=" Prénom et nom" 
          name="name"
          value={name}
          onChange={handleChangeInput} 
         required 
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group  controlId="formBasicEmail" >
       <Form.Label >Email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email"
+        <Form.Control type="email" placeholder="Email"
         name="email"
         required 
         value={email}
@@ -79,7 +78,7 @@ function DevenirInstructeur() {
         onChange={handleChangeInput}>
   <option>Séléctionnez votre spécialité</option>
   <option value="développement web">développement web</option>
-  <option value="développement mobile">développement web</option>
+  <option value="développement mobile">développement mobile</option>
   <option value="développement personnel">développement personnel</option>
   <option value="design">design</option>
   <option value="business">business</option>
@@ -124,7 +123,7 @@ function DevenirInstructeur() {
         />
       </Form.Group>
       <div className="d-grid gap-2">
-      <Button  style={{backgroundColor:"rgb(55, 8, 99)",color:"white",borderColor:"rgb(55, 8, 99)"}} 
+      <Button className='btn-devInst'
       type="submit" size="lg"
      >
         Envoyer

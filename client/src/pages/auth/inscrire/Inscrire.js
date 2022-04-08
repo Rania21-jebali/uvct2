@@ -3,7 +3,7 @@ import { Button,Form,Nav} from 'react-bootstrap';
 import axios from 'axios'
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail, isLength} from '../../../components/utils/validation/Validation'
-
+import './inscrire.css'
 
 const initialState = {
     name: '',
@@ -49,7 +49,7 @@ function Inscrire() {
     
 
     return (
-      <div>
+      <div >
       {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
         <Form onSubmit={handleSubmit}>
@@ -79,13 +79,11 @@ function Inscrire() {
         />
       </Form.Group>
       <div className="d-grid gap-2">
-      <Button  style={{backgroundColor:"rgb(55, 8, 99)",color:"white",borderColor:"rgb(55, 8, 99)"}} 
-      type="submit" size="lg"
-     >
+      <Button  className='btn-inscr'  type="submit" size="lg" >
         S'inscrire
       </Button>
        <Form.Label>Vous avez déjà un compte ?
-       <Nav.Link href="#home" >Se connecter</Nav.Link> 
+       <Nav.Link href="/connexion" >Se connecter</Nav.Link> 
        </Form.Label>
    </div>
       </Form>

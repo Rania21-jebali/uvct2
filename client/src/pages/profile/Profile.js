@@ -8,6 +8,7 @@ import './Profile.css'
 import { Button,Form } from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import LeftBar from '../../components/leftBar/LeftBar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,6 @@ function Profile() {
 
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const users = useSelector(state => state.users)
     const {user, isAdmin} = auth
     const [data, setData] = useState(initialState)
     const {name, password, cf_password, err, success} = data
@@ -129,27 +129,9 @@ function Profile() {
         if(name || avatar) updateInfor()
         if(password) updatePassword()
     }
-
-    const handleDelete = async (id) => {
-        try {
-            if(user._id !== id){
-                if(window.confirm("Are you sure you want to delete this account?")){
-                    setLoading(true)
-                    await axios.delete(`/user/delete/${id}`, {
-                        headers: {Authorization: token}
-                    })
-                    setLoading(false)
-                    setCallback(!callback)
-                }
-            }
-            
-        } catch (err) {
-            setData({...data, err: err.response.data.msg , success: ''})
-        }
-    }
-
+    
     return (
-        <>
+        <div className='profil'>
         <div className="profile_page">
         {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
@@ -197,12 +179,12 @@ function Profile() {
     onChange={handleChange}
    />
   </Form.Group>
-          <Button disabled={loading} onClick={handleUpdate}>Update</Button>
+          <Button disabled={loading} onClick={handleUpdate} className='btn-upd'>Update</Button>
                 </Form>
 </div>
 </div>
-           
-        </>
+       
+        </div>
     )
 }
 

@@ -198,7 +198,17 @@ getUserInfor: async (req, res) => {
 //Users All informations Admin
 getUsersAllInfor: async (req, res) => {
     try {
-        const users = await Users.find().select('-password')
+        const users = await Users.find({role:"user"}).select('-password')
+
+        res.json(users)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//Instructeur All informations Admin
+getInstrAllInfor: async (req, res) => {
+    try {
+        const users = await Users.find({role:"instructeur"}).select('-password')
 
         res.json(users)
     } catch (err) {
@@ -274,6 +284,16 @@ deleteUser: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+/*Information user
+getUserInfor: async (req, res) => {
+    try {
+        const user = await Users.findById(req.params.id).select('-password')
+
+        res.json(user)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},*/
 //Google login
 googleLogin: async (req, res) => {
     try {

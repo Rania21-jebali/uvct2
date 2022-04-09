@@ -1,6 +1,7 @@
 import React,{ useState } from 'react'
 import { Navbar,Nav,Form,FormControl,Button,Modal,NavDropdown} from 'react-bootstrap';
 import { BiCartAlt } from 'react-icons/bi';
+import {BsList} from 'react-icons/bs';
 import Connexion from '../../pages/auth/connexion/Connexion';
 import Inscrire from '../../pages/auth/inscrire/Inscrire';
 import {useSelector} from 'react-redux'
@@ -8,6 +9,9 @@ import axios from 'axios'
 import './Header.css'
 import Avatar1 from '../Avatar/Avatar'
 import Popover from '@material-ui/core/Popover';
+import Drawer from '@material-ui/core/Drawer';
+
+
 
 function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,7 +26,7 @@ function Header() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-//
+
   const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
@@ -42,9 +46,35 @@ function Header() {
           window.location.href = "/";
       }
   }
+
+  const [state, setState] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+  
+  
+
   return (
     <div className='header'>
     <Navbar className='row2' >
+    <div className='mobile-sect'>
+    <BsList onClick={toggleDrawer('left', true)} className="iconResp" size= "2em"/>
+          <Drawer anchor='left' open={state['left']} onClose={toggleDrawer('left', false)}>
+          hello
+          </Drawer>
+    </div>
+    
+    
       <Navbar.Brand href="#home">
         <img
           alt=""
@@ -99,10 +129,7 @@ function Header() {
       >
       <Nav.Link href="/profil" >Profil</Nav.Link>
       <Nav.Link onClick={handleLogout}>Se déconnecter</Nav.Link>
-
-      </Popover>
-      
-        
+      </Popover>       
 
 </>)
                     :

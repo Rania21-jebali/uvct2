@@ -1,9 +1,16 @@
 .profile_page{
-    flex: 1;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 20px;
-    margin-right: 50px;
-    margin-left: 50px;
     background-color: white;
-    margin-top: 10px; 
+    flex: 1;
+    
+}
+.btn-upd{
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.profil{
+    display: flex;
+    flex-wrap: wrap;
 }

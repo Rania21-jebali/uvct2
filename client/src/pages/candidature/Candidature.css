@@ -1,0 +1,29 @@
+.visibilityListIcon{
+    color: var(--primary-color);
+   cursor: pointer;
+   margin-right: 8px;
+   
+ }
+ .acceptIcon{
+     background-color: rgb(51, 212, 51);
+     border-color:rgb(51, 212, 51) ;
+   cursor: pointer;
+   margin-right: 8px;
+   border-radius: 15px;
+
+ }
+ .acceptIcon:hover{
+    background-color: rgb(51, 212, 51);
+    border-color:rgb(51, 212, 51) ;
+ }
+ .refuserIcon{
+    background-color: rgb(211, 6, 6);
+    border-color:rgb(211, 6, 6) ;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-right: 8px;
+ }
+ .refuserIcon:hover{
+    background-color: rgb(211, 6, 6);
+    border-color:rgb(211, 6, 6) ;
+ }

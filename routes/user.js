@@ -24,6 +24,8 @@ router.post('/acceptInstr/:id',auth, authAdmin, userCtrl.AcceptInstr)
 
 router.get('/all_infor', auth, authAdmin, userCtrl.getUsersAllInfor)
 
+router.get('/allInstr', auth, authAdmin, userCtrl.getInstrAllInfor)
+
 router.get('/logout', userCtrl.logout)
 
 router.patch('/update', auth, userCtrl.updateUser)
@@ -33,6 +35,8 @@ router.patch('/updatePasswordInstr', auth,userCtrl.updatePsswordInstr)
 router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)
 
 router.delete('/delete/:id', auth, authAdmin, userCtrl.deleteUser)
+
+//router.get('/userInfo/:id', auth, authAdmin, userCtrl.getUserInfor)
 
 // Social Login
 router.post('/google_login', userCtrl.googleLogin)

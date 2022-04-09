@@ -1,0 +1,10 @@
+.leftBar{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    margin-right: 50px;
+    margin-left: 50px;
+    background-color: white;
+    margin-top: 10px; 
+    flex: 2;
+    
+}

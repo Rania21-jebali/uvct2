@@ -1,0 +1,8 @@
+.home{
+    flex:4;
+ }
+ @media  (max-width:653px) {
+     div{
+color:blue
+     }
+ }

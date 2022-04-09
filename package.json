@@ -11,6 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/styles": "^4.11.5",
+    "@mui/x-data-grid": "^5.8.0",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.29.0",
     "cookie-parser": "^1.4.6",

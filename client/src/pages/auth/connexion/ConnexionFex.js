@@ -19,7 +19,7 @@ const initialState = {
     success: ''
 }
 
-function ConnexionFex({userError,userSuccess}) {
+function ConnexionFex() {
     const [user, setUser] = useState(initialState)
     const {email, password, err, success} = user
     const dispatch = useDispatch()

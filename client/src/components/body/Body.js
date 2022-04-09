@@ -8,26 +8,34 @@ import Home from '../../pages/home/Home';
 import DevenirInstructeur from '../../pages/auth/devenirInstructeur/DevenirInstructeur';
 import ConnexionFex from '../../pages/auth/connexion/ConnexionFex';
 import InscrireFex from '../../pages/auth/inscrire/InscrireFex';
-
+import NotFound from '../utils/NotFound/NotFound'
+import Candidature from '../../pages/candidature/Candidature';
+import './Body.css'
+import LeftBar from '../leftBar/LeftBar';
+import ListUsers from '../../pages/listUsers/ListUsers';
+import CandidatDetails from '../../pages/candidature/CandidatDetails';
 
 function Body() {
   
-  //const auth = useSelector(state => state.auth)
-   // const {isLogged, isAdmin} = auth
+  const auth = useSelector(state => state.auth)
+   const {isLogged, isAdmin} = auth
     return (
-        <section>
+        <section className='body'>
             <Routes> 
             <Route path="/" element={<Home />}/>
-            <Route path="/forgot_password" element={<ForgotPassword />}/>
-            <Route path="/user/reset/:token" element={<ResetPassword />}/>
+            <Route path="/left" element={<LeftBar />}/>
+            <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
+            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
-            <Route path="/profil" element={<Profile />}/>
-            <Route path="/connexion" element={<ConnexionFex />}/>
-            <Route path="/inscrire" element={<InscrireFex />}/>
-
+            <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
+            <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
+            <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>
+            <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> }/>
+            <Route path="/users" element={isAdmin ?  <ListUsers /> : <NotFound /> }/>
             </Routes>
         </section>
     )
 }
 
 export default Body
+//<Route path="/candidat/:id" element={isAdmin ?  <CandidatDetails /> : <NotFound /> }/>

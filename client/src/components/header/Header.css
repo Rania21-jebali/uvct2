@@ -1,4 +1,7 @@
+.header{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
+}
 .header:hover{
     display: block;
 }
@@ -47,4 +50,15 @@ display: block;
 }
 .nav-dropdown-title{
     color: black;
+}
+.iconResp{
+    cursor: pointer;
+    color: white;
+}
+
+@media screen and (max-width:800px) {
+    
+    .iconResp{
+        color: red;
+    }
 }

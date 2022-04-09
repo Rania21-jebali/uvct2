@@ -19,7 +19,7 @@ const initialState = {
     success: ''
 }
 
-function Connexion({userError,userSuccess}) {
+function Connexion() {
     const [user, setUser] = useState(initialState)
     const {email, password, err, success} = user
     const dispatch = useDispatch()

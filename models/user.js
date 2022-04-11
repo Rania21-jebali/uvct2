@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema({
     },
     status:{
         type:Boolean,
+    },
+    accept:{
+        type:Boolean,
+        default:false,
     }
 
 }, {

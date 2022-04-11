@@ -6,6 +6,8 @@ const usersReducer = (state = users, action) => {
     switch(action.type){
         case ACTIONS.GET_ALL_USERS:
             return action.payload
+            case ACTIONS.GET_ALL_COND:
+            return action.payload
             case ACTIONS.GET_ALL_INSTR:
             return action.payload
         default:

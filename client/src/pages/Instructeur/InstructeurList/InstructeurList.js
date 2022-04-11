@@ -1,13 +1,11 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {fetchAllCond, dispatchGetAllCond} from '../../redux/actions/usersAction'
+import {fetchAllInstr, dispatchGetAllInstr} from '../../../redux/actions/usersAction'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import axios from 'axios'
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import './Candidature.css'
-import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import axios from 'axios';
+import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
-import {isEmail} from '../../components/utils/validation/Validation'
-
 
 import {
     DataGrid,
@@ -17,8 +15,9 @@ import {
     GridToolbarExport,
     GridToolbarDensitySelector,
   } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
-function Candidature() {
+  import { Modal,Button,FloatingLabel,Form,OverlayTrigger,Tooltip} from 'react-bootstrap';
+  
+function InstructeurList() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const {user, isAdmin} = auth
@@ -29,8 +28,8 @@ function Candidature() {
     const dispatch = useDispatch()
     useEffect(() => {
         if(isAdmin){
-          fetchAllCond(token).then(res =>{
-                dispatch(dispatchGetAllCond(res))
+            fetchAllInstr(token).then(res =>{
+                dispatch(dispatchGetAllInstr(res))
             })
 
         }
@@ -49,45 +48,29 @@ function Candidature() {
             setData({...data, err: err.response.data.msg , success: ''})
         }
     }
-    const handleAccept = async (id) => {
-      if(!isEmail(user.email))
-            return setData({...data, err: 'Invalid emails.', success: ''})
-            const email=user.email
-      try {
-          if(user._id !== id){
-                 
-                  await axios.post(`/user/acceptInstr/${id}`, {email},
-                  {
-                    headers: {Authorization: token}
-                })
-                setData({...data, err: '' , success: "Accept Success!"})
-  
-          }
-          
-      } catch (err) {
-          setData({...data, err: err.response.data.msg , success: ''})
-      }
-  }
   const columns = [
     {
-      field: 'name',
-      headerName: 'Candidat',
-      flex:1,
+      field: 'avatar',
+      headerName: 'Apprenant',
+      flex:2,
+      renderCell(params){
+        return(
+          <div className='userList'>
+          <Avatar1 src={params.row.avatar}/>
+          {params.row.name}
+          </div>
+        );
+      }
     },
     {
       field: 'email',
       headerName: 'Email',
       type: 'email',
-      flex:1,
+      flex:2,
     },
     {
-        field: 'specialite',
-        headerName: 'Spécialité',
-        flex:1,
-      },
-    {
       field: 'date',
-      headerName: 'Date envoi',
+      headerName: 'Date création',
       flex:1,
       renderCell(params){
         return(
@@ -102,15 +85,33 @@ function Candidature() {
         renderCell: (params) =>{
           return(
             <>
-            
-             <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Voir détails</Tooltip>}>
-          <Link to={"/candidat/"+params.row.id}>
-          <VisibilityIcon className='visibilityListIcon' size="10rem"/>
-          </Link>
+          <VisibilityIcon className='visibilityListIcon'/>
+          <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Supprimer apprenant</Tooltip>}>
+          <DeleteOutlineIcon className='deleteListIcon' onClick={handleShow} />          
           </OverlayTrigger>
-          <Button className="acceptIcon" onClick={() => handleAccept(params.row.id)}>Accepter</Button>    
-          <Button className='refuserIcon' onClick={() => handleDelete(params.row.id)}>Refuser</Button>          
-      
+          <Modal show={show} onHide={handleClose} animation={false} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Supprimer apprenant</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form.Label >Cause</Form.Label>
+        <FloatingLabel controlId="floatingTextarea2" label="Cause">
+    <Form.Control
+      as="textarea"
+      placeholder="Leave a comment here"
+      style={{ height: '100px' }}
+    />
+  </FloatingLabel>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className='annulerButton' onClick={handleClose}>
+            Annuler
+          </Button>
+          <Button className='supprimerButton' onClick={() => handleDelete(params.row.id)}>
+            Supprimer
+          </Button>
+        </Modal.Footer>
+      </Modal>
             </>
           )
         }
@@ -121,11 +122,16 @@ const rowData= users?.map(user => {
         id:user?._id,
         name:user?.name,
         email:user?.email,
-        specialite:user?.specialite,
-        date:user?.createdAt
+        avatar:user?.avatar,
+        date:user?.createdAt,
     }
 })
-  
+   //Supprimer apprenant
+   const [show, setShow] = useState(false);
+
+   const handleClose = () => setShow(false);
+   const handleShow = () => setShow(true);
+
   const [data, setData] =useState([]);
   console.log(rowData);
   function CustomToolbar() {
@@ -139,20 +145,21 @@ const rowData= users?.map(user => {
     );
   }
   return (
-
-     <div style={{ height: 550, width: '100%' }} className="cantainerList">
+<div style={{ height: 550, width: '100%' }}  >
       <DataGrid
         rows={rowData}
         columns={columns}
+        components={{
+         Toolbar: CustomToolbar,
+  }}
         pageSize={8}
         checkboxSelection
         disableSelectionOnClick
-        components={{
-         Toolbar: CustomToolbar,
-  }}    
+        
       />
     </div> 
+    
   )
 }
 
-export default Candidature
+export default InstructeurList

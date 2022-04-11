@@ -24,6 +24,8 @@ router.post('/acceptInstr/:id',auth, authAdmin, userCtrl.AcceptInstr)
 
 router.get('/all_infor', auth, authAdmin, userCtrl.getUsersAllInfor)
 
+router.get('/allCond', auth, authAdmin, userCtrl.getCondAllInfor)
+
 router.get('/allInstr', auth, authAdmin, userCtrl.getInstrAllInfor)
 
 router.get('/logout', userCtrl.logout)

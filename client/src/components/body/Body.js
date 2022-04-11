@@ -15,6 +15,7 @@ import LeftBar from '../leftBar/LeftBar';
 import LeftBarAdmin from '../leftBar/LeftBarAdmin';
 import Users from '../../pages/Apprenant/users/users';
 import AcceptCandidat from '../../pages/candidature/AcceptCandidat';
+import Instructeurs from '../../pages/Instructeur/Instructeurs/Instructeurs';
 
 function Body() {
   
@@ -35,6 +36,7 @@ function Body() {
             <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
             <Route path="/users" element={isAdmin ?  <Users /> : <NotFound /> }/>
             <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> } />
+            <Route path="/instructeurs" element={isAdmin ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:activation_token" element={<AcceptCandidat />} />

@@ -205,10 +205,20 @@ getUsersAllInfor: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
-//Instructeur All informations Admin
+//All candidats informations Admin
+getCondAllInfor: async (req, res) => {
+    try {
+        const users = await Users.find({role:"instructeur", password:null}).select('-password')
+
+        res.json(users)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//All instructeurs informations Admin
 getInstrAllInfor: async (req, res) => {
     try {
-        const users = await Users.find({role:"instructeur"}).select('-password')
+        const users = await Users.find({role:"instructeur",accept:true})
 
         res.json(users)
     } catch (err) {
@@ -252,7 +262,7 @@ updatePsswordInstr: async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 12)
        
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            password: passwordHash        })
+            password: passwordHash , accept:true })
 
         res.json({msg: "Update Success!"})
     } catch (err) {

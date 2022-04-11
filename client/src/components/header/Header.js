@@ -78,9 +78,8 @@ function Header() {
       <Navbar.Brand href="#home">
         <img
           alt=""
-          src=""
-          width="160"
-          height="30"
+          src="./images/logo.png"
+          width="200"
           className="d-inline-block align-top"
         />{' '}
       </Navbar.Brand>

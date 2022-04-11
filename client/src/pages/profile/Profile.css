@@ -1,14 +1,12 @@
 .profile_page{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding: 20px;
     background-color: white;
-    flex: 1;
-    
+    margin: 20px;
+   
 }
 .btn-upd{
-    background-color: var(--primary-color);
+    background-color:#20384D;
     color: white;
-    border-color: var(--primary-color);
+    border-color: #20384D;
 }
 .profil{
     display: flex;

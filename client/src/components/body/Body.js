@@ -12,8 +12,9 @@ import NotFound from '../utils/NotFound/NotFound'
 import Candidature from '../../pages/candidature/Candidature';
 import './Body.css'
 import LeftBar from '../leftBar/LeftBar';
-import ListUsers from '../../pages/listUsers/ListUsers';
-import CandidatDetails from '../../pages/candidature/CandidatDetails';
+import LeftBarAdmin from '../leftBar/LeftBarAdmin';
+import Users from '../../pages/Apprenant/users/users';
+import AcceptCandidat from '../../pages/candidature/AcceptCandidat';
 
 function Body() {
   
@@ -21,18 +22,25 @@ function Body() {
    const {isLogged, isAdmin} = auth
     return (
         <section className='body'>
-            <Routes> 
+        {  (isLogged && !isAdmin) &&   <LeftBar />}
+        { isAdmin   &&   <LeftBarAdmin />}
+
+            <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/left" element={<LeftBar />}/>
-            <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
-            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
-            <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
-            <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
             <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
             <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>
+            <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
+            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+            <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
+            <Route path="/users" element={isAdmin ?  <Users /> : <NotFound /> }/>
             <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> }/>
-            <Route path="/users" element={isAdmin ?  <ListUsers /> : <NotFound /> }/>
+            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+            <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
+            <Route path="/user/acceptInstr/:activation_token" element={<AcceptCandidat />} />
+
             </Routes>
+            
         </section>
     )
 }

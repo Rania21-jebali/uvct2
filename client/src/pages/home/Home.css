@@ -6,3 +6,137 @@
 color:blue
      }
  }
+
+#slider{
+    background-size: cover;
+    background: rgba(25, 27, 27, 0.5) url(../../../public/images/neonbrand-zFSo6bnZJTw-unsplash.jpg);
+    position: relative;
+}
+
+#slider .container{
+    z-index: 10;
+    position: relative;
+}
+.slider-background{
+    position:absolute;
+    top:0px; left:0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 0;
+}
+
+#slider ul{
+    list-style: none;
+    justify-content: center;
+    display: flex;
+    margin-top:20px;
+}
+
+#slider li{
+    display: inline;
+    color:white;
+    padding: 5px 10px;
+}
+
+.btn-slider{
+   background-color:#20384D;
+   color:white;
+   font-size: 12px;
+}
+
+.slide-block1 h1{
+    color: white;
+    margin-top:5vw;
+}
+
+.slide-block1 p{
+    color: white;
+    font-size: 16px;
+    font-weight:600;
+}
+
+.slider-block3{
+    display: flex;
+    justify-content: center;
+    padding-top: 5vw;
+    padding-bottom: 3vw;
+}
+
+.slider-block3-item{
+    background-color: rgba(0,0,0,0.5);
+    margin:5px;
+    padding:16px;
+}
+
+.slider-block3-item img{
+    display:block;
+    margin:auto;
+}
+
+.slider-block3-item h3{
+    color:white;
+    font-size: 14px;
+}
+
+.slider-block3-item p{
+    color:#F59E0B;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+
+/* end slider */
+
+#offre{
+    margin-top: 5vw;
+}
+
+.offre-item{
+   padding:5px 15px;
+}
+
+.ligne-sous-titre{
+    background-color: black;
+    width: 80px;
+    height: 3px;
+    margin-bottom: 3vw;
+}
+
+.offre-item-inside{
+    background-color: #20384D;
+    border-radius: 15px;
+    padding:24px 26px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.offre-item-inside button{
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color:white;
+    padding:10px;
+    border-radius: 15px;
+    
+    margin-top: auto;
+    display: block;
+}
+
+.offre-item-inside img{
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 130px;
+}
+
+.offre-item-inside p{
+    margin-bottom: 0px;
+    color: white;
+}
+
+.offre-item-inside li{
+    color: white;
+}

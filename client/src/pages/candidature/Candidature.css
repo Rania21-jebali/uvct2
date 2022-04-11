@@ -1,3 +1,7 @@
+.cantainerList{
+   flex:4;
+margin:20px;
+ }
 .visibilityListIcon{
     color: var(--primary-color);
    cursor: pointer;
@@ -9,6 +13,7 @@
      border-color:rgb(51, 212, 51) ;
    cursor: pointer;
    margin-right: 8px;
+   font-size: small;
    border-radius: 15px;
 
  }
@@ -21,9 +26,19 @@
     border-color:rgb(211, 6, 6) ;
     border-radius: 15px;
     cursor: pointer;
+    font-size: small;
     margin-right: 8px;
  }
  .refuserIcon:hover{
     background-color: rgb(211, 6, 6);
     border-color:rgb(211, 6, 6) ;
+ }
+ .active_page{
+   flex: 1;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   padding: 20px;
+   margin-right: 450px;
+   margin-left: 450px;
+   margin-top: 40px;
+   background-color: white;
  }

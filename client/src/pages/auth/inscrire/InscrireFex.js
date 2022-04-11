@@ -52,11 +52,13 @@ function InscrireFex() {
       <div className='inscrire'>
       {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
-            <h5>Inscrivez-vous et commencez à apprendre!</h5>
+            <h2 className='title-inscri'>S'inscrire</h2>
+          <p className="sous-title-inscri">Passez votre temps libre à étudier avec les meilleurs instructeurs.</p>
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
+        <Form.Label className="labelForm">Nom complet</Form.Label>
         <Form.Control type="Normal text"
-         placeholder="Prénon et nom" 
+         placeholder="Saisissez votre nom et prénom" 
          name="name"
          value={name}
          onChange={handleChangeInput} 
@@ -64,7 +66,8 @@ function InscrireFex() {
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Enter email"
+      <Form.Label className="labelForm">Adresse e-mail</Form.Label>
+        <Form.Control type="email" placeholder="nom@gmail.com"
         name="email"
         required 
         value={email}
@@ -72,7 +75,8 @@ function InscrireFex() {
          />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" 
+      <Form.Label className="labelForm">Mot de passe</Form.Label>
+        <Form.Control type="password" placeholder="Créez votre mot de passe" 
          name="password"
         required 
         value={password}
@@ -84,7 +88,7 @@ function InscrireFex() {
         S'inscrire
       </Button>
        <Form.Label>Vous avez déjà un compte ?
-       <Nav.Link href="/connexion" >Se connecter</Nav.Link> 
+       <a href="/connexion" className='link'>Se connecter</a> 
        </Form.Label>
    </div>
       </Form>

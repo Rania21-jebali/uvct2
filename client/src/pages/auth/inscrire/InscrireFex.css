@@ -8,9 +8,11 @@
     margin-top: 60px; 
 }
 .btn-inscr{
-    background-color: var(--primary-color);
+    background-color: #20384D;
     color: white;
-    border-color: var(--primary-color);
+    border-color: #20384D;
+    border-radius: 2px;
+
 }
 .inscrire:hover{
     display: block;

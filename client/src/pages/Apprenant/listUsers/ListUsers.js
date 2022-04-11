@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {fetchAllUsers, dispatchGetAllUsers} from '../../redux/actions/usersAction'
+import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import './ListUsers.css'
 import axios from 'axios'
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Avatar1 from '../../components/Avatar/Avatar';
+import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
 
 import {
@@ -147,7 +147,7 @@ const rowData= users?.map(user => {
   }
   return (
 
-     <div style={{ height: 550, width: '100%' }}>
+     <div style={{ height: 550, width: '100%' }} >
       <DataGrid
         rows={rowData}
         columns={columns}

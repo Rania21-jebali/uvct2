@@ -14,22 +14,28 @@
     
 }
 .button-connexion{
-    background-color:white;
     color:var(--primary-color);
-    border-color:var(--primary-color);
     margin-right: 10px;
+    background: #FFFFFF;
+border: 1px solid #20384D;
+box-sizing: border-box;
+border-radius: 2px;
 }
 .button-connexion:hover{
-    color:var(--primary-color);
+    color:#20384D;
 }
 .button-inscription:hover{
-    color:var(--primary-color);
+    color:#20384D;
 }
 .button-inscription{
-    background-color: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
     margin-right: 20px;
+    background: #20384D;
+border-radius: 2px;
+font-family: 'Roboto';
+font-style: normal;
+
+
+color: #FFFFFF;
 }
 .link-postuler-enseigner{
     color: black;
@@ -46,7 +52,7 @@ display: block;
     margin-left: 180px;
 }
 .link-postuler-enseigner:hover{
-    color:var(--primary-color);
+    color:#20384D;
 }
 .nav-dropdown-title{
     color: black;
@@ -61,4 +67,22 @@ display: block;
     .iconResp{
         color: red;
     }
+}
+.title-inscri{
+text-align: center;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 28px;
+line-height: 34px;
+/* identical to box height */
+color: #1D1D1D;
+}
+.sous-title-inscri{
+text-align: center;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 148%;
 }

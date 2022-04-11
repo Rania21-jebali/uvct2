@@ -6,6 +6,8 @@ import './Candidature.css'
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from 'axios';
 import DayJS from 'react-dayjs';
+import {isEmail} from '../../components/utils/validation/Validation'
+
 
 import {
     DataGrid,
@@ -47,6 +49,25 @@ function Candidature() {
             setData({...data, err: err.response.data.msg , success: ''})
         }
     }
+    const handleAccept = async (id) => {
+      if(!isEmail(user.email))
+            return setData({...data, err: 'Invalid emails.', success: ''})
+            const email=user.email
+      try {
+          if(user._id !== id){
+                 
+                  await axios.post(`/user/acceptInstr/${id}`, {email},
+                  {
+                    headers: {Authorization: token}
+                })
+                setData({...data, err: '' , success: "Accept Success!"})
+  
+          }
+          
+      } catch (err) {
+          setData({...data, err: err.response.data.msg , success: ''})
+      }
+  }
   const columns = [
     {
       field: 'name',
@@ -87,7 +108,7 @@ function Candidature() {
           <VisibilityIcon className='visibilityListIcon' size="10rem"/>
           </Link>
           </OverlayTrigger>
-          <Button className="acceptIcon">Accepter</Button>    
+          <Button className="acceptIcon" onClick={() => handleAccept(params.row.id)}>Accepter</Button>    
           <Button className='refuserIcon' onClick={() => handleDelete(params.row.id)}>Refuser</Button>          
       
             </>
@@ -119,7 +140,7 @@ const rowData= users?.map(user => {
   }
   return (
 
-     <div style={{ height: 550, width: '100%' }}>
+     <div style={{ height: 550, width: '100%' }} className="cantainerList">
       <DataGrid
         rows={rowData}
         columns={columns}

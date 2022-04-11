@@ -1,6 +1,18 @@
 
 .btn-inscr{
-    background-color: var(--primary-color);
+  background-color: #20384D;
     color: white;
-    border-color: var(--primary-color);
+    border-color:#20384D;
+    border-radius: 2px;
+}
+.btn-inscr:hover{
+    background-color: #20384D;
+
+}
+  
+.link{
+color:#20384D;
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
 }

@@ -78,10 +78,11 @@ function ConnexionFex() {
     <div className='connexion'>
      {err && ShowErrMsg(err)}
       {success && ShowSuccessMsg(success)}
-      <h5>Connectez-vous à votre compte UVCT!</h5>
+      <h2 className='title-inscri'>Bienvenue</h2>
     <Form onSubmit={handleSubmit}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Control type="email" placeholder="Enter email" 
+  <Form.Label className="labelForm">Adresse e-mail</Form.Label>
+    <Form.Control type="email" placeholder="nom@gmail.com" 
     name="email"
     required 
     value={email}
@@ -89,7 +90,8 @@ function ConnexionFex() {
     />
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Control type="password" placeholder="Password" 
+  <Form.Label className="labelForm">Mot de passe</Form.Label>
+    <Form.Control type="password" placeholder="mot de passe" 
     name="password"
     required 
     value={password}
@@ -101,8 +103,7 @@ function ConnexionFex() {
   <Button  className="btn-conx" type="submit" size="lg" >
     Se connecter
   </Button>
-  <Form.Label style={{textAlign:"center"}}>ou</Form.Label>
-  <Link to='/forgot_password'>Mot de passe oublié</Link>
+  <Link to='/forgot_password'className='linkM'>Mot de passe oublié ?</Link>
   <Form.Label style={{textAlign:"center"}}>ou</Form.Label>
   <GoogleLogin
                     clientId="516635230406-k020fmfu8b5vrfbvck0atkm7sm7ifh3j.apps.googleusercontent.com"
@@ -117,7 +118,7 @@ function ConnexionFex() {
                 callback={responseFacebook} 
                 />
   <Form.Label>Vous n'avez pas de compte ?
-  <Nav.Link href="/inscrire">S'inscrire</Nav.Link> 
+  <a href="/inscrire" className='link'>S'inscrire</a> 
  </Form.Label>
   </div>
   </Form>

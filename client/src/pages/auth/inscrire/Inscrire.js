@@ -54,8 +54,9 @@ function Inscrire() {
             {success && ShowSuccessMsg(success)}
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
+        <Form.Label className="labelForm" >Nom complet</Form.Label>
         <Form.Control type="Normal text"
-         placeholder="Prénon et nom" 
+         placeholder="Saisissez votre mot de passe" 
          name="name"
          value={name}
          onChange={handleChangeInput} 
@@ -63,7 +64,8 @@ function Inscrire() {
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Enter email"
+      <Form.Label className="labelForm">Adresse e-mail</Form.Label>
+        <Form.Control type="email" placeholder="nom@gmail.com"
         name="email"
         required 
         value={email}
@@ -71,7 +73,8 @@ function Inscrire() {
          />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" 
+      <Form.Label className="labelForm" >Mot de passe</Form.Label>
+        <Form.Control type="password" placeholder="Créez votre mot de pase" 
          name="password"
         required 
         value={password}
@@ -83,7 +86,7 @@ function Inscrire() {
         S'inscrire
       </Button>
        <Form.Label>Vous avez déjà un compte ?
-       <Nav.Link href="/connexion" >Se connecter</Nav.Link> 
+       <a href="/connexion" className="link">Se connecter</a> 
        </Form.Label>
    </div>
       </Form>

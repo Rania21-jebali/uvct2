@@ -146,8 +146,7 @@ const rowData= users?.map(user => {
     );
   }
   return (
-
-     <div style={{ height: 550, width: '100%' }} >
+<div style={{ height: 550, width: '100%' }}  >
       <DataGrid
         rows={rowData}
         columns={columns}
@@ -160,6 +159,7 @@ const rowData= users?.map(user => {
         
       />
     </div> 
+    
   )
 }
 

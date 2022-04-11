@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import { Button,Form,Nav} from 'react-bootstrap';
+import { Button,Form} from 'react-bootstrap';
 import axios from 'axios'
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail, isLength} from '../../../components/utils/validation/Validation'
 import './inscrire.css'
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
     name: '',
@@ -18,6 +19,7 @@ function Inscrire() {
     const [user, setUser] = useState(initialState)
 
     const {name, email, password, err, success} = user
+    const history = useNavigate();
 
     const handleChangeInput = e => {
         const {name, value} = e.target
@@ -41,6 +43,8 @@ function Inscrire() {
             })
 
             setUser({...user, err: '', success: res.data.msg})
+            history.push("/")
+
         } catch (err) {
             err.response.data.msg && 
             setUser({...user, err: err.response.data.msg, success: ''})

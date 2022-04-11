@@ -35,9 +35,9 @@ function Connexion() {
             setUser({...user, err: '', success: res.data.msg})
 
             localStorage.setItem('firstLogin', true)
-
             dispatch(dispatchLogin())
             history.push("/profil")
+
 
         } catch (err) {
             err.response.data.msg && 
@@ -52,7 +52,7 @@ function Connexion() {
           localStorage.setItem('firstLogin', true)
 
           dispatch(dispatchLogin())
-          history.push('/')
+          history.push('/profil')
       } catch (err) {
           err.response.data.msg && 
           setUser({...user, err: err.response.data.msg, success: ''})
@@ -67,7 +67,7 @@ function Connexion() {
         localStorage.setItem('firstLogin', true)
 
         dispatch(dispatchLogin())
-        history.push('/')
+        history.push('/profil')
     } catch (err) {
         err.response.data.msg && 
         setUser({...user, err: err.response.data.msg, success: ''})

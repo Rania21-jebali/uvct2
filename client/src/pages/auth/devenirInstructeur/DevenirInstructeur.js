@@ -4,6 +4,7 @@ import axios from 'axios'
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail} from '../../../components/utils/validation/Validation'
 import './DevenirInstructeur.css'
+import { useNavigate } from 'react-router-dom';
 const initialState = {
     name: '',
     email: '',
@@ -17,8 +18,9 @@ const initialState = {
 
 function DevenirInstructeur() {
     const [user, setUser] = useState(initialState)
-
     const {name, email, specialite,skills,description,formation, err, success} = user
+    const history = useNavigate();
+
 
     const handleChangeInput = e => {
         const {name, value} = e.target
@@ -39,6 +41,8 @@ function DevenirInstructeur() {
             })
 
             setUser({...user, err: '', success: res.data.msg})
+            history.push("/")
+
         } catch (err) {
             err.response.data.msg && 
             setUser({...user, err: err.response.data.msg, success: ''})

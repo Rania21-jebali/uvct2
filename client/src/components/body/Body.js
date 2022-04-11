@@ -21,24 +21,23 @@ function Body() {
   const auth = useSelector(state => state.auth)
    const {isLogged, isAdmin} = auth
     return (
-        <section className='body'>
+        <section className={`${isLogged ? "body":"" } ${isAdmin ? "body":"" }`}>
         {  (isLogged && !isAdmin) &&   <LeftBar />}
         { isAdmin   &&   <LeftBarAdmin />}
 
             <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/left" element={<LeftBar />}/>
+            <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
+            <Route path="/left" element={<LeftBar />} />
             <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
             <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>
             <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
             <Route path="/users" element={isAdmin ?  <Users /> : <NotFound /> }/>
-            <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> }/>
+            <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> } />
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:activation_token" element={<AcceptCandidat />} />
-
             </Routes>
             
         </section>

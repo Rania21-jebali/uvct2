@@ -53,7 +53,7 @@ function ConnexionFex() {
           localStorage.setItem('firstLogin', true)
 
           dispatch(dispatchLogin())
-          history.push('/')
+          history.push('/profil')
       } catch (err) {
           err.response.data.msg && 
           setUser({...user, err: err.response.data.msg, success: ''})
@@ -68,7 +68,7 @@ function ConnexionFex() {
         localStorage.setItem('firstLogin', true)
 
         dispatch(dispatchLogin())
-        history.push('/')
+        history.push('/profil')
     } catch (err) {
         err.response.data.msg && 
         setUser({...user, err: err.response.data.msg, success: ''})

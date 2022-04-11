@@ -98,7 +98,7 @@ function Home() {
 
               <div className="col-sm-4 offre-item">
                 <div className="offre-item-inside">
-                  <img src="../../../public/images/Badge_Bronze.png" alt=""/>
+                  <img src="images/Badge_Bronze.png" alt=""/>
                   <br />
                   <p>Cours Marketing :</p>
                   <ul>
@@ -112,7 +112,7 @@ function Home() {
 
               <div className="col-sm-4 offre-item">
                 <div className="offre-item-inside">
-                  <img src="../../../public/images/Badge_Silver.png" alt="" />
+                  <img src="images/Badge_Silver.png" alt="" />
                   <br />
                   <p>Cours Marketing :</p>
                   <ul>
@@ -126,7 +126,7 @@ function Home() {
               </div>
               <div className="col-sm-4 offre-item">
                 <div className="offre-item-inside">
-                  <img src="../../../public/images/Badge_Gold.png" alt=""/>
+                  <img src="images/Badge_Gold.png" alt=""/>
                   <br />
                   <p>Cours Marketing :</p>
                   <ul>

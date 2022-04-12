@@ -19,7 +19,7 @@ function Inscrire() {
     const [user, setUser] = useState(initialState)
 
     const {name, email, password, err, success} = user
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleChangeInput = e => {
         const {name, value} = e.target
@@ -43,7 +43,7 @@ function Inscrire() {
             })
 
             setUser({...user, err: '', success: res.data.msg})
-            history.push("/")
+            navigate("/")
 
         } catch (err) {
             err.response.data.msg && 

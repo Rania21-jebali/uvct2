@@ -85,13 +85,15 @@ function InstructeurList() {
         renderCell: (params) =>{
           return(
             <>
+             <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Voir profil</Tooltip>}>
           <VisibilityIcon className='visibilityListIcon'/>
-          <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Supprimer apprenant</Tooltip>}>
+          </OverlayTrigger>
+          <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Supprimer instructeur</Tooltip>}>
           <DeleteOutlineIcon className='deleteListIcon' onClick={handleShow} />          
           </OverlayTrigger>
           <Modal show={show} onHide={handleClose} animation={false} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Supprimer apprenant</Modal.Title>
+          <Modal.Title>Supprimer instructeur</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Form.Label >Cause</Form.Label>

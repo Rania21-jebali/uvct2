@@ -1,6 +1,5 @@
 import React,{ useState } from 'react'
 import { Navbar,Nav,Form,FormControl,Button,Modal} from 'react-bootstrap';
-import { BiCartAlt } from 'react-icons/bi';
 import Connexion from '../../pages/auth/connexion/Connexion';
 import Inscrire from '../../pages/auth/inscrire/Inscrire';
 import {useSelector} from 'react-redux'
@@ -8,6 +7,8 @@ import axios from 'axios'
 import './Header.css'
 import Avatar1 from '../Avatar/Avatar'
 import Popover from '@material-ui/core/Popover';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Badge } from '@material-ui/core';
 
 
 
@@ -114,7 +115,11 @@ function Header() {
       }
       {
         !isAdmin && 
-        <Nav.Link><BiCartAlt size="2em" color="black" href="#" /></Nav.Link>
+        <a href="/panier" className="shoppingIcon">
+        <Badge  badgeContent={0} showZero className="badgeShopping">
+        <ShoppingCartIcon   />
+        </Badge>
+        </a>
       }
       {
                     isLogged

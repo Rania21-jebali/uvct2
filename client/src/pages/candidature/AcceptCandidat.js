@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import {useSelector} from 'react-redux'
 import {isLength, isMatch} from '../../components/utils/validation/Validation'
 import {ShowSuccessMsg, ShowErrMsg} from '../../components/utils/notifications/Nofification'
 import { Button,Form } from 'react-bootstrap'
 import './Candidature.css'
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 
 
 const initialState = {
@@ -16,10 +15,11 @@ const initialState = {
 }
 
 function AcceptCandidat() {
-    const {activation_token} = useParams()
+    const {token} = useParams()
+
     const [data, setData] = useState(initialState)
-    const token = useSelector(state => state.token)
      const { password, cf_password,success,err} = data
+     const navigate = useNavigate();
      const handleChange = e => {
 
         const {name, value} = e.target
@@ -34,11 +34,12 @@ const updatePassword = () => {
             return setData({...data, err: "Password did not match.", success: ''})
       
         try {
-            axios.patch('/user/updatePasswordInstr',
-                {activation_token}
+            axios.patch('/user/updatePasswordInstr', {password},
+            {headers: {Authorization: token}}
             )
 
             setData({...data, err: '' , success: "Updated Success!"})
+            navigate("/connexion")
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
         }

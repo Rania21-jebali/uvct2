@@ -19,7 +19,7 @@ const initialState = {
 function DevenirInstructeur() {
     const [user, setUser] = useState(initialState)
     const {name, email, specialite,skills,description,formation, err, success} = user
-    const history = useNavigate();
+    const navigate = useNavigate();
 
 
     const handleChangeInput = e => {
@@ -41,7 +41,7 @@ function DevenirInstructeur() {
             })
 
             setUser({...user, err: '', success: res.data.msg})
-            history.push("/")
+            navigate("/")
 
         } catch (err) {
             err.response.data.msg && 

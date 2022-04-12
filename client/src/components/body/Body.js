@@ -39,7 +39,7 @@ function Body() {
             <Route path="/instructeurs" element={isAdmin ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
-            <Route path="/user/acceptInstr/:activation_token" element={<AcceptCandidat />} />
+            <Route path="/user/acceptInstr/:token" element={<AcceptCandidat />} />
             </Routes>
             
         </section>

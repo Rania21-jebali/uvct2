@@ -8,7 +8,6 @@ import './Profile.css'
 import { Button,Form } from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import LeftBar from '../../components/leftBar/LeftBar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +34,7 @@ function Profile() {
 
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {user, isAdmin} = auth
+    const {user, isAdmin, isInstr} = auth
     const [data, setData] = useState(initialState)
     const {name, password, cf_password, err, success} = data
 
@@ -137,7 +136,9 @@ function Profile() {
             {success && ShowSuccessMsg(success)}
             {loading && <h3>Loading.....</h3>}
             <div className="col-left">
-                <h2>{isAdmin ? "Admin Profile": "User Profile"}</h2>
+                <h2>
+                {isAdmin ? "Admin Profile": (isInstr ? "Instructeur Profile" : "Apprenant Profile")}
+                </h2>
                 <Form >
              <Form.Group className="mb-3" >
              <div className={classes.root}>

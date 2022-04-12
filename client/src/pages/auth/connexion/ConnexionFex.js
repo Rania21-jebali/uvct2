@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { Button,Form,Nav} from 'react-bootstrap';
-import { FaFacebook } from 'react-icons/fa';
+import { Button,Form} from 'react-bootstrap';
 import './ConnexionFex.css';
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification';
 import { Link, useNavigate  } from 'react-router-dom';
@@ -23,7 +22,7 @@ function ConnexionFex() {
     const [user, setUser] = useState(initialState)
     const {email, password, err, success} = user
     const dispatch = useDispatch()
-    const history = useNavigate()
+    const navigate = useNavigate()
     
     const handleChangeInput = e => {
         const {name, value} = e.target
@@ -38,7 +37,7 @@ function ConnexionFex() {
             localStorage.setItem('firstLogin', true)
 
             dispatch(dispatchLogin())
-            history.push("/profil")
+           navigate("/profil")
 
         } catch (err) {
             err.response.data.msg && 
@@ -53,7 +52,7 @@ function ConnexionFex() {
           localStorage.setItem('firstLogin', true)
 
           dispatch(dispatchLogin())
-          history.push('/profil')
+          navigate('/profil')
       } catch (err) {
           err.response.data.msg && 
           setUser({...user, err: err.response.data.msg, success: ''})
@@ -68,7 +67,7 @@ function ConnexionFex() {
         localStorage.setItem('firstLogin', true)
 
         dispatch(dispatchLogin())
-        history.push('/profil')
+        navigate('/profil')
     } catch (err) {
         err.response.data.msg && 
         setUser({...user, err: err.response.data.msg, success: ''})

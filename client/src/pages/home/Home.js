@@ -152,6 +152,107 @@ function Home() {
       </div>
 
 
+      <div id="evenement">
+        <div className="container">
+
+          <h1>Derniers évènements <span>Voir plus</span></h1>
+
+          <div className="ligne-sous-titre ligne-sous-titre-bottom-0"> </div>
+
+          <div className="col-sm-12">
+            <div className="row evenement-block0">
+
+              <button class="btn btn-evenement-0-1"><i class="fa fa-arrow-left"></i></button>
+              <button class="btn btn-evenement-0-2"><i class="fa fa-arrow-right"></i></button>
+
+
+            </div>
+          </div>
+
+          <div className="col-sm-12">
+            <div className="row">
+              <div className="col-sm-8 evenement-block1">
+                <img src="images/event.jpg" />
+              </div>
+
+              <div className="col-sm-4 evenement-block2">
+
+                <p class="p-evenement-1">06/04/2022 - En ligne</p>
+                <h3>Selling from a to z</h3>
+                <p class="p-evenement-2">Organisé par</p>
+
+                <div className="image-inspecteur">
+                  <img src="images/Instruteur1.png" />
+                  <p class="p-evenement-3">Omar Abdelrahman</p>
+                </div>
+
+                <button class="btn btn-evenement-1">Réserver</button>
+
+                <button class="btn btn-evenement-2">Plus d'information</button>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div id="video">
+        <div className="container">
+
+          <h1>Quelques vidéos </h1>
+
+          <div className="ligne-sous-titre ligne-sous-titre-color-white ligne-sous-titre-bottom-0"> </div>
+
+          <div className="col-sm-12">
+            <div className="row evenement-block0">
+
+              <button class="btn btn-video-0-1"><i class="fa fa-arrow-left"></i></button>
+              <button class="btn btn-video-0-2"><i class="fa fa-arrow-right"></i></button>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div className="content">
+
+          <div className="col-sm-12">
+            <div className="row">
+
+              <div className="col-sm-3 item-video">
+                  <img src="images/image_13.png"/>
+              
+              </div>
+
+              <div className="col-sm-3 item-video">
+                  <img src="images/image_13.png"/>
+              
+              </div>
+              <div className="col-sm-3 item-video">
+                  <img src="images/image_13.png"/>
+              
+              </div>
+              <div className="col-sm-3 item-video">
+                  <img src="images/image_13.png"/>
+              
+              </div>
+              
+
+            </div>
+          </div>
+
+
+          
+        </div>
+
+      </div>
+
+
+
+
     </div>
 
   )

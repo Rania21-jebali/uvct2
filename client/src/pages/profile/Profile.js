@@ -34,7 +34,7 @@ function Profile() {
 
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {user, isAdmin, isInstr} = auth
+    const {user, isAdmin, isInstr, isSuperAdmin} = auth
     const [data, setData] = useState(initialState)
     const {name, password, cf_password, err, success} = data
 
@@ -137,7 +137,8 @@ function Profile() {
             {loading && <h3>Loading.....</h3>}
             <div className="col-left">
                 <h2>
-                {isAdmin ? "Admin Profile": (isInstr ? "Instructeur Profile" : "Apprenant Profile")}
+                {isAdmin ? "Admin Profile": (isInstr ? "Instructeur Profile" : 
+                ( isSuperAdmin ? "Super Admin Profil" :"Apprenant Profile"))}
                 </h2>
                 <Form >
              <Form.Group className="mb-3" >

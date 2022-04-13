@@ -7,7 +7,7 @@ const {google} = require('googleapis')
 const {OAuth2} = google.auth
 const {CLIENT_URL} = process.env
 const fetch = require('node-fetch');
-
+const History=require('../models/history')
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
 
@@ -120,6 +120,7 @@ login: async (req, res) => {
     try {
         const {email, password} = req.body
         const user = await Users.findOne({email})
+
         if(!user) return res.status(400).json({msg: "This email does not exist."})
 
         const isMatch = await bcrypt.compare(password, user.password)
@@ -287,23 +288,29 @@ updateUsersRole: async (req, res) => {
 //Delete user
 deleteUser: async (req, res) => {
     try {
+        const {cause} = req.body
+        const {idAdmin} =req
+        const user= await Users.findById(req.params.id)
+        const Useremail= user.email
+        const history = new History({cause,Useremail,idAdmin});
+        await history.save();
         await Users.findByIdAndDelete(req.params.id)
-
+       
         res.json({msg: "Deleted Success!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
 },
-/*Information user
-getUserInfor: async (req, res) => {
+//Get History
+getHistory: async (req, res) => {
     try {
-        const user = await Users.findById(req.params.id).select('-password')
+        const history = await History.find()
 
-        res.json(user)
+        res.json(history)
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
-},*/
+},
 //Google login
 googleLogin: async (req, res) => {
     try {

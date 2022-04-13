@@ -128,7 +128,7 @@ const rowData= users?.map(user => {
         date:user?.createdAt,
     }
 })
-   //Supprimer apprenant
+   //Supprimer instructeur
    const [show, setShow] = useState(false);
 
    const handleClose = () => setShow(false);

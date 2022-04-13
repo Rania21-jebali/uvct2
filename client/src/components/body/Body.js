@@ -20,11 +20,11 @@ import Instructeurs from '../../pages/Instructeur/Instructeurs/Instructeurs';
 function Body() {
   
   const auth = useSelector(state => state.auth)
-   const {isLogged, isAdmin} = auth
+   const {isLogged, isAdmin ,isInstr, isSuperAdmin} = auth
     return (
         <section className={`${isLogged ? "body":"" } ${isAdmin ? "body":"" }`}>
-        {  (isLogged && !isAdmin) &&   <LeftBar />}
-        { isAdmin   &&   <LeftBarAdmin />}
+        { ((isLogged || isInstr) && (!isAdmin && !isSuperAdmin)) &&   <LeftBar />}
+        { (isAdmin || isSuperAdmin)   &&   <LeftBarAdmin />}
 
             <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
@@ -34,7 +34,7 @@ function Body() {
             <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
-            <Route path="/users" element={isAdmin ?  <Users /> : <NotFound /> }/>
+            <Route path="/apprenants" element={isAdmin ?  <Users /> : <NotFound /> }/>
             <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> } />
             <Route path="/instructeurs" element={isAdmin ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>

@@ -2,6 +2,8 @@ const router= require('express').Router()
 const userCtrl= require('../controllers/userCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
+const authSuperAdmin = require('../middleware/authSuperAdmin')
+
 
 
 router.post('/register',userCtrl.register)
@@ -38,7 +40,8 @@ router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)
 
 router.delete('/delete/:id', auth, authAdmin, userCtrl.deleteUser)
 
-//router.get('/userInfo/:id', auth, authAdmin, userCtrl.getUserInfor)
+router.get('/history', auth, authSuperAdmin, userCtrl.getHistory)
+
 
 // Social Login
 router.post('/google_login', userCtrl.googleLogin)

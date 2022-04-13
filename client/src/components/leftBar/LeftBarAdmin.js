@@ -43,7 +43,7 @@ export default class LeftBarAdmin extends React.Component {
           <a href="/dashbord">Tableau de bord</a>
           </Menu.Item>
           <Menu.Item key="3" icon={<SupervisorAccountIcon />}>
-          <a href="/users"> Apprenants</a>
+          <a href="/apprenants"> Apprenants</a>
           </Menu.Item>
           <SubMenu key="sub1" icon={<RecordVoiceOverIcon />} title="Instructeurs">
             <Menu.Item key="5">

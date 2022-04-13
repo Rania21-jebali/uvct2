@@ -5,6 +5,8 @@ const initialState = {
     isLogged: false,
     isAdmin: false,
     isInstr: false,
+    isSuperAdmin: false,
+
 }
 
 const authReducer = (state = initialState, action) => {
@@ -20,6 +22,7 @@ const authReducer = (state = initialState, action) => {
                 user: action.payload.user,
                 isAdmin: action.payload.isAdmin,
                 isInstr: action.payload.isInstr,
+                isSuperAdmin: action.payload.isSuperAdmin,
             }
         default:
             return state

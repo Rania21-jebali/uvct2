@@ -5,6 +5,7 @@ import ForgotPassword from '../../pages/auth/forgotPassword/forgotPassword';
 import ResetPassword from '../../pages/auth/ResetPassword/ResetPassword';
 import Profile from '../../pages/profile/Profile';
 import Home from '../../pages/home/Home';
+import Inspecteur from '../../pages/inspecteur/Inspecteur';
 import DevenirInstructeur from '../../pages/auth/devenirInstructeur/DevenirInstructeur';
 import ConnexionFex from '../../pages/auth/connexion/ConnexionFex';
 import InscrireFex from '../../pages/auth/inscrire/InscrireFex';
@@ -23,6 +24,7 @@ function Body() {
         <section className='body'>
             <Routes> 
             <Route path="/" element={<Home />}/>
+            <Route path="/inspecteur" element={<Inspecteur />}/>
             <Route path="/left" element={<LeftBar />}/>
             <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>

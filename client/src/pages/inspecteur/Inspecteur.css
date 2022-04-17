@@ -1,0 +1,139 @@
+.home{
+    flex:4;
+ }
+ @media  (max-width:653px) {
+     div{
+color:blue
+     }
+ }
+
+#slider-inspecteur{
+    background: linear-gradient(to bottom, rgb(230, 230, 230) 0, #ffffff 20px, #ffffff 100%);
+    position: relative;
+}
+
+#slider-inspecteur .container{
+    z-index: 10;
+    position: relative;
+}
+
+.slider-inspecteur-block{
+    margin-bottom: 3vw;
+    margin-top: 3vw;
+}
+
+#slider-inspecteur ul{
+    list-style: none;
+    justify-content: center;
+    display: flex;
+    margin-top:20px;
+}
+
+#slider-inspecteur li{
+    display: inline;
+    color:black;
+    padding: 5px 10px;
+}
+
+.btn-slider{
+   background-color:#20384D;
+   color:white;
+   font-size: 12px;
+   margin-top: 50px;
+   margin-bottom: 20px;
+}
+
+.slide-block1 h1{
+    color: black;
+    margin-top:20px;
+    font-size: 50px;
+}
+
+.slide-block1 p{
+    color: black;
+    font-size: 16px;
+    margin-top:30px;
+    font-weight:600;
+}
+
+.image-slider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-slider img{
+    width: 80% ;
+}
+
+.slider-block3{
+    display: flex;
+    justify-content: center;
+    padding-top: 5vw;
+    padding-bottom: 3vw;
+}
+
+.slider-block3-item{
+    background-color: rgba(0,0,0,0.5);
+    margin:5px;
+    padding:16px;
+}
+
+.slider-block3-item img{
+    display:block;
+    margin:auto;
+}
+
+.slider-block3-item h3{
+    color:white;
+    font-size: 14px;
+}
+
+.slider-block3-item p{
+    color:#F59E0B;
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+
+/* end slider */
+
+
+#block2-inspecteur{
+    background-size: cover;
+    background: rgba(25, 27, 27, 0.5) url(../../../public/images/neonbrand-zFSo6bnZJTw-unsplash.jpg);
+    position: relative;
+
+    padding:5vw 0px;
+}
+
+#block2-inspecteur .block2-inspecteur-background{
+    position:absolute;
+    top:0px; left:0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 0;
+}
+
+#block2-inspecteur h1, p, li{
+    color:white;
+}
+
+/*end block2*/
+
+#block3-inspecteur{
+    background-size: cover;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.52), rgba(5, 0, 4, 0.73)), url(../../../public/images/neonbrand-zFSo6bnZJTw-unsplash.jpg) ;
+    position: relative;
+
+    padding:5vw 0px;
+}
+
+
+
+#block3-inspecteur h1, p, li{
+    color:white;
+}
+
+/*end block3*/
+

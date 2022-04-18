@@ -7,6 +7,7 @@ import Body from './components/body/Body';
 import Header from './components/header/Header';
 import {useDispatch, useSelector} from 'react-redux'
 import {dispatchLogin, fetchUser, dispatchGetUser} from './redux/actions/authAction'
+import 'antd/dist/antd.css';
 
 function App() {
 
@@ -38,7 +39,6 @@ function App() {
       getUser()
     }
   },[token, dispatch])
-  const {isLogged, isAdmin} = auth
 
   return (
     <Router >

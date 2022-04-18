@@ -6,7 +6,7 @@ module.exports = async function(req, res, next) {
             return res.status(400).json({msg: "No files were uploaded."})
             
         const file = req.files.file;
-        if(file.mimetype !== 'application/pdf' && file.mimetype !== 'application/msword'){
+        if(file.mimetype !== 'application/pdf'){
             removeTmp(file.tempFilePath)
             return res.status(400).json({msg: "File format is incorrect."})
         }

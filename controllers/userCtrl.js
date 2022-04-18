@@ -248,6 +248,19 @@ updateUser: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//update profil instructeur
+updateProfilInstr: async (req, res) => {
+    try {
+        const {name, avatar,tele,site,info} = req.body
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            name, avatar,tele,site,info
+        })
+
+        res.json({msg: "Update profil instructeur Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 
 //update password instructeur
 updatePsswordInstr: async (req, res) => {

@@ -1,0 +1,10 @@
+.leftList{
+    background: #F6F7F8;
+    width: 280px;
+    height: 950px;
+}
+.children-content{
+    background:  #F3F4F6;;
+    flex-grow: 1;
+}
+

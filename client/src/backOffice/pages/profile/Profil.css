@@ -1,0 +1,45 @@
+.profil{
+    display: flex;
+}
+.title-profil{
+margin-top: 20px;
+margin-left: 20px;
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 34px;
+}
+.content-profil{
+margin-left: 20px;
+background: #FFFFFF;
+border: 1px solid #CBD5E1;
+box-sizing: border-box;
+border-radius: 2px;
+margin-right: 60px;
+}
+.title-photo{
+margin-left: 20px;
+flex-wrap: wrap;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 160%;
+color: #1E293B;
+}
+.form-profil{
+    margin-left: 20px;
+    margin-right: 350px;
+}
+.btn-sauvg{
+background: #20384D;
+border-color: #20384D;
+border-radius: 2px;
+}
+.btn-sauvg:hover{
+    background: #20384D;
+    border-color: #20384D;
+}
+.content-button{
+    display: flex;
+    justify-content: flex-end;
+}

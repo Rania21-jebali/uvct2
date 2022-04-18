@@ -39,13 +39,20 @@ const userSchema = new mongoose.Schema({
     formation:{
         type:String
     },
-    status:{
-        type:Boolean,
-    },
     accept:{
         type:Boolean,
         default:false,
-    }
+    },
+    tele:{
+        type:String,
+    },
+    info:{
+        type:String,
+    },
+    site:{
+        type:String,
+    },
+    
 
 }, {
     timestamps: true

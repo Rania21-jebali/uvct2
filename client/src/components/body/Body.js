@@ -11,11 +11,14 @@ import InscrireFex from '../../pages/auth/inscrire/InscrireFex';
 import NotFound from '../utils/NotFound/NotFound'
 import Candidature from '../../pages/candidature/Candidature';
 import './Body.css'
-import LeftBar from '../leftBar/LeftBar';
-import LeftBarAdmin from '../leftBar/LeftBarAdmin';
 import Users from '../../pages/Apprenant/users/users';
 import AcceptCandidat from '../../pages/candidature/AcceptCandidat';
 import Instructeurs from '../../pages/Instructeur/Instructeurs/Instructeurs';
+import LeftList from '../../backOffice/components/leftList/LeftList';
+import Profil from '../../backOffice/pages/profile/Profil';
+import Formations from '../../backOffice/pages/formations/Formations';
+import Evenements from '../../backOffice/pages/evenements/Evenements';
+import Parametres from '../../backOffice/pages/parametres/Parametres';
 
 function Body() {
   
@@ -23,12 +26,16 @@ function Body() {
    const {isLogged, isAdmin ,isInstr, isSuperAdmin} = auth
     return (
         <section className={`${isLogged ? "body":"" } ${isAdmin ? "body":"" }`}>
-        { ((isLogged || isInstr) && (!isAdmin && !isSuperAdmin)) &&   <LeftBar />}
-        { (isAdmin || isSuperAdmin)   &&   <LeftBarAdmin />}
-
+            { isLogged ?  
+            (<LeftList >
             <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
-            <Route path="/left" element={<LeftBar />} />
+            <Route path="/profile" element={<Profil />} />
+            <Route path="/mes-formations" element={<Formations />} />
+            <Route path="/mes-evenements" element={<Evenements />} />
+            <Route path="/parametres" element={<Parametres />} />
+
+
             <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
             <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>
             <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
@@ -41,7 +48,16 @@ function Body() {
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:token" element={<AcceptCandidat />} />
             </Routes>
-            
+            </LeftList>
+            ) :
+            (
+                <Routes>
+            <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
+            <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
+            </Routes>
+            )
+            }
+
         </section>
     )
 }

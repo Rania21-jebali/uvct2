@@ -261,6 +261,19 @@ updateProfilInstr: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//update paiement info
+updatePaiementInfo: async (req, res) => {
+    try {
+        const {typeCompte,paysCompte,nomCompte,numCompte} = req.body
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            typeCompte,paysCompte,nomCompte,numCompte
+        })
+
+        res.json({msg: "Update paiement instructeur Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 
 //update password instructeur
 updatePsswordInstr: async (req, res) => {

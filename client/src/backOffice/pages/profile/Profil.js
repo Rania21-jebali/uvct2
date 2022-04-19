@@ -120,7 +120,7 @@ function Profil() {
     
   return (
     <div className="profile">
-    {err && ShowErrMsg(err)}
+            {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
             {loading && <h3>Loading.....</h3>}
       <h2 className='title-profil'>Informations générales</h2>

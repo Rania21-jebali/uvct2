@@ -52,6 +52,18 @@ const userSchema = new mongoose.Schema({
     site:{
         type:String,
     },
+    typeCompte:{
+        type:String,
+    },
+    paysCompte:{
+        type:String,
+    },
+    nomCompte:{
+        type:String,
+    },
+    numCompte:{
+        type:String,
+    }
     
 
 }, {

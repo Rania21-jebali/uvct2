@@ -7,23 +7,23 @@ function Paiement() {
     <div className='paiement'>
     <Form>
     <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Type de compte</Form.Label>
+    <Form.Label className="label">Type de compte</Form.Label>
     <Form.Select >
     <option>Compte bancaire</option>
   </Form.Select>
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>Pays de compte bancaire</Form.Label>
+    <Form.Label className="label">Pays de compte bancaire</Form.Label>
     <Form.Select >
     <option>Tunisie</option>
   </Form.Select>
   </Form.Group>
   <Form.Group className="mb-3" >
-    <Form.Label>Nom du compte</Form.Label>
+    <Form.Label className="label">Nom du compte</Form.Label>
     <Form.Control type="text" placeholder="Entrer le nom de votre carte" />
   </Form.Group>
   <Form.Group className="mb-3" >
-    <Form.Label>Numéro de carte</Form.Label>
+    <Form.Label className="label">Numéro de carte</Form.Label>
     <Form.Control type="number" placeholder="Entrer votre numéro de carte" />
   </Form.Group>
   <div className="content-button">

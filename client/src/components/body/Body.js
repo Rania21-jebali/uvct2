@@ -19,6 +19,7 @@ import Profil from '../../backOffice/pages/profile/Profil';
 import Formations from '../../backOffice/pages/formations/Formations';
 import Evenements from '../../backOffice/pages/evenements/Evenements';
 import Parametres from '../../backOffice/pages/parametres/Parametres';
+import AjoutEvent from '../../backOffice/pages/evenements/ajoutEvent/AjoutEvent';
 
 function Body() {
   
@@ -33,6 +34,7 @@ function Body() {
             <Route path="/profile" element={<Profil />} />
             <Route path="/mes-formations" element={<Formations />} />
             <Route path="/mes-evenements" element={<Evenements />} />
+            <Route path="/ajout-evenement" element={<AjoutEvent />} />
             <Route path="/parametres" element={<Parametres />} />
 
 

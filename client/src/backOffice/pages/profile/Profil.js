@@ -13,11 +13,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     '& > *': {
       margin: theme.spacing(1),
+      border:" 0.5px solid #999999",
+      padding:"5px",
+      boxSizing: "border-box",
     },
   },
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
+
   },
 }));
 const initialState = {
@@ -127,14 +131,18 @@ function Profil() {
          <div className={classes.root}>
        <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
        </div>
-       <Form.Control type="file" 
-   name="avatar"
+       <Form.Label htmlFor="file"> 
+       <img src="images/Camera-circle.png" alt="" className='camera-center'/>
+       </Form.Label>
+       <Form.Control type="file"  id="file"
+     name="avatar"
     defaultValue={user.avatar}
     onChange={changeAvatar}
+    style={{display:"none"}}
     />
   </Form.Group>
   <Form.Group className="mb-3" >
-  <Form.Label>Nom complet</Form.Label>
+  <Form.Label className="label">Nom complet</Form.Label>
     <Form.Control type="text" placeholder="Entrer votre nom et prénom" 
     name="name" 
     required 
@@ -143,7 +151,7 @@ function Profil() {
     />
   </Form.Group>
   <Form.Group className="mb-3" >
-  <Form.Label>Adresse e-mail</Form.Label>
+  <Form.Label className="label">Adresse e-mail</Form.Label>
     <Form.Control type="email" placeholder="nom@email.com" 
     name="email" 
     defaultValue={user.email}
@@ -151,21 +159,21 @@ function Profil() {
    />
   </Form.Group>
   <Form.Group className="mb-3" >
-  <Form.Label>Numéro de téléphone</Form.Label>
+  <Form.Label className="label">Numéro de téléphone</Form.Label>
     <Form.Control type="text" placeholder="Entrer votre numéro de téléphone" 
     name="tele" 
     defaultValue={user.tele}
    />
   </Form.Group>
   <Form.Group className="mb-3" >
-  <Form.Label>Site web personnel</Form.Label>
+  <Form.Label className="label">Site web personnel</Form.Label>
     <Form.Control type="text" placeholder="Enter votre URL" 
     name="site" 
     defaultValue={user.site}
    />
   </Form.Group>
   <Form.Group className="mb-3" >
-  <Form.Label>Sur moi</Form.Label>
+  <Form.Label className="label">Sur moi</Form.Label>
     <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
     name="info" 
     defaultValue={user.info}

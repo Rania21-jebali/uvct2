@@ -2,9 +2,24 @@
     background: #F6F7F8;
     width: 280px;
     height: 950px;
+    border-right: 1px solid #E2E8F0;
+
 }
 .children-content{
     background:  #F3F4F6;;
     flex-grow: 1;
 }
-
+.menu-item-left:hover{
+background-color: #C4D1DD;
+border-right: 4px solid #20384D;
+transition: 0.5s;
+}
+.menu-item-left{
+    display: flex;
+  justify-content: center;
+}
+.menu-title-item{
+color:#20384D;
+font-weight: 500;
+font-size: 16px;
+}

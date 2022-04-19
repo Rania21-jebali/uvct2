@@ -43,3 +43,18 @@ border-radius: 2px;
     display: flex;
     justify-content: flex-end;
 }
+.profil-avatar{
+border: 0.5px solid #999999;
+}
+.label{
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+color: #1E293B;
+display: flex;
+justify-content: space-between;
+}
+.camera-center{
+    object-fit: cover;
+    cursor: pointer;
+}

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Menu} from 'antd';
+import { Menu } from 'antd';
 import './LeftList.css';
-import { useState } from 'react';
 
 const routes=[
     {
         key:"1",
         icon:<img src="images/profile.svg" alt=""/>,
         name:"Profile",
-        path:"/profile"
+        path:"/profile",
     },
     {
         key:"2",
@@ -40,27 +39,20 @@ const routes=[
 function mapping(x){
     const menu= x.map( (routes) => (
         <Menu.Item key={routes.key} icon={routes.icon} className="menu-item-left">
-      <a href={routes.path}>{routes.name}</a>
+      <a href={routes.path} className="menu-title-item">{routes.name}</a>
       </Menu.Item>
      
   ))
          return menu;
    }
+  
 export default function LeftList({children})  {  
-    const [current,setCurrent]=useState("1");
-    const handleClick = e => {
-        console.log('click ', e);
-        setCurrent({current:e.key})
-    }
     return (
         <>
       <div  className="leftList">
         <Menu
           mode="inline"
-          onClick={handleClick}
           style={{ background:"#F6F7F8", marginTop:"90px"}}
-          selectedKeys={[current]}
-
         >
         {mapping(routes)}
         </Menu>

@@ -23,12 +23,24 @@ const routes=[
     },
     {
         key:"4",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Mes gains",
+        path:"/mes-gains"
+    },
+    {
+        key:"5",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Mes achats",
+        path:"/mes-achats"
+    },
+    {
+        key:"6",
         icon:<img src="images/setting.png" alt=""/>,
         name:"Paramétres",
         path:"/parametres"
     },
     {
-        key:"5",
+        key:"7",
         icon:<img src="images/logout.png" alt=""/>,
         name:"Se déconnecter",
         path:"/se-deconnecter"

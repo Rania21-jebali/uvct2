@@ -26,8 +26,10 @@ function AjoutEvent() {
     const token = useSelector(state => state.token)
     const {user, isAdmin} = auth
     const [event, setEvent] = useState(initialState)
-    const {titre,details,dateDebut,dateFin, nbTicket, prix, typeEvent, affiche, err, success} = event
+    const {titre,details,dateDebut,dateFin, nbTicket, prix, typeEvent, err, success} = event
     const [callback, setCallback] = useState(false)
+    const [affiche, setAffiche] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -43,6 +45,35 @@ function AjoutEvent() {
       const {name, value} = e.target
       setEvent({...event, [name]:value, err: '', success: ''})
   }
+  const changeAffiche = async(e) => {
+    e.preventDefault()
+    try {
+        const file = e.target.files[0]
+
+        if(!file) return setEvent({...event, err: "No files were uploaded." , success: ''})
+
+        if(file.size > 1024 * 1024)
+            return setEvent({...event, err: "Size too large." , success: ''})
+
+        if(file.type !== 'image/jpeg' && file.type !== 'image/png')
+            return setEvent({...event, err: "File format is incorrect." , success: ''})
+
+        let formData =  new FormData()
+        formData.append('file', file)
+
+        setLoading(true)
+        const res = await axios.post('/api/uploadAffiche', formData, {
+            headers: {'content-type': 'multipart/form-data', Authorization: token}
+        })
+
+        setLoading(false)
+        setAffiche(res.data.url)
+        
+    } catch (err) {
+        setAffiche({...event, err: err.response.data.msg , success: ''})
+    }
+}
+
     const handleSubmit = async e => {
       e.preventDefault()
       try {
@@ -66,6 +97,7 @@ function AjoutEvent() {
       <div className='content-ajout'>
       {err && ShowErrMsg(err)}
     {success && ShowSuccessMsg(success)}
+    {loading && <h3>Loading.....</h3>}
         <Form className="form-event" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" >
              <Form.Label className="label">Titre d'événement</Form.Label>
@@ -91,11 +123,15 @@ function AjoutEvent() {
           <Form.Label className="label">Ajouter une Affiche</Form.Label>
               <div className="content-affiche">
               <Form.Label htmlFor="file" > 
+                <img src={affiche ? 
+                affiche 
+                : event.affiche} alt=""></img>
               <p> <PhotoSizeSelectActualIcon /> Séléctionnez une image </p>
               </Form.Label>
               </div>
             <Form.Control type="file" id="file"
-            style={{display:"none"}}
+                onChange={changeAffiche}
+                style={{display:"none"}}
           />
           </Form.Group>
           <Form.Group className="mb-3" >

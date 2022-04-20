@@ -6,6 +6,7 @@ const uploadFileCtrl = require('../controllers/uploadFile')
 const auth = require('../middleware/auth')
 
 router.post('/upload_avatar', uploadImage, auth, uploadCtrl.uploadAvatar)
+router.post('/uploadAffiche', uploadImage, auth, uploadCtrl.uploadAffiche)
 router.post('/upload', uploadCV, uploadFileCtrl.uploadFile)
 
 module.exports = router

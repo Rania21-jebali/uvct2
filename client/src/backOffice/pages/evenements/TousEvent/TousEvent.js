@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React,{useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux'
+import {fetchMyEvents, dispatchGetMyEvents} from '../../../../redux/actions/eventsAction'
 import { Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
 import { List, Avatar } from 'antd';
+import DayJS from 'react-dayjs';
+
 
 const { Search } = Input;
 const participants = [
@@ -17,21 +21,20 @@ const participants = [
       },
     
   ];
-  const rowData = [
-    { id:"1",
-     titre: 'Selling from a to z', 
-     date:"mercredi 27 avril 2022, 17:00 jusqu'au mercredi 27 avril 2022, 19:00",
-  },
-  { id:"2",
-    titre: 'Selling from a to z', 
-    date:"mercredi 27 avril 2022, 17:00 jusqu'au mercredi 27 avril 2022, 19:00",
- }
-  ];
- 
-
   const onSearch = value => console.log(value);
-
 function TousEvent() {
+  const auth = useSelector(state => state.auth)
+  const token = useSelector(state => state.token)
+  const {user} = auth
+  const events = useSelector(state => state.events)
+  const [callback, setCallback] = useState(false)
+
+    const dispatch = useDispatch()
+    useEffect(() => {
+            fetchMyEvents(token).then(res =>{
+                dispatch(dispatchGetMyEvents(res))
+            })
+    },[token, dispatch, callback])
     const columns = [
         {
           field: 'titre',
@@ -42,6 +45,11 @@ function TousEvent() {
           field: 'date',
           headerName: 'Date',
           flex:3,
+          renderCell(params){
+            return(
+              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+            );
+          }
         },
         {
             field: 'action',
@@ -72,14 +80,21 @@ function TousEvent() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const [data, setData] =React.useState(rowData);
-
+  const rowData= events?.map(event => {
+    return{
+        id:event?._id,
+        titre:event?.titre,
+        date:event?.dateDebut,
+    }
+})
   return (
 <>
 <div style={{ height: 550, width: '100%'}}>
-      <DataGrid
-        rows={data}
+<DataGrid
+        rows={rowData}
         columns={columns}
+        components={{
+  }}
         pageSize={8}
         checkboxSelection
         disableSelectionOnClick

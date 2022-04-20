@@ -1,5 +1,3 @@
-const { chat_v1 } = require('googleapis')
-const { file } = require('googleapis/build/src/apis/file')
 const mongoose= require('mongoose')
 
 const historySchema = new mongoose.Schema({

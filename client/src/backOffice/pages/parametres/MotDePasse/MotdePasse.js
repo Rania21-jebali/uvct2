@@ -14,14 +14,12 @@ const initialState = {
   success: ''
 }
 function MotdePasse() {
-  const auth = useSelector(state => state.auth)
+    const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const { isAdmin} = auth
     const [data, setData] = useState(initialState)
     const { password, cf_password, err, success} = data
-
     const [callback, setCallback] = useState(false)
-
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -33,9 +31,7 @@ function MotdePasse() {
     },[token, isAdmin, dispatch, callback])
 
     const handleChange = e => {
-
         const {name, value} = e.target
-
         setData({...data, [name]:value, err:'', success: ''})
     }
     const updatePassword = () => {
@@ -63,39 +59,37 @@ function MotdePasse() {
     <div className='motDePasse'>
      {err && ShowErrMsg(err)}
      {success && ShowSuccessMsg(success)}
-    <Form>
-    <Form.Group className="mb-3" >
-    <Form.Label className="label">Mot de passe actuel</Form.Label>
-  <Form.Control type="password" placeholder="Entrer le mot de passe actuel" 
-    name="password"
-    value={password}
-
-    />
-  </Form.Group>
-  <Form.Group className="mb-3" >
-    <Form.Label className="label">Nouveau mot de passe</Form.Label>
-  <Form.Control type="password" placeholder="Entrer le nouveau mot de passe" 
-  required
-    name="password"
-    value={password}
-    onChange={handleChange}
-    />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-  <Form.Label className="label">Répétez le nouveau mot de passe ici</Form.Label>
-    <Form.Control type="password" placeholder="Confirmer le nouveau mot de passe" 
-    required
-    name="cf_password"
-    value={cf_password}
-    onChange={handleChange}
-   />
-  </Form.Group>
-  <div className="content-button">
-  <Button className='btn-confirme' onClick={handleUpdate}>Changer le mot de passe</Button>
-  </div>
-    </Form>
+      <Form>
+          <Form.Group className="mb-3" >
+            <Form.Label className="label">Mot de passe actuel</Form.Label>
+              <Form.Control type="password" placeholder="Entrer le mot de passe actuel" 
+                name="password"
+                value={password}
+                />
+        </Form.Group>
+        <Form.Group className="mb-3" >
+          <Form.Label className="label">Nouveau mot de passe</Form.Label>
+            <Form.Control type="password" placeholder="Entrer le nouveau mot de passe" 
+              required
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label className="label">Répétez le nouveau mot de passe ici</Form.Label>
+            <Form.Control type="password" placeholder="Confirmer le nouveau mot de passe" 
+              required
+              name="cf_password"
+              value={cf_password}
+              onChange={handleChange}
+          />
+        </Form.Group>
+        <div className="content-button">
+        <Button className='btn-confirme' onClick={handleUpdate}>Changer le mot de passe</Button>
+        </div>
+      </Form>
     </div>
-
   )
 }
 

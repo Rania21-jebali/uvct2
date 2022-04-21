@@ -36,8 +36,6 @@ router.patch('/update', auth, userCtrl.updateUser)
 
 router.patch('/updateInstr', auth, userCtrl.updateProfilInstr)
 
-router.patch('/updatePaiement', auth, userCtrl.updatePaiementInfo)
-
 router.patch('/updatePasswordInstr', auth,userCtrl.updatePsswordInstr)
 
 router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)

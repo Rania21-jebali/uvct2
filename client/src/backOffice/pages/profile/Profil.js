@@ -33,18 +33,15 @@ const initialState = {
     success: ''
 }
 function Profil() {
-  const classes = useStyles();
-
+    const classes = useStyles();
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const {user, isAdmin} = auth
     const [data, setData] = useState(initialState)
     const {name,tele,site,info, err, success} = data
-
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [callback, setCallback] = useState(false)
-
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -61,8 +58,6 @@ function Profil() {
 
         setData({...data, [name]:value, err:'', success: ''})
     }
-    
-
     const changeAvatar = async(e) => {
         e.preventDefault()
         try {
@@ -91,8 +86,6 @@ function Profil() {
             setData({...data, err: err.response.data.msg , success: ''})
         }
     }
-
-   
     const updateInfor = () => {
         try {
             axios.patch('/user/updateInstr', {
@@ -102,22 +95,15 @@ function Profil() {
                 site: site ? site : user.site,
                 info: info ? info : user.info,
 
-            },
-            {
-                headers: {Authorization: token}
-            })
-
+            }, { headers: {Authorization: token} })
             setData({...data, err: '' , success: "Updated profil instructeur Success!"})
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
         }
     }
-
-    
     const handleUpdate = () => {
          updateInfor()
     }
-    
   return (
     <div className="profile">
             {err && ShowErrMsg(err)}
@@ -128,63 +114,63 @@ function Profil() {
        <h3 className='title-photo'>Photo de profile</h3>
        <Form className='form-profil'>
          <Form.Group className="mb-3" >
-         <div className={classes.root}>
-       <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
-       </div>
-       <Form.Label htmlFor="file"> 
-       <img src="images/Camera-circle.png" alt="" className='camera-center'/>
-       </Form.Label>
-       <Form.Control type="file"  id="file"
-     name="avatar"
-    defaultValue={user.avatar}
-    onChange={changeAvatar}
-    style={{display:"none"}}
-    />
-  </Form.Group>
-  <Form.Group className="mb-3" >
-  <Form.Label className="label">Nom complet</Form.Label>
-    <Form.Control type="text" placeholder="Entrer votre nom et prénom" 
-    name="name" 
-    required 
-    defaultValue={user.name}
-    onChange={handleChange}
-    />
-  </Form.Group>
-  <Form.Group className="mb-3" >
-  <Form.Label className="label">Adresse e-mail</Form.Label>
-    <Form.Control type="email" placeholder="nom@email.com" 
-    name="email" 
-    defaultValue={user.email}
-    disabled 
-   />
-  </Form.Group>
-  <Form.Group className="mb-3" >
-  <Form.Label className="label">Numéro de téléphone</Form.Label>
-    <Form.Control type="text" placeholder="Entrer votre numéro de téléphone" 
-    name="tele" 
-    defaultValue={user.tele}
-   />
-  </Form.Group>
-  <Form.Group className="mb-3" >
-  <Form.Label className="label">Site web personnel</Form.Label>
-    <Form.Control type="text" placeholder="Enter votre URL" 
-    name="site" 
-    defaultValue={user.site}
-   />
-  </Form.Group>
-  <Form.Group className="mb-3" >
-  <Form.Label className="label">Sur moi</Form.Label>
-    <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
-    name="info" 
-    defaultValue={user.info}
-   />
-  </Form.Group>
-  <div className="content-button">
-          <Button disabled={loading} onClick={handleUpdate} className='btn-sauvg'>Sauvegarder les modifications</Button>
+          <div className={classes.root}>
+           <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
           </div>
-                </Form>
-       </div>
+           <Form.Label htmlFor="file"> 
+            <img src="images/Camera-circle.png" alt="" className='camera-center'/>
+           </Form.Label>
+            <Form.Control type="file"  id="file"
+              name="avatar"
+              defaultValue={user.avatar}
+              onChange={changeAvatar}
+              style={{display:"none"}}
+          />
+          </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label className="label">Nom complet</Form.Label>
+              <Form.Control type="text" placeholder="Entrer votre nom et prénom" 
+                name="name" 
+                required 
+                defaultValue={user.name}
+                onChange={handleChange}
+              />
+          </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label className="label">Adresse e-mail</Form.Label>
+              <Form.Control type="email" placeholder="nom@email.com" 
+                name="email" 
+                defaultValue={user.email}
+                disabled 
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label className="label">Numéro de téléphone</Form.Label>
+              <Form.Control type="text" placeholder="Entrer votre numéro de téléphone" 
+                name="tele" 
+                defaultValue={user.tele}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label className="label">Site web personnel</Form.Label>
+              <Form.Control type="text" placeholder="Enter votre URL" 
+                name="site" 
+                defaultValue={user.site}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" >
+            <Form.Label className="label">Sur moi</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
+                name="info" 
+                defaultValue={user.info}
+            />
+          </Form.Group>
+          <div className="content-button">
+                  <Button disabled={loading} onClick={handleUpdate} className='btn-sauvg'>Sauvegarder les modifications</Button>
+           </div>
+        </Form>
       </div>
+    </div>
   )
 }
 

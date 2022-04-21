@@ -27,6 +27,16 @@ getAllEvent: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+// supprimer event
+deleteEvent: async (req, res) => {
+    try {
+        await Event.findByIdAndDelete(req.params.id)
+       
+        res.json({msg: "event deleted Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 
 }
 

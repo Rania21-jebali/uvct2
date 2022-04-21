@@ -23,9 +23,7 @@ const participants = [
   ];
   const onSearch = value => console.log(value);
 function TousEvent() {
-  const auth = useSelector(state => state.auth)
   const token = useSelector(state => state.token)
-  const {user} = auth
   const events = useSelector(state => state.events)
   const [callback, setCallback] = useState(false)
 

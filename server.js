@@ -16,6 +16,7 @@ app.use(fileUpload({
 //Routes
 app.use('/user',require('./routes/user'))
 app.use('/',require('./routes/event'))
+app.use('/',require('./routes/compte'))
 app.use('/api', require('./routes/upload'))
 
 

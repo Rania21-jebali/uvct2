@@ -1,16 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import DataProvider from './redux/store';
+import { createRoot } from 'react-dom/client';
 
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<React.StrictMode>
   <DataProvider>
     <App />
     </DataProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+</React.StrictMode>);

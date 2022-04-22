@@ -8,7 +8,6 @@ import './Header.css'
 import Avatar1 from '../Avatar/Avatar'
 import Popover from '@material-ui/core/Popover';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Badge } from '@material-ui/core';
 
 
 
@@ -116,9 +115,7 @@ function Header() {
       {
         !isAdmin && 
         <a href="/panier" className="shoppingIcon">
-        <Badge  badgeContent={0} showZero className="badgeShopping">
         <ShoppingCartIcon   />
-        </Badge>
         </a>
       }
       {

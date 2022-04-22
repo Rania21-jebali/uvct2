@@ -91,8 +91,6 @@ function TousEvent() {
 <DataGrid
         rows={rowData}
         columns={columns}
-        components={{
-  }}
         pageSize={8}
         checkboxSelection
         disableSelectionOnClick

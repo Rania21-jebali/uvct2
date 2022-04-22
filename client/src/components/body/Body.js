@@ -21,6 +21,7 @@ import Evenements from '../../backOffice/pages/evenements/Evenements';
 import Parametres from '../../backOffice/pages/parametres/Parametres';
 import AjoutEvent from '../../backOffice/pages/evenements/ajoutEvent/AjoutEvent';
 import Achats from '../../backOffice/pages/achats/Achats';
+import NewFormation from '../../backOffice/pages/formations/NewFormation/NewFormation';
 
 function Body() {
   
@@ -38,6 +39,7 @@ function Body() {
             <Route path="/ajout-evenement" element={<AjoutEvent />} />
             <Route path="/parametres" element={<Parametres />} />
             <Route path="/mes-achats" element={<Achats />} />
+            <Route path="/new-formation" element={<NewFormation/>} />
 
             <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
             <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>

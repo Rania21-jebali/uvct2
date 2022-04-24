@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
+import axios from 'axios'
 import {fetchMyEvents, dispatchGetMyEvents} from '../../../../redux/actions/eventsAction'
 import { Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
@@ -25,6 +26,7 @@ const participants = [
 function TousEvent() {
   const token = useSelector(state => state.token)
   const events = useSelector(state => state.events)
+  const [event, setEvent ]= useState();
   const [callback, setCallback] = useState(false)
 
     const dispatch = useDispatch()
@@ -33,6 +35,20 @@ function TousEvent() {
                 dispatch(dispatchGetMyEvents(res))
             })
     },[token, dispatch, callback])
+    const handleDelete = async (id) => {
+      try {
+          if(event._id !== id){
+                  await axios.delete(`/deleteEvent/${id}`, {
+                      headers: {Authorization: token}
+                  })
+                 
+                  setCallback(!callback)
+          }
+          
+      } catch (err) {
+          setEvent({...event, err: err.response.data.msg , success: ''})
+      }
+  } 
     const columns = [
         {
           field: 'titre',
@@ -59,7 +75,7 @@ function TousEvent() {
                     <img src="images/edit.png" alt="" className='icon-action'/> 
                     <img src="images/eye.png" alt="" className='icon-action' /> 
                     <img src="images/List-participants.png" alt="" className='icon-action' onClick={showModal}/> 
-                    <img src="images/trash.png" alt="" className='icon-action'/>    
+                    <img src="images/trash.png" alt="" className='icon-action' onClick={() => handleDelete(params.row.id)}/>    
                 </>
               )
             }

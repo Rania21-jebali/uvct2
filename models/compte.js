@@ -3,15 +3,12 @@ const mongoose= require('mongoose')
 const compteSchema = new mongoose.Schema({
     devise:{
         type:String,
-        default:"TND"
     },
     typeCompte:{
         type:String,
-        default:"Compte bancaire"
     },
     paysCompte:{
         type:String,
-        default:"Tunisie"
     },
     nomCompte:{
         type:String,

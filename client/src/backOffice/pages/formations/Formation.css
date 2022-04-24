@@ -22,3 +22,30 @@
 .coupon{
     padding: 20px;
 }
+.content-chapitre{
+    border: 1px solid #CBD5E1;
+    padding: 20px;
+    margin: 20px;
+
+}
+.btn-add-lecon{
+    background-color: white;
+    border-color: white;
+    color:#10B981;
+}
+.btn-event{
+    background: #FFFFFF;
+    border: 1px solid #20384D;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    color: #20384D;
+    margin-right: 20px;
+ }
+ .btn-event:hover{
+     background: #20384D;
+     border-color: #20384D;
+     color:white;
+ }

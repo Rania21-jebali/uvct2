@@ -114,8 +114,8 @@ function Paiement() {
               name="devise"
               value={devise}
               onChange={handleChange}>
-              <option>TND</option>
-              <option>EUR</option>
+              <option value="TND">TND</option>
+              <option value="EUR">EUR</option>
             </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -125,7 +125,7 @@ function Paiement() {
             name="typeCompte"
             value={typeCompte}
             onChange={handleChange}>
-            <option>Compte bancaire</option>
+            <option value="Compte bancaire">Compte bancaire</option>
           </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -135,7 +135,7 @@ function Paiement() {
           name="paysCompte"
           value={paysCompte}
           onChange={handleChange}>
-          <option>Tunisie</option>
+          <option value="Tunisie">Tunisie</option>
         </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" >

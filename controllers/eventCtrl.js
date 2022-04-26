@@ -6,9 +6,9 @@ const eventCtrl = {
 //   Ajout event
 addEvent: async (req, res) => {
     try {
-        const {titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche} = req.body
+        const {titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace} = req.body
         const newEvent = {
-            titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,
+            titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace,
             postedBy:req.user.id
         }
         const event = new Event(newEvent);

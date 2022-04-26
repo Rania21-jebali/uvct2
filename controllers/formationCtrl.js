@@ -30,12 +30,11 @@ getAllFormations: async (req, res) => {
 //update formation
 updateFormationByTitre: async (req, res) => {
     try {
-        const {titre, discription, affiche, videopromo, categorie, niveau, prix} = req.body
+        const {titre, description, affiche, videopromo, categorie, niveau, prix, gratuit} = req.body
 
         await Formation.findOneAndUpdate({titre: req.params.titre}, {
-            titre, discription, affiche, videopromo, categorie, niveau, prix
+            titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
         })
-
         res.json({msg: "Update formation Success!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})

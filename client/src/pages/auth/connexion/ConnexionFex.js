@@ -37,7 +37,7 @@ function ConnexionFex() {
             localStorage.setItem('firstLogin', true)
 
             dispatch(dispatchLogin())
-           navigate("/profil")
+           navigate("/profile")
 
         } catch (err) {
             err.response.data.msg && 

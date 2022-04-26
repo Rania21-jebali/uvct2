@@ -8,6 +8,8 @@ import { Input} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import "./Formation.css"
 import { useNavigate } from 'react-router-dom';
+import DayJS from 'react-dayjs';
+
 
 const { Search } = Input;
 const onSearch = value => console.log(value);
@@ -85,9 +87,14 @@ function Formations() {
             field: 'date',
             headerName: 'Date de création',
             flex:1,
+            renderCell(params){
+              return(
+                <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+              );
+            }
           },
           {
-            field: 'ventes',
+            field: 'prix',
             headerName: 'Ventes',
             flex:1,
           },
@@ -100,6 +107,13 @@ function Formations() {
             field: 'status',
             headerName: 'Status',
             flex:1,
+            renderCell: (params) =>{
+              return(
+                <> 
+                <Button>PUBLIÉ</Button>
+                </>
+              )
+            }
           },
           {
               field: 'action',
@@ -119,6 +133,9 @@ function Formations() {
           return{
               id:formation?._id,
               titre:formation?.titre,
+              prix:formation?.prix,
+              date:formation?.createdAt,
+              inscription:0,
           }
         })
 

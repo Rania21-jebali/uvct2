@@ -70,9 +70,7 @@ function Header() {
       {
         !isAdmin  &&
         <>
-      <Button aria-describedby={id3} variant="contained" color="primary" onClick={handleClick3}>
-      <p>Catégories</p>
-      </Button>
+      <Button aria-describedby={id3} variant="contained" color="primary" onClick={handleClick3}>Catégories</Button>
       <Popover
         id={id3}
         open={open3}
@@ -102,9 +100,12 @@ function Header() {
       }
       <Form className="flex-auto ">
         <FormControl
+          style={{
+            boxShadow:'0px 0px 5px -3px black'
+          }}
           type="search"
           placeholder="Rechercher"
-          className="me-2 rounded-pill border-dark"
+          className="me-2 rounded-pill"
           aria-label="Search"
         />
       </Form>

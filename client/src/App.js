@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, {useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import {useDispatch, useSelector} from 'react-redux'
 import {dispatchLogin, fetchUser, dispatchGetUser} from './redux/actions/authAction'
 import 'antd/dist/antd.css';
+
 
 function App() {
 

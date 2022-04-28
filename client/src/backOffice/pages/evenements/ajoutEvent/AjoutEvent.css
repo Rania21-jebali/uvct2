@@ -40,5 +40,8 @@ box-sizing: border-box;
 border-radius: 2px;
 display: flex;
 justify-content: center;
-padding: 70px;
+padding: 3px;
+}
+.affiche-img{
+    width: 50%;
 }

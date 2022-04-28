@@ -4,19 +4,6 @@ const chapitreSchema = new mongoose.Schema({
     titre: {
         type: String,
     },
-    description:{
-        type:String
-    },
-    file: {
-        type: String,
-    },
-    questionnaire: {
-        type: String,
-    },
-    postedBy:{
-        type:Object,
-        ref: 'Users'
-    },
     formation:{
         type:Object,
         ref: 'Formation'
@@ -26,4 +13,4 @@ const chapitreSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model("Chapitre", chapitreSchema)
+module.exports = mongoose.model("Chapitres", chapitreSchema)

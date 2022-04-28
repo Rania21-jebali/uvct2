@@ -31,6 +31,10 @@ const formationSchema = new mongoose.Schema({
     gratuit:{
         type:Boolean,
         default:false,
+    },
+    statut:{
+        type:Boolean,
+        default:false,
     }
 
 }, {

@@ -8,10 +8,12 @@ import Curriculum from './Curriculum/Curriculum'
 import Etudiants from './Etudiants/Etudiants'
 import Informations from './informations/Informations'
 import '../Formation.css'
+import { useParams } from 'react-router-dom'
 function NewFormation() {
+  const {titre1} = useParams();
   return (
     <div className='ajout-formation'>
-     <BreadcrumbHeader item="Mes formations" link="mes-formations" active="Ajouter une nouvelle formation "/>
+     <BreadcrumbHeader item="Mes formations" link="mes-formations" active={titre1}/>
      <div className='scrolltab'>
      <ScrollTab label1="Informations" label2="Curriculum" label3="Coupons" 
      label4="Commentaires" label5="Certificat" label6="Étudiants" 

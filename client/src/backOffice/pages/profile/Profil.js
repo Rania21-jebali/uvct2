@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 import './Profil.css'
-import { Button,Form } from 'react-bootstrap'
+import { Button,Form, Spinner } from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(20),
     height: theme.spacing(20),
+    borderRadius:"50%",
 
   },
 }));
@@ -108,16 +109,16 @@ function Profil() {
     <div className="profile">
             {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
-            {loading && <h3>Loading.....</h3>}
       <h2 className='title-profil'>Informations générales</h2>
       <div className='content-profil'>
        <h3 className='title-photo'>Photo de profile</h3>
        <Form className='form-profil'>
          <Form.Group className="mb-3" >
+         {loading && <Spinner animation="border" variant="secondary" />}
           <div className={classes.root}>
            <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
           </div>
-           <Form.Label htmlFor="file"> 
+          <Form.Label htmlFor="file"> 
             <img src="images/Camera-circle.png" alt="" className='camera-center'/>
            </Form.Label>
             <Form.Control type="file"  id="file"

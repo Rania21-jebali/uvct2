@@ -1,4 +1,5 @@
 const Formation= require('../models/formation')
+const Chapitre= require('../models/chapitre')
 
 
 const formationCtrl = {
@@ -27,7 +28,7 @@ getAllFormations: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
-//update formation
+//update formation by titre
 updateFormationByTitre: async (req, res) => {
     try {
         const {titre, description, affiche, videopromo, categorie, niveau, prix, gratuit} = req.body
@@ -36,6 +37,39 @@ updateFormationByTitre: async (req, res) => {
             titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
         })
         res.json({msg: "Update formation Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update formation by id
+updateFormationById: async (req, res) => {
+    try {
+        const {titre, description, affiche, videopromo, categorie, niveau, prix, gratuit} = req.body
+
+        await Formation.findByIdAndUpdate({_id:req.params.id}, {
+            titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
+        })
+        res.json({msg: "Update formation by id Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//get Formation by id
+getFormationById: async (req, res) => {
+    try {
+        const formation = await Formation.findById(req.params.id)
+
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//get Formation by title
+getFormationByTitre: async (req, res) => {
+    try {
+        const formation = await Formation.findOne({titre:req.params.titre})
+
+        res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React ,{useState, useEffect} from 'react'
 import axios from 'axios'
-import {useSelector} from 'react-redux'
 import {ShowSuccessMsg, ShowErrMsg} from '../../../../../components/utils/notifications/Nofification'
-import { Button, Form } from 'react-bootstrap'
+import {useSelector, useDispatch} from 'react-redux'
+import {fetchFormation, dispatchGetFormation} from '../../../../../redux/actions/formationsAction'
+import { Button, Form, Spinner } from 'react-bootstrap'
 import '../../Formation.css'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import MovieIcon from '@material-ui/icons/Movie';
@@ -27,9 +28,16 @@ function Informations() {
     const {titre1} = useParams();
     const [gratuit, setGratuit] = useState(false);
     const [affiche, setAffiche] = useState(false);
-    const [loading, setLoading] = useState(false)
-
-
+    const [loading, setLoading] = useState(false);
+    const formations = useSelector(state => state.formations)
+    const [callback, setCallback] = useState(false)
+    const dispatch = useDispatch()
+        
+        useEffect(() => {
+          fetchFormation(token,titre1).then(res =>{
+                dispatch(dispatchGetFormation(res))
+            })
+          },[token,titre1, dispatch, callback])
         const handleChange = e => {
             const {name, value} = e.target
             setData({...data, [name]:value, err:'', success: ''})
@@ -68,11 +76,12 @@ function Informations() {
           try {
             if(data.titre !== titre1){
               axios.patch(`/updateFormation/${titre1}`, {
-                  description : data.description,
-                   prix : data.prix, 
-                   categorie : data.categorie,
-                   niveau : data.niveau ,
-                   gratuit, affiche
+                 description: description ? description : formations.description,
+                   prix : prix ? prix : formations.prix, 
+                   categorie : categorie ? categorie : formations.categorie,
+                   niveau : niveau ? niveau : formations.niveau ,
+                   gratuit : gratuit ? gratuit : formations.gratuit, 
+                   affiche ,
               }, { headers: {Authorization: token} })
               setData({...data, err: '' , success: "Success!"})
             }
@@ -84,7 +93,6 @@ function Informations() {
         const handleUpdate = () => {
             updateInfor()
         }
-
     return (
       <div>
         <Form className="form-event" >
@@ -104,21 +112,25 @@ function Informations() {
                 placeholder="Ecrire ici..." 
                 name="description" 
                 onChange={handleChange}
-                value={description}
+                defaultValue={formations.description}
                 required 
               />
             </Form.Group>
               <Form.Group className="mb-3" >
+              {loading && <Spinner animation="border" variant="secondary" />}
               <Form.Label className="label">L’affiche</Form.Label>
               <div className="content-affiche">
-                  <Form.Label htmlFor="file" > 
-                  <p> <PhotoSizeSelectActualIcon /> Séléctionnez une image </p>
-                  </Form.Label>
-                  </div>
-                <Form.Control type="file" id="file"
-                    style={{display:"none"}}
-                    onChange={changeAffiche}
-              />
+              <Form.Label htmlFor="file" > 
+                <img src={affiche ? 
+                affiche 
+                : formations.affiche} alt="" className="affiche-img"></img>
+              <p> <PhotoSizeSelectActualIcon /> Séléctionnez une image </p>
+              </Form.Label>
+              </div>
+            <Form.Control type="file" id="file"
+                onChange={changeAffiche}
+                style={{display:"none"}}
+          />
               </Form.Group>
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Vidéo promotionnelle</Form.Label>
@@ -137,7 +149,8 @@ function Informations() {
                     required 
                     name="categorie"
                     onChange={handleChange}
-                    value={categorie}>
+                    >
+                    <option defaultValue={formations.categorie}>{formations.categorie}</option>
                     <option value="développement web">développement web</option>
                     <option value="développement mobile">développement mobile</option>
                     <option value="développement personnel">développement personnel</option>
@@ -156,8 +169,9 @@ function Informations() {
                     required 
                     name="niveau"
                     onChange={handleChange}
-                    value={niveau}>
-                    <option value="développement web">Débutant</option>
+                    >
+                    <option defaultValue={formations.niveau}>{formations.niveau}</option>
+                    <option value="Débutant">Débutant</option>
                     <option value="développement mobile">Expert</option>
             </Form.Select>
               </Form.Group>
@@ -167,14 +181,14 @@ function Informations() {
                 type="switch"
                 id="custom-switch"
                 label="Gratuit"
-                value={gratuit}
+                defaultValue={formations.gratuit}
                 onChange={(e) => setGratuit(e.target.checked)}
               />
               </Form.Label>
                 <Form.Control type="number"
                 placeholder="0,000 Dt"
                 name="prix"
-                value={prix}
+                defaultValue={formations.prix}
                 onChange={handleChange}
                 />
               </Form.Group>

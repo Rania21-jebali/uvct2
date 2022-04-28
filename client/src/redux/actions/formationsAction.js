@@ -15,3 +15,16 @@ export const dispatchGetMyFormations = (res) => {
     }
 }
 
+export const fetchFormation = async (token,titre1) => {
+    const res = await axios.get(`/myFormation/${titre1}`, {
+        headers: {Authorization: token}
+    })
+    return res
+}
+
+export const dispatchGetFormation = (res) => {
+    return {
+        type: ACTIONS.GET_MY_FORMATION,
+        payload:  res.data
+    }
+}

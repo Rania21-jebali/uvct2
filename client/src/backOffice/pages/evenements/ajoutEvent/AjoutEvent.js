@@ -2,10 +2,17 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
 import {ShowSuccessMsg, ShowErrMsg} from '../../../../components/utils/notifications/Nofification'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Spinner } from 'react-bootstrap'
 import BreadcrumbHeader from '../../../components/breadcrumb/BreadcrumbHeader'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import './AjoutEvent.css'
+import FormatBoldIcon from '@material-ui/icons/FormatBold';
+import FormatItalicIcon from '@material-ui/icons/FormatItalic';
+import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
+import FormatColorFillIcon from '@material-ui/icons/FormatColorFill';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
     const initialState = {
       titre:'',
@@ -81,13 +88,19 @@ function AjoutEvent() {
               setEvent({...event, err: err.response.data.msg, success: ''})
           }
         }
+
+        const [formats, setFormats] = React.useState(() => ['bold', 'italic']);
+
+        const handleFormat = (event, newFormats) => {
+          setFormats(newFormats);
+        };
+
   return (
   <div className='ajout-event'>
     <BreadcrumbHeader item="Mes événements" link="mes-evenements" active="Ajouter un nouveau événement"/>
       <div className='content-ajout'>
       {err && ShowErrMsg(err)}
     {success && ShowSuccessMsg(success)}
-    {loading && <h3>Loading.....</h3>}
         <Form className="form-event" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" >
              <Form.Label className="label">Titre d'événement</Form.Label>
@@ -101,21 +114,34 @@ function AjoutEvent() {
           </Form.Group>
           <Form.Group className="mb-3" >
           <Form.Label className="label">Détails</Form.Label>
+          <ToggleButtonGroup value={formats} onChange={handleFormat} aria-label="text formatting" size="small">
+            <ToggleButton value="bold" aria-label="bold">
+              <FormatBoldIcon />
+            </ToggleButton>
+            <ToggleButton value="italic" aria-label="italic">
+              <FormatItalicIcon />
+            </ToggleButton>
+            <ToggleButton value="underlined" aria-label="underlined">
+              <FormatUnderlinedIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
             <Form.Control as="textarea" rows={5} 
             placeholder="Ecrire ici..." 
             name="details" 
             value={details}
             onChange={handleChangeInput} 
             required 
-          />
+          >
+          </Form.Control>
           </Form.Group>
           <Form.Group className="mb-3" >
           <Form.Label className="label">Ajouter une Affiche</Form.Label>
+          {loading && <Spinner animation="border" variant="secondary" />}
               <div className="content-affiche">
               <Form.Label htmlFor="file" > 
                 <img src={affiche ? 
                 affiche 
-                : event.affiche} alt=""></img>
+                : event.affiche} alt="" className="affiche-img"></img>
               <p> <PhotoSizeSelectActualIcon /> Séléctionnez une image </p>
               </Form.Label>
               </div>

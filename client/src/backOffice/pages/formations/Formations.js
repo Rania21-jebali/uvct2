@@ -3,13 +3,14 @@ import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchMyFormations, dispatchGetMyFormations} from '../../../redux/actions/formationsAction'
 import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
-import { Button, Form ,Modal} from 'react-bootstrap'
-import { Input} from 'antd';
+import { Button,Form ,Modal,Nav} from 'react-bootstrap'
+import {Input} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import "./Formation.css"
 import { useNavigate } from 'react-router-dom';
 import DayJS from 'react-dayjs';
-
+import Popover from '@material-ui/core/Popover';
+import { Divider } from '@material-ui/core'
 
 const { Search } = Input;
 const onSearch = value => console.log(value);
@@ -19,6 +20,10 @@ const initialState = {
   success: ''
 }
 function Formations() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const id= open ? 'simple-popover' : undefined;
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,6 +34,14 @@ function Formations() {
   const navigate = useNavigate();
   const [callback, setCallback] = useState(false)
   const dispatch = useDispatch()
+        
+          const handleClick = (event) => {
+            setAnchorEl(event.currentTarget);
+          };
+
+          const handleClose1 = () => {
+            setAnchorEl(null);
+          };
 
         useEffect(() => {
               fetchMyFormations(token).then(res =>{
@@ -74,22 +87,30 @@ function Formations() {
 
         const columns = [
           {
-            field: 'photo',
+            field: 'affiche',
             headerName: 'Miniature',
             flex:1,
+            renderCell: (params) =>{
+              return(
+                <> 
+                    <img src={params.row.affiche} alt="" className='miniature'/>    
+                </>
+              )
+            }
           },
           {
             field: 'titre',
             headerName: 'Titre',
-            flex:1,
+            flex:2,
           },
           {
             field: 'date',
             headerName: 'Date de création',
-            flex:1,
+            flex:2,
             renderCell(params){
               return(
                 <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+                
               );
             }
           },
@@ -107,11 +128,16 @@ function Formations() {
             field: 'status',
             headerName: 'Status',
             flex:1,
+            sorting:false,
             renderCell: (params) =>{
               return(
-                <> 
-                <Button>PUBLIÉ</Button>
-                </>
+                <div className={`${params.row.status ? "status-formation1" : "status-formation2"}`}> 
+                {
+                  params.row.status ? 
+                  <p className='p-formation'>PUBLIÉ</p> :
+                  <p className='p-formation'>INÉDIT</p>
+                }
+                </div>
               )
             }
           },
@@ -122,7 +148,28 @@ function Formations() {
               renderCell: (params) =>{
                 return(
                   <> 
-                      <img src="images/trash.png" alt="" className='icon-action' onClick={() => handleDelete(params.row.id)}/>    
+                 { console.log(params.row.titre)}
+                  <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
+                    <Popover
+                          id={id}
+                          open={open}
+                          anchorEl={anchorEl}
+                          onClose={handleClose1}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
+                        >
+                        <Nav.Link className="actionNav">Dépublier formation</Nav.Link>
+                        <Divider />
+                        <Nav.Link className="actionNav" href={`/maFormation/${params.row.titre}`}>Voir détails</Nav.Link>
+                        <Divider />
+                        <Nav.Link className="actionNav" onClick={() => handleDelete(params.row.id)}>Supprimer formation</Nav.Link>
+                    </Popover>     
                   </>
                 )
               }
@@ -134,11 +181,12 @@ function Formations() {
               id:formation?._id,
               titre:formation?.titre,
               prix:formation?.prix,
+              affiche:formation?.affiche,
+              status:formation?.status,
               date:formation?.createdAt,
               inscription:0,
           }
         })
-
   return (
     <div className='formation'>
       <div className='formTitleContainer'>

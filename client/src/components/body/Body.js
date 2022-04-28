@@ -22,6 +22,7 @@ import Parametres from '../../backOffice/pages/parametres/Parametres';
 import AjoutEvent from '../../backOffice/pages/evenements/ajoutEvent/AjoutEvent';
 import Achats from '../../backOffice/pages/achats/Achats';
 import NewFormation from '../../backOffice/pages/formations/NewFormation/NewFormation';
+import Gains from '../../backOffice/pages/gains/Gains';
 
 function Body() {
   
@@ -39,7 +40,9 @@ function Body() {
             <Route path="/ajout-evenement" element={<AjoutEvent />} />
             <Route path="/parametres" element={<Parametres />} />
             <Route path="/mes-achats" element={<Achats />} />
+            <Route path="/mes-gains" element={<Gains />} />
             <Route path="/new-formation/:titre1" element={<NewFormation/>} />
+            <Route path="/maFormation/:titre1" element={<NewFormation/>} />
 
             <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
             <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>

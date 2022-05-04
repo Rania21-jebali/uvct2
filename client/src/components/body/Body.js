@@ -6,8 +6,7 @@ import ResetPassword from '../../pages/auth/ResetPassword/ResetPassword';
 import Profile from '../../pages/profile/Profile';
 import Home from '../../pages/home/Home';
 import DevenirInstructeur from '../../pages/auth/devenirInstructeur/DevenirInstructeur';
-import ConnexionFex from '../../pages/auth/connexion/ConnexionFex';
-import InscrireFex from '../../pages/auth/inscrire/InscrireFex';
+import Inscrire from '../../pages/auth/inscrire/Inscrire';
 import NotFound from '../utils/NotFound/NotFound'
 import Candidature from '../../pages/candidature/Candidature';
 import './Body.css'
@@ -23,6 +22,7 @@ import AjoutEvent from '../../backOffice/pages/evenements/ajoutEvent/AjoutEvent'
 import Achats from '../../backOffice/pages/achats/Achats';
 import NewFormation from '../../backOffice/pages/formations/NewFormation/NewFormation';
 import Gains from '../../backOffice/pages/gains/Gains';
+import Connexion from '../../pages/auth/connexion/Connexion';
 
 function Body() {
   
@@ -43,11 +43,6 @@ function Body() {
             <Route path="/mes-gains" element={<Gains />} />
             <Route path="/new-formation/:titre1" element={<NewFormation/>} />
             <Route path="/maFormation/:titre1" element={<NewFormation/>} />
-
-            <Route path="/connexion" element={isLogged ? <NotFound /> : <ConnexionFex />} />
-            <Route path="/inscrire" element={isLogged ? <NotFound /> : <InscrireFex />}/>
-            <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
-            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
             <Route path="/apprenants" element={isAdmin ?  <Users /> : <NotFound /> }/>
             <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> } />
@@ -62,7 +57,12 @@ function Body() {
                 <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
-            </Routes>
+            <Route path="/connexion" element={isLogged ? <NotFound /> : <Connexion />} />
+            <Route path="/inscrire" element={isLogged ? <NotFound /> : <Inscrire />}/>
+            <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
+            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+              </Routes>
             )
             }
 

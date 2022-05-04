@@ -51,9 +51,9 @@ function Inscrire() {
         }
     }
     
-
+    var fex=false
     return (
-      <div >
+      <div className={`${fex ? "inscrire":"" } `}>
       {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
         <Form onSubmit={handleSubmit}>
@@ -90,7 +90,7 @@ function Inscrire() {
         S'inscrire
       </Button>
        <Form.Label>Vous avez déjà un compte ?
-       <a href="/connexion" className="link">Se connecter</a> 
+        <a href="/connexion" className="link" onClick={() => fex=true}>Se connecter</a> 
        </Form.Label>
    </div>
       </Form>

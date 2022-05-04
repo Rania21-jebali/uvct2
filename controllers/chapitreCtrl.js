@@ -7,10 +7,10 @@ const chapitreCtrl = {
 addChapitre: async (req, res) => {
     try {
         const {titre} = req.body
-        const chapitre = await Chapitre.findOne({titre})
-        if(chapitre) return res.status(400).json({msg: "This titre already exists."})
+        const formation1 = await Formation.findOne({titre:req.params.titre})
+         const {id} = formation1.id
         const newChapitre = {
-            titre , formation: req.params.id
+            titre , formation: formation1.id
         }
         const chapitre2 = new Chapitre(newChapitre);
          await chapitre2.save();

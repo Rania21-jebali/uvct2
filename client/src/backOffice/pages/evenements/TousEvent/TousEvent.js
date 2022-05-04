@@ -8,6 +8,10 @@ import { Input} from 'antd';
 import { List, Avatar } from 'antd';
 import DayJS from 'react-dayjs';
 
+const initialState = {
+  err: '',
+  success: ''
+}
 
 const { Search } = Input;
 const participants = [
@@ -26,8 +30,9 @@ const participants = [
 function TousEvent() {
   const token = useSelector(state => state.token)
   const events = useSelector(state => state.events)
-  const [event, setEvent ]= useState();
+  const [event, setEvent ]= useState(initialState);
   const [callback, setCallback] = useState(false)
+    const { err, success} = event
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -35,6 +40,7 @@ function TousEvent() {
                 dispatch(dispatchGetMyEvents(res))
             })
     },[token, dispatch, callback])
+
     const handleDelete = async (id) => {
       try {
           if(event._id !== id){
@@ -46,9 +52,10 @@ function TousEvent() {
           }
           
       } catch (err) {
-          setEvent({...event, err: err.response.data.msg , success: ''})
+              setEvent({...event, err: err.response.data.msg, success: ''})
       }
   } 
+  
     const columns = [
         {
           field: 'titre',
@@ -108,7 +115,6 @@ function TousEvent() {
         rows={rowData}
         columns={columns}
         pageSize={8}
-        checkboxSelection
         disableSelectionOnClick
         
       />

@@ -9,8 +9,6 @@ import './AjoutEvent.css'
 import FormatBoldIcon from '@material-ui/icons/FormatBold';
 import FormatItalicIcon from '@material-ui/icons/FormatItalic';
 import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
-import FormatColorFillIcon from '@material-ui/icons/FormatColorFill';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
@@ -100,7 +98,7 @@ function AjoutEvent() {
     <BreadcrumbHeader item="Mes événements" link="mes-evenements" active="Ajouter un nouveau événement"/>
       <div className='content-ajout'>
       {err && ShowErrMsg(err)}
-    {success && ShowSuccessMsg(success)}
+      {success && ShowSuccessMsg(success)}
         <Form className="form-event" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" >
              <Form.Label className="label">Titre d'événement</Form.Label>

@@ -34,7 +34,7 @@ function Formations() {
   const navigate = useNavigate();
   const [callback, setCallback] = useState(false)
   const dispatch = useDispatch()
-        
+  const [currentRow, setCurrentRow] = useState(null);
           const handleClick = (event) => {
             setAnchorEl(event.currentTarget);
           };
@@ -77,11 +77,10 @@ function Formations() {
                       await axios.delete(`/deleteFormation/${id}`, {
                           headers: {Authorization: token}
                       })
-                    
                       setCallback(!callback)
               }
             }   catch (err) {
-              setFormation({...data, err: err.response.data.msg , success: ''})
+              setFormation({...formation, err: err.response.data.msg , success: ''})
           }
           } 
 
@@ -148,7 +147,7 @@ function Formations() {
               renderCell: (params) =>{
                 return(
                   <> 
-                 { console.log(params.row.titre)}
+                  {console.log(currentRow)}
                   <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                     <Popover
                           id={id}
@@ -168,14 +167,13 @@ function Formations() {
                         <Divider />
                         <Nav.Link className="actionNav" href={`/maFormation/${params.row.titre}`}>Voir détails</Nav.Link>
                         <Divider />
-                        <Nav.Link className="actionNav" onClick={() => handleDelete(params.row.id)}>Supprimer formation</Nav.Link>
+                        <Nav.Link className="actionNav" onClick={() => handleDelete(currentRow.id)}>Supprimer formation</Nav.Link>
                     </Popover>     
                   </>
                 )
               }
             },
         ];
-
         const data= formations?.map(formation => {
           return{
               id:formation?._id,
@@ -202,8 +200,7 @@ function Formations() {
                     rows={data}
                     columns={columns}
                     pageSize={8}
-                    checkboxSelection
-                    disableSelectionOnClick
+                    isRowSelectable={(params) => setCurrentRow(params.row)}
                   />
           </div>
        <Modal show={show} onHide={handleClose}>

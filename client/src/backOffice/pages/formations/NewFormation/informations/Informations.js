@@ -24,7 +24,7 @@ const initialState = {
 function Informations() {
     const token = useSelector(state => state.token)
     const [data, setData] = useState(initialState)
-    const {titre,description,prix,categorie,niveau, err, success} = data
+    const {description,prix,categorie,niveau, err, success} = data
     const {titre1} = useParams();
     const [gratuit, setGratuit] = useState(false);
     const [affiche, setAffiche] = useState(false);
@@ -38,6 +38,8 @@ function Informations() {
                 dispatch(dispatchGetFormation(res))
             })
           },[token,titre1, dispatch, callback])
+          console.log(formations.titre)
+
         const handleChange = e => {
             const {name, value} = e.target
             setData({...data, [name]:value, err:'', success: ''})

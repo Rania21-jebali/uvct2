@@ -33,6 +33,11 @@
     border-color: white;
     color:#10B981;
 }
+.btn-add-lecon:hover{
+    background-color: white;
+    border-color: white;
+    color:#10B981;
+}
 .btn-event{
     background: #FFFFFF;
     border: 1px solid #20384D;
@@ -92,4 +97,22 @@ justify-content: center;
 }
 .affiche-img{
     width: 50%;
+}
+.btn-lecon{
+    background-color: white;
+    border-color: #20384D;
+    border: 1px solid #20384D;
+    box-sizing: border-box;
+    border-radius: 2px;
+    color:#20384D;
+    margin-right: 20px;
+}
+.btn-lecon:hover{
+    background-color: #20384D;
+    border-color: #20384D;
+    border-radius: 2px;
+    color:white;
+}
+.content-lecon{
+    margin-top: 50px;
 }

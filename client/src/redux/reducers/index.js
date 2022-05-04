@@ -5,9 +5,8 @@ import users from './usersReducer'
 import events from './eventsReducer'
 import comptes from './compteReducer'
 import formations from './formationsReducer'
-
-
-
+import chapitres from './chapitreReducer'
+import lecons from './leconReducer'
 
 
 export default combineReducers({
@@ -17,5 +16,6 @@ export default combineReducers({
     events,
     comptes,
     formations,
-   
+    chapitres,
+    lecons
 })

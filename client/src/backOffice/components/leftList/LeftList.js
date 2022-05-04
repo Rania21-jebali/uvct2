@@ -72,28 +72,33 @@ const routes1=[
     {
         key:"4",
         icon:<img src="images/calendar.png" alt=""/>,
+        name:"Mes favoris",
+        path:"/mes-favoris"
+    },
+    {
+        key:"5",
+        icon:<img src="images/calendar.png" alt=""/>,
         name:"Messages",
         path:"/messages"
     },
     {
-        key:"5",
+        key:"6",
         icon:<img src="images/calendar.png" alt=""/>,
         name:"Réclamtions",
         path:"/reclamations"
     },
     {
-        key:"6",
+        key:"7",
         icon:<img src="images/setting.png" alt=""/>,
         name:"Paramétres",
         path:"/parametres"
     },
     {
-        key:"7",
+        key:"8",
         icon:<img src="images/logout.png" alt=""/>,
         name:"Se déconnecter",
         path:"/se-deconnecter"
     },
-
 ]
 // Routes super admin
 const routes2=[
@@ -113,7 +118,7 @@ const routes2=[
         key:"3",
         icon:<img src="images/calendar.png" alt=""/>,
         name:"Administrateur",
-        path:"/administrateur"
+        path:"/administrateurs"
     },
     {
         key:"4",
@@ -189,7 +194,7 @@ export default function LeftList({children})  {
       <div  className="leftList">
         <Menu
           mode="inline"
-          style={{ background:"#F6F7F8", marginTop:"90px"}}
+          style={{ background:"#F6F7F8", marginTop:"20px"}}
         >
         { isInstr && mapping(routes)}
         { (isLogged && !isInstr && !isSuperAdmin) && mapping(routes1)}

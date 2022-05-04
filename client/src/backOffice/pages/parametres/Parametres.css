@@ -21,6 +21,7 @@
 }
 .paiement{
     background: white;
+    padding: 20px;
 }
 .btn-confirme{
     background: #20384D;
@@ -66,4 +67,8 @@
     cursor: pointer;
     height: 20px;
     width: 20px;
+}
+.motDePasse{
+    margin-left: 20px;
+    margin-top: 20px;
 }

@@ -20,6 +20,13 @@ export const fetchAllInstr = async (token) => {
     return res
 }
 
+export const fetchAllAdmin = async (token) => {
+    const res = await axios.get('/user/allAdmin', {
+        headers: {Authorization: token}
+    })
+    return res
+}
+
 export const dispatchGetAllUsers = (res) => {
     return {
         type: ACTIONS.GET_ALL_USERS,
@@ -36,6 +43,13 @@ export const dispatchGetAllCond= (res) => {
 export const dispatchGetAllInstr= (res) => {
     return {
         type: ACTIONS.GET_ALL_INSTR,
+        payload: res.data
+    }
+}
+
+export const dispatchGetAllAdmin= (res) => {
+    return {
+        type: ACTIONS.GET_ALL_ADMIN,
         payload: res.data
     }
 }

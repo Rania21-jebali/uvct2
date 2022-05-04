@@ -196,6 +196,16 @@ getUserInfor: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//All Admins informations 
+getAdminAllInfor: async (req, res) => {
+    try {
+        const users = await Users.find({role:"admin"}).select('-password')
+
+        res.json(users)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //Users All informations Admin
 getUsersAllInfor: async (req, res) => {
     try {
@@ -256,7 +266,7 @@ updateProfilInstr: async (req, res) => {
             name, avatar,tele,site,info
         })
 
-        res.json({msg: "Update profil instructeur Success!"})
+        res.json({msg: "Update profil  Success!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

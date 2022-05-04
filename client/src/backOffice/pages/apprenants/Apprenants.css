@@ -1,0 +1,14 @@
+.apprenat-list{
+    margin-top: 20px;
+    margin-right: 60px;
+    margin-left: 40px;
+}
+.title-apprenant{
+    font-size: 28px;
+    color: #0F172A;  
+}
+.userList{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+ }

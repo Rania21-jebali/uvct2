@@ -51,6 +51,9 @@ const userSchema = new mongoose.Schema({
     site:{
         type:String,
     },
+    statut:{
+        type:String,
+    }
 
 }, {
     timestamps: true

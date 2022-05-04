@@ -37,14 +37,13 @@ function Profil() {
     const classes = useStyles();
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {user, isAdmin} = auth
+    const {user, isAdmin,isInstr, isSuperAdmin} = auth
     const [data, setData] = useState(initialState)
     const {name,tele,site,info, err, success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
-
     useEffect(() => {
         if(isAdmin){
             fetchAllUsers(token).then(res =>{
@@ -152,20 +151,25 @@ function Profil() {
                 defaultValue={user.tele}
             />
           </Form.Group>
-          <Form.Group className="mb-3" >
-            <Form.Label className="label">Site web personnel</Form.Label>
-              <Form.Control type="text" placeholder="Enter votre URL" 
-                name="site" 
-                defaultValue={user.site}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" >
-            <Form.Label className="label">Sur moi</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
-                name="info" 
-                defaultValue={user.info}
-            />
-          </Form.Group>
+          { isInstr && 
+            (<>
+              <Form.Group className="mb-3" >
+                <Form.Label className="label">Site web personnel</Form.Label>
+                  <Form.Control type="text" placeholder="Enter votre URL" 
+                    name="site" 
+                    defaultValue={user.site}
+                />
+             </Form.Group>
+              <Form.Group className="mb-3" >
+                <Form.Label className="label">Sur moi</Form.Label>
+                  <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
+                    name="info" 
+                    defaultValue={user.info}
+                />
+              </Form.Group>
+            </>
+            )
+          }
           <div className="content-button">
                   <Button disabled={loading} onClick={handleUpdate} className='btn-sauvg'>Sauvegarder les modifications</Button>
            </div>

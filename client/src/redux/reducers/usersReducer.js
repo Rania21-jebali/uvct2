@@ -12,6 +12,8 @@ const usersReducer = (state = users, action) => {
                 return action.payload
             case ACTIONS.GET_ALL_INSTR:
                 return action.payload
+            case ACTIONS.GET_ALL_ADMIN:
+                return action.payload
         default:
             return state
     }

@@ -16,6 +16,10 @@ const compteSchema = new mongoose.Schema({
     numCompte:{
         type:String,
     },
+    exist:{
+        type:Boolean,
+        default:false
+    },
     userId:{
         type:Object,
         ref: 'Users'

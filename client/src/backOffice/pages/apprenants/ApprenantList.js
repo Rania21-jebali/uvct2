@@ -2,23 +2,15 @@ import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../redux/actions/usersAction'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import './ListUsers.css'
 import axios from 'axios'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
+import {DataGrid} from '@mui/x-data-grid';
+import { Modal,Button,FloatingLabel,Form,OverlayTrigger,Tooltip} from 'react-bootstrap';
+import './Apprenants.css'
 
-import {
-    DataGrid,
-    GridToolbarContainer,
-    GridToolbarColumnsButton,
-    GridToolbarFilterButton,
-    GridToolbarExport,
-    GridToolbarDensitySelector,
-  } from '@mui/x-data-grid';
-  import { Modal,Button,FloatingLabel,Form,OverlayTrigger,Tooltip} from 'react-bootstrap';
-  
-function ListUsers() {
+function ApprenantList() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const {user, isAdmin, isSuperAdmin} = auth
@@ -53,14 +45,14 @@ function ListUsers() {
   const columns = [
     {
       field: 'avatar',
-      headerName: 'Apprenant',
+      headerName: 'Nom',
       flex:2,
       renderCell(params){
         return(
-          <div className='userList'>
-          <Avatar1 src={params.row.avatar}/>
-          {params.row.name}
-          </div>
+            <div className='userList'>
+            <Avatar1 src={params.row.avatar}/>
+            {params.row.name}
+            </div>
         );
       }
     },
@@ -71,9 +63,14 @@ function ListUsers() {
       flex:2,
     },
     {
+        field: 'tele',
+        headerName: 'Téléphone',
+        flex:1,
+      },
+    {
       field: 'date',
       headerName: 'Date création',
-      flex:1,
+      flex:2,
       renderCell(params){
         return(
           <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
@@ -89,7 +86,7 @@ function ListUsers() {
             <>
           <VisibilityIcon className='visibilityListIcon'/>
           <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Supprimer apprenant</Tooltip>}>
-          <DeleteOutlineIcon className='deleteListIcon' onClick={handleShow} />          
+          <img src="images/trash.png" className="add-icon" alt="" onClick={handleShow} />
           </OverlayTrigger>
           <Modal show={show} onHide={handleClose} animation={false} centered>
         <Modal.Header closeButton>
@@ -126,6 +123,7 @@ const rowData= users?.map(user => {
         email:user?.email,
         avatar:user?.avatar,
         date:user?.createdAt,
+        tele:user?.tele,
     }
 })
    //Supprimer apprenant
@@ -136,32 +134,20 @@ const rowData= users?.map(user => {
 
   const [data, setData] =useState([]);
   console.log(rowData);
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
-  }
   return (
-<div style={{ height: 550, width: '100%' }}  >
-      <DataGrid
-        rows={rowData}
-        columns={columns}
-        components={{
-         Toolbar: CustomToolbar,
-  }}
-        pageSize={8}
-        checkboxSelection
-        disableSelectionOnClick
-        
-      />
+      <div className="apprenat-list">
+      <h1 className='title-apprenant'>Liste apprenants</h1>
+          <div style={{ height: 550, width: '100%',backgroundColor:'white' }}  >
+            <DataGrid
+                rows={rowData}
+                columns={columns}
+                pageSize={8}
+                checkboxSelection
+                disableSelectionOnClick
+            />
     </div> 
-    
+      </div>
   )
 }
 
-export default ListUsers
+export default ApprenantList

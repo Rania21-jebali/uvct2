@@ -22,11 +22,11 @@ function Paiement() {
     const {nomCompte,numCompte,typeCompte,paysCompte,devise, err, success} = compte
     const comptes = useSelector(state => state.comptes)
     const [callback, setCallback] = useState(false)
+    const [exist, setExist] = useState(false)
     const dispatch = useDispatch()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [exist,setExist] = useState(false);
     const navigate = useNavigate();
 
             useEffect(() => {
@@ -34,7 +34,6 @@ function Paiement() {
                       dispatch(dispatchGetMyCompte(res))
                   })
             },[token, dispatch, callback])
-
 
             const handleChange = e => {
                 const {name, value} = e.target
@@ -49,8 +48,7 @@ function Paiement() {
                     headers: {Authorization: token}
                 })
                   setCompte({...compte, err: '', success: res.data.msg})
-                  setExist(true);
-                  window.location.reload(false);
+                 // window.location.reload(false);
               } catch (err) {
                   err.response.data.msg && 
                   setCompte({...compte, err: err.response.data.msg, success: ''})
@@ -63,8 +61,7 @@ function Paiement() {
                             headers: {Authorization: token}
                         })
                         setCallback(!callback)
-                        setExist(true);
-                        navigate("/parametres")
+                      //  window.location.reload(false);
                 }
                 
             } catch (err) {
@@ -72,6 +69,7 @@ function Paiement() {
             }
         }
 
+        
   return (
     <div className='paiement'>
             {exist ?
@@ -83,7 +81,7 @@ function Paiement() {
               </>
             ):
             (
-              <>
+             <>
               Votre compte:<br />
               <div className='affiche-compte'>
               {comptes.map(c => (
@@ -112,7 +110,6 @@ function Paiement() {
               <Form.Select 
               required 
               name="devise"
-              value={devise}
               onChange={handleChange}>
               <option value="TND">TND</option>
               <option value="EUR">EUR</option>
@@ -123,7 +120,6 @@ function Paiement() {
             <Form.Select 
             required 
             name="typeCompte"
-            value={typeCompte}
             onChange={handleChange}>
             <option value="Compte bancaire">Compte bancaire</option>
           </Form.Select>
@@ -133,7 +129,6 @@ function Paiement() {
           <Form.Select 
           required 
           name="paysCompte"
-          value={paysCompte}
           onChange={handleChange}>
           <option value="Tunisie">Tunisie</option>
         </Form.Select>

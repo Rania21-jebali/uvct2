@@ -1,0 +1,49 @@
+.admin{
+margin-top: 20px;
+margin-left: 40px;
+margin-right: 60px;
+}
+.header-admin{
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 20px;
+}
+.title-admin{
+    font-size: 28px;
+    color: #0F172A;
+}
+.btn-add-admin{
+    background-color: white;
+    color:#0F172A;
+    font-size: 14px;
+    border: 1px solid #20384D;
+    border-radius: 2px; 
+}
+.btn-add-admin:hover{
+    background-color:#0F172A;
+    color:white;
+    border-color: #0F172A;
+    font-size: 14px;
+}
+.add-icon{
+    margin-right: 10px;
+}
+.status-admin1{
+    width: 58px;
+    height: 31px;
+    background: #A7F3D0;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+.status-admin2{
+    width: 58px;
+    height: 31px;
+    background: #FECACA;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+.p-admin{
+    color:#454545;
+}

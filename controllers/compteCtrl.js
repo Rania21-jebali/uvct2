@@ -8,7 +8,8 @@ addCompte: async (req, res) => {
         const {devise,typeCompte,paysCompte,nomCompte,numCompte} = req.body
         const newCompte = {
             devise,typeCompte,paysCompte,nomCompte,numCompte,
-            userId:req.user.id
+            userId:req.user.id,
+            exist:true
         }
         const compte = new Compte(newCompte);
          await compte.save();

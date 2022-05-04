@@ -10,9 +10,7 @@ import Inscrire from '../../pages/auth/inscrire/Inscrire';
 import NotFound from '../utils/NotFound/NotFound'
 import Candidature from '../../pages/candidature/Candidature';
 import './Body.css'
-import Users from '../../pages/Apprenant/users/users';
 import AcceptCandidat from '../../pages/candidature/AcceptCandidat';
-import Instructeurs from '../../pages/Instructeur/Instructeurs/Instructeurs';
 import LeftList from '../../backOffice/components/leftList/LeftList';
 import Profil from '../../backOffice/pages/profile/Profil';
 import Formations from '../../backOffice/pages/formations/Formations';
@@ -23,6 +21,13 @@ import Achats from '../../backOffice/pages/achats/Achats';
 import NewFormation from '../../backOffice/pages/formations/NewFormation/NewFormation';
 import Gains from '../../backOffice/pages/gains/Gains';
 import Connexion from '../../pages/auth/connexion/Connexion';
+import Favoris from '../../backOffice/pages/favoris/Favoris';
+import Messages from '../../backOffice/pages/messages/Messages';
+import Reclamations from '../../backOffice/pages/reclamations/Reclamations';
+import Administrateur from '../../backOffice/pages/administrateur/Administrateur';
+import Instructeurs from '../../backOffice/pages/instructeurs/Instructeurs';
+import ApprenantList from '../../backOffice/pages/apprenants/ApprenantList';
+
 
 function Body() {
   
@@ -44,9 +49,15 @@ function Body() {
             <Route path="/new-formation/:titre1" element={<NewFormation/>} />
             <Route path="/maFormation/:titre1" element={<NewFormation/>} />
             <Route path="/profil" element={isLogged ? <Profile /> : <NotFound />}/>
-            <Route path="/apprenants" element={isAdmin ?  <Users /> : <NotFound /> }/>
-            <Route path="/candidature" element={isAdmin ?  <Candidature /> : <NotFound /> } />
-            <Route path="/instructeurs" element={isAdmin ?  <Instructeurs /> : <NotFound /> } />
+            <Route path="/apprenants" element={(isAdmin || isSuperAdmin) ?  <ApprenantList /> : <NotFound /> }/>
+            <Route path="/candidature" element={(isAdmin || isSuperAdmin) ?  <Candidature /> : <NotFound /> } />
+            <Route path="/instructeurs" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
+            <Route path="/administrateurs" element={(isAdmin || isSuperAdmin) ?  <Administrateur /> : <NotFound /> } />
+            <Route path="/instructeur" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
+
+            <Route path="/mes-favoris" element={<Favoris /> } />
+            <Route path="/messages" element={<Messages /> } />
+            <Route path="/reclamations" element={<Reclamations /> } />
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:token" element={<AcceptCandidat />} />

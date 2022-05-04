@@ -24,11 +24,13 @@ router.get('/infor', auth, userCtrl.getUserInfor)
 
 router.post('/acceptInstr/:id',auth, authAdmin, userCtrl.AcceptInstr)
 
-router.get('/all_infor', auth, authAdmin, userCtrl.getUsersAllInfor)
+router.get('/all_infor', auth, userCtrl.getUsersAllInfor)
 
-router.get('/allCond', auth, authAdmin, userCtrl.getCondAllInfor)
+router.get('/allCond', auth, userCtrl.getCondAllInfor)
 
-router.get('/allInstr', auth, authAdmin, userCtrl.getInstrAllInfor)
+router.get('/allAdmin', auth, userCtrl.getAdminAllInfor)
+
+router.get('/allInstr', auth, userCtrl.getInstrAllInfor)
 
 router.get('/logout', userCtrl.logout)
 

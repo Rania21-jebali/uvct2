@@ -4,10 +4,15 @@ import {fetchAllAdmin, dispatchGetAllAdmin} from '../../../redux/actions/usersAc
 import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
 import {DataGrid} from '@mui/x-data-grid';
-import { Button,Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
+import axios from 'axios'
 import './Adminstrateur.css'
+import { Modal, Button, Space } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+
+const { confirm } = Modal;
 
 function Administrateur() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -15,9 +20,10 @@ function Administrateur() {
     const id= open ? 'simple-popover' : undefined;
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {isSuperAdmin} = auth
+    const {user,isSuperAdmin} = auth
     const users = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
+    const [data, setData] =useState([]);
     const dispatch = useDispatch()
 
     const handleClick = (event) => {
@@ -27,14 +33,29 @@ function Administrateur() {
       const handleClose1 = () => {
         setAnchorEl(null);
       };
-    useEffect(() => {
+
+      useEffect(() => {
         if(isSuperAdmin ){
             fetchAllAdmin(token).then(res =>{
                 dispatch(dispatchGetAllAdmin(res))
             })
-
         }
-    },[token,isSuperAdmin, dispatch, callback])
+      },[token,isSuperAdmin, dispatch, callback])
+
+    const handleDelete = async (id) => {
+      try {
+          if(user._id !== id){
+                  await axios.delete(`/user/delete/${id}`, {
+                      headers: {Authorization: token}
+                  })
+                
+                  setCallback(!callback)
+          }
+          
+      } catch (err) {
+          setData({...data, err: err.response.data.msg , success: ''})
+      }
+  }
 
     const columns = [
         {
@@ -92,6 +113,21 @@ function Administrateur() {
             headerName: 'Action',
             flex:1,
             renderCell: (params) =>{
+              function showDeleteConfirm() {
+                confirm({
+                  title: 'Êtes-vous sûr de vouloir supprimer ce compte apprenant?',
+                  icon: <ExclamationCircleOutlined />,
+                  okText: 'Supprimer',
+                  okType: 'danger',
+                  cancelText: 'Annuler',
+                  onOk() {
+                    handleDelete(params.row.id)
+                  },
+                  onCancel() {
+                    console.log('Cancel');
+                  },
+                });
+              }
               return(
                 <>
                 <img src="images/eye.png" alt=""/>
@@ -112,7 +148,7 @@ function Administrateur() {
                         >
                         <Nav.Link className="actionNav">Bloqué administrateur</Nav.Link>
                         <Divider />
-                        <Nav.Link className="actionNav" >Supprimer administrateur</Nav.Link>
+                        <Nav.Link className="actionNav" onClick={showDeleteConfirm}>Supprimer administrateur</Nav.Link>
                     </Popover> 
                 </>
               )

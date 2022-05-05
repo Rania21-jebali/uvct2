@@ -62,8 +62,7 @@ AcceptInstr: async (req, res) => {
         const url = `${CLIENT_URL}/user/acceptInstr/${access_token}`
 
         sendAccept(user.email, url, "Accéder à votre compte")
-        res.json({msg: "Instructeur accepté."})
-        
+        res.json({msg: "Instructeur accepté."}) 
 
     } catch (err) {
         return res.status(500).json({msg: err.message})

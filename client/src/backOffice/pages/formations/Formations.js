@@ -23,7 +23,6 @@ function Formations() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const id= open ? 'simple-popover' : undefined;
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,6 +34,7 @@ function Formations() {
   const [callback, setCallback] = useState(false)
   const dispatch = useDispatch()
   const [currentRow, setCurrentRow] = useState(null);
+
           const handleClick = (event) => {
             setAnchorEl(event.currentTarget);
           };

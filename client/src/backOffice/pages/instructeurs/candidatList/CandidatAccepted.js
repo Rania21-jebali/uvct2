@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import {isLength, isMatch} from '../../components/utils/validation/Validation'
-import {ShowSuccessMsg, ShowErrMsg} from '../../components/utils/notifications/Nofification'
+import {isLength, isMatch} from '../../../../components/utils/validation/Validation'
+import {ShowSuccessMsg, ShowErrMsg} from '../../../../components/utils/notifications/Nofification'
 import { Button,Form } from 'react-bootstrap'
-import './Candidature.css'
 import {useNavigate, useParams} from 'react-router-dom'
 
 
@@ -14,7 +13,8 @@ const initialState = {
     success: ''
 }
 
-function AcceptCandidat() {
+
+function CandidatAccepted() {
     const {token} = useParams()
 
     const [data, setData] = useState(initialState)
@@ -79,4 +79,4 @@ const updatePassword = () => {
     )
 }
 
-export default AcceptCandidat
+export default CandidatAccepted

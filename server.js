@@ -20,6 +20,8 @@ app.use('/',require('./routes/event'))
 app.use('/',require('./routes/compte'))
 app.use('/',require('./routes/chapitre'))
 app.use('/',require('./routes/lecon'))
+app.use('/',require('./routes/categorie'))
+app.use('/',require('./routes/sousCategorie'))
 app.use('/api', require('./routes/upload'))
 
 

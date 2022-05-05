@@ -27,6 +27,7 @@ margin-right: 60px;
 }
 .add-icon{
     margin-right: 10px;
+    cursor: pointer;
 }
 .status-admin1{
     width: 58px;

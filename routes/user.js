@@ -4,8 +4,6 @@ const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 const authSuperAdmin = require('../middleware/authSuperAdmin')
 
-
-
 router.post('/register',userCtrl.register)
 
 router.post('/registerInstr',userCtrl.registerInstructeur)
@@ -22,7 +20,7 @@ router.post('/reset', auth, userCtrl.resetPassword)
 
 router.get('/infor', auth, userCtrl.getUserInfor)
 
-router.post('/acceptInstr/:id',auth, authAdmin, userCtrl.AcceptInstr)
+router.post('/acceptInstr/:id',auth,  userCtrl.AcceptInstr)
 
 router.get('/all_infor', auth, userCtrl.getUsersAllInfor)
 
@@ -40,11 +38,11 @@ router.patch('/updateInstr', auth, userCtrl.updateProfilInstr)
 
 router.patch('/updatePasswordInstr', auth,userCtrl.updatePsswordInstr)
 
-router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)
+router.patch('/update_role/:id', auth, userCtrl.updateUsersRole)
 
-router.delete('/delete/:id', auth, authAdmin, userCtrl.deleteUser)
+router.delete('/delete/:id', auth, userCtrl.deleteUser)
 
-router.get('/history', auth, authSuperAdmin, userCtrl.getHistory)
+router.get('/history', auth, userCtrl.getHistory)
 
 
 // Social Login

@@ -100,8 +100,66 @@ const routes1=[
         path:"/se-deconnecter"
     },
 ]
-// Routes super admin
+// Routes admin
 const routes2=[
+    {
+        key:"1",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Tableau du bord",
+        path:"/tableau-bord"
+    },
+    {
+        key:"2",
+        icon:<img src="images/profile.svg" alt=""/>,
+        name:"Profile",
+        path:"/profile",
+    },
+    {
+        key:"3",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Instructeurs",
+        path:"/instructeur"
+    },
+    {
+        key:"4",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Apprenants",
+        path:"/apprenants"
+    },
+    {
+        key:"5",
+        icon:<img src="images/Formations.png" alt=""/>,
+        name:"Mes formations",
+        path:"/mes-formations"
+    },
+    {
+        key:"6",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Mes événements",
+        path:"/mes-evenements"
+    },
+    {
+        key:"7",
+        icon:<img src="images/calendar.png" alt=""/>,
+        name:"Réclamtions",
+        path:"/reclamations"
+    },
+    {
+        key:"8",
+        icon:<img src="images/setting.png" alt=""/>,
+        name:"Paramétres",
+        path:"/parametres"
+    },
+    {
+        key:"9",
+        icon:<img src="images/logout.png" alt=""/>,
+        name:"Se déconnecter",
+        path:"/se-deconnecter"
+    },
+
+]
+// Routes super admin
+const routes3=[
     {
         key:"1",
         icon:<img src="images/calendar.png" alt=""/>,
@@ -140,36 +198,30 @@ const routes2=[
     },
     {
         key:"7",
-        icon:<img src="images/logout.png" alt=""/>,
-        name:"Se déconnecter",
-        path:"/se-deconnecter"
-    },
-    {
-        key:"8",
         icon:<img src="images/Formations.png" alt=""/>,
         name:"Mes formations",
         path:"/mes-formations"
     },
     {
-        key:"9",
+        key:"8",
         icon:<img src="images/calendar.png" alt=""/>,
         name:"Mes événements",
         path:"/mes-evenements"
     },
     {
-        key:"10",
+        key:"9",
         icon:<img src="images/calendar.png" alt=""/>,
         name:"Réclamtions",
         path:"/reclamations"
     },
     {
-        key:"11",
+        key:"10",
         icon:<img src="images/setting.png" alt=""/>,
         name:"Paramétres",
         path:"/parametres"
     },
     {
-        key:"12",
+        key:"11",
         icon:<img src="images/logout.png" alt=""/>,
         name:"Se déconnecter",
         path:"/se-deconnecter"
@@ -197,8 +249,9 @@ export default function LeftList({children})  {
           style={{ background:"#F6F7F8", marginTop:"20px"}}
         >
         { isInstr && mapping(routes)}
-        { (isLogged && !isInstr && !isSuperAdmin) && mapping(routes1)}
-        { isSuperAdmin && mapping(routes2)}
+        { (isLogged && !isInstr && !isSuperAdmin && !isAdmin) && mapping(routes1)}
+        { isAdmin && mapping(routes2)}
+        { isSuperAdmin && mapping(routes3)}
         </Menu>
         </div>
         <main className="children-content">

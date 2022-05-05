@@ -7,6 +7,10 @@ import comptes from './compteReducer'
 import formations from './formationsReducer'
 import chapitres from './chapitreReducer'
 import lecons from './leconReducer'
+import categorie from './categorieReducer'
+import sousCategorie from './sousCategorieReducer'
+
+
 
 
 export default combineReducers({
@@ -17,5 +21,7 @@ export default combineReducers({
     comptes,
     formations,
     chapitres,
-    lecons
+    lecons,
+    categorie,
+    sousCategorie
 })

@@ -4,15 +4,23 @@ import {fetchAllAdmin, dispatchGetAllAdmin} from '../../../redux/actions/usersAc
 import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
 import {DataGrid} from '@mui/x-data-grid';
-import { Nav } from 'react-bootstrap';
+import { Nav} from 'react-bootstrap';
 import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
 import axios from 'axios'
 import './Adminstrateur.css'
-import { Modal, Button, Space } from 'antd';
+import { Button, Modal} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const { confirm } = Modal;
+const initialState = {
+  name: '',
+  email:'',
+  tele:'',
+  password:'',
+  err: '',
+  success: ''
+}
 
 function Administrateur() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,12 +31,12 @@ function Administrateur() {
     const {user,isSuperAdmin} = auth
     const users = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
-    const [data, setData] =useState([]);
+    const [data, setData] =useState(initialState);
     const dispatch = useDispatch()
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-      };
+      const handleClick = (event) => {
+          setAnchorEl(event.currentTarget);
+        };
 
       const handleClose1 = () => {
         setAnchorEl(null);
@@ -120,6 +128,7 @@ function Administrateur() {
                   okText: 'Supprimer',
                   okType: 'danger',
                   cancelText: 'Annuler',
+                  closable:true,
                   onOk() {
                     handleDelete(params.row.id)
                   },
@@ -155,6 +164,7 @@ function Administrateur() {
             }
           },
       ];
+
       const rowData= users?.map(user => {
         return{
             id:user?._id,
@@ -165,19 +175,21 @@ function Administrateur() {
             date:user?.createdAt,
         }
     })
+
   return (
       <div className='admin'>
       <div className="header-admin">
         <h1 className='title-admin'>Liste administrateurs</h1>
-        <Button className='btn-add-admin'><img src="images/add-square.png" className="add-icon" alt=""/>Administrateur</Button>
-      </div>
+          <Button className='btn-add-admin' href="/addAdmin">
+            <img src="images/add-square.png" className="add-icon" alt=""/>Administrateur
+          </Button>
+  </div>
         <div style={{ height: 550, width: '100%' ,backgroundColor:'white'}}  >
             <DataGrid
                 rows={rowData}
                 columns={columns}
                 pageSize={8}
                 checkboxSelection
-                disableSelectionOnClick
             />
         </div> 
       </div>

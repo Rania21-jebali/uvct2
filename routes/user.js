@@ -1,12 +1,12 @@
 const router= require('express').Router()
 const userCtrl= require('../controllers/userCtrl')
 const auth = require('../middleware/auth')
-const authAdmin = require('../middleware/authAdmin')
-const authSuperAdmin = require('../middleware/authSuperAdmin')
 
 router.post('/register',userCtrl.register)
 
 router.post('/registerInstr',userCtrl.registerInstructeur)
+
+router.post('/registerAdmin',auth,userCtrl.registerAdmin)
 
 router.post('/activation',userCtrl.activateEmail)
 

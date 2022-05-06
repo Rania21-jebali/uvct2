@@ -26,6 +26,8 @@ import ApprenantList from '../../backOffice/pages/apprenants/ApprenantList';
 import CandidatAccepted from '../../backOffice/pages/instructeurs/candidatList/CandidatAccepted';
 import Categories from '../../backOffice/pages/categories/Categories';
 import './Body.css'
+import AddAdmin from '../../backOffice/pages/administrateur/AddAdmin';
+import AddCategorie from '../../backOffice/pages/categories/AddCategorie';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -48,9 +50,11 @@ function Body() {
             <Route path="/maFormation/:titre1" element={<NewFormation/>} />
             <Route path="/apprenants" element={(isAdmin || isSuperAdmin) ?  <ApprenantList /> : <NotFound /> }/>
             <Route path="/instructeurs" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
-            <Route path="/administrateurs" element={(isAdmin || isSuperAdmin) ?  <Administrateur /> : <NotFound /> } />
+            <Route path="/administrateurs" element={isSuperAdmin ?  <Administrateur /> : <NotFound /> } />
+            <Route path="/addAdmin" element={isSuperAdmin ?  <AddAdmin /> : <NotFound /> } />
             <Route path="/instructeur" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
-            <Route path="/categories" element={(isAdmin || isSuperAdmin) ?  <Categories /> : <NotFound /> } />
+            <Route path="/categories" element={isSuperAdmin ?  <Categories /> : <NotFound /> } />
+            <Route path="/addcategorie" element={isSuperAdmin ?  <AddCategorie /> : <NotFound /> } />
             <Route path="/mes-favoris" element={<Favoris /> } />
             <Route path="/messages" element={<Messages /> } />
             <Route path="/reclamations" element={<Reclamations /> } />

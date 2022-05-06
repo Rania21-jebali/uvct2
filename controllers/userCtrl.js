@@ -91,6 +91,38 @@ registerInstructeur: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//Register Admin
+registerAdmin: async (req, res) => {
+    try {
+        const {name, email, tele, password} = req.body
+        
+        if(!name || !email || !tele || !password)
+            return res.status(400).json({msg: "Please fill in all fields."})
+
+        if(!validateEmail(email))
+            return res.status(400).json({msg: "Invalid emails."})
+
+        const user = await Users.findOne({email})
+        if(user) return res.status(400).json({msg: "This email already exists."})
+
+        if(password.length < 6)
+            return res.status(400).json({msg: "Password must be at least 6 characters."})
+
+        const passwordHash = await bcrypt.hash(password, 12)
+
+        const newUser = {
+            name, email, tele,password: passwordHash
+        }
+        const user1 = new Users(newUser);
+        user1.role="admin";
+
+         await user1.save();
+
+        res.json({msg: "Register admin Success! "})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //Activation email
 activateEmail: async (req, res) => {
     try {

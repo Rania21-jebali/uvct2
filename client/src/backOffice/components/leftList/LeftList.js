@@ -129,13 +129,13 @@ const routes2=[
     {
         key:"5",
         icon:<img src="images/Formations.png" alt=""/>,
-        name:"Mes formations",
+        name:"Formations",
         path:"/mes-formations"
     },
     {
         key:"6",
         icon:<img src="images/calendar.png" alt=""/>,
-        name:"Mes événements",
+        name:"Événements",
         path:"/mes-evenements"
     },
     {
@@ -199,13 +199,13 @@ const routes3=[
     {
         key:"7",
         icon:<img src="images/Formations.png" alt=""/>,
-        name:"Mes formations",
+        name:"Formations",
         path:"/mes-formations"
     },
     {
         key:"8",
         icon:<img src="images/calendar.png" alt=""/>,
-        name:"Mes événements",
+        name:"Événements",
         path:"/mes-evenements"
     },
     {

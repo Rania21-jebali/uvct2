@@ -48,3 +48,54 @@ margin-right: 60px;
 .p-admin{
     color:#454545;
 }
+.add-admin{
+    margin-top: 20px;
+    margin-left:20px;
+}
+.content-admin{
+    margin-left: 20px;
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin-right: 100px;
+}
+.form-admin{
+    margin-left: 20px;
+    margin-right: 350px;
+}
+.ctn-btn-admin{
+display: flex;
+justify-content: flex-end;
+margin-bottom: 10px;
+}
+.btn-annuler{
+    border-radius: 2px;
+    margin-right: 10px;
+    font-size: 14px;
+    background-color: #999999;
+    border-color: #999999;
+    color:white
+}
+.btn-annuler:hover{
+    border-radius: 2px;
+    font-size: 14px;
+    background-color: white;
+    border-color: white;
+    color:#999999;
+    margin-right: 10px;
+}
+.btn-confirmer{
+    border-radius: 2px;
+    font-size: 14px;
+    background-color: #0F172A;
+    border-color: #0F172A;
+    color:white;
+}
+.btn-confirmer:hover{
+    border-radius: 2px;
+    font-size: 14px;
+    background-color: white;
+    border-color: white;
+    color:#0F172A
+}

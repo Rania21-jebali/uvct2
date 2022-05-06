@@ -17,7 +17,6 @@ const initialState = {
 
 function Inscrire() {
     const [user, setUser] = useState(initialState)
-
     const {name, email, password, err, success} = user
     const navigate = useNavigate();
 
@@ -54,48 +53,48 @@ function Inscrire() {
     var fex=false
     return (
       <div className={`${fex ? "inscrire":"" } `}>
-      {err && ShowErrMsg(err)}
+            {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-        <Form.Label className="labelForm" >Nom complet</Form.Label>
-        <Form.Control type="Normal text"
-         placeholder="Saisissez votre mot de passe" 
-         name="name"
-         value={name}
-         onChange={handleChangeInput} 
-        required 
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label className="labelForm">Adresse e-mail</Form.Label>
-        <Form.Control type="email" placeholder="nom@gmail.com"
-        name="email"
-        required 
-        value={email}
-        onChange={handleChangeInput} 
-         />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label className="labelForm" >Mot de passe</Form.Label>
-        <Form.Control type="password" placeholder="Créez votre mot de pase" 
-         name="password"
-        required 
-        value={password}
-        onChange={handleChangeInput} 
-        />
-      </Form.Group>
-      <div className="d-grid gap-2">
-      <Button  className='btn-inscr'  type="submit" size="lg" >
-        S'inscrire
-      </Button>
-       <Form.Label>Vous avez déjà un compte ?
-        <a href="/connexion" className="link" onClick={() => fex=true}>Se connecter</a> 
-       </Form.Label>
-   </div>
+            <Form.Group className="mb-3">
+                <Form.Label className="labelForm" >Nom complet</Form.Label>
+                    <Form.Control type="Normal text"
+                    placeholder="Saisissez votre mot de passe" 
+                    name="name"
+                    value={name}
+                    onChange={handleChangeInput} 
+                    required 
+                    />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label className="labelForm">Adresse e-mail</Form.Label>
+                <Form.Control type="email" placeholder="nom@gmail.com"
+                name="email"
+                required 
+                value={email}
+                onChange={handleChangeInput} 
+                />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label className="labelForm" >Mot de passe</Form.Label>
+                <Form.Control type="password" placeholder="Créez votre mot de pase" 
+                name="password"
+                required 
+                value={password}
+                onChange={handleChangeInput} 
+                />
+        </Form.Group>
+        <div className="d-grid gap-2">
+            <Button  className='btn-inscr'  type="submit" size="lg" >
+                S'inscrire
+            </Button>
+            <Form.Label>Vous avez déjà un compte ?
+                <a href="/connexion" className="link" onClick={() => fex=true}>Se connecter</a> 
+            </Form.Label>
+        </div>
       </Form>
-      </div>
-      )
+    </div>
+  )
 }
 
 export default Inscrire;

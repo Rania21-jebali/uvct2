@@ -129,7 +129,9 @@ function InstructeurList() {
               }
               return(
                 <>
-                <VisibilityIcon className='icon-visible' />
+                 <a href={`/instructeur/${params.row.id}`}>
+                 <VisibilityIcon className='icon-visible' />
+                 </a>
                     <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                         <Popover
                               id={id}

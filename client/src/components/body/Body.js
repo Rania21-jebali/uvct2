@@ -33,6 +33,8 @@ import Administrateur from '../../backOffice/pages/administrateur/Admin/Administ
 import ApprenantAdd from '../../backOffice/pages/apprenants/ApprenantAdd';
 import InstructeurAdd from '../../backOffice/pages/instructeurs/InstructeurAdd';
 import Apprenant from '../../backOffice/pages/apprenants/Apprenant/Apprenant';
+import EditUser from '../../backOffice/pages/user/EditUser';
+import Instructeur from '../../backOffice/pages/instructeurs/instructeur/Instructeur';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -54,14 +56,16 @@ function Body() {
             <Route path="/new-formation/:titre1" element={<NewFormation/>} />
             <Route path="/maFormation/:titre1" element={<NewFormation/>} />
             <Route path="/apprenants" element={(isAdmin || isSuperAdmin) ?  <ApprenantList /> : <NotFound /> }/>
-            <Route path="/apprenant/:id" element={(isAdmin || isSuperAdmin) ?  <Apprenant /> : <NotFound /> }/>
+            <Route path="/apprenant/:id" element={(isAdmin || isSuperAdmin) ? <Apprenant /> : <NotFound /> }/>
+            <Route path="/user/:id" element={(isAdmin || isSuperAdmin) ?  <EditUser /> : <NotFound /> }/>
+            <Route path="/admin/:id" element={(isAdmin || isSuperAdmin) ?  <Administrateur /> : <NotFound /> }/>
             <Route path="/ajout-apprenant" element={(isAdmin || isSuperAdmin) ?  <ApprenantAdd /> : <NotFound /> }/>
             <Route path="/formations" element={(isAdmin || isSuperAdmin) ?  <FormationList /> : <NotFound /> }/>
             <Route path="/instructeurs" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/administrateurs" element={isSuperAdmin ?  <AdministrateurList /> : <NotFound /> } />
-            <Route path="/admin/:id" element={isSuperAdmin ?  <Administrateur /> : <NotFound /> } />
             <Route path="/addAdmin" element={isSuperAdmin ?  <AddAdmin /> : <NotFound /> } />
             <Route path="/instructeur" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
+            <Route path="/instructeur/:id" element={(isAdmin || isSuperAdmin) ?  <Instructeur /> : <NotFound /> } />
             <Route path="/ajouter-instructeur" element={(isAdmin || isSuperAdmin) ?  <InstructeurAdd /> : <NotFound /> } />
             <Route path="/categories" element={isSuperAdmin ?  <Categories /> : <NotFound /> } />
             <Route path="/addcategorie" element={isSuperAdmin ?  <AddCategorie /> : <NotFound /> } />

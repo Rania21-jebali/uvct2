@@ -8,8 +8,9 @@ import {DataGrid} from '@mui/x-data-grid';
 import {Nav } from 'react-bootstrap';
 import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
-import { Modal, Button, Space } from 'antd';
+import { Modal, Button} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const { confirm } = Modal;
 
@@ -128,7 +129,7 @@ function InstructeurList() {
               }
               return(
                 <>
-                <img src="images/eye.png" alt=""/>
+                <VisibilityIcon className='icon-visible' />
                     <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                         <Popover
                               id={id}

@@ -7,18 +7,48 @@ import axios from 'axios'
 import './Categories.css'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button } from 'react-bootstrap';
+import { Upload } from 'antd';
+import ImgCrop from 'antd-img-crop';
 
 const initialState = {
     titre:'',
     err: '',
     success: ''
   }
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
 
 function AddCategorie() {
     const token = useSelector(state => state.token)
     const [categorie, setCategorie] = useState(initialState)
     const {titre, err, success} = categorie
-
+    
+    const [fileList, setFileList] = useState([]);
+      const onChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+      };
+    
+      const onPreview = async file => {
+        let src = file.url;
+        if (!src) {
+          src = await new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+          });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow.document.write(image.outerHTML);
+      };
+    
         const handleChangeInput = e => {
             const {name, value} = e.target
             setCategorie({...categorie, [name]:value, err: '', success: ''})
@@ -41,19 +71,43 @@ function AddCategorie() {
         }
   return (
     <div className='add-admin'>
-    <BreadcrumbHeader item="Administrateur" link="administrateurs" active="Ajouter Administrateur"/>
+    <BreadcrumbHeader item="Liste des catégories" link="/categories" active="Ajouter catégorie"/>
       <div className='content-admin'>
-        <Form name="dynamic_form_item" onSubmit={handleSubmit} className='form-admin'>
+        <Form name="dynamic_form_item" onSubmit={handleSubmit} className='form-admin'  {...layout}>
                 {err && ShowErrMsg(err)}
                 {success && ShowSuccessMsg(success)}
                  <Form.Item name='titre' label="Nom de catégorie"
-                 value={titre}
+                     value={titre} 
+                     onChange={handleChangeInput} 
+                      required>
+                   <Input placeholder="Catégorie..." style={{ width: '60%' }} />
+                  </Form.Item>
+                  <Form.Item name='titre' label="Mots clés"
+                        value={titre}
                         onChange={handleChangeInput} 
                         required>
-                   <Input placeholder="Catégorie..." style={{ width: '60%' }}
-                        
-                   />
+                   <Input placeholder="mots clés" style={{ width: '60%' }} />
                   </Form.Item>
+                  <Form.Item
+                        name="upload"
+                        label="Upload"
+                        valuePropName="fileList"
+                    >
+                        <ImgCrop rotate>
+                    <Upload
+                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        listType="picture-card"
+                        fileList={fileList}
+                        onChange={onChange}
+                        onPreview={onPreview}
+                    >
+                        {fileList.length < 1 && '+ Upload'}
+                    </Upload>
+                    </ImgCrop>
+                    </Form.Item>
+                    <Form.Item label="Description">
+                        <Input.TextArea style={{ width: '60%' }}/>
+                    </Form.Item>
                     <Form.List name="names">
                         {(fields, { add, remove }, { errors }) => (
                         <>
@@ -75,7 +129,8 @@ function AddCategorie() {
                                 ]}
                                 noStyle
                                 >
-                                <Input placeholder="sous-catégorie..." style={{ width: '60%' }} />
+                                <Input placeholder="sous-catégorie..." style={{ width: '60%'}}
+                                className={`${fields.length > 1? "addSousCatg":"" }`} />
                                 </Form.Item>
                                 {fields.length > 1 ? (
                                 <MinusCircleOutlined
@@ -87,21 +142,25 @@ function AddCategorie() {
                             ))}
                             <Form.Item>
                             <Button
-                                type="dashed"
                                 onClick={() => add()}
-                                style={{ width: '60%' }}
-                                icon={<PlusOutlined />}
+                                style={{ width: '60%',marginLeft:'300px'}}
+                                className='btn-confirmer'
                             >
-                                Ajouter sous-catégorie
+                             <PlusOutlined />   Ajouter sous-catégorie
                             </Button>
                             <Form.ErrorList errors={errors} />
                             </Form.Item>
                         </>
                         )}
                     </Form.List>
-                    <Button type="submit">
-                         Sauvegarder
-                    </Button>
+                    <div className='ctn-btn-admin'>
+                        <Button  className='btn-annuler' size="lg" >
+                            Annuler
+                        </Button>
+                        <Button  className='btn-confirmer' type="submit" size="lg" >
+                            confirmer
+                        </Button>
+            </div>
                 </Form>
                 </div>
     </div>

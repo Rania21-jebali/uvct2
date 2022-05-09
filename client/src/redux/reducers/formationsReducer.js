@@ -10,6 +10,8 @@ import ACTIONS from '../actions/'
             return action.payload
         case ACTIONS.GET_MY_FORMATION:
                 return action.payload
+        case ACTIONS.GET_ALL_FORMATION:
+                return action.payload
         default:
             return state
     }

@@ -71,22 +71,30 @@ AcceptInstr: async (req, res) => {
 //Register instructeur
 registerInstructeur: async (req, res) => {
     try {
-        const {name, email,specialite,skills,description,formation} = req.body
+        const {name, email,specialite,password,tele} = req.body
 
-       if(!name || !email )
+       if(!name || !email || !specialite || !tele || !password )
             return res.status(400).json({msg: "Please fill in all fields."})
 
         if(!validateEmail(email))
             return res.status(400).json({msg: "Invalid emails."})
+            const user = await Users.findOne({email})
+            if(user) return res.status(400).json({msg: "This email already exists."})
+    
+            if(password.length < 6)
+                return res.status(400).json({msg: "Password must be at least 6 characters."})
+    
+            const passwordHash = await bcrypt.hash(password, 12)
             
         const newUser = {
-            name, email,specialite,skills,description,formation
+            name, email,specialite,tele,password: passwordHash, accept:true
         }
       
-        const user = new Users(newUser);
-        user.role="instructeur";
-         await user.save();
-                res.json({msg: "Candidature envoyée !"})
+        const user1 = new Users(newUser);
+        user1.role="instructeur";
+        user1.accept=true;
+         await user1.save();
+                res.json({msg: "instructeur enregistré !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -119,6 +127,70 @@ registerAdmin: async (req, res) => {
          await user1.save();
 
         res.json({msg: "Register admin Success! "})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//Register Apprenant
+registerApprenant: async (req, res) => {
+    try {
+        const {name, email, tele, password} = req.body
+        
+        if(!name || !email || !tele || !password)
+            return res.status(400).json({msg: "Please fill in all fields."})
+
+        if(!validateEmail(email))
+            return res.status(400).json({msg: "Invalid emails."})
+
+        const user = await Users.findOne({email})
+        if(user) return res.status(400).json({msg: "This email already exists."})
+
+        if(password.length < 6)
+            return res.status(400).json({msg: "Password must be at least 6 characters."})
+
+        const passwordHash = await bcrypt.hash(password, 12)
+
+        const newUser = {
+            name, email, tele,password: passwordHash
+        }
+        const user1 = new Users(newUser);
+        user1.role="user";
+
+         await user1.save();
+
+        res.json({msg: "Register apprenant Success! "})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//Add instructeur
+AddInstructeur: async (req, res) => {
+    try {
+        const {name, email, tele, specialite, password} = req.body
+        
+        if(!name || !email || !tele || !specialite ||!password)
+            return res.status(400).json({msg: "Please fill in all fields."})
+
+        if(!validateEmail(email))
+            return res.status(400).json({msg: "Invalid emails."})
+
+        const user = await Users.findOne({email})
+        if(user) return res.status(400).json({msg: "This email already exists."})
+
+        if(password.length < 6)
+            return res.status(400).json({msg: "Password must be at least 6 characters."})
+
+        const passwordHash = await bcrypt.hash(password, 12)
+
+        const newUser = {
+            name, email, tele, specialite, password: passwordHash
+        }
+        const user1 = new Users(newUser);
+        user1.role="instructeur";
+
+         await user1.save();
+
+        res.json({msg: "Register instructeur Success! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -227,6 +299,17 @@ getUserInfor: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+
+//get User 
+getUser: async (req, res) => {
+    try {
+        const user = await Users.findById({_id:req.params.id}).select('-password')
+
+        res.json(user)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //All Admins informations 
 getAdminAllInfor: async (req, res) => {
     try {
@@ -279,9 +362,22 @@ logout: async (req, res) => {
 //update user
 updateUser: async (req, res) => {
     try {
-        const {name, avatar} = req.body
+        const {name, avatar,email,tele} = req.body
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            name, avatar
+            name, avatar,email,tele
+        })
+
+        res.json({msg: "Update Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update user
+updateUserInfo: async (req, res) => {
+    try {
+        const {name, avatar,email,tele} = req.body
+        await Users.findOneAndUpdate({_id: req.params.id}, {
+            name, avatar,email,tele
         })
 
         res.json({msg: "Update Success!"})

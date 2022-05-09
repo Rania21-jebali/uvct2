@@ -7,8 +7,9 @@ import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
 import {DataGrid} from '@mui/x-data-grid';
 import {OverlayTrigger,Tooltip} from 'react-bootstrap';
-import { Modal, Button, Space } from 'antd';
+import { Modal, Button } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import './Apprenants.css'
 
 const { confirm } = Modal;
@@ -106,9 +107,11 @@ function ApprenantList() {
               }
               return(
                 <>
-              <VisibilityIcon className='visibilityListIcon'/>
+                <a href={`/apprenant/${params.row.id}`}>
+                <VisibilityIcon  className='icon-visible'/>
+                </a>
               <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Supprimer apprenant</Tooltip>}>
-              <img src="images/trash.png" className="add-icon" alt="" onClick={showDeleteConfirm}/>
+              <DeleteOutlineIcon onClick={showDeleteConfirm} className="icon-delete"/>
               </OverlayTrigger>
                 </>
               )
@@ -128,7 +131,11 @@ function ApprenantList() {
       })
   return (
       <div className="apprenat-list">
-        <h1 className='title-apprenant'>Liste apprenants</h1>
+        <div className="header-instructeur">
+        <h1 className='title-instructeur'>Liste apprenants</h1>
+        <Button className='btn-add-instructeur' href='/ajout-apprenant'>
+        <img src="images/add-square.png" className="add-icon" alt=""/>Apprenants</Button>
+      </div>
             <div style={{ height: 550, width: '100%',backgroundColor:'white' }}  >
               <DataGrid
                   rows={rowData}

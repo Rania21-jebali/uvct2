@@ -1,51 +1,76 @@
 import React from 'react';
 import {useSelector} from 'react-redux'
 import { Menu } from 'antd';
+import axios from 'axios'
 import './LeftList.css';
+import PersonIcon from '@material-ui/icons/Person';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import SchoolIcon from '@material-ui/icons/School';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EventIcon from '@material-ui/icons/Event';
+import DescriptionIcon from '@material-ui/icons/Description';
+import CategoryIcon from '@material-ui/icons/Category';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import SmsFailedIcon from '@material-ui/icons/SmsFailed';
+import SecurityIcon from '@material-ui/icons/Security';
+import MessageIcon from '@material-ui/icons/Message';
+import ShopIcon from '@material-ui/icons/Shop';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import StarsIcon from '@material-ui/icons/Stars';
+
+const handleLogout = async () => {
+    try {
+        await axios.get('/user/logout')
+        localStorage.removeItem('firstLogin')
+        window.location.href = "/";
+    } catch (err) {
+        window.location.href = "/";
+    }
+  }
 
 // Routes instructeur
 const routes=[
     {
         key:"1",
-        icon:<img src="images/profile.svg" alt=""/>,
+        icon:<PersonIcon />,
         name:"Profile",
         path:"/profile",
     },
     {
         key:"2",
-        icon:<img src="images/Formations.png" alt=""/>,
+        icon:<DescriptionIcon />,
         name:"Mes formations",
         path:"/mes-formations"
     },
     {
         key:"3",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<EventIcon />,
         name:"Mes événements",
         path:"/mes-evenements"
     },
     {
         key:"4",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<MonetizationOnIcon />,
         name:"Mes gains",
         path:"/mes-gains"
     },
     {
         key:"5",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<ShopIcon />,
         name:"Mes achats",
         path:"/mes-achats"
     },
     {
         key:"6",
-        icon:<img src="images/setting.png" alt=""/>,
+        icon:<SettingsIcon />,
         name:"Paramétres",
         path:"/parametres"
     },
     {
         key:"7",
-        icon:<img src="images/logout.png" alt=""/>,
+        icon:<ExitToAppIcon />,
         name:"Se déconnecter",
-        path:"/se-deconnecter"
     },
 
 ]
@@ -53,49 +78,49 @@ const routes=[
 const routes1=[
     {
         key:"1",
-        icon:<img src="images/profile.svg" alt=""/>,
+        icon:<PersonIcon />,
         name:"Profile",
         path:"/profile",
     },
     {
         key:"2",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<ShopIcon />,
         name:"Mes achats",
         path:"/mes-achats"
     },
     {
         key:"3",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<EventIcon />,
         name:"Mes événements",
         path:"/mes-evenements"
     },
     {
         key:"4",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<StarsIcon />,
         name:"Mes favoris",
         path:"/mes-favoris"
     },
     {
         key:"5",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<MessageIcon />,
         name:"Messages",
         path:"/messages"
     },
     {
         key:"6",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<SmsFailedIcon />,
         name:"Réclamtions",
         path:"/reclamations"
     },
     {
         key:"7",
-        icon:<img src="images/setting.png" alt=""/>,
+        icon:<SettingsIcon />,
         name:"Paramétres",
         path:"/parametres"
     },
     {
         key:"8",
-        icon:<img src="images/logout.png" alt=""/>,
+        icon:<ExitToAppIcon />,
         name:"Se déconnecter",
         path:"/se-deconnecter"
     },
@@ -104,55 +129,55 @@ const routes1=[
 const routes2=[
     {
         key:"1",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<DashboardIcon />,
         name:"Tableau du bord",
         path:"/tableau-bord"
     },
     {
         key:"2",
-        icon:<img src="images/profile.svg" alt=""/>,
+        icon:<PersonIcon />,
         name:"Profile",
         path:"/profile",
     },
     {
         key:"3",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<BusinessCenterIcon />,
         name:"Instructeurs",
         path:"/instructeur"
     },
     {
         key:"4",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<SchoolIcon />,
         name:"Apprenants",
         path:"/apprenants"
     },
     {
         key:"5",
-        icon:<img src="images/Formations.png" alt=""/>,
+        icon:<DescriptionIcon />,
         name:"Formations",
         path:"/mes-formations"
     },
     {
         key:"6",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<EventIcon />,
         name:"Événements",
         path:"/mes-evenements"
     },
     {
         key:"7",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<SmsFailedIcon />,
         name:"Réclamtions",
         path:"/reclamations"
     },
     {
         key:"8",
-        icon:<img src="images/setting.png" alt=""/>,
+        icon:<SettingsIcon />,
         name:"Paramétres",
         path:"/parametres"
     },
     {
         key:"9",
-        icon:<img src="images/logout.png" alt=""/>,
+        icon:<ExitToAppIcon />,
         name:"Se déconnecter",
         path:"/se-deconnecter"
     },
@@ -162,67 +187,67 @@ const routes2=[
 const routes3=[
     {
         key:"1",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<DashboardIcon />,
         name:"Tableau du bord",
         path:"/tableau-bord"
     },
     {
         key:"2",
-        icon:<img src="images/profile.svg" alt=""/>,
+        icon:<PersonIcon />,
         name:"Profile",
         path:"/profile",
     },
     {
         key:"3",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<SecurityIcon />,
         name:"Administrateur",
         path:"/administrateurs"
     },
     {
         key:"4",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<BusinessCenterIcon />,
         name:"Instructeurs",
         path:"/instructeur"
     },
     {
         key:"5",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<SchoolIcon />,
         name:"Apprenants",
         path:"/apprenants"
     },
     {
         key:"6",
-        icon:<img src="images/setting.png" alt=""/>,
+        icon:<CategoryIcon />,
         name:"Catégories",
         path:"/categories"
     },
     {
         key:"7",
-        icon:<img src="images/Formations.png" alt=""/>,
+        icon:<DescriptionIcon />,
         name:"Formations",
-        path:"/mes-formations"
+        path:"/formations"
     },
     {
         key:"8",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<EventIcon />,
         name:"Événements",
         path:"/mes-evenements"
     },
     {
         key:"9",
-        icon:<img src="images/calendar.png" alt=""/>,
+        icon:<SmsFailedIcon />,
         name:"Réclamtions",
         path:"/reclamations"
     },
     {
         key:"10",
-        icon:<img src="images/setting.png" alt=""/>,
+        icon:<SettingsIcon />,
         name:"Paramétres",
         path:"/parametres"
     },
     {
         key:"11",
-        icon:<img src="images/logout.png" alt=""/>,
+        icon:<ExitToAppIcon />,
         name:"Se déconnecter",
         path:"/se-deconnecter"
     },
@@ -241,6 +266,8 @@ function mapping(x){
 export default function LeftList({children})  { 
     const auth = useSelector(state => state.auth)
     const {isLogged, isAdmin ,isInstr, isSuperAdmin} = auth 
+    
+
     return (
         <>
       <div  className="leftList">

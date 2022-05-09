@@ -28,6 +28,15 @@ getAllFormations: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//  All formations for admin
+getAllFormationsAdmin: async (req, res) => {
+    try {
+        const formation = await Formation.find()
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //update formation by titre
 updateFormationByTitre: async (req, res) => {
     try {

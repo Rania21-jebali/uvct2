@@ -53,7 +53,7 @@ function Header() {
       } catch (err) {
           window.location.href = "/";
       }
-  }
+    }
 
   return (
     <div className='header'>

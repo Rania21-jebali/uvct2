@@ -7,6 +7,8 @@ router.post('/addFormation',auth,formationCtrl.addFormation)
 
 router.get('/myFormations',auth,formationCtrl.getAllFormations)
 
+router.get('/allFormations',auth,formationCtrl.getAllFormationsAdmin)
+
 //router.get('/myFormation/:id',auth,formationCtrl.getFormationById)
 
 router.get('/myFormation/:titre',auth,formationCtrl.getFormationByTitre)

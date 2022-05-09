@@ -15,6 +15,20 @@ export const dispatchGetMyFormations = (res) => {
     }
 }
 
+export const fetchAllFormations = async (token) => {
+    const res = await axios.get('/allFormations', {
+        headers: {Authorization: token}
+    })
+    return res
+}
+
+export const dispatchGetAllFormations = (res) => {
+    return {
+        type: ACTIONS.GET_ALL_FORMATIONS,
+        payload: res.data
+    }
+}
+
 export const fetchFormation = async (token,titre1) => {
     const res = await axios.get(`/myFormation/${titre1}`, {
         headers: {Authorization: token}

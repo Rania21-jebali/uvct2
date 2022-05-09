@@ -20,7 +20,6 @@ import Connexion from '../../pages/auth/connexion/Connexion';
 import Favoris from '../../backOffice/pages/favoris/Favoris';
 import Messages from '../../backOffice/pages/messages/Messages';
 import Reclamations from '../../backOffice/pages/reclamations/Reclamations';
-import Administrateur from '../../backOffice/pages/administrateur/Administrateur';
 import Instructeurs from '../../backOffice/pages/instructeurs/Instructeurs';
 import ApprenantList from '../../backOffice/pages/apprenants/ApprenantList';
 import CandidatAccepted from '../../backOffice/pages/instructeurs/candidatList/CandidatAccepted';
@@ -28,6 +27,12 @@ import Categories from '../../backOffice/pages/categories/Categories';
 import './Body.css'
 import AddAdmin from '../../backOffice/pages/administrateur/AddAdmin';
 import AddCategorie from '../../backOffice/pages/categories/AddCategorie';
+import FormationList from '../../backOffice/pages/formations/ListFormation/FormationList';
+import AdministrateurList from '../../backOffice/pages/administrateur/AdministrateurList';
+import Administrateur from '../../backOffice/pages/administrateur/Admin/Administrateur';
+import ApprenantAdd from '../../backOffice/pages/apprenants/ApprenantAdd';
+import InstructeurAdd from '../../backOffice/pages/instructeurs/InstructeurAdd';
+import Apprenant from '../../backOffice/pages/apprenants/Apprenant/Apprenant';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -49,10 +54,15 @@ function Body() {
             <Route path="/new-formation/:titre1" element={<NewFormation/>} />
             <Route path="/maFormation/:titre1" element={<NewFormation/>} />
             <Route path="/apprenants" element={(isAdmin || isSuperAdmin) ?  <ApprenantList /> : <NotFound /> }/>
+            <Route path="/apprenant/:id" element={(isAdmin || isSuperAdmin) ?  <Apprenant /> : <NotFound /> }/>
+            <Route path="/ajout-apprenant" element={(isAdmin || isSuperAdmin) ?  <ApprenantAdd /> : <NotFound /> }/>
+            <Route path="/formations" element={(isAdmin || isSuperAdmin) ?  <FormationList /> : <NotFound /> }/>
             <Route path="/instructeurs" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
-            <Route path="/administrateurs" element={isSuperAdmin ?  <Administrateur /> : <NotFound /> } />
+            <Route path="/administrateurs" element={isSuperAdmin ?  <AdministrateurList /> : <NotFound /> } />
+            <Route path="/admin/:id" element={isSuperAdmin ?  <Administrateur /> : <NotFound /> } />
             <Route path="/addAdmin" element={isSuperAdmin ?  <AddAdmin /> : <NotFound /> } />
             <Route path="/instructeur" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
+            <Route path="/ajouter-instructeur" element={(isAdmin || isSuperAdmin) ?  <InstructeurAdd /> : <NotFound /> } />
             <Route path="/categories" element={isSuperAdmin ?  <Categories /> : <NotFound /> } />
             <Route path="/addcategorie" element={isSuperAdmin ?  <AddCategorie /> : <NotFound /> } />
             <Route path="/mes-favoris" element={<Favoris /> } />

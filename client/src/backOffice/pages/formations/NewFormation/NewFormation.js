@@ -13,7 +13,7 @@ function NewFormation() {
   const {titre1} = useParams();
   return (
     <div className='ajout-formation'>
-     <BreadcrumbHeader item="Mes formations" link="mes-formations" active={titre1}/>
+     <BreadcrumbHeader item="Mes formations" link="/mes-formations" active={titre1}/>
      <div className='scrolltab'>
      <ScrollTab label1="Informations" label2="Curriculum" label3="Coupons" 
      label4="Commentaires" label5="Certificat" label6="Étudiants" 

@@ -25,3 +25,20 @@ export const dispatchGetUser = (res) => {
         }
     }
 }
+
+export const fetchUserDetails = async (token,id) => {
+    const res = await axios.get(`/user/details/${id}`, {
+        headers: {Authorization: token}
+    })
+    return res
+}
+
+export const dispatchGetUserDetails = (res) => {
+    return {
+        type: ACTIONS.GET_USER_DET,
+        payload: {
+            admin: res.data,
+        }
+    }
+}
+

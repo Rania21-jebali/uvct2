@@ -148,6 +148,7 @@ function Formations() {
                 return(
                   <> 
                   {console.log(currentRow)}
+                  <a href={`/maFormation/${params.row.titre}`}><img src="images/eye.png" alt="" className='icon-visible'/></a>
                   <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                     <Popover
                           id={id}
@@ -164,8 +165,6 @@ function Formations() {
                           }}
                         >
                         <Nav.Link className="actionNav">Dépublier formation</Nav.Link>
-                        <Divider />
-                        <Nav.Link className="actionNav" href={`/maFormation/${params.row.titre}`}>Voir détails</Nav.Link>
                         <Divider />
                         <Nav.Link className="actionNav" onClick={() => handleDelete(currentRow.id)}>Supprimer formation</Nav.Link>
                     </Popover>     

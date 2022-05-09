@@ -14,7 +14,11 @@ import { Button , Form } from 'react-bootstrap'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import '../../Formation.css'
+import Questionnaire from './Questionnaire';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const { Panel } = Collapse;
 
@@ -32,9 +36,9 @@ const initialState = {
 export default function Curriculum() {
   const [show, setShow] = useState(true);
   const [show2, setShow2] = useState(true);
-  const [showFile, setShowFile] = useState(true);
-  const [showText, setShowText] = useState(true);
-  const [showQuest, setShowQuest] = useState(true);
+  const [showFile, setShowFile] = useState(false);
+  const [showText, setShowText] = useState(false);
+  const [showQuest, setShowQuest] = useState(false);
   const [checked, setChecked] = React.useState([0]);
   const [chapitre, setChapitre] = useState(initialState)
   const {formation,titre, err, success} = chapitre
@@ -73,7 +77,6 @@ export default function Curriculum() {
             {titre, formation: formations._id}, {headers: {Authorization: token}
           })
             setChapitre({...chapitre, err: '', success: res.data.msg})
-            window.location.reload(false);
 
       } } catch (err) { 
           err.response.data.msg &&
@@ -90,6 +93,14 @@ export default function Curriculum() {
       }
       setChecked(newChecked);
     };
+    
+    const genExtra = () => (
+      <EditIcon
+        onClick={event => {
+          event.stopPropagation();
+        }}
+      />
+    );
 
     return(
       <div className="coupon">
@@ -98,13 +109,11 @@ export default function Curriculum() {
        (<>
         <Button className='btn-event'  onClick={() => setShow(!show)}>Nouveau chapitre</Button>
       {
-        show ? 
-        ( 
           chapitres.map(chapitre => 
           (
           <div className='content-chapitre'>
               <Collapse  onChange={callback1}>
-                <Panel header={chapitre.titre} >
+                <Panel header={chapitre.titre}  extra={genExtra()}>
                   <List>
                     <ListItem key="1" role={undefined} dense button onClick={handleToggle("1")}>
                       <ListItemIcon>
@@ -127,15 +136,18 @@ export default function Curriculum() {
                       </ListItemSecondaryAction>
                     </ListItem>
                       <Button className='btn-add-lecon' onClick={() => setShow2(!show2)}>
-                        Ajouter une nouvelle leçon
+                       <AddCircleOutlineIcon /> Ajouter une nouvelle leçon
                       </Button>
                   </List>
                 </Panel>
             </Collapse>
           </div> 
-        )))
-        : 
-        (
+          
+        ))
+      }
+        {
+          !show &&
+          (
           <div className='content-chapitre'>
                 <Form onSubmit={handleSubmit}>
                 {err && ShowErrMsg(err)}
@@ -143,11 +155,21 @@ export default function Curriculum() {
                 <Form.Group className="mb-3" >
                   <Form.Label className="label">Titre du chapitre</Form.Label>
                     <Form.Control type="text" 
-                    placeholder="Enter un titre" 
-                    name="titre"
-                    value={titre}
-                    onChange={handleChangeInput} 
-                    required 
+                      placeholder="Enter un titre" 
+                      name="titre"
+                      value={titre}
+                      onChange={handleChangeInput} 
+                      required 
+                    />
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                  <Form.Label className="label">Qu'est-ce que les participants seront capables de faire à la fin de cette section ?</Form.Label>
+                    <Form.Control type="text" 
+                      placeholder="Saisir un objectif d'apprentissage" 
+                      name="titre"
+                      value={titre}
+                      onChange={handleChangeInput} 
+                      required 
                     />
                 </Form.Group>
                 <div className="content-btn">
@@ -157,8 +179,7 @@ export default function Curriculum() {
               </Form>
           </div>
           )
-      }
-      
+        } 
        </>
 
        )
@@ -171,25 +192,66 @@ export default function Curriculum() {
              <Button className="btn-lecon" onClick={() => setShowQuest(!showQuest)}>Ajouter un questionnaire </Button>
             </div>
             {
-              showFile ?
+              (showFile) &&
                 (<div className="content-lecon">
                 <h5>Téléchargeur de fichiers</h5>
                 <p>Utilisez le téléchargeur de fichiers pour télécharger des fichiers vidéo, audio, PDF ou tout autre fichier dans votre cours.</p>
+               <Form>
+               <Form.Group className="mb-3" >
+              <div className="content-affiche">
+              <Form.Label htmlFor="file" > 
+                <img src="" alt="" className="affiche-img"></img>
+                <PostAddIcon />  <p>Déposez ici des fichiers vidéo, audio, PDF ou d'autres fichiers ou cliquez pour choisir des fichiers</p>
+              </Form.Label>
+              </div>
+            <Form.Control type="file" id="file"
+                style={{display:"none"}}
+          />
+              </Form.Group>
+              <div className="content-btn">
+              <Button className='btn-annnuler'>Annuler</Button>
+              <Button  className='btn-confirme' >Sauvegarder</Button>
+          </div>
+               </Form>
                 </div>
                 )
-
-              :
-              (<>
-                {
-                  showText ?
-                  (<h5>Text</h5>)
-                  :
-                  <h5>questionnaire</h5>
-                }
-                </>
-                )
-                
             }
+            {
+              showText &&
+                (<div className="content-lecon">
+                <h5>Texte</h5>
+                <p>Utilisez l'éditeur de texte enrichi pour formater proprement le texte de votre session.</p>
+               <Form>
+               <Form.Group className="mb-3" >
+                <Form.Control as="textarea" rows={5} 
+                placeholder="Ecrire ici..." 
+                required 
+              />
+            </Form.Group>
+              <div className="content-btn">
+              <Button className='btn-annnuler'>Annuler</Button>
+              <Button  className='btn-confirme' >Sauvegarder</Button>
+          </div>
+               </Form>
+                </div>
+                )
+            }
+            {
+              showQuest &&
+                (<div className="content-lecon">
+                <h5>Questionnaire</h5>
+                <p>Utilisez le créateur de quiz pour créer un quiz à choix multiples. Vous ne pouvez avoir qu'un quiz par session.</p>
+               <Form>
+               <Questionnaire />
+              <div className="content-btn">
+              <Button className='btn-annnuler'>Annuler</Button>
+              <Button  className='btn-confirme' >Sauvegarder</Button>
+          </div>
+               </Form>
+                </div>
+                )
+            }
+            
           </>
         )
       }

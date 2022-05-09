@@ -11,6 +11,7 @@ import axios from 'axios'
 import './Adminstrateur.css'
 import { Button, Modal} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const { confirm } = Modal;
 const initialState = {
@@ -22,7 +23,7 @@ const initialState = {
   success: ''
 }
 
-function Administrateur() {
+function AdministrateurList() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const id= open ? 'simple-popover' : undefined;
@@ -139,7 +140,9 @@ function Administrateur() {
               }
               return(
                 <>
-                <img src="images/eye.png" alt=""/>
+                <a href={`/admin/${params.row.id}`}>
+                <VisibilityIcon className='icon-visible'/>
+                </a>
                 <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                     <Popover
                           id={id}
@@ -196,4 +199,4 @@ function Administrateur() {
   )
 }
 
-export default Administrateur
+export default AdministrateurList

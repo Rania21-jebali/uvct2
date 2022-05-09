@@ -8,6 +8,10 @@ router.post('/registerInstr',userCtrl.registerInstructeur)
 
 router.post('/registerAdmin',auth,userCtrl.registerAdmin)
 
+router.post('/registerApprenant',auth,userCtrl.registerApprenant)
+
+router.post('/addInstructeur',auth,userCtrl.AddInstructeur)
+
 router.post('/activation',userCtrl.activateEmail)
 
 router.post('/login',userCtrl.login)
@@ -19,6 +23,8 @@ router.post('/forgot',userCtrl.forgotPassword)
 router.post('/reset', auth, userCtrl.resetPassword)
 
 router.get('/infor', auth, userCtrl.getUserInfor)
+
+router.get('/details/:id', auth, userCtrl.getUser)
 
 router.post('/acceptInstr/:id',auth,  userCtrl.AcceptInstr)
 
@@ -33,6 +39,8 @@ router.get('/allInstr', auth, userCtrl.getInstrAllInfor)
 router.get('/logout', userCtrl.logout)
 
 router.patch('/update', auth, userCtrl.updateUser)
+
+router.patch('/updateInfo/:id', auth, userCtrl.updateUserInfo)
 
 router.patch('/updateInstr', auth, userCtrl.updateProfilInstr)
 

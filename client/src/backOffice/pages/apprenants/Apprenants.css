@@ -12,3 +12,10 @@
     align-items: center;
     flex-wrap: wrap;
  }
+ .icon-visible{
+     margin-right: 5px;
+     color:gray;
+ }
+ .icon-delete{
+     color:#F87171;
+ }

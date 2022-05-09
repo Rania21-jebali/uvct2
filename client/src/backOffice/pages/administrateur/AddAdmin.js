@@ -61,7 +61,6 @@ function AddAdmin() {
         <div className='content-admin'>
             {err && ShowErrMsg(err)}
             {success && ShowSuccessMsg(success)}
-            <h3 className='title-photo'>Photo de profile</h3>
           <Form onSubmit={handleSubmit} className='form-admin'>
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Nom complet</Form.Label>
@@ -89,6 +88,33 @@ function AddAdmin() {
                     onChange={handleChangeInput} 
                     required 
                 />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label className="label">Rôle</Form.Label>
+                  <Form.Control type="text" placeholder="" 
+                    name="tele" 
+                    value={tele}
+                    onChange={handleChangeInput} 
+                    required 
+                   />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label className="label">Spécialité</Form.Label>
+                  <Form.Control type="text" placeholder="" 
+                    name="tele" 
+                    value={tele}
+                    onChange={handleChangeInput} 
+                    required 
+                   />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label className="label">Tâches</Form.Label>
+                  <Form.Control type="text" placeholder="" 
+                    name="tele" 
+                    value={tele}
+                    onChange={handleChangeInput} 
+                    required 
+                    />
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Mot de passe</Form.Label>

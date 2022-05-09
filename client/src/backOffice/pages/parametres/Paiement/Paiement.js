@@ -72,7 +72,7 @@ function Paiement() {
         
   return (
     <div className='paiement'>
-            {exist ?
+            {!exist ?
             (
               <>
               Pour retirer vos gains, vous avez besoin d'ajouter des comptes de retrait ici.<br />

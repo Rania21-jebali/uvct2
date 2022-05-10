@@ -63,7 +63,7 @@ function Formations() {
                 headers: {Authorization: token}
             })
               setFormation({...formation, err: '', success: res.data.msg})
-              navigate(`/new-formation/${formation.titre}`);
+              navigate(`/test/${formation.titre}`);
 
           } catch (err) {
               err.response.data.msg && 
@@ -194,7 +194,7 @@ function Formations() {
       <div className="search">
       <Search placeholder="Rechercher des formations" allowClear onSearch={onSearch}  />
       </div>
-          <div style={{ height: 550, width: '100%',background:"white",marginTop:"20px"}} >
+          <div style={{ height: 550}} className="tableau" >
             <DataGrid
                     rows={data}
                     columns={columns}

@@ -29,6 +29,7 @@ function callback1(key) {
 const initialState = {
   titre:'',
   formation:'',
+  description:'',
   err: '',
   success: ''
 }
@@ -41,7 +42,7 @@ export default function Curriculum() {
   const [showQuest, setShowQuest] = useState(false);
   const [checked, setChecked] = React.useState([0]);
   const [chapitre, setChapitre] = useState(initialState)
-  const {formation,titre, err, success} = chapitre
+  const {formation,description,titre, err, success} = chapitre
   const token = useSelector(state => state.token)
   const formations = useSelector(state => state.formations)
   const chapitres = useSelector(state => state.chapitres)
@@ -166,8 +167,8 @@ export default function Curriculum() {
                   <Form.Label className="label">Qu'est-ce que les participants seront capables de faire à la fin de cette section ?</Form.Label>
                     <Form.Control type="text" 
                       placeholder="Saisir un objectif d'apprentissage" 
-                      name="titre"
-                      value={titre}
+                      name="description"
+                      value={description}
                       onChange={handleChangeInput} 
                       required 
                     />

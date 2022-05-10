@@ -4,6 +4,9 @@ const chapitreSchema = new mongoose.Schema({
     titre: {
         type: String,
     },
+    objectif: {
+        type: String,
+    },
     formation:{
         type:Object,
         ref: 'Formation'

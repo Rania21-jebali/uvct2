@@ -35,6 +35,7 @@ import InstructeurAdd from '../../backOffice/pages/instructeurs/InstructeurAdd';
 import Apprenant from '../../backOffice/pages/apprenants/Apprenant/Apprenant';
 import EditUser from '../../backOffice/pages/user/EditUser';
 import Instructeur from '../../backOffice/pages/instructeurs/instructeur/Instructeur';
+import AddFormation from '../../backOffice/pages/AddFormation/AddFormation';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -75,6 +76,8 @@ function Body() {
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:token" element={<CandidatAccepted />} />
+            <Route path="/test/:titre1" element={<AddFormation/>} />
+
             </Routes>
             </LeftList>
             ) :

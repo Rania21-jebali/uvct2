@@ -16,6 +16,8 @@ border: 1px solid #CBD5E1;
 box-sizing: border-box;
 border-radius: 2px;
 margin-right: 60px;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 .title-photo{
 margin-left: 20px;

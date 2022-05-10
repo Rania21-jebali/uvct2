@@ -132,3 +132,9 @@ justify-content: center;
     cursor: not-allowed;
     opacity: 0.5;
   }
+  .tableau{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     width: 100%;
+     background:white;
+     margin-top:20px;
+  }

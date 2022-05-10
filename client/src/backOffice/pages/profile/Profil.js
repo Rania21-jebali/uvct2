@@ -3,9 +3,19 @@ import axios from 'axios'
 import {useSelector} from 'react-redux'
 import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import './Profil.css'
-import { Button,Form, Spinner } from 'react-bootstrap'
+import { Button,Form} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import { message } from 'antd';
+
+const key = 'updatable';
+
+const openMessage = () => {
+  message.loading({ content: 'Loading...', key });
+  setTimeout(() => {
+    message.success({ content: 'Loaded!', key, duration: 2 });
+  }, 1000);
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,7 +113,7 @@ function Profil() {
        <h3 className='title-photo'>Photo de profile</h3>
        <Form className='form-profil'>
          <Form.Group className="mb-3" >
-         {loading && <Spinner animation="border" variant="secondary" />}
+         {loading && openMessage() }
           <div className={classes.root}>
            <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
           </div>

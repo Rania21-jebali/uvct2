@@ -6,11 +6,11 @@ const chapitreCtrl = {
 //   Ajout chapitre
 addChapitre: async (req, res) => {
     try {
-        const {titre} = req.body
+        const {titre,objectif} = req.body
         const formation1 = await Formation.findOne({titre:req.params.titre})
          const {id} = formation1.id
         const newChapitre = {
-            titre , formation: formation1.id
+            titre , objectif, formation: formation1.id
         }
         const chapitre2 = new Chapitre(newChapitre);
          await chapitre2.save();

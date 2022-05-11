@@ -30,3 +30,17 @@
 .icon-add{
     margin-right: 5px;
 }
+.content-chapitre{
+    border: 1px solid #CBD5E1;
+    padding: 5px;
+    margin: 20px;
+}
+.content-type{
+    display: flex;
+    justify-content: center;
+}
+.type-content{
+    border: 1px solid #CBD5E1;
+    padding: 5px;
+    margin: 20px;
+}

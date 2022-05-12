@@ -11,6 +11,7 @@ import './AddFormation.css'
 
 const initialState = {
   titre:'',
+  sousTitre:'',
   description:'',
   affiche:'',
   videopromo:'',
@@ -24,7 +25,7 @@ const initialState = {
 function PublierCours() {
     const token = useSelector(state => state.token)
     const [data, setData] = useState(initialState)
-    const {description,prix,categorie,niveau, err, success} = data
+    const {sousTitre,description,prix,categorie,niveau, err, success} = data
     const {titre1} = useParams();
     const [gratuit, setGratuit] = useState(false);
     const [affiche, setAffiche] = useState(false);
@@ -78,6 +79,7 @@ function PublierCours() {
           try {
             if(data.titre !== titre1){
               axios.patch(`/updateFormation/${titre1}`, {
+                sousTitre: sousTitre ? sousTitre : formations.sousTitre,
                  description: description ? description : formations.description,
                    prix : prix ? prix : formations.prix, 
                    categorie : categorie ? categorie : formations.categorie,
@@ -96,9 +98,9 @@ function PublierCours() {
             updateInfor()
         }
   return (
-    <div>
+    <div className="publier">
         <h5>Page d'accueil du cours</h5>
-        <Form className='publier-content'>
+        <Form >
           {err && ShowErrMsg(err)}
           {success && ShowSuccessMsg(success)}
             <Form.Group className="mb-3" >
@@ -107,12 +109,17 @@ function PublierCours() {
                   defaultValue={titre1}
                   name="titre"
                   disabled
+                  style={{ width: '500px' }}
                   />
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Sous-titre du cours</Form.Label>
                   <Form.Control type="text" 
                     placeholder="Saisissez le sous-titre de votre cours." 
+                    name="sousTitre"
+                    onChange={handleChange}
+                    defaultValue={formations.sousTitre}
+                    required 
                   />
             </Form.Group>
             <Form.Group className="mb-3" >
@@ -139,7 +146,7 @@ function PublierCours() {
             <Form.Control type="file" id="file"
                 onChange={changeAffiche}
                 style={{display:"none"}}
-          />
+              />
               </Form.Group>
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Vidéo promotionnelle</Form.Label>

@@ -6,6 +6,9 @@ const formationSchema = new mongoose.Schema({
         unique: true,
         trim: true
     },
+    sousTitre:{
+        type:String
+    },
     description:{
         type:String
     },
@@ -22,6 +25,15 @@ const formationSchema = new mongoose.Schema({
         type: String,
     },
     affiche: {
+        type: String,
+    },
+    objectif: {
+        type: String,
+    },
+    prerequis: {
+        type: String,
+    },
+    destinerA: {
         type: String,
     },
     postedBy:{

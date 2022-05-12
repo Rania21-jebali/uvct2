@@ -1,12 +1,12 @@
 import ACTIONS from '../actions/'
 
 
-  const  lecons = [];
+  const  sessions = [];
    
 
-  const leconReducer = (state = lecons, action) => {
+  const sessionReducer = (state = sessions, action) => {
     switch(action.type){
-        case ACTIONS.GET_ALL_LECON:
+        case ACTIONS.GET_ALL_SESSION:
             return action.payload
         default:
             return state
@@ -14,4 +14,4 @@ import ACTIONS from '../actions/'
 }
 
 
-export default leconReducer
+export default sessionReducer

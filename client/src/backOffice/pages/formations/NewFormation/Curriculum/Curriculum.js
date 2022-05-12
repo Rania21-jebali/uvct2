@@ -7,7 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import {fetchFormation, dispatchGetFormation} from '../../../../../redux/actions/formationsAction'
-import {fetchChapitres, dispatchChapitres} from '../../../../../redux/actions/chapitreAction'
+import {fetchSections, dispatchSections} from '../../../../../redux/actions/sectionAction'
 import {ShowSuccessMsg, ShowErrMsg} from '../../../../../components/utils/notifications/Nofification'
 import { Collapse } from 'antd';
 import { Button , Form } from 'react-bootstrap'
@@ -41,11 +41,11 @@ export default function Curriculum() {
   const [showText, setShowText] = useState(false);
   const [showQuest, setShowQuest] = useState(false);
   const [checked, setChecked] = React.useState([0]);
-  const [chapitre, setChapitre] = useState(initialState)
-  const {formation,description,titre, err, success} = chapitre
+  const [section, setSection] = useState(initialState)
+  const {formation,description,titre, err, success} = section
   const token = useSelector(state => state.token)
   const formations = useSelector(state => state.formations)
-  const chapitres = useSelector(state => state.chapitres)
+  const sections = useSelector(state => state.sections)
   const [callback, setCallback] = useState(false)
   const [callback2, setCallback2] = useState(false)
   const dispatch = useDispatch()
@@ -60,28 +60,28 @@ export default function Curriculum() {
           },[token,titre1, dispatch, callback])
           
           useEffect(() => {
-            fetchChapitres(token,id).then(res =>{
-                  dispatch2(dispatchChapitres(res))
+            fetchSections(token,id).then(res =>{
+                  dispatch2(dispatchSections(res))
               })
           },[token, id ,dispatch2, callback2])
 
       const handleChangeInput = e => {
         const {name, value} = e.target
-        setChapitre({...chapitre, [name]:value, err: '', success: ''})
+        setSection({...section, [name]:value, err: '', success: ''})
       }
 
       const handleSubmit = async (e,titre1) => {
         e.preventDefault()
         try {
           if(formations.titre !== titre1){
-            const res = await axios.post(`/ajoutchap/${formations.titre}`,
+            const res = await axios.post(`/ajoutsect/${formations.titre}`,
             {titre, formation: formations._id}, {headers: {Authorization: token}
           })
-            setChapitre({...chapitre, err: '', success: res.data.msg})
+            setSection({...section, err: '', success: res.data.msg})
 
       } } catch (err) { 
           err.response.data.msg &&
-          setChapitre({...chapitre, err: err.response.data.msg, success: ''})
+          setSection({...section, err: err.response.data.msg, success: ''})
         }
       }
     const handleToggle = (value) => () => {
@@ -110,7 +110,7 @@ export default function Curriculum() {
        (<>
         <Button className='btn-event'  onClick={() => setShow(!show)}>Nouveau chapitre</Button>
       {
-          chapitres.map(chapitre => 
+          sections.map(chapitre => 
           (
           <div className='content-chapitre'>
               <Collapse  onChange={callback1}>

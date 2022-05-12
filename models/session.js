@@ -1,6 +1,6 @@
 const mongoose= require('mongoose')
 
-const leconSchema = new mongoose.Schema({
+const sessionSchema = new mongoose.Schema({
     titre: {
         type: String,
     },
@@ -10,16 +10,13 @@ const leconSchema = new mongoose.Schema({
     video: {
         type: String,
     },
-    questionnaire: {
-        type: String,
-    },
-    chapitre:{
-        type:Object,
-        ref: 'Chapitre'
+    section:{
+        type:String,
+        ref: 'Sections'
     }
 
 }, {
     timestamps: true
 })
 
-module.exports = mongoose.model("Lecon", leconSchema)
+module.exports = mongoose.model("Session", sessionSchema)

@@ -1,5 +1,4 @@
 const Formation= require('../models/formation')
-const Chapitre= require('../models/chapitre')
 
 
 const formationCtrl = {
@@ -40,10 +39,12 @@ getAllFormationsAdmin: async (req, res) => {
 //update formation by titre
 updateFormationByTitre: async (req, res) => {
     try {
-        const {titre, description, affiche, videopromo, categorie, niveau, prix, gratuit} = req.body
+        const {titre, sousTitre,description, affiche, videopromo, categorie, niveau, 
+            prix, gratuit,objectif,destinerA,prerequis} = req.body
 
         await Formation.findOneAndUpdate({titre: req.params.titre}, {
-            titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
+            titre,sousTitre, description, affiche, videopromo, categorie, niveau,
+             prix, gratuit,objectif,destinerA,prerequis
         })
         res.json({msg: "Update formation Success!"})
     } catch (err) {

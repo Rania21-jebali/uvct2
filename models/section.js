@@ -1,6 +1,6 @@
 const mongoose= require('mongoose')
 
-const chapitreSchema = new mongoose.Schema({
+const sectionSchema = new mongoose.Schema({
     titre: {
         type: String,
     },
@@ -16,4 +16,4 @@ const chapitreSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model("Chapitres", chapitreSchema)
+module.exports = mongoose.model("Sections", sectionSchema)

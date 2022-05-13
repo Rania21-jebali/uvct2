@@ -38,6 +38,19 @@ getSectionById: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//update section by id
+updateSectionById: async (req, res) => {
+    try {
+        const {titre , objectif} = req.body
+
+        await Section.findByIdAndUpdate({_id:req.params.id}, {
+            titre, objectif
+        })
+        res.json({msg: "Update section by id Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 // supprimer section
 deleteSection: async (req, res) => {
     try {

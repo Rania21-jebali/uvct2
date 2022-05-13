@@ -138,3 +138,10 @@ justify-content: center;
      background:white;
      margin-top:20px;
   }
+  .addFormation{
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-right: 50px;
+}

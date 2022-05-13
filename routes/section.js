@@ -6,6 +6,8 @@ router.post('/ajoutsect/:titre',auth, sectionCtrl.addSection)
 
 router.get('/allSection/:id',auth, sectionCtrl.getAllSections)
 
+router.patch('/updatesection/:id', auth, sectionCtrl.updateSectionById)
+
 router.get('/section/:id',auth, sectionCtrl.getSectionById)
 
 router.delete('/deleteSection/:id', auth, sectionCtrl.deleteSection )

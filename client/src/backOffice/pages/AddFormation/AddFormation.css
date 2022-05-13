@@ -48,3 +48,12 @@
 .publier{
     display:grid;
 }
+.affiche-session{
+    margin-top: 10px;
+}
+.content-section{
+    border: 1px solid #20384D;
+    background-color:white;
+    padding: 5px;
+    margin: 20px;
+}

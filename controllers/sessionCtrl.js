@@ -16,6 +16,29 @@ addSession: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//get Session by id
+getSessionById: async (req, res) => {
+    try {
+        const session = await Session.findById({ _id:req.params.id})
+
+        res.json(session)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update session by id
+updateSessionById: async (req, res) => {
+    try {
+        const {titre,description} = req.body
+
+        await Session.findByIdAndUpdate({_id:req.params.id}, {
+             titre,description
+        })
+        res.json({msg: "Update session by id Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //  get All sessions
 getAllSessions: async (req, res) => {
     try {

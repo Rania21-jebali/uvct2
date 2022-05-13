@@ -14,3 +14,17 @@ export const dispatchSessions = (res) => {
         payload:  res.data
     }
 }
+
+export const fetchSession = async (token,idS) => {
+    const res = await axios.get(`/session/${idS}`, 
+    { headers: {Authorization: token}}
+    )
+    return res
+}
+
+export const dispatchGetSession = (res) => {
+    return {
+        type: ACTIONS.GET_SESSION,
+        payload:  res.data
+    }
+}

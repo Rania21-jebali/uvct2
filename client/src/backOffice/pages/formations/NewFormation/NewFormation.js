@@ -9,11 +9,19 @@ import Etudiants from './Etudiants/Etudiants'
 import Informations from './informations/Informations'
 import '../Formation.css'
 import { useParams } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
+import AddIcon from '@material-ui/icons/Add';
 function NewFormation() {
   const {titre1} = useParams();
+
   return (
-    <div className='ajout-formation'>
-     <BreadcrumbHeader item="Mes formations" link="/mes-formations" active={titre1}/>
+    <div className='admin'>
+      <div>
+      <BreadcrumbHeader item="Mes formations" link="/mes-formations" active={titre1}/>
+            <Button className='btn-event' href={`/test/${titre1}`}>
+              <AddIcon />Modifier formation
+            </Button>
+      </div>
      <div className='scrolltab'>
      <ScrollTab label1="Informations" label2="Curriculum" label3="Coupons" 
      label4="Commentaires" label5="Certificat" label6="Étudiants" 

@@ -36,6 +36,7 @@ import Apprenant from '../../backOffice/pages/apprenants/Apprenant/Apprenant';
 import EditUser from '../../backOffice/pages/user/EditUser';
 import Instructeur from '../../backOffice/pages/instructeurs/instructeur/Instructeur';
 import AddFormation from '../../backOffice/pages/AddFormation/AddFormation';
+import {AllEvents} from "../../pages/events/all-events";
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -43,7 +44,7 @@ function Body() {
 
     return (
         <section className={`${isLogged ? "body":"" } ${isAdmin ? "body":"" }`}>
-            { isLogged ?  
+            { isLogged ?
             (<LeftList >
             <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
@@ -90,7 +91,8 @@ function Body() {
             <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
-              </Routes>
+            <Route path="/events" element={<AllEvents />} />
+                </Routes>
             )
             }
 

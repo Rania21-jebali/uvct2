@@ -38,6 +38,7 @@ import Instructeur from '../../backOffice/pages/instructeurs/instructeur/Instruc
 import AddFormation from '../../backOffice/pages/AddFormation/AddFormation';
 import {AllEvents} from "../../pages/events/all-events/all-events";
 import {EventDetails} from "../../pages/events/event-details/event-details";
+import Footer from "../footer/footer";
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -97,7 +98,7 @@ function Body() {
                 </Routes>
             )
             }
-
+            <Footer/>
         </section>
     )
 }

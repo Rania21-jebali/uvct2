@@ -1,11 +1,14 @@
-import {Button, Card, Select, Typography} from "antd";
+import {Select} from "antd";
 import React from 'react'
 import "./all-events.scss"
-import {ArrowDropDown, SearchOutlined, ShoppingCart} from "@material-ui/icons";
+import {ArrowDropDown, SearchOutlined} from "@material-ui/icons";
+import {QuickNavigation} from "../components/quick-navigation/quick-navigation";
+import {EventCard} from "../components/event-card/event-card";
 
 export const AllEvents = () => {
  return(
      <div className={'events-container'}>
+         <QuickNavigation/>
          <div className={'filter-container'}>
              <div className={'search-input-container'}>
                  <input className={"search-input"} placeholder="Rechercher des événements" />
@@ -27,23 +30,9 @@ export const AllEvents = () => {
          </div>
          <div className={'all-events-container'} >
              {
-             scaffolding.map((event, index)=> {
+             eventsScaffolding.map((event)=> {
                  return(
-                     <React.Fragment key={event.id}>
-                         <Card className={`event-card ${(index+1) %3 === 0? 'event-card-no-margin-right': ''}`}
-                                hoverable
-                                cover={<img height={224} style={{objectFit: "cover"}} alt="example" src={event.image} />}
-                                bordered={false}
-                         >
-                             <Typography className={'event-date-type-text'}>{event.date} - {event.eventType}{'\n'}</Typography>
-                             <Typography className={'title'}>{event.name}</Typography>
-                             <Typography className={'content-creator'}>{event.contentCreator}</Typography>
-                             <div className={'card-footer'}>
-                                 <Button className={'event-details-info'}>Plus d'information</Button>
-                                 <Button icon={<ShoppingCart/>} className={'price-details-info'}/>
-                             </div>
-                         </Card>
-                     </React.Fragment>
+                    <EventCard {...event} />
                  )
              })
          }
@@ -61,7 +50,7 @@ type event = {
     date: string
 }
 
-const scaffolding: event[] = [
+export const eventsScaffolding: event[] = [
     {
         id: 1,
         name: "Selling from A to Z",

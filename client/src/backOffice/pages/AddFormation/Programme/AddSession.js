@@ -1,9 +1,8 @@
-import React ,{useState, useEffect} from 'react'
+import React ,{useState} from 'react'
 import { Button , Form } from 'react-bootstrap'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 import axios from 'axios'
 import '../AddFormation.css'
-import { dispatchGetSection, fetchSection } from '../../../../redux/actions/sectionAction'
 
     const sessionState = {
       titre:'',
@@ -11,13 +10,11 @@ import { dispatchGetSection, fetchSection } from '../../../../redux/actions/sect
       err: '',
       success: ''
       }
-    
 
       function AddSession(props){
         const token = useSelector(state => state.token)
         const [session, setSession] = useState(sessionState)
         const {titre} = session
-        const idS=props.id
 
           const handleChangeInput = e => {
             const {name, value} = e.target

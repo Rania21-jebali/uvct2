@@ -29,10 +29,10 @@ getSessionById: async (req, res) => {
 //update session by id
 updateSessionById: async (req, res) => {
     try {
-        const {titre,description} = req.body
+        const {titre,description,file,article,video} = req.body
 
         await Session.findByIdAndUpdate({_id:req.params.id}, {
-             titre,description
+             titre,description,file,article,video
         })
         res.json({msg: "Update session by id Success!"})
     } catch (err) {

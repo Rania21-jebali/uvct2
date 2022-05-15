@@ -1,9 +1,6 @@
-import React ,{useState, useEffect} from 'react'
-import {fetchSection, dispatchGetSection} from '../../../../redux/actions/sectionAction'
-import { Button , Modal } from 'react-bootstrap'
+import React ,{useState} from 'react'
 import axios from 'axios'
-import {useSelector, useDispatch} from 'react-redux'
-import { useParams } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -13,6 +10,9 @@ import AfficheSession from './AfficheSession';
 import AddSession from './AddSession';
 import '../AddFormation.css'
 import UpdateSection from './UpdateSection'
+import { Modal} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+const { confirm } = Modal;
 
     const sectionState = {
     titre:'',
@@ -24,38 +24,39 @@ import UpdateSection from './UpdateSection'
 
 function Section(props) {
     const token = useSelector(state => state.token)
-    const sections = useSelector(state => state.sections)
     const [session, setSession] = useState(false)
     const [edit, setEdit] = useState(false)
     const [modifier, setModifier] = useState(false)
-    const [callback, setCallback] = useState(false)
     const [section, setSection] = useState(sectionState)
     const [callback3, setCallback3] = useState(false)
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const dispatch = useDispatch()
-    const {id} = props.id
-   
-        
-            useEffect(() => {
-                fetchSection(token,id).then(res =>{
-                  dispatch(dispatchGetSection(res))
-              })
-                },[token,id, dispatch, callback])
 
-        const handleDelete = async (id) => {
+        const handleDelete = async () => {
             try {
-                if(sections[0]._id !== id){
-                        await axios.delete(`/deleteSection/${id}`, {
+                        await axios.delete(`/deleteSection/${props.id}`, {
                             headers: {Authorization: token}
                         })
                         setCallback3(!callback3)
-                }
               }   catch (err) {
                 setSection({...section, err: err.response.data.msg , success: ''})
             }
             } 
+
+            function showDeleteConfirm() {
+              confirm({
+                title: 'Êtes-vous sûr de vouloir supprimer cette section?',
+                icon: <ExclamationCircleOutlined />,
+                okText: 'Supprimer',
+                okType: 'danger',
+                cancelText: 'Annuler',
+                closable:true,
+                onOk() {
+                  handleDelete()
+                },
+                onCancel() {
+                  console.log('Cancel');
+                },
+              });
+            }
             
   return (
     <div>
@@ -66,14 +67,14 @@ function Section(props) {
                     {edit && (
                       <>
                       <EditIcon className="icon-prog" onClick={() => setModifier(true)}/> 
-                      <DeleteOutlineIcon className="icon-prog" />
+                      <DeleteOutlineIcon className="icon-prog" onClick={showDeleteConfirm}/>
                     </>)
                     }</div>
                     {
                       modifier && (
                       <div className='content-section'>
                         <CloseIcon onClick={() => setModifier(!modifier)} className="icon-add"/>
-                          <UpdateSection  id={props.id} />
+                          <UpdateSection  id={props.id} num={props.num}/>
                       </div>
                       )  
                   }
@@ -87,25 +88,10 @@ function Section(props) {
                           <AddSession  id={props.id} />
                       </div>
                       )  
-                  }
+                   }
                     <div className='btn-add-session' onClick={() => setSession(!session)}>
                       <p><AddCircleOutlineIcon className='icon-add' />Ajouter session</p>
                     </div>
-                        
-                    <Modal show={show} onHide={handleClose} animation={false}>
-                        <Modal.Header closeButton>
-                          <Modal.Title></Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Êtes-vous sûr de vouloir supprimer cette section ?</Modal.Body>
-                        <Modal.Footer>
-                          <Button className='btn-annuler' onClick={handleClose}>
-                          Annuler
-                          </Button>
-                          <Button className="btn-confirmer" >
-                          Supprimer
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
     </div>
   )
 }

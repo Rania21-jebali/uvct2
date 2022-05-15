@@ -62,15 +62,17 @@ function PlanifierCours() {
     <div className='content'>
           {err && ShowErrMsg(err)}
           {success && ShowSuccessMsg(success)}
-            <h3>Participants cibles</h3>
-            <p className='paragraphe'>
+          <>
+          <h3>Participants cibles</h3>
+            <span className='paragraphe'>
             Les descriptions suivantes seront publiquement visibles sur la page d'accueil de votre cours <br /> et auront une incidence directe sur les performances de votre cours. <br />
             Ces descriptions aideront les participants à décider si votre cours leur convient.
-            </p>
+            </span>
             <h5>Que vont apprendre les participants inscrits à votre cours ?</h5>
-            <p className='paragraphe'>
+            <span className='paragraphe'>
             Vous devez saisir au moins 3 objectifs ou résultats d'apprentissage que les participants <br />sont censés atteindre après avoir suivi votre cours.
-            </p>
+            </span>
+          </>
             <Form className='publier-content'>
                 <Form.Group className="mb-3" >
                     <Form.Control type="text" 
@@ -82,10 +84,12 @@ function PlanifierCours() {
                         required 
                     />
                 </Form.Group>
-            <h5>Quels sont les prérequis du cours ?</h5>
-            <p className='paragraphe'>Dressez la liste des compétences, de l'expérience, des outils ou de l'équipement <br /> 
+                <>
+                <h5>Quels sont les prérequis du cours ?</h5>
+            <span className='paragraphe'>Dressez la liste des compétences, de l'expérience, des outils ou de l'équipement <br /> 
             que les participants doivent posséder pour suivre votre cours.<br />
-            S'il n'y a pas de prérequis, profitez-en pour simplifier la tâche des débutants.</p>
+            S'il n'y a pas de prérequis, profitez-en pour simplifier la tâche des débutants.</span>
+                </>
                 <Form.Group className="mb-3" >
                     <Form.Control type="text" 
                         name="prerequis"
@@ -96,11 +100,13 @@ function PlanifierCours() {
                         required 
                     />
                 </Form.Group>
-        <h5>À qui ce cours s'adresse-t-il ?</h5>
-        <p className='paragraphe'>
-        Rédigez une courte description des participants cibles que le contenu de votre cours peut intéresser.<br />
-        Cela vous aidera à attirer les bons participants.
-        </p>
+                <>
+                <h5>À qui ce cours s'adresse-t-il ?</h5>
+                  <span className='paragraphe'>
+                  Rédigez une courte description des participants cibles que le contenu de votre cours peut intéresser.<br />
+                  Cela vous aidera à attirer les bons participants.
+                  </span>
+                </>
             <Form.Group className="mb-3" >
                   <Form.Control type="text" 
                     name="destinerA"

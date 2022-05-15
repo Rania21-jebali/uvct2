@@ -7,6 +7,9 @@ const sessionSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    article: {
+        type: String,
+    },
     file: {
         type: String,
     },

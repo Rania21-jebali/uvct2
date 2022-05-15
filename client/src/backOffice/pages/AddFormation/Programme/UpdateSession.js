@@ -1,10 +1,8 @@
 import React ,{useState} from 'react'
 import { Button , Form} from 'react-bootstrap'
 import axios from 'axios'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector} from 'react-redux'
 import '../AddFormation.css'
-import { dispatchGetSession, fetchSession } from '../../../../redux/actions/sessionAction'
-import { useEffect } from 'react'
 
     const sessionState = {
     titre:'',
@@ -13,36 +11,25 @@ import { useEffect } from 'react'
     }
 
 function UpdateSession(props){
-    const [section, setSection] = useState(sessionState)
-    const {titre} = section
-    const sessions = useSelector(state => state.sessions)
+    const [session, setSession] = useState(sessionState)
+    const {titre} = session
     const token = useSelector(state => state.token)
-    const [callback, setCallback] = useState(false)
-    const dispatch = useDispatch()
-    const {id} = props.id
-        
-            useEffect(() => {
-                    fetchSession(token,id).then(res =>{
-                        dispatch(dispatchGetSession(res))
-                    })
-                },[token,id, dispatch, callback])
-
-                console.log(sessions[0].titre)
+    
 
                 const handleChange = e => {
                     const {name, value} = e.target
-                    setSection({...section, [name]:value, err:'', success: ''})
+                    setSession({...session, [name]:value, err:'', success: ''})
                 }
 
               const updateInfor = async() => {
                 try {
                     axios.patch(`/updateSession/${props.id}`, {
-                       titre: titre ? titre : section.description,
+                       titre: titre ? titre : session.titre,
                     }, { headers: {Authorization: token} })
-                    setSection({...section, err: '' , success: "Success!"})
+                    setSession({...session, err: '' , success: "Success!"})
                   
                } catch (err) {
-                    setSection({...section, err: err.response.data.msg , success: ''})
+                    setSession({...session, err: err.response.data.msg , success: ''})
                 }
               }
       
@@ -59,7 +46,7 @@ function UpdateSession(props){
                     placeholder="Enter un titre" 
                     name="titre"
                     required 
-                    defaultValue={sessions[0].titre}
+                    defaultValue={props.titre}
                     onChange={handleChange} 
                     />
                 </Form.Group>

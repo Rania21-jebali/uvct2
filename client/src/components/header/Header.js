@@ -8,43 +8,40 @@ import './Header.css'
 import Avatar1 from '../Avatar/Avatar'
 import Popover from '@material-ui/core/Popover';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import SvgLogo from '../../logo';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 
 
 
 function Header() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorEl3, setAnchorEl3] = React.useState(null);
-  const open3 = Boolean(anchorEl3);
-  const id3 = open3 ? 'simple-popover' : undefined;
-
-  const handleClick2 = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose2 = () => {
-    setAnchorEl(null);
-  };
-  const handleClick3 = (event) => {
-    setAnchorEl3(event.currentTarget);
-  };
-
-  const handleClose3 = () => {
-    setAnchorEl3(null);
-  };
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  const handleShow = () => setShow(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl3, setAnchorEl3] = React.useState(null);
+    const open3 = Boolean(anchorEl3);
+    const id3 = open3 ? 'simple-popover' : undefined;
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+    const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
     const handleShow1 = () => setShow1(true);
     const handleClose1 = () => setShow1(false);
     const [show1, setShow1] = useState(false);
-
     const auth = useSelector(state => state.auth)
+    const {isInstr,isSuperAdmin, isAdmin,user, isLogged} = auth
 
-    const {user, isAdmin, isLogged} = auth
-
+    const handleClick2 = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose2 = () => {
+      setAnchorEl(null);
+    };
+    const handleClick3 = (event) => {
+      setAnchorEl3(event.currentTarget);
+    };
+    const handleClose3 = () => {
+      setAnchorEl3(null);
+    };
     const handleLogout = async () => {
       try {
           await axios.get('/user/logout')
@@ -59,18 +56,9 @@ function Header() {
     <div className='header'>
     <Navbar className='row2' >
       <Navbar.Brand href="/">
-        <img
-          alt=""
-          src="./images/logo.png"
-          width="160"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
+      <p className='titleLogo'><SvgLogo />Uvct-Training</p>
       </Navbar.Brand>
-      {
-        !isAdmin  &&
-        <>
-      <Button aria-describedby={id3} variant="contained" color="primary" onClick={handleClick3}>Catégories</Button>
+      <p aria-describedby={id3} variant="contained" color="primary" className="categorie-title" onClick={handleClick3}>Catégories</p>
       <Popover
         id={id3}
         open={open3}
@@ -85,19 +73,37 @@ function Header() {
           horizontal: 'center',
         }}
       >
-      <Nav.Link href="/profil" >Développement web</Nav.Link>
-      <Nav.Link href="/profil" >Design</Nav.Link>
-      <Nav.Link href="/profil" >Business</Nav.Link>
-      <Nav.Link href="/profil" >Marketing</Nav.Link>
-      <Nav.Link href="/profil" >Développement personnel</Nav.Link>
-      <Nav.Link href="/profil" >Communication</Nav.Link>
-      <Nav.Link href="/profil" >Photographie</Nav.Link>
-      <Nav.Link href="/profil" >Informatiques et logiciels</Nav.Link>
-      <Nav.Link href="/profil" >Mode de vie</Nav.Link>
-      <Nav.Link href="/profil" >Musique</Nav.Link>
+      <div className='categorie-content'>
+        <a href="/devloppement-web" className="categorie-lien">Développement web</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/design" className="categorie-lien">Design</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/business" className="categorie-lien">Business</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/marketing" className="categorie-lien">Marketing</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/developpement-personnel" className="categorie-lien">Développement personnel</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/communication" className="categorie-lien">Communication</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/photographie" className="categorie-lien">Photographie</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/informatique" className="categorie-lien">Informatiques et logiciels</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/mode-de-vie" className="categorie-lien">Mode de vie</a>
+      </div>
+      <div className='categorie-content'>
+        <a href="/musique" className="categorie-lien">Musique</a>
+      </div>
       </Popover>  
-      </>
-      }
       <Form className="flex-auto ">
         <FormControl
           style={{
@@ -110,22 +116,28 @@ function Header() {
         />
       </Form>
       {
-        !isAdmin && 
+        (!isAdmin && !isSuperAdmin) && 
         <Nav.Link href="/devenir-instructeur" className="link-postuler-enseigner">Devenir instructeur</Nav.Link>
       }
       {
-        !isAdmin && 
+        (!isAdmin && !isSuperAdmin) && 
         <a href="/panier" className="shoppingIcon">
-        <ShoppingCartIcon   />
+        <ShoppingCartIcon   href="/panier"/>
         </a>
       }
       {
                     isLogged
                     ? 
                     (<>
-      <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick2}>
+                    { (!isInstr && !isAdmin && !isSuperAdmin ) && (
+                      <div>
+                      <FavoriteBorderIcon className='header-icon'/>
+                      </div>
+                      )}
+       <NotificationsNoneIcon />
+      <p aria-describedby={id} variant="contained" color="primary" onClick={handleClick2}>
       <Avatar1 src={user.avatar} />
-      </Button>
+      </p>
       <Popover
         id={id}
         open={open}
@@ -140,8 +152,12 @@ function Header() {
           horizontal: 'center',
         }}
       >
-      <Nav.Link href="/profil" >Profil</Nav.Link>
-      <Nav.Link onClick={handleLogout}>Se déconnecter</Nav.Link>
+      <div className='categorie-content'>
+        <a href="/profil" className="categorie-lien">Profil</a>
+      </div>
+      <div className='categorie-content'>
+        <p onClick={handleLogout} className="categorie-lien">Se déconnecter</p>
+      </div>
       </Popover>       
 
 </>)

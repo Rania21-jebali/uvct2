@@ -21,7 +21,6 @@ function DevenirInstructeur() {
     const {name, email, specialite,skills,description,formation, err, success} = user
     const navigate = useNavigate();
 
-
     const handleChangeInput = e => {
         const {name, value} = e.target
         setUser({...user, [name]:value, err: '', success: ''})

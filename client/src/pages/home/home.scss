@@ -61,10 +61,10 @@
     .home-sections{
       padding: 50px 0;
       &.background-color{
-        background: #1D1D1D;
+        background: white;
         .section-header{
           .section-title{
-            color: white !important;
+            color: #20384D !important;
             &::before{
               content: '';
               position: absolute;
@@ -76,7 +76,7 @@
             }
           }
           .section-desc{
-            color: white !important;
+            color: #20384D !important;
           }
         }
       }

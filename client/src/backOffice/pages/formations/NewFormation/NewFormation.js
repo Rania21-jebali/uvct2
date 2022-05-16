@@ -16,9 +16,9 @@ function NewFormation() {
 
   return (
     <div className='admin'>
-      <div>
+      <div className='header-formation'>
       <BreadcrumbHeader item="Mes formations" link="/mes-formations" active={titre1}/>
-            <Button className='btn-event' href={`/test/${titre1}`}>
+            <Button className='btn-edit-formation' href={`/formation/${titre1}`}>
               <AddIcon />Modifier formation
             </Button>
       </div>

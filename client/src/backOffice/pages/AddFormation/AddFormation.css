@@ -1,13 +1,14 @@
 .addFormation{
-    display: flex;
-    margin-left: 20px;
     background: #FFFFFF;
     border: 1px solid #CBD5E1;
     box-sizing: border-box;
     border-radius: 2px;
     margin-right: 100px;
-    margin-top: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.content-formation{
+    margin-left: 20px;
+    margin-top: 20px;
 }
 .paragraphe{
     font-size: 15px;  
@@ -44,6 +45,7 @@
     border: 1px solid #CBD5E1;
     padding: 5px;
     margin: 20px;
+    cursor: pointer;
 }
 .publier{
     display:grid;

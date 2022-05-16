@@ -1,7 +1,6 @@
 .header{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-}
+    }
 .header:hover{
     display: block;
 }
@@ -37,7 +36,8 @@ color: #FFFFFF;
 }
 .link-postuler-enseigner{
     color: black;
-    font-size: large;
+    font-size: 18px;
+    font-weight: 500;
 }
 .dropdown:hover .dropdown-menu{
 display: block;
@@ -51,6 +51,7 @@ display: block;
 }
 .link-postuler-enseigner:hover{
     color:#20384D;
+    font-weight: 700;
 }
 .nav-dropdown-title{
     color: black;
@@ -82,14 +83,56 @@ text-align: center;
 font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
-font-size: 18px;
-line-height: 148%;
+font-size: 14px;
+}
+
+.header-icon{
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.categorie-content{
+    padding: 10px;
+    cursor: pointer;
+}
+.categorie-lien{
+    color:black;
+    font-weight: 500;
+}
+.categorie-lien:hover{
+    color:#20384D;
+    font-weight: 500;
+}
+.categorie-title{
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.categorie-title:hover{
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 .shoppingIcon{
-    color: #20384D;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    color:#20384D
 }
-.badgeShopping{
+.shoppingIcon:hover{
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    color:#20384D
+}
+.titleLogo{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
     color:#20384D;
-
+    margin-top: 20px;
 }

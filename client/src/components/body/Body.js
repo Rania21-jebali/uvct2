@@ -36,6 +36,9 @@ import Apprenant from '../../backOffice/pages/apprenants/Apprenant/Apprenant';
 import EditUser from '../../backOffice/pages/user/EditUser';
 import Instructeur from '../../backOffice/pages/instructeurs/instructeur/Instructeur';
 import AddFormation from '../../backOffice/pages/AddFormation/AddFormation';
+import Dashbord from '../../backOffice/pages/dashbord/Dashbord';
+import Panier from '../../pages/panier/Panier';
+import HeaderInstructeur from '../../pages/auth/devenirInstructeur/HeaderInstructeur';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -68,6 +71,7 @@ function Body() {
             <Route path="/instructeur" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/instructeur/:id" element={(isAdmin || isSuperAdmin) ?  <Instructeur /> : <NotFound /> } />
             <Route path="/ajouter-instructeur" element={(isAdmin || isSuperAdmin) ?  <InstructeurAdd /> : <NotFound /> } />
+            <Route path="/tableau-bord" element={(isAdmin || isSuperAdmin) ?  <Dashbord /> : <NotFound /> } />
             <Route path="/categories" element={isSuperAdmin ?  <Categories /> : <NotFound /> } />
             <Route path="/addcategorie" element={isSuperAdmin ?  <AddCategorie /> : <NotFound /> } />
             <Route path="/mes-favoris" element={<Favoris /> } />
@@ -76,20 +80,20 @@ function Body() {
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:token" element={<CandidatAccepted />} />
-            <Route path="/test/:titre1" element={<AddFormation/>} />
-
+            <Route path="/formation/:titre1" element={<AddFormation/>} />
             </Routes>
             </LeftList>
             ) :
             (
                 <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
-            <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
+            <Route path="/devenir-instructeur" element={<HeaderInstructeur />}/>
             <Route path="/connexion" element={isLogged ? <NotFound /> : <Connexion />} />
             <Route path="/inscrire" element={isLogged ? <NotFound /> : <Inscrire />}/>
             <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+            <Route path="/panier" element={<Panier />} />
               </Routes>
             )
             }

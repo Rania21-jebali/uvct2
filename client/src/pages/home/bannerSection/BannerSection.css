@@ -1,0 +1,81 @@
+
+.carousel-poster{
+    margin-top: -60px;
+    display: flex;
+}
+.navbar-poster{
+    z-index: 999;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    margin-left: 400px;
+    font-size: large;
+}
+.title-carousel{
+    color:white;
+    font-size: 50px;
+    animation-duration: 2s;
+  animation-name: slidein;
+  margin-bottom: 50px;
+}
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+.title-carousel:hover{
+    color:#F59E0B;
+}
+.caption-poster{
+bottom: 150px;
+}
+.caption-rect1{
+    background-color:black;
+    height: 120px;
+    width: 280px;
+    opacity: 0.6;
+    float:right;
+}
+.caption-rect1:hover{
+    opacity: 1;
+}
+.caption-rect2{
+    background-color:black;
+    height: 120px;
+    width: 280px;
+    opacity: 0.6;
+    float:left;
+}
+.caption-rect2:hover{
+    opacity: 1;
+}.caption-rect3{
+    background-color:black;
+    height: 120px;
+    width: 280px;
+    opacity: 0.6;
+    margin: 0 auto;
+}
+.captionIcon{
+    color:#F59E0B;
+}
+.caption-rect3:hover{
+    opacity: 1;
+}
+.captionTitle{
+    font-size: 20px;
+    font-weight: 600;
+}
+.link-rect{
+    color:#F59E0B;
+    font-size: 20px;
+    text-decoration: underline;
+}
+.link-rect:hover{
+    color:#F59E0B;
+}

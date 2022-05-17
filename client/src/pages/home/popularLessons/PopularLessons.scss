@@ -1,0 +1,85 @@
+.lessons-card{
+    .lessons-swiper{
+      .lesson-card{
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
+        border-radius: 5px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        .lc-header{
+          height: 140px;
+          position: relative;
+          .lesson-img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          .lesson-teacher{
+            position: absolute;
+            bottom: -76px;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100px;
+            .teacher-avatar{
+              width: 50px;
+              height: 50px;
+            }
+            .teacher-name{
+              color: #20384D;
+            }
+            .teacher-info{
+              color: #20384D;
+            }
+          }
+        }
+        .lc-body{
+          flex: 1;
+          padding-top: 70px;
+          .lesson-info{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            .lesson-rate{
+              display: flex;
+              align-items: center;
+              .rate-logo{
+                margin-right: 5px;
+              }
+              .rate-txt{
+                line-height: 15px;
+              }
+            }
+            .lesson-price{
+              display: flex;
+              align-items: center;
+              .price-logo{
+                margin-right: 5px;
+              }
+              .price-txt{
+                line-height: 15px;
+              }
+            }
+          }
+        }
+        .lc-footer{
+          padding: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .lesson-button{
+            text-decoration: none;
+            color: #ffffff;
+            background: #1D1D1D;
+            padding: 5px 10px;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }

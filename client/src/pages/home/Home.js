@@ -1,5 +1,4 @@
 import React from 'react'
-import './home.scss'
 import BannerSection from './bannerSection/BannerSection';
 import OffersSection from './offersSection/OffersSection';
 import LastEvents from './lastEvents/LastEvents';
@@ -7,12 +6,13 @@ import SomeVideos from './someVideos/SomeVideos';
 import PopularLessons from './popularLessons/PopularLessons';
 import BestCategories from './bestCategories/BestCategories';
 import Insctructors from './insctructors/Insctructors';
+import Footer1 from '../../components/footer/footer';
 
 
 
 const Home = () => {
   return(
-    <div className="home-wrapper">
+    <div>
       <BannerSection />
       <OffersSection />
       <LastEvents />
@@ -20,6 +20,7 @@ const Home = () => {
       <PopularLessons />
       <BestCategories />
       <Insctructors />
+      <Footer1 />
     </div>
   )
 }

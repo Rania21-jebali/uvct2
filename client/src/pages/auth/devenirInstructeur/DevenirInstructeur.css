@@ -1,11 +1,19 @@
 .devInst{
     flex: 1;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding: 50px;
-    margin-right: 200px;
-    margin-left: 200px;
+    padding: 40px;
     background-color: white;
-    margin-top: 10px;
+    margin-top: 60px;
+    margin-right: 150px;
+    margin-bottom: 20px;
+}
+.inputForm{
+    width: 400px;
+}
+.labelForm{
+    font-size: 20px;
+    font-weight: 400;
+    color: #20384D;
 }
 .btn-devInst{
     background-color: #20384D;
@@ -13,24 +21,25 @@
     border-color:#20384D ;
     border-radius: 2px;
     cursor: pointer;
+    font-size: 15px;
 }
 .navbarHeaderInst{
-    display: inline-block;
-    margin-left: 400px;  
+    display: flex;
+    justify-content: center;
 }
 .linkHeaderInst{
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color:black;
 }
 .posterInstr{
     display: flex;
-    margin-left: 100px;
+    margin-left: 200px;
     margin-top: 20px;
     margin-bottom: 40px;
 }
 .imgInstructeur{
-    margin-left: 100px;
+    margin-left: 200px;
     width: 300px;
     height: 350px;
 }
@@ -57,4 +66,26 @@
 }
 .contentTitle4{
     color:white;
+}
+.content4Inst{
+    background-color: #1D1D1D;
+    display: flex;
+}
+.contentTitle5{
+    font-size: 40px;
+    font-weight: 600;
+    color:white;
+    padding: 100px;
+}
+.content5Inst{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+.contentTitle6{
+    font-size: 20px;
+    font-weight: 500;
+    color:#20384D;
+    padding: 10px;
+    display: flex;
 }

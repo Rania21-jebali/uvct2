@@ -1,4 +1,5 @@
 import React from 'react'
+import './OffresSections.scss'
 
 function OffersSection(){
     return(

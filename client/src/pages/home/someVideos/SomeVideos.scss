@@ -1,0 +1,50 @@
+.videos-wrapper{
+    .videos-swiper{
+      .video-card{
+        overflow: hidden;
+        border-radius: 5px;
+        width: 100%;
+        height: fit-content;
+        background: #1d1d1d;
+        .video-img{
+          width: 100%;
+          height: 180px;
+          object-fit: cover;
+        }
+        .video-title{
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          font-size: 12px;
+          text-align: center;
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .lessons-wrapper{
+    .lessons-categories{
+      .list-categories{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        .category-item{
+          list-style: none;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 12px;
+          text-align: center;
+          .category-link{
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+      }
+    }
+}

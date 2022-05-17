@@ -2,6 +2,8 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Autoplay } from 'swiper';
 import { motion } from 'framer-motion'
+import './Instructors.scss'
+import { Button } from 'react-bootstrap';
 
 
 function Insctructors(){
@@ -45,14 +47,17 @@ function Insctructors(){
     } 
 
     return(
-      <div className="home-sections background-color">
+      <div className="home-sections sectionInstructor">
         <div className="container">
           <div className="row mb-3">
             <div className="col-md-6">
               <div className="section-header">
-                <h3 className="section-title mb-2">Devenir instructeur</h3>
-                <p className="section-desc">Nos instructeurs enseignent à des milliers de personnes à travers le monde.
-Nous vous offrons l'appui et les outils nécessaires pour démontrer votre expertise.</p>
+                <h3 className="title-instrocteur mb-2">Devenir instructeur</h3>
+                <p className="instrocteur-desc">Nos instructeurs enseignent à des milliers de <br />
+                personnes à travers le monde.<br />
+                Nous vous offrons l'appui et les outils <br />
+                nécessaires pour démontrer votre expertise.</p>
+                <Button className="btn-instrocteur">Commencez à enseigner</Button>
               </div>
             </div>
             <div className="col-md-6">

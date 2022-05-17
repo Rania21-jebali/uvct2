@@ -6,6 +6,8 @@ router.post('/register',userCtrl.register)
 
 router.post('/registerInstr',userCtrl.registerInstructeur)
 
+router.post('/devenirInstr',userCtrl.devenirInstructeur)
+
 router.post('/registerAdmin',auth,userCtrl.registerAdmin)
 
 router.post('/registerApprenant',auth,userCtrl.registerApprenant)

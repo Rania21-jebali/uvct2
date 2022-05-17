@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navbar,Nav, Button } from 'react-bootstrap'
 import './DevenirInstructeur.css'
+import DevenirInstructeur from './DevenirInstructeur'
 
 function HeaderInstructeur() {
   return (
@@ -19,7 +20,7 @@ function HeaderInstructeur() {
     </Navbar>
     <div className='posterInstr'>
       <div>
-        <h2>Partenaire avec Uvct-Training</h2>
+        <h1>Partenaire avec Uvct-Training</h1>
         <p>Engagez-vous auprès d'un public large et motivé avec vos connaissances et votre expertise.</p>
         <Button href="/devenir-instructeur" className='btn-devInst'>Devenir instructeur</Button>
       </div>
@@ -50,6 +51,14 @@ function HeaderInstructeur() {
       <h5 className='contentTitle3'>Lancez votre cours</h5>
       <p className='contentTitle4'>Votre cours sera visible sur notre place de marché où vous toucherez des revenus<br />
        à chaque inscription payante.</p>
+    </div>
+    <div className='content4Inst'>
+    <h1 className='contentTitle5'>Inscrivez-vous pour devenir instructeur</h1>
+    <div><DevenirInstructeur /></div>
+    </div>
+    <div className='content5Inst'>
+      <h4 className='contentTitle6'>En savoir plus sur nous</h4>
+      <div className='contentTitle6'><Button className='btn-devInst'>À propos de nous</Button></div>
     </div>
     </div>
   )

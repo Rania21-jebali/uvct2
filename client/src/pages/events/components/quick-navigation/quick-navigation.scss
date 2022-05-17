@@ -1,0 +1,19 @@
+.quick-navigation{
+    padding-top: 24px;
+    .container{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      color: #454545;
+      width: 750px;
+      .text{
+        padding-inline-end: 30px;
+        cursor: default;
+      }
+    }
+  }

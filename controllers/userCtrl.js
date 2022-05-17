@@ -99,6 +99,32 @@ registerInstructeur: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//Devenir instructeur
+devenirInstructeur: async (req, res) => {
+    try {
+        const {name, email,specialite,tele,message,cv} = req.body
+
+       if(!name || !email || !specialite || !tele || !message )
+            return res.status(400).json({msg: "Please fill in all fields."})
+
+        if(!validateEmail(email))
+            return res.status(400).json({msg: "Invalid emails."})
+            const user = await Users.findOne({email})
+            if(user) return res.status(400).json({msg: "This email already exists."})
+            
+            
+        const newUser = {
+            name, email,specialite,tele,message,cv
+        }
+      
+        const user1 = new Users(newUser);
+        user1.role="instructeur";
+         await user1.save();
+                res.json({msg: "Candidature envoyé !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //Register Admin
 registerAdmin: async (req, res) => {
     try {
@@ -333,7 +359,7 @@ getUsersAllInfor: async (req, res) => {
 //All candidats informations Admin
 getCondAllInfor: async (req, res) => {
     try {
-        const users = await Users.find({role:"instructeur", password:null}).select('-password')
+        const users = await Users.find({role:"instructeur", password:null,accept:false}).select('-password')
 
         res.json(users)
     } catch (err) {

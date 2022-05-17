@@ -1,6 +1,9 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Autoplay } from 'swiper';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import './PopularLessons.scss'
+import { Button } from 'react-bootstrap';
 
 function PopularLessons(){
 
@@ -33,7 +36,7 @@ function PopularLessons(){
             </div>
           </div>
           <div className="lc-footer">
-            <a href="/panier" className="lesson-button">Ajouter au panier</a>
+            <Button href="/panier" className="lesson-button"><ShoppingCartIcon />Ajouter au panier</Button>
           </div>
         </div>
       )
@@ -104,7 +107,7 @@ function PopularLessons(){
                       <SwiperSlide>
                         <LessonCard 
                           img="./images/Rectangle88.png"
-                          avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+                          avatar="./images/Instruteur1.png"
                           username="John doe"
                           position="HR management diploma"
                           rate="4.8"
@@ -114,7 +117,7 @@ function PopularLessons(){
                       <SwiperSlide>
                         <LessonCard 
                           img="./images/Rectangle88.png"
-                          avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+                          avatar="./images/Instruteur1.png"
                           username="John doe"
                           position="HR management diploma"
                           rate="4.8"
@@ -124,7 +127,7 @@ function PopularLessons(){
                       <SwiperSlide>
                         <LessonCard 
                           img="./images/Rectangle88.png"
-                          avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+                          avatar="./images/Instruteur1.png"
                           username="John doe"
                           position="HR management diploma"
                           rate="4.8"
@@ -134,7 +137,7 @@ function PopularLessons(){
                       <SwiperSlide>
                         <LessonCard 
                           img="./images/Rectangle88.png"
-                          avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+                          avatar="./images/Instruteur1.png"
                           username="John doe"
                           position="HR management diploma"
                           rate="4.8"
@@ -144,7 +147,7 @@ function PopularLessons(){
                       <SwiperSlide>
                         <LessonCard 
                           img="./images/Rectangle88.png"
-                          avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+                          avatar="./images/Instruteur1.png"
                           username="John doe"
                           position="HR management diploma"
                           rate="4.8"
@@ -154,7 +157,7 @@ function PopularLessons(){
                       <SwiperSlide>
                         <LessonCard 
                           img="./images/Rectangle88.png"
-                          avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+                          avatar="./images/Instruteur1.png"
                           username="John doe"
                           position="HR management diploma"
                           rate="4.8"

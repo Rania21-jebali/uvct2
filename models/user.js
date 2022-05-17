@@ -26,16 +26,13 @@ const userSchema = new mongoose.Schema({
         default:"https://res.cloudinary.com/dwofvitkq/image/upload/v1649367599/avatar/user_ofqjtg.png"
     }
     ,
-    description:{
+    message:{
         type:String
     },
     specialite:{
         type:String
     },
-    skills:{
-        type:String
-    },
-    formation:{
+    cv:{
         type:String
     },
     accept:{

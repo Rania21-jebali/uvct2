@@ -1,6 +1,7 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
+import './SomeVideos.scss'
 
 
 function SomeVideos(){
@@ -8,8 +9,8 @@ function SomeVideos(){
     function VideoCard({img,title,link}) {
       return(
         <div className="video-card">
-          <img className="video-img" src="./images/Rectangle88.png" alt="img" />
-          <h6 className="video-title">Introduction au monde de l'administration des affaires</h6>
+          <img className="video-img" src={img} alt="img" />
+          <h6 className="video-title">{title}</h6>
         </div>
       )
     }
@@ -56,22 +57,22 @@ function SomeVideos(){
                     onSlidePrevTransitionEnd={()=>console.log('start')}
                     onSwiper={(swiper) => console.log(swiper)}>
                     <SwiperSlide>
-                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/Rectangle88-1.png" />
+                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/image15.png" />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/Rectangle88-1.png" />
+                      <VideoCard title="Connaître le rôle du marketing" img="./images/image13.png" />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/Rectangle88-1.png" />
+                      <VideoCard title="Introduction aux ressources humaines" img="./images/image14.png"/>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/Rectangle88-1.png" />
+                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/image15.png" />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/Rectangle88-1.png" />
+                      <VideoCard title="Connaître le rôle du marketing" img="./images/image13.png" />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <VideoCard title="Introduction au monde de l'administration des affaires" img="./images/Rectangle88-1.png" />
+                      <VideoCard title="Introduction aux ressources humaines" img="./images/image14.png" />
                     </SwiperSlide>
                   </Swiper>
                 </div>

@@ -39,6 +39,8 @@ import AddFormation from '../../backOffice/pages/AddFormation/AddFormation';
 import Dashbord from '../../backOffice/pages/dashbord/Dashbord';
 import Panier from '../../pages/panier/Panier';
 import HeaderInstructeur from '../../pages/auth/devenirInstructeur/HeaderInstructeur';
+import { AllEvents } from '../../pages/events/allEvents/AllEvents';
+import { EventDetails } from '../../pages/events/eventDetails/event-details';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -94,6 +96,8 @@ function Body() {
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/panier" element={<Panier />} />
+            <Route path="/events" element={<AllEvents />} />
+            <Route path="/event/:id" element={<EventDetails />} />
               </Routes>
             )
             }

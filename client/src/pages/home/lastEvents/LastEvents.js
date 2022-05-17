@@ -1,6 +1,7 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Autoplay } from 'swiper';
+import './LastEvents.scss'
 
 function LastEvents(){
 
@@ -66,32 +67,32 @@ function LastEvents(){
                     onSwiper={(swiper) => console.log(swiper)}>
                     <SwiperSlide>
                       <EventCard
-                        img="https://ericsgoodkarmacookies.com/wp-content/uploads/2016/04/School-Events-3-edited.jpg"
+                        img="./images/Rectangle88.png"
                         date="06/04/2022"
                         hour="22H:00"
                         title="Selling from A to Z"
-                        avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
-                        username="John doe"
+                        avatar="./images/Instruteur1.png"
+                        username="Omar Abdelrahman"
                       />
                     </SwiperSlide>
                     <SwiperSlide>
                       <EventCard
-                        img="https://ericsgoodkarmacookies.com/wp-content/uploads/2016/04/School-Events-3-edited.jpg"
+                        img="./images/Rectangle881.png"
                         date="06/04/2022"
                         hour="22H:00"
                         title="Selling from A to Z"
-                        avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
-                        username="John doe"
+                        avatar="./images/Instruteur1.png"
+                        username="Omar Abdelrahman"
                       />
                     </SwiperSlide>
                     <SwiperSlide>
                       <EventCard
-                        img="https://ericsgoodkarmacookies.com/wp-content/uploads/2016/04/School-Events-3-edited.jpg"
+                        img="./images/Rectangle882.png"
                         date="06/04/2022"
                         hour="22H:00"
                         title="Selling from A to Z"
-                        avatar="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
-                        username="John doe"
+                        avatar="./images/Instruteur1.png"
+                        username="Omar Abdelrahman"
                       />
                     </SwiperSlide>
                   </Swiper>

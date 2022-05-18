@@ -15,7 +15,7 @@ function BannerSection() {
             <Menu menu="Accueil"/>
             <Menu menu="Cours"/>
             <Menu menu="Instructeurs"/>
-            <Menu menu="Événements"/>
+            <Menu menu="Événements" lien="/events"/>
             <Menu menu="Offres"/>
             <Menu menu="A propos"/>
             <Menu menu="Blog"/>

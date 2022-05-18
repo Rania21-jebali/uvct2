@@ -16,12 +16,12 @@ function SomeVideos(){
     }
 
     return(
-      <div className="home-sections">
+      <div className="video-sections">
         <div className="container">
           <div className="row mb-3">
             <div className="col-md-12">
               <div className="section-header">
-                <h3 className="section-title">Quelques vidéos</h3>
+                <h3 className="video-title">Quelques vidéos</h3>
               </div>
             </div>
           </div>

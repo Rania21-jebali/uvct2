@@ -5,6 +5,12 @@ import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom';
 import '../AddFormation.css'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
     const sectionState = {
     titre:'',
@@ -16,12 +22,28 @@ import '../AddFormation.css'
 
 function AddSection(){
     const [section, setSection] = useState(sectionState)
-    const {objectif,titre} = section
+    const {objectif,titre,err, success} = section
     const formations = useSelector(state => state.formations)
     const token = useSelector(state => state.token)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
     const {titre1} = useParams();
+    const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+
+        const handleClose = (event, reason) => {
+          if (reason === 'clickaway') {
+            return;
+          }
+          setOpen(false);
+        };
+
+        const handleClose1 = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            setOpen1(false);
+          };
   
           useEffect(() => {
             fetchFormation(token,titre1).then(res =>{
@@ -43,10 +65,12 @@ function AddSection(){
                     {titre, objectif, formation: formations._id}, {headers: {Authorization: token}
                 })
                     setSection({...section, err: '', success: res.data.msg})
+                    setOpen(true);
 
                   } } catch (err) { 
                 err.response.data.msg &&
                 setSection({...section, err: err.response.data.msg, success: ''})
+                setOpen1(true);
                 }
             }
 
@@ -77,6 +101,18 @@ function AddSection(){
               <Button  className='btn-confirme'  type="submit">Enregistrer la section</Button>
             </div>
           </Form>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose} severity="success">
+                {success}
+                </Alert>
+        </Snackbar>
+        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose1} severity="error">
+                {err}
+                </Alert>
+        </Snackbar>
       </>
     )
 }

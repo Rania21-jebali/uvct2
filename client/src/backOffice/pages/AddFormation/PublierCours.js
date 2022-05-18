@@ -8,6 +8,12 @@ import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual'
 import MovieIcon from '@material-ui/icons/Movie';
 import { useParams } from 'react-router-dom'
 import './AddFormation.css'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const initialState = {
   titre:'',
@@ -33,6 +39,22 @@ function PublierCours() {
     const formations = useSelector(state => state.formations)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
+    const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+
+        const handleClose = (event, reason) => {
+          if (reason === 'clickaway') {
+            return;
+          }
+          setOpen(false);
+        };
+
+        const handleClose1 = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            setOpen1(false);
+          };
         
         useEffect(() => {
           fetchFormation(token,titre1).then(res =>{
@@ -69,9 +91,11 @@ function PublierCours() {
     
               setLoading(false)
               setAffiche(res.data.url)
+              setOpen(true);
               
           } catch (err) {
               setAffiche({...data, err: err.response.data.msg , success: ''})
+              setOpen1(true);
           }
         }
 
@@ -216,6 +240,18 @@ function PublierCours() {
               <Button  className='btn-confirme' disabled={loading} onClick={handleUpdate}>Confirmer</Button>
           </div>
         </Form>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose} severity="success">
+                {success}
+                </Alert>
+        </Snackbar>
+        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose1} severity="error">
+                {err}
+                </Alert>
+        </Snackbar>
     </div>
   )
 }

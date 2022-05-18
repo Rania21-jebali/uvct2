@@ -336,6 +336,17 @@ getUser: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+
+//get User by id
+getUserById: async (req, res) => {
+    try {
+        const user = await Users.findById({_id:req.params.id}).select('-password')
+
+        res.json(user)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //All Admins informations 
 getAdminAllInfor: async (req, res) => {
     try {
@@ -359,7 +370,7 @@ getUsersAllInfor: async (req, res) => {
 //All candidats informations Admin
 getCondAllInfor: async (req, res) => {
     try {
-        const users = await Users.find({role:"instructeur", password:null,accept:false}).select('-password')
+        const users = await Users.find({role:"instructeur", password:null,accept:false})
 
         res.json(users)
     } catch (err) {

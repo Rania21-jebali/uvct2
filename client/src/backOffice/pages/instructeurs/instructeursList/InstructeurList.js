@@ -11,8 +11,13 @@ import { Divider } from '@material-ui/core'
 import { Modal, Button} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const { confirm } = Modal;
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function InstructeurList() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,11 +25,20 @@ function InstructeurList() {
     const id= open ? 'simple-popover' : undefined;
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {user, isSuperAdmin} = auth
-    const users = useSelector(state => state.users)
+    const {user, isAdmin, isSuperAdmin } = auth
+    const users1 = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
     const [data, setData] =useState([]);
+    const {err} = data
     const dispatch = useDispatch()
+    const [open2, setOpen2] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen2(false);
+    };
 
       const handleClick = (event) => {
           setAnchorEl(event.currentTarget);
@@ -35,13 +49,11 @@ function InstructeurList() {
         };
 
       useEffect(() => {
-          if(isSuperAdmin){
+        if(isAdmin|| isSuperAdmin ){
               fetchAllInstr(token).then(res =>{
                   dispatch(dispatchGetAllInstr(res))
               })
-
-          }
-      },[token, isSuperAdmin, dispatch, callback])
+         }},[token,isAdmin, isSuperAdmin, dispatch, callback])
 
       const handleDelete = async (id) => {
           try {
@@ -53,6 +65,7 @@ function InstructeurList() {
                     }
                   } catch (err) {
               setData({...data, err: err.response.data.msg , success: ''})
+              setOpen2(true)
             }
           }
 
@@ -156,12 +169,13 @@ function InstructeurList() {
             }
           },
       ];
-    const rowData= users?.map(user => {
+    const rowData= users1?.map(user => {
         return{
             id:user?._id,
             name:user?.name,
             email:user?.email,
             avatar:user?.avatar,
+            tele:user?.tele,
             date:user?.createdAt,
           }
         })
@@ -174,8 +188,13 @@ function InstructeurList() {
         pageSize={8}
         checkboxSelection
         disableSelectionOnClick
-        
       />
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="error">
+          {err}
+        </Alert>
+      </Snackbar>
     </div> 
     
   )

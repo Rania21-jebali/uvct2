@@ -12,7 +12,12 @@ import './Adminstrateur.css'
 import { Button, Modal} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const { confirm } = Modal;
 const initialState = {
   name: '',
@@ -33,7 +38,16 @@ function AdministrateurList() {
     const users = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
     const [data, setData] =useState(initialState);
+    const {err} =data
     const dispatch = useDispatch()
+    const [open2, setOpen2] = React.useState(false);
+
+    const handleClose2 = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen2(false);
+    };
 
       const handleClick = (event) => {
           setAnchorEl(event.currentTarget);
@@ -63,6 +77,7 @@ function AdministrateurList() {
           
       } catch (err) {
           setData({...data, err: err.response.data.msg , success: ''})
+          setOpen2(true);
       }
   }
 
@@ -195,6 +210,12 @@ function AdministrateurList() {
                 checkboxSelection
             />
         </div> 
+        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose2} severity="error">
+                {err}
+                </Alert>
+        </Snackbar>
       </div>
   )
 }

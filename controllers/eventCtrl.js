@@ -27,6 +27,24 @@ getAllEvent: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+// get event by id
+getEventById: async (req, res) => {
+    try {
+        const event = await Event.findById({_id:req.params.id})
+        res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  All events 
+getAllEvents: async (req, res) => {
+    try {
+        const event = await Event.find()
+        res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 // supprimer event
 deleteEvent: async (req, res) => {
     try {

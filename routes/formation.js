@@ -9,9 +9,11 @@ router.get('/myFormations',auth,formationCtrl.getAllFormations)
 
 router.get('/allFormations',auth,formationCtrl.getAllFormationsAdmin)
 
-//router.get('/myFormation/:id',auth,formationCtrl.getFormationById)
+router.get('/formations',formationCtrl.getFormations)
 
 router.get('/myFormation/:titre',auth,formationCtrl.getFormationByTitre)
+
+router.get('/formation/:id',formationCtrl.getFormationById)
 
 router.delete('/deleteFormation/:id', auth, formationCtrl.deleteFormation)
 

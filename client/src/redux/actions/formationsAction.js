@@ -42,3 +42,15 @@ export const dispatchGetFormation = (res) => {
         payload:  res.data
     }
 }
+
+export const fetchFormations = async () => {
+    const res = await axios.get('/formations')
+    return res
+}
+
+export const dispatchGetFormations = (res) => {
+    return {
+        type: ACTIONS.GET_FORMATIONS,
+        payload: res.data
+    }
+}

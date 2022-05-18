@@ -11,8 +11,6 @@ import categorie from './categorieReducer'
 import sousCategorie from './sousCategorieReducer'
 
 
-
-
 export default combineReducers({
     auth,
     token,

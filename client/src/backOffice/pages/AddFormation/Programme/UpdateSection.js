@@ -5,7 +5,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import '../AddFormation.css'
 import { dispatchGetSection, fetchSection } from '../../../../redux/actions/sectionAction'
 import { useEffect } from 'react'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
     const sectionState = {
     titre:'',
     formation:'',
@@ -16,12 +21,28 @@ import { useEffect } from 'react'
 
 function UpdateSection(props){
     const [section, setSection] = useState(sectionState)
-    const {objectif,titre} = section
+    const {objectif,titre,err,success} = section
     const sections5 = useSelector(state => state.sections)
     const token = useSelector(state => state.token)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
     const {id} = props.id
+    const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+
+        const handleClose = (event, reason) => {
+          if (reason === 'clickaway') {
+            return;
+          }
+          setOpen(false);
+        };
+
+        const handleClose1 = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            setOpen1(false);
+          };
         
             useEffect(() => {
                     fetchSection(token,id).then(res =>{
@@ -80,6 +101,18 @@ function UpdateSection(props){
               <Button  className='btn-confirme'  onClick={handleUpdate}>Enregistrer la section</Button>
             </div>
           </Form>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose} severity="success">
+                {success}
+                </Alert>
+        </Snackbar>
+        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose1} severity="error">
+                {err}
+                </Alert>
+        </Snackbar>
       </>
     )
 }

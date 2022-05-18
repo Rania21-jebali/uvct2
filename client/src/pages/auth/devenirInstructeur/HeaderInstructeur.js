@@ -1,23 +1,13 @@
 import React from 'react'
-import { Navbar,Nav, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import './DevenirInstructeur.css'
 import DevenirInstructeur from './DevenirInstructeur'
+import { QuickNavigation } from '../../../components/quick-navigation/quick-navigation'
 
 function HeaderInstructeur() {
   return (
     <div>
-    <Navbar className='navbarHeaderInst'>
-        <Nav >
-        <Nav.Link className='linkHeaderInst'>Accueil</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>Cours</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>Instructeurs</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>Événements</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>Offres</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>A propos</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>Blog</Nav.Link>
-        <Nav.Link className='linkHeaderInst'>Contact</Nav.Link>
-        </Nav>
-    </Navbar>
+    <QuickNavigation />
     <div className='posterInstr'>
       <div>
         <h1>Partenaire avec Uvct-Training</h1>

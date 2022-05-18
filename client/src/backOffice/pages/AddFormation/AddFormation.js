@@ -10,9 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import PlanifierCours from './PlanifierCours';
 import PublierCours from './PublierCours';
 import Programme from './Programme/Programme';
-import { useParams } from 'react-router-dom'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -48,7 +46,6 @@ export default function AddFormation() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-  const {titre1} = useParams();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

@@ -155,7 +155,7 @@ const routes2=[
         key:"5",
         icon:<DescriptionIcon />,
         name:"Formations",
-        path:"/mes-formations"
+        path:"/all-formations"
     },
     {
         key:"6",
@@ -225,7 +225,7 @@ const routes3=[
         key:"7",
         icon:<DescriptionIcon />,
         name:"Formations",
-        path:"/formations"
+        path:"/all-formations"
     },
     {
         key:"8",

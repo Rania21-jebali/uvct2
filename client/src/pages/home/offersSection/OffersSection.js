@@ -23,8 +23,8 @@ function OffersSection(){
                           <path d="M84.299 58.7039L84.2989 58.7737C84.2989 74.486 73.3571 90.6487 57.4677 97.2826C41.5784 90.6487 30.6365 74.486 30.6365 58.7737V41.4055L56.464 30.8334C56.4664 30.8325 56.4688 30.8315 56.4711 30.8306C57.1108 30.5719 57.8888 30.5719 58.5286 30.8305C58.531 30.8315 58.5334 30.8325 58.5358 30.8334L84.3384 41.3953L84.299 58.7039Z" stroke="#CCA073" strokeWidth="61.2731" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <div className="header-info">
-                          <h4 className="info-title">Bronze</h4>
-                          <p className="info-desc">Cours marketing</p>
+                          <h4 className="info-offre-title">Bronze</h4>
+                          <p className="info-offre-desc">Cours marketing</p>
                         </div>
                       </div>
                       <div className="oc-body">
@@ -46,8 +46,8 @@ function OffersSection(){
                           <path d="M84.299 58.7039L84.2989 58.7737C84.2989 74.486 73.3571 90.6487 57.4677 97.2826C41.5784 90.6487 30.6365 74.486 30.6365 58.7737V41.4055L56.464 30.8334C56.4664 30.8325 56.4688 30.8315 56.4711 30.8306C57.1108 30.5719 57.8888 30.5719 58.5286 30.8305C58.531 30.8315 58.5334 30.8325 58.5358 30.8334L84.3384 41.3953L84.299 58.7039Z" stroke="#CFCCC5" strokeWidth="61.2731" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <div className="header-info">
-                          <h4 className="info-title">Silver</h4>
-                          <p className="info-desc">Cours marketing</p>
+                          <h4 className="info-offre-title">Silver</h4>
+                          <p className="info-offre-desc">Cours marketing</p>
                         </div>
                       </div>
                       <div className="oc-body">
@@ -70,8 +70,8 @@ function OffersSection(){
                           <path d="M84.299 58.7039L84.2989 58.7737C84.2989 74.486 73.3571 90.6487 57.4677 97.2826C41.5784 90.6487 30.6365 74.486 30.6365 58.7737V41.4055L56.464 30.8334C56.4664 30.8325 56.4688 30.8315 56.4711 30.8306C57.1108 30.5719 57.8888 30.5719 58.5286 30.8305C58.531 30.8315 58.5334 30.8325 58.5358 30.8334L84.3384 41.3953L84.299 58.7039Z" stroke="#D9BC6C" strokeWidth="61.2731" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                         <div className="header-info">
-                          <h4 className="info-title">Gold</h4>
-                          <p className="info-desc">Cours marketing</p>
+                          <h4 className="info-offre-title">Gold</h4>
+                          <p className="info-offre-desc">Cours marketing</p>
                         </div>
                       </div>
                       <div className="oc-body">

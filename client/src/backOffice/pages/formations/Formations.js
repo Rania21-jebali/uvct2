@@ -11,6 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import DayJS from 'react-dayjs';
 import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const { Search } = Input;
 const onSearch = value => console.log(value);
@@ -34,41 +40,60 @@ function Formations() {
   const [callback, setCallback] = useState(false)
   const dispatch = useDispatch()
   const [currentRow, setCurrentRow] = useState(null);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
 
-          const handleClick = (event) => {
-            setAnchorEl(event.currentTarget);
+
+        const handleClose2 = (event, reason) => {
+          if (reason === 'clickaway') {
+            return;
+          }
+          setOpen2(false);
+        };
+
+        const handleClose3 = (event, reason) => {
+            if (reason === 'clickaway') {
+              return;
+            }
+            setOpen3(false);
           };
 
-          const handleClose1 = () => {
-            setAnchorEl(null);
-          };
+        const handleClick = (event) => {
+                setAnchorEl(event.currentTarget);
+        };
+
+        const handleClose1 = () => {
+                setAnchorEl(null);
+        };
 
         useEffect(() => {
-              fetchMyFormations(token).then(res =>{
-                    dispatch(dispatchGetMyFormations(res))
-                })
+                  fetchMyFormations(token).then(res =>{
+                        dispatch(dispatchGetMyFormations(res))
+                    })
         },[token, dispatch, callback])
 
-          const handleChangeInput = e => {
-            const {name, value} = e.target
-            setFormation({...formation, [name]:value, err: '', success: ''})
+        const handleChangeInput = e => {
+                const {name, value} = e.target
+                setFormation({...formation, [name]:value, err: '', success: ''})
         }
 
         const handleSubmit = async e => {
-          e.preventDefault()
-          try {
-              const res = await axios.post('/addFormation', {
-                titre
-              },{
-                headers: {Authorization: token}
-            })
-              setFormation({...formation, err: '', success: res.data.msg})
-              navigate(`/test/${formation.titre}`);
+              e.preventDefault()
+              try {
+                  const res = await axios.post('/addFormation', {
+                    titre
+                  },{
+                    headers: {Authorization: token}
+                })
+                  setFormation({...formation, err: '', success: res.data.msg})
+                  navigate(`/test/${formation.titre}`);
+                  setOpen2(true);
 
-          } catch (err) {
-              err.response.data.msg && 
-              setFormation({...formation, err: err.response.data.msg, success: ''})
-          }
+              } catch (err) {
+                  err.response.data.msg && 
+                  setFormation({...formation, err: err.response.data.msg, success: ''})
+                  setOpen3(true);
+              }
         }
 
         const handleDelete = async (id) => {
@@ -81,6 +106,7 @@ function Formations() {
               }
             }   catch (err) {
               setFormation({...formation, err: err.response.data.msg , success: ''})
+              setOpen3(true);
           }
           } 
 
@@ -173,6 +199,7 @@ function Formations() {
               }
             },
         ];
+
         const data= formations?.map(formation => {
           return{
               id:formation?._id,
@@ -184,6 +211,7 @@ function Formations() {
               inscription:0,
           }
         })
+
   return (
     <div className='formation'>
       <div className='formTitleContainer'>
@@ -229,6 +257,18 @@ function Formations() {
           </Form>
         </Modal.Body>
       </Modal>
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose2} severity="success">
+                {success}
+                </Alert>
+        </Snackbar>
+        <Snackbar open={open3} autoHideDuration={6000} onClose={handleClose3}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose3} severity="error">
+                {err}
+                </Alert>
+            </Snackbar>
     </div>
   )
 }

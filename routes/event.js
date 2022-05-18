@@ -4,7 +4,13 @@ const auth = require('../middleware/auth')
 
 
 router.post('/addEvent',auth,eventCtrl.addEvent)
+
 router.get('/myEvents',auth,eventCtrl.getAllEvent)
+
+router.get('/events',eventCtrl.getAllEvents)
+
+router.get('/event/:id',eventCtrl.getEventById)
+
 router.delete('/deleteEvent/:id', auth, eventCtrl.deleteEvent)
 
 

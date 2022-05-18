@@ -14,6 +14,8 @@ const usersReducer = (state = users, action) => {
                 return action.payload
             case ACTIONS.GET_ALL_ADMIN:
                 return action.payload
+            case ACTIONS.GET_USER_BY_ID:
+                return action.payload
         default:
             return state
     }

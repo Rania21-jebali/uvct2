@@ -4,7 +4,12 @@ import {isLength, isMatch} from '../../../../components/utils/validation/Validat
 import {ShowSuccessMsg, ShowErrMsg} from '../../../../components/utils/notifications/Nofification'
 import { Button,Form } from 'react-bootstrap'
 import {useNavigate, useParams} from 'react-router-dom'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const initialState = {
     password: '',
@@ -13,13 +18,28 @@ const initialState = {
     success: ''
 }
 
-
 function CandidatAccepted() {
     const {token} = useParams()
-
     const [data, setData] = useState(initialState)
-     const { password, cf_password,success,err} = data
-     const navigate = useNavigate();
+    const { password, cf_password,success,err} = data
+    const navigate = useNavigate();
+    const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
+
+    const handleClose1 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen1(false);
+      };
+
      const handleChange = e => {
 
         const {name, value} = e.target
@@ -37,11 +57,12 @@ const updatePassword = () => {
             axios.patch('/user/updatePasswordInstr', {password},
             {headers: {Authorization: token}}
             )
-
             setData({...data, err: '' , success: "Updated Success!"})
             navigate("/connexion")
+            setOpen(true);
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
+            setOpen1(true);
         }
     }
     const handleUpdate = () => {
@@ -75,7 +96,19 @@ const updatePassword = () => {
   </Button>
   </div>
   </Form>
-        </div>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose} severity="success">
+                {success}
+                </Alert>
+        </Snackbar>
+        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                <Alert onClose={handleClose1} severity="error">
+                {err}
+                </Alert>
+            </Snackbar>
+    </div>
     )
 }
 

@@ -26,6 +26,8 @@ router.post('/reset', auth, userCtrl.resetPassword)
 
 router.get('/infor', auth, userCtrl.getUserInfor)
 
+router.get('/user/:id', userCtrl.getUserById)
+
 router.get('/details/:id', auth, userCtrl.getUser)
 
 router.post('/acceptInstr/:id',auth,  userCtrl.AcceptInstr)

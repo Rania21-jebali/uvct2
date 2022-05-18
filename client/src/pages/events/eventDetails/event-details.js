@@ -1,4 +1,4 @@
-import {QuickNavigation} from "../components/quick-navigation/quick-navigation";
+import {QuickNavigation} from "../../../components/quick-navigation/quick-navigation";
 import {Button, Typography} from "antd";
 import './event-details.scss'
 import {UserInfoComponent} from "../components/user-info-component/user-info-component";

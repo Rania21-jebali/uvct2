@@ -4,7 +4,7 @@ import './Menu.css';
 
 function Menu(props) {
   return (
-    <Nav.Link href="#home" className='nav-menu-link' style={{color:"white"}}>{props.menu}</Nav.Link>
+    <Nav.Link href={props.lien} className='nav-menu-link' style={{color:"white"}}>{props.menu}</Nav.Link>
     )
 }
 

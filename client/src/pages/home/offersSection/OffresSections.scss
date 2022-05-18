@@ -91,7 +91,7 @@
         width: 100%;
         max-width: 355px;
         min-height: 400px;
-        background: #1d1d1d0d;
+        background: #20384D;
         border-radius: 25px;
         box-shadow: 0px 0px 5px -3px black;
         padding: 20px;
@@ -113,7 +113,6 @@
             align-items: center;
             .info-title{
               margin: 0;
-              text-transform: uppercase;
               font-weight: 600;
             }
             .info-desc{
@@ -138,7 +137,7 @@
               margin: 5px 0;
               width: 100%;
               font-size: 14px;
-              color: #000000;
+              color: white;
               &::before{
                 content: '';
                 position: absolute;
@@ -147,7 +146,7 @@
                 width: 10px;
                 height: 10px;
                 border-radius: 10px;
-                background: #20384D;
+                background: white;
               }
             }
           }
@@ -156,7 +155,7 @@
           .footer-button{
             width: 100%;
             height: 45px;
-            background: #20384d;
+            background: #1D1D1D;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -165,3 +164,9 @@
           }
         }
       }}}
+.info-offre-title{
+  color:white
+}
+.info-offre-desc{
+  color:white
+}

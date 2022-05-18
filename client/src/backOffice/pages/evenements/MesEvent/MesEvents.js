@@ -1,18 +1,12 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios'
-import {fetchEvents, dispatchGetEvents} from '../../../../redux/actions/eventsAction'
-import {fetchUserById, dispatchGetAllUserById} from '../../../../redux/actions/usersAction'
-import Avatar1 from '../../../../components/Avatar/Avatar';
+import {fetchMyEvents, dispatchGetMyEvents} from '../../../../redux/actions/eventsAction'
 import { Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
 import { List, Avatar } from 'antd';
 import DayJS from 'react-dayjs';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import DescriptionIcon from '@material-ui/icons/Description';
-import CreateIcon from '@material-ui/icons/Create';
 
 const initialState = {
   err: '',
@@ -33,17 +27,18 @@ const participants = [
     
   ];
   const onSearch = value => console.log(value);
-function TousEvent() {
+  
+function MesEvents() {
   const token = useSelector(state => state.token)
   const events = useSelector(state => state.events)
   const [event, setEvent ]= useState(initialState);
   const [callback, setCallback] = useState(false)
-  const { err, success} = event
+    const { err, success} = event
 
     const dispatch = useDispatch()
     useEffect(() => {
-            fetchEvents(token).then(res =>{
-                dispatch(dispatchGetEvents(res))
+            fetchMyEvents(token).then(res =>{
+                dispatch(dispatchGetMyEvents(res))
             })
     },[token, dispatch, callback])
 
@@ -69,39 +64,9 @@ function TousEvent() {
           flex:1,
         },
         {
-          headerName: 'Instructeur',
-          flex:2,
-          renderCell: (params) =>{
-            function Instructeur(instructeur){
-                const users = useSelector(state => state.users)
-                const [callback1, setCallback1] = useState(false)
-                const dispatch1 = useDispatch()
-                useEffect(() => {
-                    fetchUserById(instructeur).then(res =>{
-                          dispatch1(dispatchGetAllUserById(res))
-                      })
-                },[dispatch1,instructeur, callback1])
-                return users
-            }
-            return(
-              <> 
-              <div className='userList'>
-                <Avatar1 src={Instructeur(params.row.instructeur).avatar}/>
-                {Instructeur(params.row.instructeur).name}
-              </div>
-              </>
-            )
-          }
-        },
-        {
-          field: 'prix',
-          headerName: 'Prix',
-          flex:1,
-        },
-        {
           field: 'date',
           headerName: 'Date',
-          flex:2,
+          flex:3,
           renderCell(params){
             return(
               <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
@@ -115,10 +80,10 @@ function TousEvent() {
             renderCell: (params) =>{
               return(
                 <>
-                    <VisibilityIcon  className='icon-visible'/>
-                    <CreateIcon className='icon-visible'/>
-                    <DescriptionIcon onClick={showModal} className='icon-visible'/>
-                    <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>    
+                    <img src="images/edit.png" alt="" className='icon-action'/> 
+                    <img src="images/eye.png" alt="" className='icon-action' /> 
+                    <img src="images/List-participants.png" alt="" className='icon-action' onClick={showModal}/> 
+                    <img src="images/trash.png" alt="" className='icon-action' onClick={() => handleDelete(params.row.id)}/>    
                 </>
               )
             }
@@ -141,8 +106,6 @@ function TousEvent() {
     return{
         id:event?._id,
         titre:event?.titre,
-        prix:event?.prix,
-        instructeur:event?.postedBy,
         date:event?.dateDebut,
     }
 })
@@ -178,4 +141,4 @@ function TousEvent() {
   )
 }
 
-export default TousEvent
+export default MesEvents

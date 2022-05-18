@@ -27,6 +27,24 @@ getAllFormations: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+// get All formations
+getFormations: async (req, res) => {
+    try {
+        const formation = await Formation.find()
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// get event by id
+getFormationById: async (req, res) => {
+    try {
+        const formation = await Event.findById({_id:req.params.id})
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 //  All formations for admin
 getAllFormationsAdmin: async (req, res) => {
     try {

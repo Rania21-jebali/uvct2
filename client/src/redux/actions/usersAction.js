@@ -27,6 +27,11 @@ export const fetchAllAdmin = async (token) => {
     return res
 }
 
+export const fetchUserById = async (id) => {
+    const res = await axios.get(`/user/user/${id}`)
+    return res
+}
+
 export const dispatchGetAllUsers = (res) => {
     return {
         type: ACTIONS.GET_ALL_USERS,
@@ -50,6 +55,13 @@ export const dispatchGetAllInstr= (res) => {
 export const dispatchGetAllAdmin= (res) => {
     return {
         type: ACTIONS.GET_ALL_ADMIN,
+        payload: res.data
+    }
+}
+
+export const dispatchGetAllUserById= (res) => {
+    return {
+        type: ACTIONS.GET_USER_BY_ID,
         payload: res.data
     }
 }

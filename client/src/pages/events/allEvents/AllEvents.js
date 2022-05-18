@@ -2,7 +2,7 @@ import {Select} from "antd";
 import React from 'react'
 import "./AllEvents.scss"
 import {ArrowDropDown, SearchOutlined} from "@material-ui/icons";
-import {QuickNavigation} from "../components/quick-navigation/quick-navigation";
+import {QuickNavigation} from "../../../components/quick-navigation/quick-navigation";
 import {EventCard} from "../components/event-card/event-card";
 
 export const AllEvents = () => {

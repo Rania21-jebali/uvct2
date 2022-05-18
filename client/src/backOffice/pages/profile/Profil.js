@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import './Profil.css'
 import { Button,Form} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { message } from 'antd';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const key = 'updatable';
 
@@ -16,6 +17,10 @@ const openMessage = () => {
     message.success({ content: 'Loaded!', key, duration: 2 });
   }, 1000);
 };
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +56,23 @@ function Profil() {
     const {name,tele,site,info, err, success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen2(false);
+  };
 
       const handleChange = e => {
 
@@ -97,8 +119,10 @@ function Profil() {
 
             }, { headers: {Authorization: token} })
             setData({...data, err: '' , success: "Updated profil instructeur Success!"})
+            setOpen(true);
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
+            setOpen2(true);
         }
     }
     const handleUpdate = () => {
@@ -106,8 +130,6 @@ function Profil() {
     }
   return (
     <div className="profile">
-            {err && ShowErrMsg(err)}
-            {success && ShowSuccessMsg(success)}
       <h2 className='title-profil'>Informations générales</h2>
       <div className='content-profil'>
        <h3 className='title-photo'>Photo de profile</h3>
@@ -149,6 +171,7 @@ function Profil() {
               <Form.Control type="text" placeholder="Entrer votre numéro de téléphone" 
                 name="tele" 
                 defaultValue={user.tele}
+                onChange={handleChange}
             />
           </Form.Group>
           { isInstr && 
@@ -158,6 +181,7 @@ function Profil() {
                   <Form.Control type="text" placeholder="Enter votre URL" 
                     name="site" 
                     defaultValue={user.site}
+                    onChange={handleChange}
                 />
              </Form.Group>
               <Form.Group className="mb-3" >
@@ -165,6 +189,7 @@ function Profil() {
                   <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
                     name="info" 
                     defaultValue={user.info}
+                    onChange={handleChange}
                 />
               </Form.Group>
             </>
@@ -175,6 +200,18 @@ function Profil() {
            </div>
         </Form>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success">
+          {success}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose2} severity="error">
+          {err}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }

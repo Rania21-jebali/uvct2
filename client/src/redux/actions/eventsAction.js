@@ -15,3 +15,15 @@ export const dispatchGetMyEvents = (res) => {
     }
 }
 
+export const fetchEvents = async (token) => {
+    const res = await axios.get('/events')
+    return res
+}
+
+export const dispatchGetEvents = (res) => {
+    return {
+        type: ACTIONS.GET_EVENTS,
+        payload: res.data
+    }
+}
+

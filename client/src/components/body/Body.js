@@ -41,6 +41,7 @@ import Panier from '../../pages/panier/Panier';
 import HeaderInstructeur from '../../pages/auth/devenirInstructeur/HeaderInstructeur';
 import { AllEvents } from '../../pages/events/allEvents/AllEvents';
 import { EventDetails } from '../../pages/events/eventDetails/event-details';
+import Formation from '../../backOffice/pages/admin/formation/Formation';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -67,6 +68,7 @@ function Body() {
             <Route path="/admin/:id" element={(isAdmin || isSuperAdmin) ?  <Administrateur /> : <NotFound /> }/>
             <Route path="/ajout-apprenant" element={(isAdmin || isSuperAdmin) ?  <ApprenantAdd /> : <NotFound /> }/>
             <Route path="/formations" element={(isAdmin || isSuperAdmin) ?  <FormationList /> : <NotFound /> }/>
+            <Route path="/all-formations" element={(isAdmin || isSuperAdmin) ?  <Formation /> : <NotFound /> }/>
             <Route path="/instructeurs" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/administrateurs" element={isSuperAdmin ?  <AdministrateurList /> : <NotFound /> } />
             <Route path="/addAdmin" element={isSuperAdmin ?  <AddAdmin /> : <NotFound /> } />

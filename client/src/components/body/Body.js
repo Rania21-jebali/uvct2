@@ -39,6 +39,7 @@ import AddFormation from '../../backOffice/pages/AddFormation/AddFormation';
 import {AllEvents} from "../../pages/events/all-events/all-events";
 import {EventDetails} from "../../pages/events/event-details/event-details";
 import Footer from "../footer/footer";
+import PartnerPage from "../../pages/partner/partner-page";
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -95,6 +96,7 @@ function Body() {
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/events" element={<AllEvents />} />
             <Route path="/event/:id" element={<EventDetails />} />
+            <Route path="/partner" element={<PartnerPage />} />
                 </Routes>
             )
             }

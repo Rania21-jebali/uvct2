@@ -4,9 +4,9 @@ const categorieCtrl = {
 //   Ajout catégorie
 addCategorie: async (req, res) => {
     try {
-        const {titre} = req.body
+        const {titre,image,description,motCles} = req.body
         const newCategorie = {
-            titre 
+            titre , image, description, motCles
         }
         const categorie = new Categorie(newCategorie);
          await categorie.save();
@@ -19,6 +19,28 @@ addCategorie: async (req, res) => {
 getAllCategorie: async (req, res) => {
     try {
         const categorie = await Categorie.find()
+        res.json(categorie)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update catégorie by id
+updateCategorieById: async (req, res) => {
+    try {
+        const {titre, image, description, motCles} = req.body
+
+        await Categorie.findByIdAndUpdate({_id:req.params.id}, {
+            titre, image, description, motCles
+        })
+        res.json({msg: "Update categorie by id Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// get categorie by id
+getCategorieById: async (req, res) => {
+    try {
+        const categorie = await Categorie.findById({_id:req.params.id})
         res.json(categorie)
     } catch (err) {
         return res.status(500).json({msg: err.message})

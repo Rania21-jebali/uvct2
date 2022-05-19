@@ -7,7 +7,16 @@ const sousCategorieSchema = new mongoose.Schema({
     categorie:{
         type:Object,
         ref: 'Categorie'
-    }
+    },
+    motCles:{
+        type: String,
+    },
+    image:{
+        type: String,
+    },
+    description:{
+        type: String,
+    },
 
 }, {
     timestamps: true

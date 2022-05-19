@@ -4,6 +4,15 @@ const categorieSchema = new mongoose.Schema({
     titre: {
         type: String,
     },
+    motCles: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
+    description: {
+        type: String,
+    },
 }, {
     timestamps: true
 })

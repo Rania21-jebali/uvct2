@@ -11,6 +11,8 @@ import FormatItalicIcon from '@material-ui/icons/FormatItalic';
 import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
     const initialState = {
       titre:'',
@@ -25,6 +27,10 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
       success: ''
     }
 
+    function Alert(props) {
+      return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
 function AjoutEvent() {
     const token = useSelector(state => state.token)
     const [event, setEvent] = useState(initialState)
@@ -34,6 +40,22 @@ function AjoutEvent() {
     const [gratuit, setGratuit] = useState(false);
     const [enLigne, setEnLigne] = useState(false);
     const [surPlace, setSurPlace] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+      };
+      const handleClose2 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+
+        setOpen2(false);
+      };
 
       const handleChangeInput = e => {
         const {name, value} = e.target
@@ -62,6 +84,7 @@ function AjoutEvent() {
               })
               setLoading(false)
               setAffiche(res.data.url)
+
             } 
         catch (err) {
             setAffiche({...event, err: err.response.data.msg , success: ''})
@@ -80,10 +103,12 @@ function AjoutEvent() {
             })
 
               setEvent({...event, err: '', success: res.data.msg})
+              setOpen(true);
 
           } catch (err) {
               err.response.data.msg && 
               setEvent({...event, err: err.response.data.msg, success: ''})
+              setOpen2(true);
           }
         }
 
@@ -219,6 +244,18 @@ function AjoutEvent() {
       </div>
     </Form>
   </div>
+  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success">
+          {success}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose2} severity="error">
+          {err}
+        </Alert>
+      </Snackbar>
 </div>
   )
 }

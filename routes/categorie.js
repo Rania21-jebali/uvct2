@@ -2,11 +2,15 @@ const router= require('express').Router()
 const categorieCtrl = require('../controllers/categorieCtrl')
 const auth = require('../middleware/auth')
 
-router.post('/ajoutcateg',auth, categorieCtrl.addCategorie)
+router.post('/addcateg', categorieCtrl.addCategorie)
 
-router.get('/allCategorie',auth,categorieCtrl.getAllCategorie)
+router.get('/allCategorie', categorieCtrl.getAllCategorie)
 
-router.delete('/deleteCategorie/:id', auth, categorieCtrl.deleteCategorie)
+router.get('/categorie/:id', categorieCtrl.getCategorieById)
+
+router.patch('/updateCategorie/:id', categorieCtrl.updateCategorieById)
+
+router.delete('/deleteCategorie/:id', categorieCtrl.deleteCategorie)
 
 
 module.exports=router

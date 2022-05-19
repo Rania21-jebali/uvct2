@@ -50,8 +50,6 @@ function UpdateSection(props){
                     })
                 },[token,id, dispatch, callback])
 
-                console.log(sections5[0].titre)
-
                 const handleChange = e => {
                     const {name, value} = e.target
                     setSection({...section, [name]:value, err:'', success: ''})

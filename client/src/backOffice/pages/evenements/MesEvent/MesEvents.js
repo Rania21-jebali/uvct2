@@ -7,6 +7,7 @@ import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
 import { List, Avatar } from 'antd';
 import DayJS from 'react-dayjs';
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 const initialState = {
   err: '',
@@ -82,6 +83,7 @@ function MesEvents() {
                 <>
                     <img src="images/edit.png" alt="" className='icon-action'/> 
                     <img src="images/eye.png" alt="" className='icon-action' /> 
+                    <ArchiveIcon />
                     <img src="images/List-participants.png" alt="" className='icon-action' onClick={showModal}/> 
                     <img src="images/trash.png" alt="" className='icon-action' onClick={() => handleDelete(params.row.id)}/>    
                 </>

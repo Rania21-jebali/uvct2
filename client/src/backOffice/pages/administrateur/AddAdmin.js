@@ -81,8 +81,6 @@ function AddAdmin() {
       <div className='add-admin'>
       <BreadcrumbHeader item="Administrateur" link="administrateurs" active="Ajouter Administrateur"/>
         <div className='content-admin'>
-            {err && ShowErrMsg(err)}
-            {success && ShowSuccessMsg(success)}
           <Form onSubmit={handleSubmit} className='form-admin'>
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Nom complet</Form.Label>

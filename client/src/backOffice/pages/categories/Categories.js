@@ -1,12 +1,15 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchCategories, dispatchCategories} from '../../../redux/actions/categorieAction'
-import {fetchSousCategorie, dispatchSousCategorie} from '../../../redux/actions/sousCategorieAction'
 import DayJS from 'react-dayjs';
 import {DataGrid} from '@mui/x-data-grid';
 import { Modal, Button} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 import axios from 'axios'
+import ListIcon from '@material-ui/icons/List';
+import AddIcon from '@material-ui/icons/Add';
 import './Categories.css'
 
 const { confirm } = Modal;
@@ -17,37 +20,23 @@ const initialState = {
   }
 
 function Categories() {
-    const token = useSelector(state => state.token)
     const [categorie, setCategorie] = useState(initialState)
     const categories1 = useSelector(state => state.categorie)
-    const sousCategories1 = useSelector(state => state.sousCategories)
     const [callback, setCallback] = useState(false)
-    const [callback1, setCallback1] = useState(false)
     const dispatch = useDispatch()
-    const dispatch1 = useDispatch()
-    var id = categorie._id
        
         //Catégories
         useEffect(() => {
-            fetchCategories(token).then(res =>{
+            fetchCategories().then(res =>{
                   dispatch(dispatchCategories(res))
               })
-        },[token, dispatch, callback])
-
-        //Sous catégorie
-        useEffect(() => {
-          fetchSousCategorie(token,id).then(res =>{
-                dispatch1(dispatchSousCategorie(res))
-            })
-        },[token,id, dispatch1, callback1])
-       
+        },[dispatch, callback])
+        
 
        const handleDelete = async (id) => {
         try {
             if(categorie._id !== id){
-                    await axios.delete(`/deleteCategorie/${id}`, {
-                        headers: {Authorization: token}
-                    })
+                    await axios.delete(`/deleteCategorie/${id}`)
                     
                     setCallback(!callback)
             }
@@ -56,13 +45,6 @@ function Categories() {
         }
         }
 
-        //Sous catégorie
-        useEffect(() => {
-            fetchSousCategorie(token,id).then(res =>{
-                  dispatch1(dispatchSousCategorie(res))
-              })
-        },[token,id, dispatch1, callback1])
-
     const columns = [
         {
           field: 'titre',
@@ -70,27 +52,18 @@ function Categories() {
           flex:1,
         },
         {
-            field: 'souscategories',
             headerName: 'Sous-catégories',
-            flex:2,
+            flex:1,
             renderCell(params){
-              
               return(
-                <>
-                   {
-                    sousCategories1?.map(sousCategories => (
-                                        <td>{sousCategories?.titre}</td>
-                                           
-                    ))
-                   }
-                </>
+                <a href={`/categorie/sousCategories/${params.row.id}`}><ListIcon className='icon-visible'/></a>
               );
             }
-          },
+        },
         {
           field: 'date',
           headerName: 'Date création',
-          flex:2,
+          flex:1,
           renderCell(params){
             return(
               <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
@@ -119,8 +92,10 @@ function Categories() {
               }
               return(
                 <>
-                 <img src="images/edit.png" className="add-icon" alt="" />
-                 <img src="images/trash.png" className="add-icon" alt="" onClick={showDeleteConfirm}/>
+                <a href={`/categorie/${params.row.id}`}>
+                   <EditIcon className='icon-visible' />
+                </a>
+                 <DeleteOutlineIcon onClick={showDeleteConfirm} className="icon-delete"/>
                 </>
               )
             }
@@ -139,10 +114,10 @@ function Categories() {
         <div className="header-admin">
             <h1 className='title-admin'>Liste des catégories</h1>
             <Button className='btn-add-categorie' href='/addcategorie'>
-             <img src="images/add-square.png" className="add-icon" alt="" />Catégorie
+             <AddIcon /> Catégorie
             </Button>
         </div>
-    <div style={{ height: 550, width: '100%' ,backgroundColor:'white'}}  >
+    <div className="table-categorie" >
         <DataGrid
             rows={rowData}
             columns={columns}

@@ -6,6 +6,8 @@ import ACTIONS from '../actions/'
     switch(action.type){
         case ACTIONS.GET_ALL_CATEGORIE:
             return action.payload
+        case ACTIONS.GET_CATEGORIE:
+            return action.payload 
         default:
             return state
     }

@@ -6,11 +6,11 @@ const sousCategorieCtrl = {
 //   Ajout sous catégorie
 addSousCategorie: async (req, res) => {
     try {
-        const {titre} = req.body
-        const categorie1 = await Categorie.findOne({titre:req.params.titre})
+        const {titre,image,description,motCles} = req.body
+        const categorie1 = await Categorie.findOne({_id:req.params.id})
          const {id} = categorie1.id
         const newSousCategorie = {
-            titre , categorie: categorie1.id
+            titre , image, description, motCles, categorie: categorie1.id
         }
         const sousCategorie = new SousCategorie(newSousCategorie);
          await sousCategorie.save();
@@ -24,6 +24,28 @@ getAllSousCategorie: async (req, res) => {
     try {
         const sousCategorie = await SousCategorie.find({ categorie: req.params.id })
         res.json(sousCategorie)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update sous catégorie by id
+updateSousCategorieById: async (req, res) => {
+    try {
+        const {titre, image, description, motCles} = req.body
+
+        await SousCategorie.findByIdAndUpdate({_id:req.params.id}, {
+            titre, image, description, motCles
+        })
+        res.json({msg: "Update sous categorie by id Success!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// get sous categorie by id
+getSousCategorieById: async (req, res) => {
+    try {
+        const souscategorie = await SousCategorie.findById({_id:req.params.id})
+        res.json(souscategorie)
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

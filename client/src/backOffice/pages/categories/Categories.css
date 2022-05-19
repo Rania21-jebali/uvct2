@@ -30,4 +30,16 @@
 .addSousCatg{
   margin-left: 300px;
 }
+.content-categorie{
+    border: 1px solid #20384D;
+    background-color:white;
+    padding: 0px;
+    margin: 20px;
+}
+.table-categorie{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 100%;
+    background-color: white;
+    height: 550px;
+}
   

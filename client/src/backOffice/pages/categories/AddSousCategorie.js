@@ -2,11 +2,12 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux'
 import {isEmpty} from '../../../components/utils/validation/Validation'
 import axios from 'axios'
-import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Button, Form, Spinner } from 'react-bootstrap'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
+import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader';
+import { useParams } from 'react-router-dom'
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,7 +21,7 @@ import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual'
     success: ''
   }
 
-function AddCategorie() {
+function AddSousCategorie() {
     const [data, setData] =useState(initialState);
     const {titre,description,motCles, err, success} = data
     const token = useSelector(state => state.token)
@@ -28,6 +29,7 @@ function AddCategorie() {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [open1, setOpen1] = React.useState(false);
+    const {id} = useParams()
 
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
@@ -42,7 +44,6 @@ function AddCategorie() {
         }
         setOpen1(false);
       };
-
 
     const handleChangeInput = e => {
         const {name, value} = e.target
@@ -86,7 +87,7 @@ function AddCategorie() {
                 return setData({...data, err: "Please fill in all fields.", success: ''})
   
         try {
-            const res = await axios.post('/ajoutcateg', {
+            const res = await axios.post(`/addsousCateg/${id}`, {
               titre, description, image, motCles
             })
   
@@ -101,8 +102,8 @@ function AddCategorie() {
       }
       
   return (
-      <div className='add-admin'>
-      <BreadcrumbHeader item="Liste des catégories" link="categories" active="Ajouter catégorie"/>
+    <div className='add-admin'>
+      <BreadcrumbHeader item="Liste des sous catégories" link={`/categorie/sousCategories/${id}`} active="Ajouter sous catégorie"/>
         <div className='content-admin'>
           <Form onSubmit={handleSubmit} className='form-admin'>
             <Form.Group className="mb-3" >
@@ -125,7 +126,7 @@ function AddCategorie() {
             </Form.Group>
             <Form.Group className="mb-3" >
               {loading && <Spinner animation="border" variant="secondary" />}
-              <Form.Label className="label">Images du catégorie</Form.Label>
+              <Form.Label className="label">Images du sous-catégorie</Form.Label>
               <div className="content-affiche">
               <Form.Label htmlFor="file" > 
                 <img src={image} alt="" className="affiche-img"></img>
@@ -155,7 +156,6 @@ function AddCategorie() {
             </Button>
             </div>
           </Form>
-      </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert onClose={handleClose} severity="success">
@@ -168,9 +168,9 @@ function AddCategorie() {
                 {err}
                 </Alert>
             </Snackbar>
-      </div>
-    
+    </div>
+    </div>
   )
 }
 
-export default AddCategorie
+export default AddSousCategorie

@@ -42,6 +42,10 @@ import HeaderInstructeur from '../../pages/auth/devenirInstructeur/HeaderInstruc
 import { AllEvents } from '../../pages/events/allEvents/AllEvents';
 import { EventDetails } from '../../pages/events/eventDetails/event-details';
 import Formation from '../../backOffice/pages/admin/formation/Formation';
+import UpdateCategorie from '../../backOffice/pages/categories/UpdateCategorie';
+import SousCategorie from '../../backOffice/pages/categories/SousCategorie';
+import AddSousCategorie from '../../backOffice/pages/categories/AddSousCategorie';
+import UpdateSousCategorie from '../../backOffice/pages/categories/UpdateSousCategorie';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -84,7 +88,11 @@ function Body() {
             <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
             <Route path="/devenir-instructeur" element={<DevenirInstructeur />}/>
             <Route path="/user/acceptInstr/:token" element={<CandidatAccepted />} />
-            <Route path="/formation/:titre1" element={<AddFormation/>} />
+            <Route path="/formation/:titre1" element={<AddFormation />} />
+            <Route path="/categorie/:id" element={<UpdateCategorie />} />
+            <Route path="/categorie/sousCategories/:id" element={<SousCategorie />} />
+            <Route path="/addSousCategorie/:id" element={<AddSousCategorie />} />
+            <Route path="/sousCategorie/:id" element={<UpdateSousCategorie />} />
             </Routes>
             </LeftList>
             ) :

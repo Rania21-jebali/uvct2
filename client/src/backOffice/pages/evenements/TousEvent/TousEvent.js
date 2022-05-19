@@ -7,7 +7,7 @@ import Avatar1 from '../../../../components/Avatar/Avatar';
 import { Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 import DayJS from 'react-dayjs';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -32,15 +32,16 @@ const participants = [
       },
     
   ];
-  const onSearch = value => console.log(value);
-function TousEvent() {
+  
+  function TousEvent() {
   const token = useSelector(state => state.token)
   const events = useSelector(state => state.events)
   const [event, setEvent ]= useState(initialState);
   const [callback, setCallback] = useState(false)
   const { err, success} = event
+  const onSearch = value => console.log(value);
+  const dispatch = useDispatch()
 
-    const dispatch = useDispatch()
     useEffect(() => {
             fetchEvents(token).then(res =>{
                 dispatch(dispatchGetEvents(res))
@@ -68,12 +69,12 @@ function TousEvent() {
           headerName: 'Titre',
           flex:1,
         },
-        {
+        { 
           headerName: 'Instructeur',
           flex:2,
           renderCell: (params) =>{
-            function Instructeur(instructeur){
-                const users = useSelector(state => state.users)
+            function Instructeur1(instructeur){
+                const users1 = useSelector(state => state.users)
                 const [callback1, setCallback1] = useState(false)
                 const dispatch1 = useDispatch()
                 useEffect(() => {
@@ -81,13 +82,13 @@ function TousEvent() {
                           dispatch1(dispatchGetAllUserById(res))
                       })
                 },[dispatch1,instructeur, callback1])
-                return users
+                return users1
             }
             return(
               <> 
               <div className='userList'>
-                <Avatar1 src={Instructeur(params.row.instructeur).avatar}/>
-                {Instructeur(params.row.instructeur).name}
+                <Avatar1 src={Instructeur1(params.row.instructeur).avatar}/>
+                {Instructeur1(params.row.instructeur).name}
               </div>
               </>
             )
@@ -164,7 +165,7 @@ function TousEvent() {
     renderItem={item => (
       <List.Item>
         <List.Item.Meta
-          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+          avatar={<Avatar1 src="https://joeschmoe.io/api/v1/random" />}
           title={item.title}
           description={item.date}
 

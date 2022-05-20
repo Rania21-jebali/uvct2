@@ -47,7 +47,7 @@ function FormationList() {
               flex:2,
               renderCell(params){
                 return(
-                  <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+                  <DayJS format="dddd, MMMM D, YYYY h:mm A">{params.row.date}</DayJS>
                   
                 );
               }

@@ -10,7 +10,6 @@ import NotFound from '../utils/NotFound/NotFound'
 import LeftList from '../../backOffice/components/leftList/LeftList';
 import Profil from '../../backOffice/pages/profile/Profil';
 import Formations from '../../backOffice/pages/formations/Formations';
-import Evenements from '../../backOffice/pages/evenements/Evenements';
 import Parametres from '../../backOffice/pages/parametres/Parametres';
 import AjoutEvent from '../../backOffice/pages/evenements/ajoutEvent/AjoutEvent';
 import Achats from '../../backOffice/pages/achats/Achats';
@@ -46,6 +45,14 @@ import UpdateCategorie from '../../backOffice/pages/categories/UpdateCategorie';
 import SousCategorie from '../../backOffice/pages/categories/SousCategorie';
 import AddSousCategorie from '../../backOffice/pages/categories/AddSousCategorie';
 import UpdateSousCategorie from '../../backOffice/pages/categories/UpdateSousCategorie';
+import PartnerPage from '../../pages/partner/partner-page';
+import AddReclamation from '../../backOffice/pages/reclamations/AddReclamation';
+import Reclamation from '../../backOffice/pages/reclamations/Reclamation';
+import Reclamations1 from '../../backOffice/pages/admin/reclamations/Reclamations';
+import Reclamation1 from '../../backOffice/pages/admin/reclamations/Reclamation';
+import MesEvents from '../../backOffice/pages/evenements/MesEvent/MesEvents';
+import Evenements from '../../backOffice/pages/admin/events/Evenements';
+import Formations1 from '../../backOffice/pages/admin/formation/Formations';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -59,7 +66,8 @@ function Body() {
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
             <Route path="/profile"  element={isLogged ? <Profil /> : <NotFound />} />
             <Route path="/mes-formations" element={<Formations />} />
-            <Route path="/mes-evenements" element={<Evenements />} />
+            <Route path="/mes-evenements" element={<MesEvents />} />
+            <Route path="/evenements" element={<Evenements />} />
             <Route path="/ajout-evenement" element={<AjoutEvent />} />
             <Route path="/parametres" element={<Parametres />} />
             <Route path="/mes-achats" element={<Achats />} />
@@ -72,7 +80,7 @@ function Body() {
             <Route path="/admin/:id" element={(isAdmin || isSuperAdmin) ?  <Administrateur /> : <NotFound /> }/>
             <Route path="/ajout-apprenant" element={(isAdmin || isSuperAdmin) ?  <ApprenantAdd /> : <NotFound /> }/>
             <Route path="/formations" element={(isAdmin || isSuperAdmin) ?  <FormationList /> : <NotFound /> }/>
-            <Route path="/all-formations" element={(isAdmin || isSuperAdmin) ?  <Formation /> : <NotFound /> }/>
+            <Route path="/all-formations" element={(isAdmin || isSuperAdmin) ?  <Formations1 /> : <NotFound /> }/>
             <Route path="/instructeurs" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/administrateurs" element={isSuperAdmin ?  <AdministrateurList /> : <NotFound /> } />
             <Route path="/addAdmin" element={isSuperAdmin ?  <AddAdmin /> : <NotFound /> } />
@@ -93,6 +101,10 @@ function Body() {
             <Route path="/categorie/sousCategories/:id" element={<SousCategorie />} />
             <Route path="/addSousCategorie/:id" element={<AddSousCategorie />} />
             <Route path="/sousCategorie/:id" element={<UpdateSousCategorie />} />
+            <Route path="/add-reclamation" element={<AddReclamation />} />
+            <Route path="/reclamation/:id" element={<Reclamation />} />
+            <Route path="/all-reclamation" element={<Reclamations1 />} />
+            <Route path="/reclamationdt/:id" element={<Reclamation1 />} />
             </Routes>
             </LeftList>
             ) :
@@ -108,6 +120,7 @@ function Body() {
             <Route path="/panier" element={<Panier />} />
             <Route path="/events" element={<AllEvents />} />
             <Route path="/event/:id" element={<EventDetails />} />
+            <Route path="/partner" element={<PartnerPage />} />
               </Routes>
             )
             }

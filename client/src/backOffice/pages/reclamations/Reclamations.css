@@ -11,3 +11,18 @@
     line-height: 34px;
     color: #0F172A;
 }
+.header-reclamation{
+display: flex;
+justify-content: space-between;
+}
+.repondre-reclamation{
+    display: flex;
+    justify-content:flex-start;
+    color:#64748B;
+    cursor: pointer;
+}
+.add-reponse{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin: 20px;
+    padding: 10px;
+}

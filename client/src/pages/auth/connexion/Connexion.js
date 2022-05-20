@@ -103,7 +103,7 @@ function Connexion() {
         <Link to='/forgot_password' className='linkM'>Mot de passe oublié ?</Link>
         <Form.Label style={{textAlign:"center"}}>ou</Form.Label>
           <GoogleLogin
-                            clientId="516635230406-k020fmfu8b5vrfbvck0atkm7sm7ifh3j.apps.googleusercontent.com"
+                            clientId="516635230406-pu5rcen6ddeurdv21dm65ai5bufr2g8r.apps.googleusercontent.com"
                             buttonText="Continuer avec Google"
                             onSuccess={responseGoogle}
                             cookiePolicy={'single_host_origin'}

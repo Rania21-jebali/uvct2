@@ -4,9 +4,9 @@ const reclamationCtrl = {
 //   Ajout reclamation
 addReclamation: async (req, res) => {
     try {
-        const {cause,details} = req.body
+        const {cause,message} = req.body
         const newReclamation = {
-            cause, details, userId:req.user.id,
+            cause, message, userId:req.user.id,
         }
         const reclamation = new Reclamation(newReclamation);
          await reclamation.save();
@@ -19,6 +19,24 @@ addReclamation: async (req, res) => {
 getReclamation: async (req, res) => {
     try {
         const reclamation = await Reclamation.find({ userId: req.user.id })
+        res.json(reclamation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  get all reclamation
+getAllReclamation: async (req, res) => {
+    try {
+        const reclamation = await Reclamation.find()
+        res.json(reclamation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// get reclamation by id
+getReclamationById: async (req, res) => {
+    try {
+        const reclamation = await Reclamation.findById({_id:req.params.id})
         res.json(reclamation)
     } catch (err) {
         return res.status(500).json({msg: err.message})

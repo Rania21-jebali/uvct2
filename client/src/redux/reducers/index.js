@@ -9,6 +9,7 @@ import sections from './sectionReducer'
 import sessions from './sessionReducer'
 import categorie from './categorieReducer'
 import sousCategorie from './sousCategorieReducer'
+import reclamations from './reclamationReducer'
 
 
 export default combineReducers({
@@ -21,5 +22,6 @@ export default combineReducers({
     sections,
     sessions,
     categorie,
-    sousCategorie
+    sousCategorie,
+    reclamations,
 })

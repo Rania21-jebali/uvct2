@@ -116,7 +116,7 @@ function CandidatList() {
           flex:1,
           renderCell(params){
             return(
-              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+              <DayJS format="dddd, MMMM D, YYYY h:mm A">{params.row.date}</DayJS>
             );
           }
         },
@@ -161,7 +161,7 @@ function CandidatList() {
                   <OverlayTrigger placement="bottom" 
                     overlay={<Tooltip id="button-tooltip-2">Voir détails</Tooltip>}>
                     <Link to={"/candidat/"+params.row.id}>
-                      <VisibilityIcon className="icon-candidat1"/>
+                      <VisibilityIcon className='icon-action'/>
                     </Link>
                   </OverlayTrigger>
                   <CheckCircleOutlineIcon className="icon-candidat2" onClick={showAccepte} />

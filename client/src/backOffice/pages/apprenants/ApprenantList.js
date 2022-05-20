@@ -14,8 +14,6 @@ import './Apprenants.css'
 
 const { confirm } = Modal;
 
-
-
 function ApprenantList() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
@@ -108,7 +106,7 @@ function ApprenantList() {
               return(
                 <>
                 <a href={`/apprenant/${params.row.id}`}>
-                <VisibilityIcon  className='icon-visible'/>
+                <VisibilityIcon  className='icon-action'/>
                 </a>
               <OverlayTrigger placement="bottom" overlay={<Tooltip id="button-tooltip-2">Supprimer apprenant</Tooltip>}>
               <DeleteOutlineIcon onClick={showDeleteConfirm} className="icon-delete"/>
@@ -136,7 +134,7 @@ function ApprenantList() {
         <Button className='btn-add-instructeur' href='/ajout-apprenant'>
         <img src="images/add-square.png" className="add-icon" alt=""/>Apprenants</Button>
       </div>
-            <div style={{ height: 550, width: '100%',backgroundColor:'white' }}  >
+            <div style={{ height: 550 }} className="tableau">
               <DataGrid
                   rows={rowData}
                   columns={columns}

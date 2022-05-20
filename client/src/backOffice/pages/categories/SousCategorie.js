@@ -99,7 +99,7 @@ function SousCategorie() {
                  <AddIcon /> Sous Catégorie
                 </Button>
             </div>
-        <div className="table-categorie" >
+        <div style={{ height: 550 }} className="tableau">
             <DataGrid
                 rows={rowData}
                 columns={columns}

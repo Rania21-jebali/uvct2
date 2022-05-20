@@ -93,7 +93,7 @@ function Categories() {
               return(
                 <>
                 <a href={`/categorie/${params.row.id}`}>
-                   <EditIcon className='icon-visible' />
+                   <EditIcon className='icon-action' />
                 </a>
                  <DeleteOutlineIcon onClick={showDeleteConfirm} className="icon-delete"/>
                 </>
@@ -117,7 +117,7 @@ function Categories() {
              <AddIcon /> Catégorie
             </Button>
         </div>
-    <div className="table-categorie" >
+    <div  style={{ height: 550 }} className="tableau" >
         <DataGrid
             rows={rowData}
             columns={columns}

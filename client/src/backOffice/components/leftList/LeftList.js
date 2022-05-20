@@ -1,7 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux'
 import { Menu } from 'antd';
-import axios from 'axios'
 import './LeftList.css';
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
@@ -18,16 +17,6 @@ import MessageIcon from '@material-ui/icons/Message';
 import ShopIcon from '@material-ui/icons/Shop';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import StarsIcon from '@material-ui/icons/Stars';
-
-const handleLogout = async () => {
-    try {
-        await axios.get('/user/logout')
-        localStorage.removeItem('firstLogin')
-        window.location.href = "/";
-    } catch (err) {
-        window.location.href = "/";
-    }
-  }
 
 // Routes instructeur
 const routes=[
@@ -90,30 +79,24 @@ const routes1=[
     },
     {
         key:"3",
-        icon:<EventIcon />,
-        name:"Mes événements",
-        path:"/mes-evenements"
-    },
-    {
-        key:"4",
         icon:<StarsIcon />,
         name:"Mes favoris",
         path:"/mes-favoris"
     },
     {
-        key:"5",
+        key:"4",
         icon:<MessageIcon />,
         name:"Messages",
         path:"/messages"
     },
     {
-        key:"6",
+        key:"5",
         icon:<SmsFailedIcon />,
         name:"Réclamtions",
         path:"/reclamations"
     },
     {
-        key:"7",
+        key:"6",
         icon:<SettingsIcon />,
         name:"Paramétres",
         path:"/parametres"
@@ -161,13 +144,13 @@ const routes2=[
         key:"6",
         icon:<EventIcon />,
         name:"Événements",
-        path:"/mes-evenements"
+        path:"/evenements"
     },
     {
         key:"7",
         icon:<SmsFailedIcon />,
         name:"Réclamtions",
-        path:"/reclamations"
+        path:"/all-reclamation"
     },
     {
         key:"8",
@@ -231,13 +214,13 @@ const routes3=[
         key:"8",
         icon:<EventIcon />,
         name:"Événements",
-        path:"/mes-evenements"
+        path:"/evenements"
     },
     {
         key:"9",
         icon:<SmsFailedIcon />,
         name:"Réclamtions",
-        path:"/reclamations"
+        path:"/all-reclamation"
     },
     {
         key:"10",
@@ -256,8 +239,9 @@ const routes3=[
 function mapping(x){
     const menu= x.map( (routes) => (
         <Menu.Item key={routes.key} icon={routes.icon} className="menu-item-left">
-      <a href={routes.path} className="menu-title-item">{routes.name}</a>
-      </Menu.Item>
+        <a href={routes.path} className="menu-title-item">
+        {routes.name}</a>
+        </Menu.Item>
      
   ))
          return menu;
@@ -266,14 +250,13 @@ function mapping(x){
 export default function LeftList({children})  { 
     const auth = useSelector(state => state.auth)
     const {isLogged, isAdmin ,isInstr, isSuperAdmin} = auth 
-    
 
     return (
         <>
       <div  className="leftList">
         <Menu
           mode="inline"
-          style={{ background:"#F6F7F8", marginTop:"20px"}}
+          style={{ backgroundColor:"#F6F7F8", marginTop:"20px"}}
         >
         { isInstr && mapping(routes)}
         { (isLogged && !isInstr && !isSuperAdmin && !isAdmin) && mapping(routes1)}

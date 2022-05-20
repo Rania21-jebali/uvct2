@@ -4,7 +4,7 @@ const reclamationSchema = new mongoose.Schema({
     cause:{
         type:String,
     },
-    details:{
+    message:{
         type:String,
     },
     userId:{

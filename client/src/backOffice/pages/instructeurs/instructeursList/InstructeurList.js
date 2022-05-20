@@ -100,7 +100,7 @@ function InstructeurList() {
           flex:2,
           renderCell(params){
             return(
-              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+              <DayJS format="dddd, MMMM D, YYYY h:mm A">{params.row.date}</DayJS>
             );
           }
         },
@@ -143,7 +143,7 @@ function InstructeurList() {
               return(
                 <>
                  <a href={`/instructeur/${params.row.id}`}>
-                 <VisibilityIcon className='icon-visible' />
+                 <VisibilityIcon className='icon-action'/>
                  </a>
                     <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                         <Popover

@@ -1,9 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios'
-import {fetchEvents, dispatchGetEvents} from '../../../../redux/actions/eventsAction'
-import {fetchUserById, dispatchGetAllUserById} from '../../../../redux/actions/usersAction'
-import Avatar1 from '../../../../components/Avatar/Avatar';
+import {fetchEvents, dispatchGetEvents} from '../../../../../redux/actions/eventsAction'
+import {fetchUserById, dispatchGetAllUserById} from '../../../../../redux/actions/usersAction'
+import Avatar1 from '../../../../../components/Avatar/Avatar';
 import { Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
@@ -13,6 +13,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DescriptionIcon from '@material-ui/icons/Description';
 import CreateIcon from '@material-ui/icons/Create';
+import ListIcon from '@material-ui/icons/List';
 
 const initialState = {
   err: '',
@@ -65,6 +66,18 @@ const participants = [
   
     const columns = [
         {
+            field: 'affiche',
+            headerName: 'Miniature',
+            flex:1,
+            renderCell: (params) =>{
+              return(
+                <> 
+                    <img src={params.row.affiche} alt="" className='miniature'/>    
+                </>
+              )
+            }
+          },
+        {
           field: 'titre',
           headerName: 'Titre',
           flex:1,
@@ -73,31 +86,23 @@ const participants = [
           headerName: 'Instructeur',
           flex:2,
           renderCell: (params) =>{
-            function Instructeur1(instructeur){
-                const users1 = useSelector(state => state.users)
-                const [callback1, setCallback1] = useState(false)
-                const dispatch1 = useDispatch()
+            function Instructeur3(instructeur3){
+                const users3 = useSelector(state => state.users)
+                const [callback3, setCallback3] = useState(false)
+                const dispatch3 = useDispatch()
                 useEffect(() => {
-                    fetchUserById(instructeur).then(res =>{
-                          dispatch1(dispatchGetAllUserById(res))
+                    fetchUserById(instructeur3).then(res =>{
+                          dispatch3(dispatchGetAllUserById(res))
                       })
-                },[dispatch1,instructeur, callback1])
-                return users1
+                },[dispatch3,instructeur3, callback3])
+                return users3
             }
             return(
-              <> 
-              <div className='userList'>
-                <Avatar1 src={Instructeur1(params.row.instructeur).avatar}/>
-                {Instructeur1(params.row.instructeur).name}
-              </div>
-              </>
+                <> 
+                
+                </>
             )
           }
-        },
-        {
-          field: 'prix',
-          headerName: 'Prix',
-          flex:1,
         },
         {
           field: 'date',
@@ -110,15 +115,25 @@ const participants = [
           }
         },
         {
+            field: 'participant',
+            headerName: 'Participants',
+            flex:2,
+            renderCell(params){
+              return(
+                <ListIcon onClick={showModal} className='icon-action'/>
+              );
+            }
+          },
+        {
             field: 'action',
             headerName: 'Action',
-            flex:1,
+            flex:2,
             renderCell: (params) =>{
               return(
                 <>
-                    <VisibilityIcon  className='icon-visible'/>
-                    <CreateIcon className='icon-visible'/>
-                    <DescriptionIcon onClick={showModal} className='icon-visible'/>
+                    <VisibilityIcon  className='icon-action'/>
+                    <CreateIcon className='icon-action'/>
+                    <DescriptionIcon onClick={showModal} className='icon-action'/>
                     <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>    
                 </>
               )
@@ -143,7 +158,8 @@ const participants = [
         id:event?._id,
         titre:event?.titre,
         prix:event?.prix,
-        instructeur:event?.postedBy,
+        affiche:event?.affiche,
+        postedBy:event?.postedBy,
         date:event?.dateDebut,
     }
 })

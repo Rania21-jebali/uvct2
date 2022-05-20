@@ -1,0 +1,28 @@
+.how-does-it-work{
+    height: 687px;
+    width: 100%;
+    background: url("https://www.thebalancecareers.com/thmb/3TXSZvKKQXcWu3Zu3qU8ag158MU=/3864x2577/filters:fill(auto,1)/school-books-on-desk--education-concept-871454068-5b548900c9e77c005b04fc8c.jpg") no-repeat;
+    background-size: cover;
+    padding-left: 497px;
+    padding-top: 80px;
+    .title{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 48px;
+      max-width: 582px;
+      color: #FFFFFF;
+      padding-bottom: 40px;
+    }
+    .subtitle{
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 160%;
+      max-width: 724px;
+      color: #FFFFFF;
+    }
+    ul li::before {
+      list-style-type: disc; /* Change the color */
+    }
+  }

@@ -112,7 +112,7 @@ function AdministrateurList() {
           flex:2,
           renderCell(params){
             return(
-              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+              <DayJS format="dddd, MMMM D, YYYY h:mm A">{params.row.date}</DayJS>
             );
           }
         },
@@ -156,7 +156,7 @@ function AdministrateurList() {
               return(
                 <>
                 <a href={`/admin/${params.row.id}`}>
-                <VisibilityIcon className='icon-visible'/>
+                <VisibilityIcon className='icon-action'/>
                 </a>
                 <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                     <Popover
@@ -202,7 +202,7 @@ function AdministrateurList() {
             <img src="images/add-square.png" className="add-icon" alt=""/>Administrateur
           </Button>
   </div>
-        <div style={{ height: 550, width: '100%' ,backgroundColor:'white'}}  >
+        <div style={{ height: 550}}  className="tableau">
             <DataGrid
                 rows={rowData}
                 columns={columns}

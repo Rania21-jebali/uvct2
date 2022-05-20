@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
-import ScrollTab from '../../components/ScrollTab/ScrollTab'
-import MesEvents from './MesEvent/MesEvents'
+import ScrollTab from '../../../components/ScrollTab/ScrollTab'
 import './Evenements.css'
+import MesEvents from '../../evenements/MesEvent/MesEvents'
+import TousEvent from './tousEvent/TousEvent'
 
 function Evenements() {
   return (
@@ -14,7 +15,8 @@ function Evenements() {
         </a>
       </div>
       <div className="scrollTab">
-     <ScrollTab label1="Tous" label2="Mes événements" 
+     <ScrollTab label1="Tous" label2="Mes événements" label3="Archives" 
+        item1={<TousEvent />}
         item2={<MesEvents />}
     />
     </div>

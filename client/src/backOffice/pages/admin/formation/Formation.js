@@ -11,6 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -117,12 +118,13 @@ function Formation() {
           {
               field: 'action',
               headerName: 'Action',
-              flex:1,
+              flex:2,
               renderCell: (params) =>{
                 return(
                   <>  
-                  <VisibilityIcon className='icon-visible'/>  
-                  <DeleteOutlineIcon className="icon-delete"/> 
+                  <VisibilityIcon className='icon-action'/>  
+                  <ArchiveIcon className='icon-action'/>
+                  <DeleteOutlineIcon className='icon-action'/> 
                   </>
                 )
               }
@@ -142,14 +144,8 @@ function Formation() {
         })
 
   return (
-    <div className='formation'>
-      <div className='formTitleContainer'>
-        <h1 className="title-event">Liste des formations</h1>
-      </div>
-      <div className="search">
-      <Search placeholder="Rechercher des formations" allowClear onSearch={onSearch}  />
-      </div>
-          <div style={{ height: 550}} className="tableau" >
+    <div >
+          <div style={{ height: 550, width: '100%'}} >
             <DataGrid
                     rows={data}
                     columns={columns}

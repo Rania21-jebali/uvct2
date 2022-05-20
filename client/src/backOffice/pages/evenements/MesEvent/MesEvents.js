@@ -4,10 +4,14 @@ import axios from 'axios'
 import {fetchMyEvents, dispatchGetMyEvents} from '../../../../redux/actions/eventsAction'
 import { Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
-import { Input} from 'antd';
+import { Input, Button} from 'antd';
 import { List, Avatar } from 'antd';
 import DayJS from 'react-dayjs';
 import ArchiveIcon from '@material-ui/icons/Archive';
+import ListIcon from '@material-ui/icons/List';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AddIcon from '@material-ui/icons/Add';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const initialState = {
   err: '',
@@ -30,11 +34,13 @@ const participants = [
   const onSearch = value => console.log(value);
   
 function MesEvents() {
+  const auth = useSelector(state => state.auth)
+  const {isInstr} = auth
   const token = useSelector(state => state.token)
   const events = useSelector(state => state.events)
   const [event, setEvent ]= useState(initialState);
   const [callback, setCallback] = useState(false)
-    const { err, success} = event
+  const { err, success} = event
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -59,6 +65,18 @@ function MesEvents() {
   } 
   
     const columns = [
+      {
+        field: 'affiche',
+        headerName: 'Miniature',
+        flex:1,
+        renderCell: (params) =>{
+          return(
+            <> 
+                <img src={params.row.affiche} alt="" className='miniature'/>    
+            </>
+          )
+        }
+      },
         {
           field: 'titre',
           headerName: 'Titre',
@@ -67,10 +85,20 @@ function MesEvents() {
         {
           field: 'date',
           headerName: 'Date',
-          flex:3,
+          flex:2,
           renderCell(params){
             return(
               <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+            );
+          }
+        },
+        {
+          field: 'participant',
+          headerName: 'Participants',
+          flex:2,
+          renderCell(params){
+            return(
+              <ListIcon onClick={showModal} className='icon-action'/>
             );
           }
         },
@@ -80,12 +108,10 @@ function MesEvents() {
             flex:1,
             renderCell: (params) =>{
               return(
-                <>
-                    <img src="images/edit.png" alt="" className='icon-action'/> 
-                    <img src="images/eye.png" alt="" className='icon-action' /> 
-                    <ArchiveIcon />
-                    <img src="images/List-participants.png" alt="" className='icon-action' onClick={showModal}/> 
-                    <img src="images/trash.png" alt="" className='icon-action' onClick={() => handleDelete(params.row.id)}/>    
+                <>  
+                    <VisibilityIcon className='icon-action'/>
+                    <ArchiveIcon className='icon-action'/>
+                    <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>
                 </>
               )
             }
@@ -108,20 +134,30 @@ function MesEvents() {
     return{
         id:event?._id,
         titre:event?.titre,
+        affiche:event?.affiche,
         date:event?.dateDebut,
     }
 })
+
   return (
-<>
-<div style={{ height: 550, width: '100%'}}>
-<DataGrid
-        rows={rowData}
-        columns={columns}
-        pageSize={8}
-        disableSelectionOnClick
-        
-      />
-    </div> 
+<div className={`${isInstr ? "favoris":""} `}>
+{
+      isInstr && (
+        <div className='formTitleContainer'>
+        <h3 className="title-event">Mes événements</h3>
+        <Button  href="/ajout-evenement">
+         <AddIcon />Ajouter événement</Button>
+      </div>
+      )
+    }
+  <div style={{ height: 550, width: '100%' , backgroundColor:'white'}}>
+      <DataGrid
+              rows={rowData}
+              columns={columns}
+              pageSize={8}
+              disableSelectionOnClick 
+            />
+  </div> 
 <Modal title="Participants" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
 <Search placeholder="Rechercher des participants" allowClear onSearch={onSearch}  />
 <List
@@ -132,13 +168,12 @@ function MesEvents() {
           avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
           title={item.title}
           description={item.date}
-
         />
       </List.Item>
     )}
   />
       </Modal>
-</>
+</div>
      
   )
 }

@@ -116,7 +116,7 @@ function Header() {
         />
       </Form>
       {
-        (!isAdmin && !isSuperAdmin) && 
+        (!isAdmin && !isSuperAdmin && !isInstr) && 
         <Nav.Link href="/devenir-instructeur" className="link-postuler-enseigner">Devenir instructeur</Nav.Link>
       }
       {

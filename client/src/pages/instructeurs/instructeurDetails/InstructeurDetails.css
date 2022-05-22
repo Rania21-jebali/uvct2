@@ -1,0 +1,36 @@
+.instructeur-details{
+    display: flex;
+    margin: 100px;
+}
+.img-instructeur{
+    clip-path:ellipse(50% 50%);
+    width: 200px;
+    height: 200px;
+}
+.nb-instructeur{
+    display: flex;
+}
+.nb-t-instr{
+    margin-right: 100px;
+}
+.f-title{
+    font-size: 18px;
+    font-weight: 500;
+    color: gray;
+}
+.name-instr{
+    font-size: 40px;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+}
+.number-instr{
+    font-size: 22px;
+    font-weight: 500;
+}
+.info-instr{
+    margin-right:100px;
+}
+.info-perso-instr{
+    font-size: 16px;
+    font-weight: 400;
+}

@@ -23,6 +23,7 @@ app.use('/',require('./routes/session'))
 app.use('/',require('./routes/categorie'))
 app.use('/',require('./routes/sousCategorie'))
 app.use('/',require('./routes/reclamation'))
+app.use('/',require('./routes/message'))
 app.use('/api', require('./routes/upload'))
 
 

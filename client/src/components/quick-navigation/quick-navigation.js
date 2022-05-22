@@ -28,7 +28,7 @@ export const QuickNavigation = () => {
 const routes = [
     {name: "Accueil", route: "/"},
     {name: "Cours", route: "/"},
-    {name: "Instructeurs", route: "/"},
+    {name: "Instructeurs", route: "/allInstructeurs"},
     {name: "Événements", route: "/events"},
     {name: "Offres", route: "/"},
     {name: "À propos", route: "/"},

@@ -40,7 +40,6 @@ import Panier from '../../pages/panier/Panier';
 import HeaderInstructeur from '../../pages/auth/devenirInstructeur/HeaderInstructeur';
 import { AllEvents } from '../../pages/events/allEvents/AllEvents';
 import { EventDetails } from '../../pages/events/eventDetails/event-details';
-import Formation from '../../backOffice/pages/admin/formation/Formation';
 import UpdateCategorie from '../../backOffice/pages/categories/UpdateCategorie';
 import SousCategorie from '../../backOffice/pages/categories/SousCategorie';
 import AddSousCategorie from '../../backOffice/pages/categories/AddSousCategorie';
@@ -53,6 +52,8 @@ import Reclamation1 from '../../backOffice/pages/admin/reclamations/Reclamation'
 import MesEvents from '../../backOffice/pages/evenements/MesEvent/MesEvents';
 import Evenements from '../../backOffice/pages/admin/events/Evenements';
 import Formations1 from '../../backOffice/pages/admin/formation/Formations';
+import { Instructeurs1 } from '../../pages/instructeurs/Instructeurs';
+import InstructeurDetails from '../../pages/instructeurs/instructeurDetails/InstructeurDetails';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -121,6 +122,9 @@ function Body() {
             <Route path="/events" element={<AllEvents />} />
             <Route path="/event/:id" element={<EventDetails />} />
             <Route path="/partner" element={<PartnerPage />} />
+            <Route path="/allInstructeurs" element={<Instructeurs1 />} />
+            <Route path="/instructeurDet" element={<InstructeurDetails />} />
+
               </Routes>
             )
             }

@@ -14,3 +14,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+.align-items-center{
+  align-items: center;
+}
+.divider{
+  height: 0;
+  border: 1px solid #E2E8F0;
+  transform: rotate(180deg);
+  text-align: center;
+  margin-left: 133px;
+  width: calc(100% - 266px);
+}
+.overlay{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0,0,0, .7);
+}
+.space-between{
+  justify-content: space-between;
+}
+
+.justify-center{
+  justify-content: center;
+}

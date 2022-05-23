@@ -52,6 +52,7 @@ import Reclamation1 from '../../backOffice/pages/admin/reclamations/Reclamation'
 import MesEvents from '../../backOffice/pages/evenements/MesEvent/MesEvents';
 import Evenements from '../../backOffice/pages/admin/events/Evenements';
 import Formations1 from '../../backOffice/pages/admin/formation/Formations';
+import Footer from "../footer/footer";
 import { Instructeurs1 } from '../../pages/instructeurs/Instructeurs';
 import InstructeurDetails from '../../pages/instructeurs/instructeurDetails/InstructeurDetails';
 import UpdateEvent from '../../backOffice/pages/evenements/updateEvent/UpdateEvent';
@@ -63,7 +64,7 @@ function Body() {
 
     return (
         <section className={`${isLogged ? "body":"" } ${isAdmin ? "body":"" }`}>
-            { isLogged ?  
+            { isLogged ?
             (<LeftList >
             <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
@@ -128,11 +129,10 @@ function Body() {
             <Route path="/partner" element={<PartnerPage />} />
             <Route path="/allInstructeurs" element={<Instructeurs1 />} />
             <Route path="/instructeurDet" element={<InstructeurDetails />} />
-
+                <Footer/>
               </Routes>
             )
             }
-
         </section>
     )
 }

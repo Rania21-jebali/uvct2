@@ -3,6 +3,7 @@ import './partner-page.scss'
 import {Button, Typography} from "antd";
 import {WhyToChooseUs} from "./components/why-to-choose-us/why-to-choose-us";
 import {HowDoesItWork} from "./components/how-does-it-work/how-does-it-work";
+import {instructor} from "../../assets";
 
 const PartnerPage = () => {
   return(
@@ -19,14 +20,14 @@ const PartnerPage = () => {
                   </div>
                   <div>
                       <img
-                          src={'https://images.unsplash.com/photo-1530268729831-4b0b9e170218?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8cmFuZG9tJTIwcGVvcGxlfGVufDB8fDB8fA%3D%3D&w=1000&q=80'}
+                          src={instructor}
                           className={'image'}
                        alt={'instructor'}/>
                   </div>
               </div>
           </div>
           <WhyToChooseUs/>
-            <HowDoesItWork/>
+          <HowDoesItWork/>
       </div>
   )
 }

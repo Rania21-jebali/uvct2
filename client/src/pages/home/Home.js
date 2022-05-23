@@ -6,7 +6,6 @@ import SomeVideos from './someVideos/SomeVideos';
 import PopularLessons from './popularLessons/PopularLessons';
 import BestCategories from './bestCategories/BestCategories';
 import Insctructors from './insctructors/Insctructors';
-import Footer1 from '../../components/footer/footer';
 
 
 
@@ -20,7 +19,6 @@ const Home = () => {
       <PopularLessons />
       <BestCategories />
       <Insctructors />
-      <Footer1 />
     </div>
   )
 }

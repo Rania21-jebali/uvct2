@@ -1,11 +1,14 @@
 .why-to-choose-us{
-    background-image: url("https://dailypost.files.wordpress.com/2015/04/turnpike-blur.jpg");
+    background-image: url("https://i.ibb.co/5BXHsYc/background-Instr.jpg");
     height: 687px;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-left: 148px;
-    padding-top: 80px;
+    position: relative;
+    .content{
+      padding-left: 148px;
+      padding-top: 80px;
+    }
     .title{
       font-style: normal;
       font-weight: 600;

@@ -4,22 +4,22 @@ import {Typography} from "antd";
 export const HowDoesItWork = () => {
   return(
       <div className={'how-does-it-work'}>
-            <Typography className={'title'}>Pourquoi enseigner sur notre platforme?</Typography>
-            <Typography className={'subtitle'}>Créez des cours qui vous ressemblent
+            <Typography className={'title'}>Comment ça marche?</Typography>
+            <Typography className={'subtitle'}>Plannifiez le cours
                 <ul>
-                    <li>Postez le cours que vous souhaitez, comme vous le souhaitez, et gardez toujours le contrôle sur votre propre contenu.
+                    <li>Ta façon d'enseigner est à toi. En plus, notre tableau de bord des instructeurs vous permet de rester organisé.
                     </li>
                 </ul>
             </Typography>
-          <Typography className={'subtitle'}>Inspirez les participants
+          <Typography className={'subtitle'}>Enregistrez votre vidéos
               <ul>
-                    <li>Aidez les participants à explorer leurs intérêts, à acquérir de nouvelles compétences et à développer leur carrière.
+                    <li>Utilisez les outils de base tels que les smartphones, les webcams, les caméras numériques... Tant que ça a une bonne résolution et un enregistrement de voix clair.
                     </li>
                 </ul>
             </Typography>
-          <Typography className={'subtitle'}>Soyez récompensé
+          <Typography className={'subtitle'}>Lancez votre cours
                 <ul>
-                    <li>Développez votre réseau professionnel et votre expertise, et gagnez de l'argent à chaque inscription rémunérée.
+                    <li>Your course will be visible on our marketplace where you will get income with every paid registration.
                     </li>
                 </ul>
             </Typography>

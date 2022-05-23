@@ -3,8 +3,12 @@ import { Button,Form} from 'react-bootstrap';
 import axios from 'axios'
 import {ShowErrMsg, ShowSuccessMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail} from '../../../components/utils/validation/Validation'
-import './DevenirInstructeur.css'
 import { useNavigate } from 'react-router-dom';
+import './DevenirInstructeur.scss'
+import {Typography} from "antd";
+import {arrow} from "../../../assets";
+
+
 const initialState = {
     name: '',
     email: '',
@@ -26,7 +30,7 @@ function DevenirInstructeur() {
         const {name, value} = e.target
         setUser({...user, [name]:value, err: '', success: ''})
     }
-  
+
     const handleSubmit = async e => {
         e.preventDefault()
         if(isEmpty(name) || isEmpty(specialite) || isEmpty(tele) || isEmpty(message))
@@ -34,7 +38,7 @@ function DevenirInstructeur() {
 
         if(!isEmail(email))
             return setUser({...user, err: "Invalid emails.", success: ''})
-        
+
         try {
             const res = await axios.post('/user/registerInstr', {
                 name, email, specialite,message,tele
@@ -44,11 +48,14 @@ function DevenirInstructeur() {
             navigate("/")
 
         } catch (err) {
-            err.response.data.msg && 
+            err.response.data.msg &&
             setUser({...user, err: err.response.data.msg, success: ''})
         }
     }
   return (
+      <div className={'devenir-instructeur-container flex-row '}>
+          <Typography className={'become-instructor'}>Inscrivez-vous pour devenir instructeur</Typography>
+          <img src={arrow} className={'arrow'} alt={'arrow'}/>
     <div className='devInst'>
       {err && ShowErrMsg(err)}
       {success && ShowSuccessMsg(success)}
@@ -57,42 +64,42 @@ function DevenirInstructeur() {
         <Form.Label className='labelForm'>Nom complet</Form.Label>
         <Form.Control type="Normal text"
          className='inputForm'
-         placeholder=" Saissiez votre nom et prénom" 
+         placeholder=" Saissiez votre nom et prénom"
          name="name"
          value={name}
-         onChange={handleChangeInput} 
-         required 
+         onChange={handleChangeInput}
+         required
         />
       </Form.Group>
       <Form.Group  controlId="formBasicEmail" >
       <Form.Label className='labelForm'>Adresse E-mail</Form.Label>
         <Form.Control type="email" placeholder="nom@eamil.com"
         name="email"
-        required 
+        required
         value={email}
-        onChange={handleChangeInput} 
+        onChange={handleChangeInput}
          />
       </Form.Group>
       <Form.Group  controlId="formBasicEmail" >
       <Form.Label className='labelForm'>Téléphone</Form.Label>
         <Form.Control type="number" placeholder="21 212 212"
         name="tele"
-        required 
+        required
         value={tele}
-        onChange={handleChangeInput} 
+        onChange={handleChangeInput}
          />
       </Form.Group>
       <Form.Group  controlId="formBasicEmail" >
       <Form.Label className='labelForm'>Votre CV</Form.Label>
-        <Form.Control type="file" 
-        onChange={handleChangeInput} 
+        <Form.Control type="file"
+        onChange={handleChangeInput}
          />
       </Form.Group>
       <Form.Group className="mb-3" >
       <Form.Label className='labelForm'>Spécialité</Form.Label>
         <Form.Select aria-label="Default select example"
           name="specialite"
-          required 
+          required
           value={specialite}
           onChange={handleChangeInput}>
           <option>Séléctionnez votre spécialité</option>
@@ -113,9 +120,9 @@ function DevenirInstructeur() {
         <Form.Control type="text" as="textarea" rows={5}
          placeholder="Saissiez un message"
          name="message"
-          required 
+          required
           value={message}
-          onChange={handleChangeInput} 
+          onChange={handleChangeInput}
         />
       </Form.Group>
       <div className="d-grid gap-2">
@@ -125,7 +132,9 @@ function DevenirInstructeur() {
    </div>
   </Form>
 </div>
+</div>
   )
 }
 
 export default DevenirInstructeur
+

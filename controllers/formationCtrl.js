@@ -13,7 +13,7 @@ addFormation: async (req, res) => {
         }
         const formation2 = new Formation(newFormation);
          await formation2.save();
-        res.json({msg: "Add formation Success! "})
+        res.json({msg: "Formation ajoutée ! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -64,7 +64,7 @@ updateFormationByTitre: async (req, res) => {
             titre,sousTitre, description, affiche, videopromo, categorie, niveau,
              prix, gratuit,objectif,destinerA,prerequis
         })
-        res.json({msg: "Update formation Success!"})
+        res.json({msg: "Formation modifiée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -77,7 +77,7 @@ updateFormationById: async (req, res) => {
         await Formation.findByIdAndUpdate({_id:req.params.id}, {
             titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
         })
-        res.json({msg: "Update formation by id Success!"})
+        res.json({msg: "Formation modifiée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -107,7 +107,7 @@ deleteFormation: async (req, res) => {
     try {
         await Formation.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "formation deleted Success!"})
+        res.json({msg: "Formation supprimée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

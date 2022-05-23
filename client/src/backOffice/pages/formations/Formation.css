@@ -1,7 +1,5 @@
 .formation{
-    margin-left: 30px;
-    margin-top: 20px;
-    margin-right: 50px;
+    padding: 3px;
 }
 .formTitleContainer{
     display: flex;
@@ -41,13 +39,10 @@
 .btn-event{
     background: #FFFFFF;
     border: 1px solid #20384D;
-    box-sizing: border-box;
     border-radius: 2px;
-    font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 14px;
     color: #20384D;
-    margin-right: 20px;
  }
  .btn-event:hover{
      background: #20384D;
@@ -58,16 +53,12 @@
     width: 65%;
 }
 .status-formation1{
-width: 58px;
-height: 31px;
 background: #A7F3D0;
 border-radius: 2px;
 display: flex;
 justify-content: center;
 }
 .status-formation2{
-    width: 58px;
-    height: 31px;
     background: #FECACA;
     border-radius: 2px;
     display: flex;
@@ -75,6 +66,7 @@ justify-content: center;
     }
 .p-formation{
     color:#454545;
+    font-weight: 600;
 }
 .btn-action{
     background: white;

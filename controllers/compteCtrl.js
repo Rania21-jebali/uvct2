@@ -13,7 +13,7 @@ addCompte: async (req, res) => {
         }
         const compte = new Compte(newCompte);
          await compte.save();
-        res.json({msg: "Add compte Success! "})
+        res.json({msg: " Compte ajouté! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -32,7 +32,7 @@ deleteCompte: async (req, res) => {
     try {
         await Compte.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "Compte deleted Success!"})
+        res.json({msg: "Compte supprimé !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

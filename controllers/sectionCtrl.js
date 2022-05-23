@@ -14,7 +14,7 @@ addSection: async (req, res) => {
         }
         const section2 = new Section(newSection);
          await section2.save();
-        res.json({msg: "Add section Success! "})
+        res.json({msg: "Section ajoutée ! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -46,7 +46,7 @@ updateSectionById: async (req, res) => {
         await Section.findByIdAndUpdate({_id:req.params.id}, {
             titre, objectif
         })
-        res.json({msg: "Update section by id Success!"})
+        res.json({msg: "Section ajoutée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -56,13 +56,11 @@ deleteSection: async (req, res) => {
     try {
         await Section.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "Section deleted Success!"})
+        res.json({msg: "Section supprimée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
 },
-
 }
-
 
 module.exports= sectionCtrl

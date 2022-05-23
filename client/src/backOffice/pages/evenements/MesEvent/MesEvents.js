@@ -109,7 +109,9 @@ function MesEvents() {
             renderCell: (params) =>{
               return(
                 <>  
-                    <VisibilityIcon className='icon-action'/>
+                 <a href={`/events/${params.row.id}`}>
+                         <VisibilityIcon className='icon-action'/>
+                  </a>
                     <ArchiveIcon className='icon-action'/>
                     <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>
                 </>

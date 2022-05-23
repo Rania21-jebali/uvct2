@@ -116,7 +116,7 @@ function CandidatList() {
           flex:1,
           renderCell(params){
             return(
-              <DayJS format="dddd, MMMM D, YYYY h:mm A">{params.row.date}</DayJS>
+              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
             );
           }
         },

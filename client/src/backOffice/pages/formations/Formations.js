@@ -13,6 +13,7 @@ import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import AddIcon from '@material-ui/icons/Add';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -217,7 +218,7 @@ function Formations() {
       <div className='formTitleContainer'>
         <h1 className="title-event">Mes formations</h1>
         <Button className='btn-event' onClick={handleShow}>
-         <img src="images/add-square.png" alt="" className='img-btn'/>Formation</Button>
+         <AddIcon />Formation</Button>
       </div>
       <div className="search">
       <Search placeholder="Rechercher des formations" allowClear onSearch={onSearch}  />

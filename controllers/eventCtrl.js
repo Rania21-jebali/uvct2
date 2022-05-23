@@ -1,3 +1,4 @@
+const { EventAvailable } = require('@material-ui/icons')
 const Event= require('../models/event')
 const Users= require('../models/user')
 
@@ -13,7 +14,7 @@ addEvent: async (req, res) => {
         }
         const event = new Event(newEvent);
          await event.save();
-        res.json({msg: "Add event Success! "})
+        res.json({msg: "Événement ajouté! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -50,7 +51,20 @@ deleteEvent: async (req, res) => {
     try {
         await Event.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "event deleted Success!"})
+        res.json({msg: "Événement supprimé!"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//update event by id
+updateEventById: async (req, res) => {
+    try {
+        const {titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace} = req.body
+
+        await Event.findByIdAndUpdate({_id:req.params.id}, {
+            titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace
+        })
+        res.json({msg: "Événement modifié !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

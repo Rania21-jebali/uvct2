@@ -11,6 +11,8 @@ router.get('/events',eventCtrl.getAllEvents)
 
 router.get('/event/:id',eventCtrl.getEventById)
 
+router.patch('/updateEvent/:id',auth,eventCtrl.updateEventById)
+
 router.delete('/deleteEvent/:id', auth, eventCtrl.deleteEvent)
 
 

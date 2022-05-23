@@ -9,7 +9,7 @@ const initialState = {
     name: '',
     email: '',
     specialite:'',
-    description:'',
+    message:'',
     tele:'',
     err: '',
     success: ''
@@ -17,7 +17,7 @@ const initialState = {
 
 function DevenirInstructeur() {
     const [user, setUser] = useState(initialState)
-    const {name, email, specialite,description,tele,err, success} = user
+    const {name, email, specialite,message,tele,err, success} = user
     const navigate = useNavigate();
     const [file, setFile] = useState(false);
 
@@ -29,15 +29,15 @@ function DevenirInstructeur() {
   
     const handleSubmit = async e => {
         e.preventDefault()
-        if(isEmpty(name) || isEmpty(specialite) || isEmpty(description))
-                return setUser({...user, err: "Please fill in all fields.", success: ''})
+        if(isEmpty(name) || isEmpty(specialite) || isEmpty(tele) || isEmpty(message))
+                return setUser({...user, err: "Merci de remplir tous les champs.", success: ''})
 
         if(!isEmail(email))
             return setUser({...user, err: "Invalid emails.", success: ''})
         
         try {
             const res = await axios.post('/user/registerInstr', {
-                name, email, specialite,description
+                name, email, specialite,message,tele
             })
 
             setUser({...user, err: '', success: res.data.msg})
@@ -85,7 +85,6 @@ function DevenirInstructeur() {
       <Form.Group  controlId="formBasicEmail" >
       <Form.Label className='labelForm'>Votre CV</Form.Label>
         <Form.Control type="file" 
-        required 
         onChange={handleChangeInput} 
          />
       </Form.Group>
@@ -111,11 +110,11 @@ function DevenirInstructeur() {
       </Form.Group>
       <Form.Group className="mb-3" >
       <Form.Label className='labelForm'>Message</Form.Label>
-        <Form.Control type="text" 
+        <Form.Control type="text" as="textarea" rows={5}
          placeholder="Saissiez un message"
-         name="description"
+         name="message"
           required 
-          value={description}
+          value={message}
           onChange={handleChangeInput} 
         />
       </Form.Group>

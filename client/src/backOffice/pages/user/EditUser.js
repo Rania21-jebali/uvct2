@@ -2,14 +2,18 @@ import React ,{useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchUserDetails, dispatchGetUserDetails} from '../../../redux/actions/authAction'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import {isLength, isMatch} from '../../../components/utils/validation/Validation'
 import { Button,Form, Spinner } from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import { useParams } from 'react-router-dom'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import './EditUser.css'
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
         const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
@@ -43,7 +47,7 @@ function EditUser() {
     const classes = useStyles();
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {isInstr, isAdmin, admin} = auth
+    const {admin} = auth
     const [data, setData] = useState(initialState)
     const {name,tele,email,specialite,password, cf_password, err, success} = data
     const [avatar, setAvatar] = useState(false)
@@ -51,6 +55,23 @@ function EditUser() {
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
+    const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
+    const handleClose1= (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen1(false);
+    };
 
         useEffect(() => {
           fetchUserDetails(token,id).then(res =>{
@@ -70,13 +91,13 @@ function EditUser() {
             try {
                 const file = e.target.files[0]
 
-                if(!file) return setData({...data, err: "No files were uploaded." , success: ''})
+                if(!file) return setData({...data, err: "Aucun fichier n'a été téléchargé." , success: 'Photo téléchargée'})
 
                 if(file.size > 1024 * 1024)
-                    return setData({...data, err: "Size too large." , success: ''})
+                    return setData({...data, err: "Taille trop grande." , success: 'Photo téléchargée'})
 
                 if(file.type !== 'image/jpeg' && file.type !== 'image/png')
-                    return setData({...data, err: "File format is incorrect." , success: ''})
+                    return setData({...data, err: "Le format de fichier est incorrect." , success: 'Photo téléchargée'})
 
                 let formData =  new FormData()
                 formData.append('file', file)
@@ -88,9 +109,12 @@ function EditUser() {
 
                 setLoading(false)
                 setAvatar(res.data.url)
+                setOpen(true);
                 
             } catch (err) {
                 setData({...data, err: err.response.data.msg , success: ''})
+                setOpen1(true);
+
             }
         }
    
@@ -107,9 +131,12 @@ function EditUser() {
                     headers: {Authorization: token}
                 })
 
-                setData({...data, err: '' , success: "Updated Success!"})
+                setData({...data, err: '' , success: "Profile modifié!"})
+                setOpen(true);
+                window.location.reload(false);
             } catch (err) {
                 setData({...data, err: err.response.data.msg , success: ''})
+                setOpen1(true);
             }
         }
 
@@ -137,19 +164,16 @@ function EditUser() {
     }
 
   return (
-    <div className="profile">
-            {err && ShowErrMsg(err)}
-            {success && ShowSuccessMsg(success)}
       <div className='content-user'>
        <h3 className='title-photo'>Photo de profile</h3>
        <Form className='form-profil'>
          <Form.Group className="mb-3" >
          {loading && <Spinner animation="border" variant="secondary" />}
           <div className={classes.root}>
-           <Avatar src={avatar ? avatar : admin.avatar} alt="" className={classes.large} />
+           <img src={avatar ? avatar : admin.avatar} alt="" className={classes.large} />
           </div>
           <Form.Label htmlFor="file"> 
-            <img src="images/Camera-circle.png" alt="" className='camera-center'/>
+           <PhotoCameraIcon />
            </Form.Label>
             <Form.Control type="file"  id="file"
               name="avatar"
@@ -185,11 +209,22 @@ function EditUser() {
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Spécialité</Form.Label>
-              <Form.Control type="text" placeholder="Entrer spécialité" 
-                name="specialite" 
-              defaultValue={admin.specialite}
-              onChange={handleChange}
-            />
+            <Form.Select
+              name="specialite"
+              required 
+              onChange={handleChange}>
+              <option defaultValue={admin.specialite}>{admin.specialite}</option>
+              <option value="développement web">développement web</option>
+              <option value="développement mobile">développement mobile</option>
+              <option value="développement personnel">développement personnel</option>
+              <option value="design">design</option>
+              <option value="business">business</option>
+              <option value="design">design</option>
+              <option value="communication">communication</option>
+              <option value="photographie">photographie</option>
+              <option value="mode de vie">design</option>
+              <option value="musique">musique</option>
+        </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Mot de passe</Form.Label>
@@ -208,11 +243,23 @@ function EditUser() {
                 onChange={handleChange}
                />
             </Form.Group>
-          <div className="content-button">
-                  <Button disabled={loading} onClick={handleUpdate} className='btn-sauvg'>Sauvegarder les modifications</Button>
+          <div className="content-btn">
+                  <Button className='btn-annnuler' href="/instructeurs">Annuler</Button>
+                  <Button disabled={loading} onClick={handleUpdate} className='btn-confirme'>Sauvegarder les modifications</Button>
            </div>
         </Form>
-      </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success">
+          {success}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose1} severity="error">
+          {err}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }

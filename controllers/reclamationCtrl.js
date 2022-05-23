@@ -10,7 +10,7 @@ addReclamation: async (req, res) => {
         }
         const reclamation = new Reclamation(newReclamation);
          await reclamation.save();
-        res.json({msg: "Add reclamation Success! "})
+        res.json({msg: "Réclamation ajoutée ! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -47,7 +47,7 @@ deleteReclamation: async (req, res) => {
     try {
         await Reclamation.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "Reclamation deleted Success!"})
+        res.json({msg: "Réclamation supprimée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

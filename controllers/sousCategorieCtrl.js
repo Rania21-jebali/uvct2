@@ -14,7 +14,7 @@ addSousCategorie: async (req, res) => {
         }
         const sousCategorie = new SousCategorie(newSousCategorie);
          await sousCategorie.save();
-        res.json({msg: "Add sous-catégorie Success! "})
+        res.json({msg: "Sous-catégorie ajoutée ! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -36,7 +36,7 @@ updateSousCategorieById: async (req, res) => {
         await SousCategorie.findByIdAndUpdate({_id:req.params.id}, {
             titre, image, description, motCles
         })
-        res.json({msg: "Update sous categorie by id Success!"})
+        res.json({msg: "Sous catégorie modifiée!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -55,7 +55,7 @@ deleteSousCategorie: async (req, res) => {
     try {
         await SousCategorie.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "Sous Categorie deleted Success!"})
+        res.json({msg: "Sous Catégorie supprimée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

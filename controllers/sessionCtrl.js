@@ -11,7 +11,7 @@ addSession: async (req, res) => {
         }
         const session = new Session(newSession);
          await session.save();
-        res.json({msg: "Add session Success! "})
+        res.json({msg: "Session ajoutée ! "})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -34,7 +34,7 @@ updateSessionById: async (req, res) => {
         await Session.findByIdAndUpdate({_id:req.params.id}, {
              titre,description,file,article,video
         })
-        res.json({msg: "Update session by id Success!"})
+        res.json({msg: "Session modifiée!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }
@@ -53,7 +53,7 @@ deleteSession: async (req, res) => {
     try {
         await Session.findByIdAndDelete(req.params.id)
        
-        res.json({msg: "Session deleted Success!"})
+        res.json({msg: "Session supprimée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

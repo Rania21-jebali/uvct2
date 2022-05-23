@@ -10,6 +10,8 @@ const eventsReducer = (state = events, action) => {
             return action.payload
         case ACTIONS.GET_EVENTS:
             return action.payload
+        case ACTIONS.GET_EVENT:
+            return action.payload
         default:
             return state
     }

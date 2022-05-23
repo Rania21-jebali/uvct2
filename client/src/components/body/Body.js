@@ -54,6 +54,8 @@ import Evenements from '../../backOffice/pages/admin/events/Evenements';
 import Formations1 from '../../backOffice/pages/admin/formation/Formations';
 import { Instructeurs1 } from '../../pages/instructeurs/Instructeurs';
 import InstructeurDetails from '../../pages/instructeurs/instructeurDetails/InstructeurDetails';
+import UpdateEvent from '../../backOffice/pages/evenements/updateEvent/UpdateEvent';
+import Candidat from '../../backOffice/pages/instructeurs/candidat/Candidat';
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -70,6 +72,7 @@ function Body() {
             <Route path="/mes-evenements" element={<MesEvents />} />
             <Route path="/evenements" element={<Evenements />} />
             <Route path="/ajout-evenement" element={<AjoutEvent />} />
+            <Route path="/events/:id" element={<UpdateEvent />} />
             <Route path="/parametres" element={<Parametres />} />
             <Route path="/mes-achats" element={<Achats />} />
             <Route path="/mes-gains" element={isInstr ? <Gains /> : <NotFound />} />
@@ -88,6 +91,7 @@ function Body() {
             <Route path="/instructeur" element={(isAdmin || isSuperAdmin) ?  <Instructeurs /> : <NotFound /> } />
             <Route path="/instructeur/:id" element={(isAdmin || isSuperAdmin) ?  <Instructeur /> : <NotFound /> } />
             <Route path="/ajouter-instructeur" element={(isAdmin || isSuperAdmin) ?  <InstructeurAdd /> : <NotFound /> } />
+            <Route path="/candidat/:id" element={(isAdmin || isSuperAdmin) ?  <Candidat /> : <NotFound /> } />
             <Route path="/tableau-bord" element={(isAdmin || isSuperAdmin) ?  <Dashbord /> : <NotFound /> } />
             <Route path="/categories" element={isSuperAdmin ?  <Categories /> : <NotFound /> } />
             <Route path="/addcategorie" element={isSuperAdmin ?  <AddCategorie /> : <NotFound /> } />

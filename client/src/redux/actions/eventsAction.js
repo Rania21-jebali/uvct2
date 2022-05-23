@@ -26,4 +26,15 @@ export const dispatchGetEvents = (res) => {
         payload: res.data
     }
 }
+export const fetchEvent = async (id) => {
+    const res = await axios.get(`/event/${id}`)
+    return res
+}
+
+export const dispatchGetEvent = (res) => {
+    return {
+        type: ACTIONS.GET_EVENT,
+        payload:  res.data
+    }
+}
 

@@ -4,10 +4,10 @@ import {useSelector} from 'react-redux'
 import './Profil.css'
 import { Button,Form} from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import { message } from 'antd';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
 const key = 'updatable';
 
@@ -24,20 +24,16 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+      display: 'flex',
+      overflow:"hidden",
+      flexWrap: 'wrap',
     '& > *': {
       margin: theme.spacing(1),
-      border:" 0.5px solid #999999",
       padding:"5px",
       boxSizing: "border-box",
-    },
-  },
-  large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
-    borderRadius:"50%",
 
-  },
+    },
+  }
 }));
 const initialState = {
     name: '',
@@ -118,7 +114,7 @@ function Profil() {
                 info: info ? info : user.info,
 
             }, { headers: {Authorization: token} })
-            setData({...data, err: '' , success: "Updated profil instructeur Success!"})
+            setData({...data, err: '' , success: "Profile modifié!"})
             setOpen(true);
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
@@ -137,11 +133,13 @@ function Profil() {
          <Form.Group className="mb-3" >
          {loading && openMessage() }
           <div className={classes.root}>
-           <Avatar src={avatar ? avatar : user.avatar} alt="" className={classes.large} />
-          </div>
-          <Form.Label htmlFor="file"> 
-            <img src="images/Camera-circle.png" alt="" className='camera-center'/>
+           <img src={avatar ? avatar : user.avatar} alt="" className="avatar-img" />
+           <div className='icon-camera'>
+           <Form.Label htmlFor="file" > 
+            <PhotoCameraIcon />
            </Form.Label>
+           </div>
+          </div>
             <Form.Control type="file"  id="file"
               name="avatar"
               defaultValue={user.avatar}

@@ -23,7 +23,7 @@ function DevenirInstructeur() {
     const [user, setUser] = useState(initialState)
     const {name, email, specialite,message,tele,err, success} = user
     const navigate = useNavigate();
-    const [file, setFile] = useState(false);
+    // const [file, setFile] = useState(false);
 
 
     const handleChangeInput = e => {

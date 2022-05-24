@@ -15,10 +15,10 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
+const { confirm } = Modal;
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-const { confirm } = Modal;
 const initialState = {
   name: '',
   email:'',
@@ -41,13 +41,23 @@ function AdministrateurList() {
     const {err} =data
     const dispatch = useDispatch()
     const [open2, setOpen2] = React.useState(false);
-
-    const handleClose2 = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
+    const rowData= users?.map(user => {
+      return{
+          id:user?._id,
+          name:user?.name,
+          email:user?.email,
+          avatar:user?.avatar,
+          tele:user?.tele,
+          date:user?.createdAt,
       }
-      setOpen2(false);
-    };
+  })
+
+      const handleClose2 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen2(false);
+      };
 
       const handleClick = (event) => {
           setAnchorEl(event.currentTarget);
@@ -71,7 +81,6 @@ function AdministrateurList() {
                   await axios.delete(`/user/delete/${id}`, {
                       headers: {Authorization: token}
                   })
-                
                   setCallback(!callback)
           }
           
@@ -182,26 +191,16 @@ function AdministrateurList() {
             }
           },
       ];
-
-      const rowData= users?.map(user => {
-        return{
-            id:user?._id,
-            name:user?.name,
-            email:user?.email,
-            avatar:user?.avatar,
-            tele:user?.tele,
-            date:user?.createdAt,
-        }
-    })
+      
 
   return (
       <div className='admin'>
-      <div className="header-admin">
-        <h1 className='title-admin'>Liste administrateurs</h1>
+        <div className="header-admin">
+          <h1 className='title-admin'>Liste administrateurs</h1>
           <Button className='btn-add-admin' href="/addAdmin">
             <img src="images/add-square.png" className="add-icon" alt=""/>Administrateur
           </Button>
-  </div>
+       </div>
         <div style={{ height: 550}}  className="tableau">
             <DataGrid
                 rows={rowData}

@@ -24,14 +24,19 @@ function Categories() {
     const categories1 = useSelector(state => state.categorie)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
-       
-        //Catégories
+    const rowData= categories1?.map(categorie => {
+      return{
+          id:categorie?._id,
+          titre:categorie?.titre,
+          date:categorie?.createdAt,
+      }
+  })
+        
         useEffect(() => {
             fetchCategories().then(res =>{
                   dispatch(dispatchCategories(res))
               })
         },[dispatch, callback])
-        
 
        const handleDelete = async (id) => {
         try {
@@ -101,13 +106,7 @@ function Categories() {
             }
           },
       ];
-     const rowData= categories1?.map(categorie => {
-        return{
-            id:categorie?._id,
-            titre:categorie?.titre,
-            date:categorie?.createdAt,
-        }
-    })
+     
     
   return (
       <div className='admin'>
@@ -117,16 +116,16 @@ function Categories() {
              <AddIcon /> Catégorie
             </Button>
         </div>
-    <div  style={{ height: 550 }} className="tableau" >
-        <DataGrid
-            rows={rowData}
-            columns={columns}
-            pageSize={8}
-            checkboxSelection
-            disableSelectionOnClick
-        />
-    </div> 
-</div>
+        <div  style={{ height: 550 }} className="tableau" >
+            <DataGrid
+                rows={rowData}
+                columns={columns}
+                pageSize={8}
+                checkboxSelection
+                disableSelectionOnClick
+         />
+       </div> 
+      </div>
   )
 }
 

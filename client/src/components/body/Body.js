@@ -129,7 +129,7 @@ function Body() {
             <Route path="/partner" element={<PartnerPage />} />
             <Route path="/allInstructeurs" element={<Instructeurs1 />} />
             <Route path="/instructeurDet" element={<InstructeurDetails />} />
-                <Footer/>
+                
               </Routes>
             )
             }

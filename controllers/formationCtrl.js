@@ -30,7 +30,16 @@ getAllFormations: async (req, res) => {
 // get All formations
 getFormations: async (req, res) => {
     try {
-        const formation = await Formation.find()
+        const formation = await Formation.find({statut:false})
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// get All formations archivées
+getFormationsArchive: async (req, res) => {
+    try {
+        const formation = await Formation.find({statut:true})
         res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -48,7 +57,16 @@ getFormationById: async (req, res) => {
 //  All formations for admin
 getAllFormationsAdmin: async (req, res) => {
     try {
-        const formation = await Formation.find()
+        const formation = await Formation.find({statut:false})
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  get formations by categorie
+getFormationsByCategorie: async (req, res) => {
+    try {
+        const formation = await Formation.find({categorie:req.params.categorie})
         res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -78,6 +96,28 @@ updateFormationById: async (req, res) => {
             titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
         })
         res.json({msg: "Formation modifiée !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// archiver formation by id
+archiveFormationById: async (req, res) => {
+    try {
+        await Formation.findByIdAndUpdate({_id:req.params.id}, {
+            statut:true
+        })
+        res.json({msg: "Formation archivée !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// unarchiver formation by id
+unarchiveFormationById: async (req, res) => {
+    try {
+        await Formation.findByIdAndUpdate({_id:req.params.id}, {
+            statut:false
+        })
+        res.json({msg: "Formation unarchivée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

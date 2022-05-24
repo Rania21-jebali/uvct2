@@ -22,7 +22,16 @@ addEvent: async (req, res) => {
 //  All events by user
 getAllEvent: async (req, res) => {
     try {
-        const event = await Event.find({ postedBy: req.user.id })
+        const event = await Event.find({ postedBy: req.user.id , statut:false})
+        res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  All archive events by user
+getAllArchiveEvent: async (req, res) => {
+    try {
+        const event = await Event.find({ postedBy: req.user.id , statut:true})
         res.json(event)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -40,8 +49,39 @@ getEventById: async (req, res) => {
 //  All events 
 getAllEvents: async (req, res) => {
     try {
-        const event = await Event.find()
+        const event = await Event.find({statut:false})
         res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  get archive events 
+getArchiveEvents: async (req, res) => {
+    try {
+        const event = await Event.find({statut:true})
+        res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// archiver event by id
+archiveEventById: async (req, res) => {
+    try {
+        await Event.findByIdAndUpdate({_id:req.params.id}, {
+            statut:true
+        })
+        res.json({msg: "Event archivée !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// unarchiver event by id
+unarchiveEventById: async (req, res) => {
+    try {
+        await Event.findByIdAndUpdate({_id:req.params.id}, {
+            statut:false
+        })
+        res.json({msg: "Event unarchivée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

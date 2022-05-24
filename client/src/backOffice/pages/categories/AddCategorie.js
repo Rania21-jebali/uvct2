@@ -43,7 +43,6 @@ function AddCategorie() {
         setOpen1(false);
       };
 
-
     const handleChangeInput = e => {
         const {name, value} = e.target
         setData({...data, [name]:value, err: '', success: ''})
@@ -102,7 +101,7 @@ function AddCategorie() {
       
   return (
       <div className='add-admin'>
-      <BreadcrumbHeader item="Liste des catégories" link="categories" active="Ajouter catégorie"/>
+        <BreadcrumbHeader item="Liste des catégories" link="categories" active="Ajouter catégorie"/>
         <div className='content-admin'>
           <Form onSubmit={handleSubmit} className='form-admin'>
             <Form.Group className="mb-3" >
@@ -169,7 +168,6 @@ function AddCategorie() {
                 </Alert>
             </Snackbar>
       </div>
-    
   )
 }
 

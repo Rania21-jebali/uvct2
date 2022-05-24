@@ -26,7 +26,6 @@ const initialState = {
     success: ''
   }
 
-
 function UpdateEvent(props){
     const token = useSelector(state => state.token)
     const [event, setEvent] = useState(initialState)
@@ -43,11 +42,11 @@ function UpdateEvent(props){
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetchEvent(id).then(res =>{
-            dispatch(dispatchGetEvent(res))
-        })
-    },[id, dispatch, callback])
+        useEffect(() => {
+            fetchEvent(id).then(res =>{
+                dispatch(dispatchGetEvent(res))
+            })
+        },[id, dispatch, callback])
 
         const handleClose = (event, reason) => {
           if (reason === 'clickaway') {
@@ -68,7 +67,7 @@ function UpdateEvent(props){
             setEvent({...event, [name]:value, err:'', success: ''})
             }
 
-                const changeAffiche = async(e) => {
+        const changeAffiche = async(e) => {
                     e.preventDefault()
                     try {
                         const file = e.target.files[0]
@@ -97,9 +96,9 @@ function UpdateEvent(props){
                         setAffiche({...event, err: err.response.data.msg , success: ''})
                         setOpen1(true);
                     }
-                  }
+        }
 
-              const updateInfor = async() => {
+        const updateInfor = async() => {
                 try {
                     axios.patch(`/updateEvent/${id}`, {
                        titre: titre ? titre : events1.titre,
@@ -121,14 +120,15 @@ function UpdateEvent(props){
                     setEvent({...event, err: err.response.data.msg , success: ''})
                     setOpen1(true);
                 }
-              }
+        }
       
-              const handleUpdate = () => {
+        const handleUpdate = () => {
                   updateInfor()
-              }
+        }
+
     return(
         <div className='ajout-event'>
-        <BreadcrumbHeader item="Mes événements" link="/mes-evenements" active="Modifier événement"/>
+          <BreadcrumbHeader item="Mes événements" link="/evenements" active="Modifier événement"/>
           <div className='content-ajout'>
             <Form className="form-event">
               <Form.Group className="mb-3" >
@@ -251,7 +251,7 @@ function UpdateEvent(props){
               {err}
             </Alert>
           </Snackbar>
-    </div>
+        </div>
     )
 }
 

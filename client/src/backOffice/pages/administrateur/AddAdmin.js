@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import {useSelector} from 'react-redux'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail, isLength} from '../../../components/utils/validation/Validation'
 import { Button} from 'react-bootstrap';
 import axios from 'axios'
@@ -43,13 +42,12 @@ function AddAdmin() {
         setOpen1(false);
       };
 
-
     const handleChangeInput = e => {
         const {name, value} = e.target
         setData({...data, [name]:value, err: '', success: ''})
       }
-    
-      const handleSubmit = async e => {
+     
+    const handleSubmit = async e => {
         e.preventDefault()
         if(isEmpty(name) || isEmpty(password) || isEmpty(tele))
                 return setData({...data, err: "Please fill in all fields.", success: ''})
@@ -79,7 +77,7 @@ function AddAdmin() {
       
   return (
       <div className='add-admin'>
-      <BreadcrumbHeader item="Administrateur" link="administrateurs" active="Ajouter Administrateur"/>
+        <BreadcrumbHeader item="Administrateur" link="administrateurs" active="Ajouter Administrateur"/>
         <div className='content-admin'>
           <Form onSubmit={handleSubmit} className='form-admin'>
             <Form.Group className="mb-3" >
@@ -154,21 +152,20 @@ function AddAdmin() {
             </Button>
             </div>
           </Form>
-      </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
+        </div>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                  <Alert onClose={handleClose} severity="success">
+                  {success}
+                  </Alert>
         </Snackbar>
         <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert onClose={handleClose1} severity="error">
                 {err}
                 </Alert>
-            </Snackbar>
-      </div>
-    
+        </Snackbar>
+      </div> 
   )
 }
 

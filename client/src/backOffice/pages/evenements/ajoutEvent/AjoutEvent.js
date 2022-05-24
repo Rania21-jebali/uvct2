@@ -20,7 +20,6 @@ import './AjoutEvent.css'
       err: '',
       success: ''
     }
-
     function Alert(props) {
       return <MuiAlert elevation={6} variant="filled" {...props} />;
     }
@@ -86,7 +85,7 @@ function AjoutEvent() {
         }
       }
 
-        const handleSubmit = async e => {
+      const handleSubmit = async e => {
           e.preventDefault()
           try {
               const res = await axios.post('/addEvent', {
@@ -105,11 +104,11 @@ function AjoutEvent() {
               setEvent({...event, err: err.response.data.msg, success: ''})
               setOpen2(true);
           }
-        }
+      }
 
   return (
   <div className='ajout-event'>
-    <BreadcrumbHeader item="Mes événements" link="mes-evenements" active="Ajouter un nouveau événement"/>
+    <BreadcrumbHeader item="Mes événements" link="/evenements" active="Ajouter un nouveau événement"/>
       <div className='content-ajout'>
         <Form className="form-event" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" >
@@ -220,7 +219,7 @@ function AjoutEvent() {
       </div>
     </Form>
   </div>
-  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
         <Alert onClose={handleClose} severity="success">
           {success}
@@ -232,7 +231,7 @@ function AjoutEvent() {
           {err}
         </Alert>
       </Snackbar>
-</div>
+  </div>
   )
 }
 

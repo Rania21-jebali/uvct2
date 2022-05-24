@@ -54,7 +54,7 @@ router.patch('/update_role/:id', auth, userCtrl.updateUsersRole)
 
 router.delete('/delete/:id', auth, userCtrl.deleteUser)
 
-router.get('/history', auth, userCtrl.getHistory)
+router.get('/history', userCtrl.getHistory)
 
 
 // Social Login

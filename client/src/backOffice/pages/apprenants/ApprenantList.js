@@ -10,6 +10,7 @@ import {OverlayTrigger,Tooltip} from 'react-bootstrap';
 import { Modal, Button } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AddIcon from '@material-ui/icons/Add';
 import './Apprenants.css'
 
 const { confirm } = Modal;
@@ -21,8 +22,17 @@ function ApprenantList() {
     const users = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
     const [data, setData] =useState([]);
-    const [currentRow, setCurrentRow] = useState(null);
     const dispatch = useDispatch()
+    const rowData= users?.map(user => {
+      return{
+          id:user?._id,
+          name:user?.name,
+          email:user?.email,
+          avatar:user?.avatar,
+          date:user?.createdAt,
+          tele:user?.tele,
+      }
+     })
     
       useEffect(() => {
           if(isAdmin || isSuperAdmin){
@@ -116,30 +126,19 @@ function ApprenantList() {
             }
           },
       ];
-
-      const rowData= users?.map(user => {
-          return{
-              id:user?._id,
-              name:user?.name,
-              email:user?.email,
-              avatar:user?.avatar,
-              date:user?.createdAt,
-              tele:user?.tele,
-          }
-      })
+     
   return (
       <div className="apprenat-list">
         <div className="header-instructeur">
         <h1 className='title-instructeur'>Liste apprenants</h1>
         <Button className='btn-add-instructeur' href='/ajout-apprenant'>
-        <img src="images/add-square.png" className="add-icon" alt=""/>Apprenants</Button>
+        <AddIcon />Apprenants</Button>
       </div>
             <div style={{ height: 550 }} className="tableau">
               <DataGrid
                   rows={rowData}
                   columns={columns}
                   pageSize={8}
-$                 isRowSelectable={(params) => setCurrentRow(params.row)}
               />
             </div> 
       </div>

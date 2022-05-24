@@ -212,6 +212,7 @@ AddInstructeur: async (req, res) => {
         }
         const user1 = new Users(newUser);
         user1.role="instructeur";
+        user1.accept=true;
 
          await user1.save();
 
@@ -473,14 +474,11 @@ updateUsersRole: async (req, res) => {
 //Delete user
 deleteUser: async (req, res) => {
     try {
-        const {cause} = req.body
-        const {idAdmin} =req
         const user= await Users.findById(req.params.id)
         const Useremail= user.email
-        const history = new History({cause,Useremail,idAdmin});
+        const history = new History({Useremail,idAdmin:req.user.id});
         await history.save();
         await Users.findByIdAndDelete(req.params.id)
-       
         res.json({msg: "Utilisateur supprimé!"})
     } catch (err) {
         return res.status(500).json({msg: err.message})

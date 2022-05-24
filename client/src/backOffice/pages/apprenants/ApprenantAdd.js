@@ -6,7 +6,6 @@ import { Button,Form} from 'react-bootstrap'
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader'
 import axios from 'axios'
 
-
 const initialState = {
     name: '',
     tele:'',
@@ -16,6 +15,7 @@ const initialState = {
     err: '',
     success: ''
 }
+
 function ApprenantAdd() {
     const [data, setData] = useState(initialState)
     const {name, tele, email, password,cf_password, err, success} = data
@@ -26,31 +26,31 @@ function ApprenantAdd() {
             setData({...data, [name]:value, err: '', success: ''})
         }
 
-      const handleSubmit = async e => {
-        e.preventDefault()
-        if(isEmpty(name) || isEmpty(password) || isEmpty(tele) || isEmpty(email))
-                return setData({...data, err: "Please fill in all fields.", success: ''})
-  
-        if(!isEmail(email))
-            return setData({...data, err: "Invalid emails.", success: ''})
-  
-        if(isLength(password))
-            return setData({...data, err: "Password must be at least 6 characters.", success: ''})
-  
-        try {
-            const res = await axios.post('/user/registerApprenant', {
-                name, email, tele, password
-            },{
-              headers: {Authorization: token}
-            })
-  
-            setData({...data, err: '', success: res.data.msg})
-  
-        } catch (err) {
-            err.response.data.msg && 
-            setData({...data, err: err.response.data.msg, success: ''})
+        const handleSubmit = async e => {
+          e.preventDefault()
+          if(isEmpty(name) || isEmpty(password) || isEmpty(tele) || isEmpty(email))
+                  return setData({...data, err: "Please fill in all fields.", success: ''})
+    
+          if(!isEmail(email))
+              return setData({...data, err: "Invalid emails.", success: ''})
+    
+          if(isLength(password))
+              return setData({...data, err: "Password must be at least 6 characters.", success: ''})
+    
+          try {
+              const res = await axios.post('/user/registerApprenant', {
+                  name, email, tele, password
+              },{
+                headers: {Authorization: token}
+              })
+    
+              setData({...data, err: '', success: res.data.msg})
+    
+          } catch (err) {
+              err.response.data.msg && 
+              setData({...data, err: err.response.data.msg, success: ''})
+          }
         }
-      }
    
   return (
     <div className="profile">

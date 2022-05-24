@@ -10,6 +10,7 @@ import sessions from './sessionReducer'
 import categorie from './categorieReducer'
 import sousCategorie from './sousCategorieReducer'
 import reclamations from './reclamationReducer'
+import histories from './historyReducer'
 
 
 export default combineReducers({
@@ -24,4 +25,5 @@ export default combineReducers({
     categorie,
     sousCategorie,
     reclamations,
+    histories,
 })

@@ -37,4 +37,15 @@ export const dispatchGetEvent = (res) => {
         payload:  res.data
     }
 }
+export const fetchArchiveEvents = async () => {
+    const res = await axios.get('/archiveEvents')
+    return res
+}
+
+export const dispatchGetArchiveEvents = (res) => {
+    return {
+        type: ACTIONS.GET_ARCHIVE_EVENTS,
+        payload: res.data
+    }
+}
 

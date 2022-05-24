@@ -9,13 +9,13 @@ import './Dashbord.css'
 function Dashbord() {
   return (
     <div className='home'>
-    <FeaturedInfo />
-    <Chart data={userData} title="Nombre d'utilisateurs actifs" grid dataKey="Active User"/>
-    <div className='homeWidgets'>
-      <WidgetSm />
-      <WidgetLg />
+      <FeaturedInfo />
+      <Chart data={userData} title="Nombre d'utilisateurs actifs" grid dataKey="Active User"/>
+      <div className='homeWidgets'>
+        <WidgetSm />
+        <WidgetLg />
+      </div>
     </div>
-     </div>
   )
 }
 

@@ -34,7 +34,6 @@ const eventSchema = new mongoose.Schema({
     affiche: {
         type: String,
         required: true,
-
     },
     enLigne: {
         type: Boolean,
@@ -45,7 +44,11 @@ const eventSchema = new mongoose.Schema({
     postedBy:{
         type:Object,
         ref: 'Users'
-    }
+    },
+    statut: {
+        type: Boolean,
+        default: false,
+    },
 
 }, {
     timestamps: true

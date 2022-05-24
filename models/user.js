@@ -42,12 +42,6 @@ const userSchema = new mongoose.Schema({
     tele:{
         type:String,
     },
-    info:{
-        type:String,
-    },
-    site:{
-        type:String,
-    },
     statut:{
         type:String,
     }

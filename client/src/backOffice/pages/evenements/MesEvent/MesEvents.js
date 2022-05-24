@@ -12,10 +12,16 @@ import ListIcon from '@material-ui/icons/List';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import AddIcon from '@material-ui/icons/Add';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const initialState = {
   err: '',
   success: ''
+}
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const { Search } = Input;
@@ -34,112 +40,131 @@ const participants = [
   const onSearch = value => console.log(value);
   
 function MesEvents() {
-  const auth = useSelector(state => state.auth)
-  const {isInstr} = auth
-  const token = useSelector(state => state.token)
-  const events = useSelector(state => state.events)
-  const [event, setEvent ]= useState(initialState);
-  const [callback, setCallback] = useState(false)
-  const { err, success} = event
-
+    const auth = useSelector(state => state.auth)
+    const {isInstr} = auth
+    const token = useSelector(state => state.token)
+    const events = useSelector(state => state.events)
+    const [event, setEvent ]= useState(initialState);
+    const [callback, setCallback] = useState(false)
+    const { err, success} = event
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const dispatch = useDispatch()
-    useEffect(() => {
-            fetchMyEvents(token).then(res =>{
-                dispatch(dispatchGetMyEvents(res))
-            })
-    },[token, dispatch, callback])
 
-    const handleDelete = async (id) => {
-      try {
-          if(event._id !== id){
-                  await axios.delete(`/deleteEvent/${id}`, {
-                      headers: {Authorization: token}
-                  })
-                 
-                  setCallback(!callback)
-          }
-          
-      } catch (err) {
-              setEvent({...event, err: err.response.data.msg, success: ''})
-      }
-  } 
-  
-    const columns = [
-      {
-        field: 'affiche',
-        headerName: 'Miniature',
-        flex:1,
-        renderCell: (params) =>{
-          return(
-            <> 
-                <img src={params.row.affiche} alt="" className='miniature'/>    
-            </>
-          )
+      const showModal = () => {
+        setIsModalVisible(true);
+      };
+
+      const handleOk = () => {
+        setIsModalVisible(false);
+      };
+
+      const handleCancel = () => {
+        setIsModalVisible(false);
+      };
+
+      const rowData= events?.map(event => {
+        return{
+            id:event?._id,
+            titre:event?.titre,
+            affiche:event?.affiche,
+            date:event?.dateDebut,
         }
-      },
+      })
+
+      const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+      };
+
+      const handleClose2 = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen2(false);
+      };
+   
+      useEffect(() => {
+              fetchMyEvents(token).then(res =>{
+                  dispatch(dispatchGetMyEvents(res))
+              })
+      },[token, dispatch, callback])
+
+      const handleDelete = async (id) => {
+        try {
+            if(event._id !== id){
+                    await axios.delete(`/deleteEvent/${id}`, {
+                        headers: {Authorization: token}
+                    })
+                  
+                    setCallback(!callback)
+                    setOpen(true);
+            }
+            
+        } catch (err) {
+                setEvent({...event, err: err.response.data.msg, success: ''})
+                setOpen2(true);
+        }
+      } 
+  
+      const columns = [
         {
-          field: 'titre',
-          headerName: 'Titre',
+          field: 'affiche',
+          headerName: 'Miniature',
           flex:1,
-        },
-        {
-          field: 'date',
-          headerName: 'Date',
-          flex:2,
-          renderCell(params){
+          renderCell: (params) =>{
             return(
-              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
-            );
+              <> 
+                  <img src={params.row.affiche} alt="" className='miniature'/>    
+              </>
+            )
           }
         },
-        {
-          field: 'participant',
-          headerName: 'Participants',
-          flex:2,
-          renderCell(params){
-            return(
-              <ListIcon onClick={showModal} className='icon-action'/>
-            );
-          }
-        },
-        {
-            field: 'action',
-            headerName: 'Action',
+          {
+            field: 'titre',
+            headerName: 'Titre',
             flex:1,
-            renderCell: (params) =>{
+          },
+          {
+            field: 'date',
+            headerName: 'Date',
+            flex:2,
+            renderCell(params){
               return(
-                <>  
-                 <a href={`/events/${params.row.id}`}>
-                         <VisibilityIcon className='icon-action'/>
-                  </a>
-                    <ArchiveIcon className='icon-action'/>
-                    <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>
-                </>
-              )
+                <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
+              );
             }
           },
-      ];
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-  const rowData= events?.map(event => {
-    return{
-        id:event?._id,
-        titre:event?.titre,
-        affiche:event?.affiche,
-        date:event?.dateDebut,
-    }
-})
+          {
+            field: 'participant',
+            headerName: 'Participants',
+            flex:2,
+            renderCell(params){
+              return(
+                <ListIcon onClick={showModal} className='icon-action'/>
+              );
+            }
+          },
+          {
+              field: 'action',
+              headerName: 'Action',
+              flex:1,
+              renderCell: (params) =>{
+                return(
+                  <>  
+                  <a href={`/events/${params.row.id}`}>
+                          <VisibilityIcon className='icon-action'/>
+                    </a>
+                      <ArchiveIcon className='icon-action'/>
+                      <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>
+                  </>
+                )
+              }
+            },
+        ];
 
   return (
 <div className={`${isInstr ? "favoris":""} `}>
@@ -160,21 +185,33 @@ function MesEvents() {
               disableSelectionOnClick 
             />
   </div> 
-<Modal title="Participants" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-<Search placeholder="Rechercher des participants" allowClear onSearch={onSearch}  />
-<List
-    dataSource={participants}
-    renderItem={item => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-          title={item.title}
-          description={item.date}
+      <Modal title="Participants" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+   <Search placeholder="Rechercher des participants" allowClear onSearch={onSearch}  />
+      <List
+          dataSource={participants}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                title={item.title}
+                description={item.date}
+              />
+            </List.Item>
+          )}
         />
-      </List.Item>
-    )}
-  />
       </Modal>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity="success">
+          {success}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert onClose={handleClose2} severity="error">
+          {err}
+        </Alert>
+      </Snackbar>
 </div>
      
   )

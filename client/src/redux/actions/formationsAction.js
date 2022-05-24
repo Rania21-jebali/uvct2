@@ -15,10 +15,8 @@ export const dispatchGetMyFormations = (res) => {
     }
 }
 
-export const fetchAllFormations = async (token) => {
-    const res = await axios.get('/allFormations', {
-        headers: {Authorization: token}
-    })
+export const fetchAllFormations = async () => {
+    const res = await axios.get('/allFormations')
     return res
 }
 
@@ -51,6 +49,17 @@ export const fetchFormations = async () => {
 export const dispatchGetFormations = (res) => {
     return {
         type: ACTIONS.GET_FORMATIONS,
+        payload: res.data
+    }
+}
+export const fetchArchiveFormations = async () => {
+    const res = await axios.get('/formationsArchive')
+    return res
+}
+
+export const dispatchGetArchiveFormations = (res) => {
+    return {
+        type: ACTIONS.GET_ARCHIVE_FORMATIONS,
         payload: res.data
     }
 }

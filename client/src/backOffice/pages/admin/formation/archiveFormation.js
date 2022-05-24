@@ -1,9 +1,9 @@
 import React ,{useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {fetchFormations, dispatchGetFormations} from '../../../../redux/actions/formationsAction'
+import {fetchArchiveFormations, dispatchGetArchiveFormations} from '../../../../redux/actions/formationsAction'
 import {fetchUserById, dispatchGetAllUserById} from '../../../../redux/actions/usersAction'
 import Avatar1 from '../../../../components/Avatar/Avatar';
-import { Modal} from 'antd';
+import {Modal} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
 import "./Formation.css"
 import DayJS from 'react-dayjs';
@@ -11,7 +11,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import ArchiveIcon from '@material-ui/icons/Archive';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import axios from 'axios'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
@@ -24,26 +24,26 @@ const initialState = {
   success: ''
 }
 
-function Formation() {
-  const token = useSelector(state => state.token)
-  const [formation, setFormation] = useState(initialState)
-  const formations = useSelector(state => state.formations)
-  const { err, success} = formation
-  const [callback, setCallback] = useState(false)
-  const dispatch = useDispatch()
-  const [open2, setOpen2] = React.useState(false);
-  const [open3, setOpen3] = React.useState(false);
-  const data= formations?.map(formation => {
-    return{
-        id:formation?._id,
-        titre:formation?.titre,
-        affiche:formation?.affiche,
-        date:formation?.createdAt,
-        categorie:formation?.categorie,
-        instructeur:formation?.postedBy,  
-    }
-  })
-
+function ArchiveFormation() {
+    const token = useSelector(state => state.token)
+    const [formation, setFormation] = useState(initialState)
+    const formations = useSelector(state => state.formations)
+    const { err, success} = formation
+    const [callback, setCallback] = useState(false)
+    const dispatch = useDispatch()
+    const [open2, setOpen2] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
+    const data= formations?.map(formation => {
+        return{
+            id:formation?._id,
+            titre:formation?.titre,
+            affiche:formation?.affiche,
+            date:formation?.createdAt,
+            categorie:formation?.categorie,
+            instructeur:formation?.postedBy,
+            
+        }
+      })
 
         const handleClose2 = (event, reason) => {
           if (reason === 'clickaway') {
@@ -58,43 +58,43 @@ function Formation() {
             }
             setOpen3(false);
           };
-      
+
+        const handleDelete = async (id) => {
+            try {
+                if(formation._id !== id){
+                        await axios.delete(`/deleteFormation/${id}`, {
+                            headers: {Authorization: token}
+                        })
+                      
+                        setCallback(!callback)
+                }
+                
+            } catch (err) {
+                setFormation({...formation, err: err.response.data.msg , success: ''})
+                setOpen2(true);
+            }
+        }
+        
         useEffect(() => {
-                  fetchFormations().then(res =>{
-                        dispatch(dispatchGetFormations(res))
+            fetchArchiveFormations().then(res =>{
+                        dispatch(dispatchGetArchiveFormations(res))
                     })
         },[dispatch, callback])
 
-        const handleDelete = async (id) => {
-          try {
-              if(formation._id !== id){
-                      await axios.delete(`/deleteFormation/${id}`, {
-                          headers: {Authorization: token}
-                      })
-                    
-                      setCallback(!callback)
-              }
+        const unarchiverFormation = async(id) => {
+            try {
+                axios.patch(`/unarchiveFormation/${id}`,{
+                  headers: {Authorization: token}
+              })
+                setFormation({...formation, err: '' , success: "Formation unarchivé !"})
+                setOpen2(true);
               
-          } catch (err) {
-              setFormation({...formation, err: err.response.data.msg , success: ''})
-              setOpen2(true);
+          }catch (err) {
+                setFormation({...formation, err: err.response.data.msg , success: ''})
+                setOpen3(true);
+              
+            }
           }
-        }
-
-        const archiverFormation = async(id) => {
-          try {
-              axios.patch(`/archiveFormation/${id}`,{
-                headers: {Authorization: token}
-            })
-              setFormation({...formation, err: '' , success: "Formation archivé !"})
-              setOpen2(true);
-            
-        }catch (err) {
-              setFormation({...formation, err: err.response.data.msg , success: ''})
-              setOpen3(true);
-            
-          }
-        }
 
         const columns = [
           {
@@ -165,71 +165,71 @@ function Formation() {
               flex:2,
               renderCell: (params) =>{
                 function showDeleteConfirm() {
-                  confirm({
-                    title: 'Êtes-vous sûr de vouloir supprimer cette formation ?',
-                    icon: <ExclamationCircleOutlined />,
-                    okText: 'Supprimer',
-                    okType: 'danger',
-                    cancelText: 'Annuler',
-                    closable:true,
-                    onOk() {
-                      handleDelete(params.row.id)
-                    },
-                    onCancel() {
-                      console.log('Cancel');
-                    },
-                  });
-                }
-                function showArchiveConfirm() {
-                  confirm({
-                    title: 'Êtes-vous sûr de vouloir archiver cette formation ?',
-                    icon: <ExclamationCircleOutlined />,
-                    okText: 'Archiver',
-                    okType: 'danger',
-                    cancelText: 'Annuler',
-                    closable:true,
-                    onOk() {
-                      archiverFormation(params.row.id)
-                    },
-                    onCancel() {
-                      console.log('Cancel');
-                    },
-                  });
-                }
+                    confirm({
+                      title: 'Êtes-vous sûr de vouloir supprimer cette formation ?',
+                      icon: <ExclamationCircleOutlined />,
+                      okText: 'Supprimer',
+                      okType: 'danger',
+                      cancelText: 'Annuler',
+                      closable:true,
+                      onOk() {
+                        handleDelete(params.row.id)
+                      },
+                      onCancel() {
+                        console.log('Cancel');
+                      },
+                    });
+                  }
+                  function showUnarchiveConfirm() {
+                    confirm({
+                      title: 'Êtes-vous sûr de vouloir unarchiver cette formation ?',
+                      icon: <ExclamationCircleOutlined />,
+                      okText: 'Unarchiver',
+                      okType: 'danger',
+                      cancelText: 'Annuler',
+                      closable:true,
+                      onOk() {
+                        unarchiverFormation(params.row.id)
+                      },
+                      onCancel() {
+                        console.log('Cancel');
+                      },
+                    });
+                  }
                 return(
                   <>  
                   <VisibilityIcon className='icon-action'/>  
-                  <ArchiveIcon className='icon-action' onClick={showArchiveConfirm}/>
-                  <DeleteOutlineIcon className='icon-action' onClick={showDeleteConfirm}/> 
+                  <UnarchiveIcon className='icon-action'onClick={showUnarchiveConfirm}/>
+                  <DeleteOutlineIcon className='icon-action' onClick={showDeleteConfirm} /> 
                   </>
                 )
               }
             },
         ];
-        
+
   return (
-    <div >
+    <div>
           <div style={{ height: 550, width: '100%'}} >
             <DataGrid
                     rows={data}
                     columns={columns}
                     pageSize={8}
-                  />
+            />
           </div>
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose2} severity="success">
-                {success}
-                </Alert>
+        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                    <Alert onClose={handleClose2} severity="success">
+                    {success}
+                    </Alert>
         </Snackbar>
         <Snackbar open={open3} autoHideDuration={6000} onClose={handleClose3}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert onClose={handleClose3} severity="error">
                 {err}
                 </Alert>
-            </Snackbar>
+        </Snackbar>
     </div>
   )
 }
 
-export default Formation
+export default ArchiveFormation

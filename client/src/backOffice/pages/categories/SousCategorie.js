@@ -19,6 +19,13 @@ function SousCategorie() {
     const [callback2, setCallback2] = useState(false)
     const dispatch2 = useDispatch()
     const {id} = useParams()
+    const rowData= sousCategories2?.map(sousCategorie => {
+      return{
+          id:sousCategorie?._id,
+          titre:sousCategorie?.titre,
+          date:sousCategorie?.createdAt,
+      }
+     })
        
         useEffect(() => {
             fetchAllSousCategorie(id).then(res =>{
@@ -83,13 +90,6 @@ function SousCategorie() {
                 }
               },
           ];
-         const rowData= sousCategories2?.map(sousCategorie => {
-            return{
-                id:sousCategorie?._id,
-                titre:sousCategorie?.titre,
-                date:sousCategorie?.createdAt,
-            }
-        })
         
       return (
           <div className='admin'>
@@ -99,16 +99,16 @@ function SousCategorie() {
                  <AddIcon /> Sous Catégorie
                 </Button>
             </div>
-        <div style={{ height: 550 }} className="tableau">
-            <DataGrid
-                rows={rowData}
-                columns={columns}
-                pageSize={8}
-                checkboxSelection
-                disableSelectionOnClick
-            />
-        </div> 
-    </div>
+            <div style={{ height: 550 }} className="tableau">
+              <DataGrid
+                  rows={rowData}
+                  columns={columns}
+                  pageSize={8}
+                  checkboxSelection
+                  disableSelectionOnClick
+              />
+           </div> 
+          </div>
       )
 }
 

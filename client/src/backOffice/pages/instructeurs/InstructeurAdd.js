@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail, isLength, isMatch} from '../../../components/utils/validation/Validation'
 import { Button,Form} from 'react-bootstrap'
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader'
@@ -112,13 +111,23 @@ function InstructeurAdd() {
             />
           </Form.Group>
           <Form.Group className="mb-3" >
-            <Form.Label className="label">Spécialité</Form.Label>
-              <Form.Control type="text" placeholder="Entrer son spécialité" 
-                name="specialite" 
+              <Form.Label className='labelForm'>Spécialité</Form.Label>
+              <Form.Select aria-label="Default select example"
+                name="specialite"
+                required
                 value={specialite}
-                required 
-                onChange={handleChangeInput}
-            />
+                onChange={handleChangeInput}>
+                <option>Séléctionnez votre spécialité</option>
+                <option value="Développement web">Développement web</option>
+                <option value="Développement mobile">Développement mobile</option>
+                <option value="Développement personnel">Développement personnel</option>
+                <option value="Design">Design</option>
+                <option value="Business">Business</option>
+                <option value="Design">Design</option>
+                <option value="Communication">Communication</option>
+                <option value="Photographie">Photographie</option>
+                <option value="Musique">Musique</option>
+              </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Mot de passe</Form.Label>

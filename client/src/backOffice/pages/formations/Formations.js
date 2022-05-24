@@ -43,7 +43,17 @@ function Formations() {
   const [currentRow, setCurrentRow] = useState(null);
   const [open2, setOpen2] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
-
+  const data= formations?.map(formation => {
+    return{
+        id:formation?._id,
+        titre:formation?.titre,
+        prix:formation?.prix,
+        affiche:formation?.affiche,
+        status:formation?.status,
+        date:formation?.createdAt,
+        inscription:0,
+    }
+  })
 
         const handleClose2 = (event, reason) => {
           if (reason === 'clickaway') {
@@ -200,18 +210,6 @@ function Formations() {
               }
             },
         ];
-
-        const data= formations?.map(formation => {
-          return{
-              id:formation?._id,
-              titre:formation?.titre,
-              prix:formation?.prix,
-              affiche:formation?.affiche,
-              status:formation?.status,
-              date:formation?.createdAt,
-              inscription:0,
-          }
-        })
 
   return (
     <div className='formation'>

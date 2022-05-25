@@ -1,29 +1,20 @@
 import React from 'react';
-import { Carousel,Navbar,Nav} from 'react-bootstrap';
+import { Carousel} from 'react-bootstrap';
 import './BannerSection.css';
-import Menu from '../Menu/Menu';
 import {MdNavigateNext} from 'react-icons/md';
 import BusinessIcon from '@material-ui/icons/Business';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import {QuickNavigation} from "../../../components/quick-navigation/quick-navigation";
 
 function BannerSection() {
   return (
     <div className='poster'>
-      <Navbar className='navbar-poster'>
-        <Nav className='nav-poster'>
-            <Menu menu="Accueil"/>
-            <Menu menu="Cours"/>
-            <Menu menu="Instructeurs" lien="/allInstructeurs"/>
-            <Menu menu="Événements" lien="/events"/>
-            <Menu menu="Offres"/>
-            <Menu menu="A propos"/>
-            <Menu menu="Blog"/>
-            <Menu menu="Contact"/>
-        </Nav>
-    </Navbar>
- <Carousel className='carousel-poster' fade>
-    <Carousel.Item className='carousel-item'>
+        <div style={{position: "absolute", zIndex: 1000, textAlign: "center", width: '100%', top: 60}}>
+            <QuickNavigation inverted={true}/>
+        </div>
+        <Carousel className='carousel-poster' fade>
+            <Carousel.Item className='carousel-item'>
       <img
         className="d-block w-100"
         src="./images/neonbrand.jpg"
@@ -49,8 +40,7 @@ function BannerSection() {
               </div>
           </Carousel.Caption>
     </Carousel.Item>
-</Carousel>
-
+        </Carousel>
     </div>
   )
 }

@@ -1,16 +1,21 @@
 .header{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
+    box-shadow: rgba(0, 0, 0, 0.5) 0 3px 8px;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    position: sticky;
+    top:0;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.4);
+}
 .header:hover{
     display: block;
 }
 .row2{
-    background-color:white;
     margin-left: 20px;
 }
 .links{
     text-align: center;
-    
+
 }
 .button-connexion{
     color:#20384D;
@@ -30,7 +35,6 @@
     margin-right: 20px;
     background: #20384D;
     border-radius: 2px;
-    font-family: 'Roboto';
     font-style: normal;
     color: #FFFFFF;
 }
@@ -62,7 +66,7 @@ display: block;
 }
 
 @media screen and (max-width:800px) {
-    
+
     .iconResp{
         color: red;
     }
@@ -73,7 +77,6 @@ font-weight: 400;
 font-size: 28px;
 line-height: 34px;
 color: #1D1D1D;
-text-align: center;
 }
 .sous-title-inscri{
 text-align: center;
@@ -103,14 +106,14 @@ font-size: 14px;
     font-weight: 600;
     font-size: 18px;
     margin-right: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 .categorie-title:hover{
     cursor: pointer;
     font-weight: 700;
     font-size: 18px;
     margin-right: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 .shoppingIcon{
     margin-left: 10px;
@@ -129,5 +132,5 @@ font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     color:#20384D;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }

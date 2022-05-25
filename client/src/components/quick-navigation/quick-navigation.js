@@ -3,7 +3,8 @@ import './quick-navigation.scss'
 import {Link} from "react-router-dom";
 import {Fragment} from "react";
 
-export const QuickNavigation = () => {
+export const QuickNavigation = ({inverted =false}) => {
+    // you can pass inverted to make the text color white
   return(
       <div className={'quick-navigation'}>
           <div className={'container'}>
@@ -12,7 +13,7 @@ export const QuickNavigation = () => {
                       return (
                           <Fragment key={index}>
                            <Link to={route.route}>
-                              <Typography className={'text'}>{route.name}</Typography>
+                              <Typography style={{color: inverted && 'white'}} className={'text'}>{route.name}</Typography>
                            </Link>
                           </Fragment>
 

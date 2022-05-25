@@ -21,7 +21,7 @@ addFormation: async (req, res) => {
 //  All formations by user
 getAllFormations: async (req, res) => {
     try {
-        const formation = await Formation.find({ postedBy: req.user.id })
+        const formation = await Formation.find({ postedBy: req.user.id , archiver:false})
         res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -30,7 +30,7 @@ getAllFormations: async (req, res) => {
 // get All formations
 getFormations: async (req, res) => {
     try {
-        const formation = await Formation.find({statut:false})
+        const formation = await Formation.find({archiver:false})
         res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -39,7 +39,7 @@ getFormations: async (req, res) => {
 // get All formations archivées
 getFormationsArchive: async (req, res) => {
     try {
-        const formation = await Formation.find({statut:true})
+        const formation = await Formation.find({archiver:true})
         res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -90,7 +90,8 @@ updateFormationByTitre: async (req, res) => {
 //update formation by id
 updateFormationById: async (req, res) => {
     try {
-        const {titre, description, affiche, videopromo, categorie, niveau, prix, gratuit} = req.body
+        const {titre, sousTitre, description, affiche, videopromo, categorie, niveau,
+             prix, gratuit,objectif,destinerA,prerequis} = req.body
 
         await Formation.findByIdAndUpdate({_id:req.params.id}, {
             titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
@@ -104,7 +105,7 @@ updateFormationById: async (req, res) => {
 archiveFormationById: async (req, res) => {
     try {
         await Formation.findByIdAndUpdate({_id:req.params.id}, {
-            statut:true
+            archiver:true
         })
         res.json({msg: "Formation archivée !"})
     } catch (err) {
@@ -115,9 +116,31 @@ archiveFormationById: async (req, res) => {
 unarchiveFormationById: async (req, res) => {
     try {
         await Formation.findByIdAndUpdate({_id:req.params.id}, {
-            statut:false
+            archiver:false
         })
         res.json({msg: "Formation unarchivée !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// publier formation by id
+publierFormationById: async (req, res) => {
+    try {
+        await Formation.findByIdAndUpdate({_id:req.params.id}, {
+            statut:true
+        })
+        res.json({msg: "Formation publiée !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+// depublier formation by id
+depublierFormationById: async (req, res) => {
+    try {
+        await Formation.findByIdAndUpdate({_id:req.params.id}, {
+            statut:false
+        })
+        res.json({msg: "Formation dépubliée !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

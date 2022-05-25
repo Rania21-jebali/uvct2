@@ -30,6 +30,7 @@ function ArchiveFormation() {
     const formations = useSelector(state => state.formations)
     const { err, success} = formation
     const [callback, setCallback] = useState(false)
+    const [archiver, setArchiver] = useState(false)
     const dispatch = useDispatch()
     const [open2, setOpen2] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
@@ -83,9 +84,10 @@ function ArchiveFormation() {
 
         const unarchiverFormation = async(id) => {
             try {
-                axios.patch(`/unarchiveFormation/${id}`,{
+                axios.patch(`/unarchiveFormation/${id}`,{ archiver },{
                   headers: {Authorization: token}
               })
+                setArchiver(false)
                 setFormation({...formation, err: '' , success: "Formation unarchivé !"})
                 setOpen2(true);
               

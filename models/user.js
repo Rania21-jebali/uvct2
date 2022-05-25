@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
         type:String,
     },
     statut:{
-        type:String,
+        type:Boolean,
+        default:false,//débloquer
     }
 
 }, {

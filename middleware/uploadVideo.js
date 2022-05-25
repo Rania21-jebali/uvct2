@@ -11,7 +11,6 @@ module.exports = async function(req, res, next) {
             removeTmp(file.tempFilePath)
             return res.status(400).json({msg: "File format is incorrect."})
         }
-
         next()
     } catch (err) {
         return res.status(500).json({msg: err.message})

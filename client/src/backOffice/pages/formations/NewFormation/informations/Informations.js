@@ -8,6 +8,7 @@ import '../../Formation.css'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import MovieIcon from '@material-ui/icons/Movie';
 import { useParams } from 'react-router-dom'
+import ReactPlayer from 'react-player'
 
 const initialState = {
   titre:'',
@@ -28,6 +29,7 @@ function Informations() {
     const {titre1} = useParams();
     const [gratuit, setGratuit] = useState(false);
     const [affiche, setAffiche] = useState(false);
+    const [videopromo, setVideopromo] = useState(false);
     const [loading, setLoading] = useState(false);
     const formations = useSelector(state => state.formations)
     const [callback, setCallback] = useState(false)
@@ -38,7 +40,6 @@ function Informations() {
                 dispatch(dispatchGetFormation(res))
             })
           },[token,titre1, dispatch, callback])
-          console.log(formations.titre)
 
         const handleChange = e => {
             const {name, value} = e.target
@@ -73,6 +74,28 @@ function Informations() {
               setAffiche({...data, err: err.response.data.msg , success: ''})
           }
         }
+        const changeVideoPromo = async(e) => {
+          e.preventDefault()
+          try {
+              const file2 = e.target.files[0]
+    
+              if(!file2) return setData({...data, err: "No files were uploaded." , success: ''})
+    
+              let formData =  new FormData()
+              formData.append('file2', file2)
+    
+              setLoading(true)
+              const res = await axios.post('/api/uploadVideo', formData, {
+                  headers: {'content-type': 'multipart/form-data', Authorization: token}
+              })
+    
+              setLoading(false)
+              setVideopromo(res.data.url)
+              
+          } catch (err) {
+              setVideopromo({...data, err: err.response.data.msg , success: ''})
+          }
+        }
 
         const updateInfor = async() => {
           try {
@@ -83,7 +106,7 @@ function Informations() {
                    categorie : categorie ? categorie : formations.categorie,
                    niveau : niveau ? niveau : formations.niveau ,
                    gratuit : gratuit ? gratuit : formations.gratuit, 
-                   affiche ,
+                   affiche , videopromo,
               }, { headers: {Authorization: token} })
               setData({...data, err: '' , success: "Success!"})
             }
@@ -123,9 +146,7 @@ function Informations() {
               <Form.Label className="label">L’affiche</Form.Label>
               <div className="content-affiche">
               <Form.Label htmlFor="file" > 
-                <img src={affiche ? 
-                affiche 
-                : formations.affiche} alt="" className="affiche-img"></img>
+                <img src={affiche ? affiche : formations.affiche} alt="" className="affiche-img"></img>
               <p> <PhotoSizeSelectActualIcon /> Séléctionnez une image </p>
               </Form.Label>
               </div>
@@ -138,11 +159,14 @@ function Informations() {
                 <Form.Label className="label">Vidéo promotionnelle</Form.Label>
                 <div className="content-affiche">
                   <Form.Label htmlFor="file" > 
+                  <ReactPlayer url={videopromo ? videopromo : formations.videopromo}
+                  controls playing muted width='80%' height='60%' ></ReactPlayer>
                   <p> <MovieIcon /> Séléctionnez un vidéo </p>
                   </Form.Label>
                   </div>
-                <Form.Control type="file" id="file"
+                <Form.Control type="file" id="file2"
                     style={{display:"none"}}
+                    onChange={changeVideoPromo}
               />
               </Form.Group>
               <Form.Group className="mb-3" >
@@ -199,7 +223,7 @@ function Informations() {
               <Button  className='btn-confirme' disabled={loading} onClick={handleUpdate}>Confirmer</Button>
           </div>
         </Form>
-    </div>
+      </div>
   )
 }
 

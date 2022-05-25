@@ -42,6 +42,7 @@ const participants = [
   const token = useSelector(state => state.token)
   const events = useSelector(state => state.events)
   const [event, setEvent ]= useState(initialState);
+  const [archiver, setArchiver ]= useState(false);
   const [callback, setCallback] = useState(false)
   const {err, success} = event
   const onSearch = value => console.log(value);
@@ -110,9 +111,10 @@ const participants = [
       const archiverEvent = async(id) => {
         try {
           if(event._id !== id){
-            axios.patch(`/archiveEvent/${id}`,{
+            axios.patch(`/archiveEvent/${id}`,{ archiver },{
             headers: {Authorization: token}
           })
+            setArchiver(true)
             setEvent({...event, err: '' , success: "Événement archivé !"})
             setOpen(true);
         }}catch (err) {

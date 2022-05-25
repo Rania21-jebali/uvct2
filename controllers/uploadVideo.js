@@ -7,19 +7,17 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
-
-
 const uploadVideo = {
     uploadVideo: (req, res) => {
         try {
-            const file = req.files.file;
+            const file2 = req.files.file;
             
-            cloudinary.v2.uploader.upload(file.tempFilePath, {
-                folder: 'video', width: 150, height: 150, crop: "fill"
-            }, async(err, result) => {
+            cloudinary.v2.uploader.upload_large(file2.tempFilePath, {folder: 'video',
+             resource_type : "video", crop: "fill"},
+            async(err, result) => {
                 if(err) throw err;
 
-                removeTmp(file.tempFilePath)
+                removeTmp(file2.tempFilePath)
 
                 res.json({url: result.secure_url})
             })

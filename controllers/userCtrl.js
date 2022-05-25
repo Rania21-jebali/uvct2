@@ -429,8 +429,29 @@ updateProfilInstr: async (req, res) => {
         await Users.findOneAndUpdate({_id: req.user.id}, {
             name, avatar,tele,site,info
         })
-
         res.json({msg: "Profile modifié !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//Bloquer user
+BloquerUser: async (req, res) => {
+    try {
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            statut:true
+        })
+        res.json({msg: "Utilisateur bloqué !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//Débloquer user
+DébloquerUser: async (req, res) => {
+    try {
+        await Users.findOneAndUpdate({_id: req.user.id}, {
+            statut:false
+        })
+        res.json({msg: "Utilisateur débloqué !"})
     } catch (err) {
         return res.status(500).json({msg: err.message})
     }

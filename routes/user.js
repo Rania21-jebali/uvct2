@@ -52,10 +52,13 @@ router.patch('/updatePasswordInstr', auth,userCtrl.updatePsswordInstr)
 
 router.patch('/update_role/:id', auth, userCtrl.updateUsersRole)
 
+router.patch('/bloquer/:id', auth, userCtrl.BloquerUser)
+
+router.patch('/debloquer/:id', auth, userCtrl.DébloquerUser)
+
 router.delete('/delete/:id', auth, userCtrl.deleteUser)
 
 router.get('/history', userCtrl.getHistory)
-
 
 // Social Login
 router.post('/google_login', userCtrl.googleLogin)

@@ -1,15 +1,15 @@
 import React ,{useState, useEffect} from 'react'
 import axios from 'axios'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchFormation, dispatchGetFormation} from '../../../redux/actions/formationsAction'
 import { Button, Form, Spinner } from 'react-bootstrap'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import MovieIcon from '@material-ui/icons/Movie';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './AddFormation.css'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import ReactPlayer from 'react-player'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -35,12 +35,14 @@ function PublierCours() {
     const {titre1} = useParams();
     const [gratuit, setGratuit] = useState(false);
     const [affiche, setAffiche] = useState(false);
+    const [videopromo, setVideopromo] = useState(false);
     const [loading, setLoading] = useState(false);
     const formations = useSelector(state => state.formations)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
     const [open1, setOpen1] = React.useState(false);
+    const navigate= useNavigate()
 
         const handleClose = (event, reason) => {
           if (reason === 'clickaway') {
@@ -61,7 +63,6 @@ function PublierCours() {
                 dispatch(dispatchGetFormation(res))
             })
           },[token,titre1, dispatch, callback])
-          console.log(formations.titre)
 
         const handleChange = e => {
             const {name, value} = e.target
@@ -91,11 +92,32 @@ function PublierCours() {
     
               setLoading(false)
               setAffiche(res.data.url)
-              setOpen(true);
               
           } catch (err) {
               setAffiche({...data, err: err.response.data.msg , success: ''})
               setOpen1(true);
+          }
+        }
+ 
+        const changeVideoPromo = async(e) => {
+          e.preventDefault()
+          try {
+              const file2 = e.target.files[0]
+              let formData =  new FormData()
+              formData.append('file2', file2)
+    
+              setLoading(true)
+              const res = await axios.post('/api/uploadVideo', formData, {
+                headers: {'content-type': 'multipart/form-data', Authorization: token}
+              })
+    
+              setLoading(false)
+              setVideopromo(res.data.url)
+              setOpen(true)
+              
+          } catch (err) {
+              setVideopromo({...data, err: err.response.data.msg , success: ''})
+              setOpen1(true)
           }
         }
 
@@ -109,24 +131,26 @@ function PublierCours() {
                    categorie : categorie ? categorie : formations.categorie,
                    niveau : niveau ? niveau : formations.niveau ,
                    gratuit : gratuit ? gratuit : formations.gratuit, 
-                   affiche ,
+                   affiche , videopromo
               }, { headers: {Authorization: token} })
-              setData({...data, err: '' , success: "Success!"})
+              setData({...data, err: '' , success: "Formation sauvegardée!"})
+              setOpen(true)
+              navigate(`/maFormation/${titre1}`)
             }
          } catch (err) {
               setData({...data, err: err.response.data.msg , success: ''})
+              setOpen1(true)
           }
         }
 
         const handleUpdate = () => {
             updateInfor()
         }
+
   return (
     <div className="publier">
         <h5>Page d'accueil du cours</h5>
         <Form >
-          {err && ShowErrMsg(err)}
-          {success && ShowSuccessMsg(success)}
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Titre du cours</Form.Label>
                   <Form.Control type="text" 
@@ -161,9 +185,7 @@ function PublierCours() {
               <Form.Label className="label">Images du cours</Form.Label>
               <div className="content-affiche">
               <Form.Label htmlFor="file" > 
-                <img src={affiche ? 
-                affiche 
-                : formations.affiche} alt="" className="affiche-img"></img>
+                <img src={affiche ? affiche : formations.affiche} alt="" className="affiche-img" />
               <p> <PhotoSizeSelectActualIcon /> Séléctionnez une image </p>
               </Form.Label>
               </div>
@@ -176,10 +198,13 @@ function PublierCours() {
                 <Form.Label className="label">Vidéo promotionnelle</Form.Label>
                 <div className="content-affiche">
                   <Form.Label htmlFor="file" > 
+                  <ReactPlayer url={[{src: videopromo ? videopromo : formations.videopromo}]}
+                  controls playing muted width='80%' height='60%' ></ReactPlayer>
                   <p> <MovieIcon /> Séléctionnez un vidéo </p>
                   </Form.Label>
                   </div>
-                <Form.Control type="file" id="file"
+                <Form.Control type="file" id="file2"
+                    onChange={changeVideoPromo}
                     style={{display:"none"}}
               />
               </Form.Group>

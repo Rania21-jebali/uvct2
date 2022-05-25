@@ -66,6 +66,7 @@ function AddSection(){
                 })
                     setSection({...section, err: '', success: res.data.msg})
                     setOpen(true);
+                   
 
                   } } catch (err) { 
                 err.response.data.msg &&

@@ -7,6 +7,7 @@ import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import './AjoutEvent.css'
+import { useNavigate } from 'react-router-dom'
 
     const initialState = {
       titre:'',
@@ -35,6 +36,7 @@ function AjoutEvent() {
     const [surPlace, setSurPlace] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    const navigate = useNavigate()
 
       const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -98,6 +100,7 @@ function AjoutEvent() {
 
               setEvent({...event, err: '', success: res.data.msg})
               setOpen(true);
+              navigate("/mes-evenements")
 
           } catch (err) {
               err.response.data.msg && 

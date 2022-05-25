@@ -14,6 +14,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import axios from 'axios'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import QueueIcon from '@material-ui/icons/Queue';
 
 const { confirm } = Modal;
 function Alert(props) {
@@ -27,6 +28,7 @@ const initialState = {
 function Formation() {
   const token = useSelector(state => state.token)
   const [formation, setFormation] = useState(initialState)
+  const [archiver, setArchiver] = useState(false)
   const formations = useSelector(state => state.formations)
   const { err, success} = formation
   const [callback, setCallback] = useState(false)
@@ -83,9 +85,10 @@ function Formation() {
 
         const archiverFormation = async(id) => {
           try {
-              axios.patch(`/archiveFormation/${id}`,{
+              axios.patch(`/archiveFormation/${id}`,{archiver},{
                 headers: {Authorization: token}
             })
+              setArchiver(true)
               setFormation({...formation, err: '' , success: "Formation archivé !"})
               setOpen2(true);
             
@@ -158,6 +161,13 @@ function Formation() {
             field: 'offre',
             headerName: 'Offres',
             flex:1,
+            renderCell: (params) =>{
+              return(
+                <>  
+                <QueueIcon className='icon-action'/>
+                </>
+              )
+            }
           },
           {
               field: 'action',

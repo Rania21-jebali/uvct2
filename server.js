@@ -25,6 +25,7 @@ app.use('/',require('./routes/sousCategorie'))
 app.use('/',require('./routes/reclamation'))
 app.use('/',require('./routes/message'))
 app.use('/',require('./routes/history'))
+app.use('/',require('./routes/coupon'))
 app.use('/api', require('./routes/upload'))
 
 

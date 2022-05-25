@@ -2,7 +2,6 @@ import React ,{useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchMyFormations, dispatchGetMyFormations} from '../../../redux/actions/formationsAction'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import { Button,Form ,Modal,Nav} from 'react-bootstrap'
 import {Input} from 'antd';
 import {DataGrid} from '@mui/x-data-grid';
@@ -14,11 +13,11 @@ import { Divider } from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import AddIcon from '@material-ui/icons/Add';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
 const { Search } = Input;
 const onSearch = value => console.log(value);
 const initialState = {
@@ -27,14 +26,15 @@ const initialState = {
   success: ''
 }
 function Formations() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const id= open ? 'simple-popover' : undefined;
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const open4 = Boolean(anchorEl1);
+  const id= open4 ? 'simple-popover' : undefined;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const token = useSelector(state => state.token)
   const [formation, setFormation] = useState(initialState)
+  const [archiver, setArchiver] = useState(false)
   const formations = useSelector(state => state.formations)
   const {titre, err, success} = formation
   const navigate = useNavigate();
@@ -70,11 +70,11 @@ function Formations() {
           };
 
         const handleClick = (event) => {
-                setAnchorEl(event.currentTarget);
+                setAnchorEl1(event.currentTarget);
         };
 
-        const handleClose1 = () => {
-                setAnchorEl(null);
+        const handleClose4 = () => {
+                setAnchorEl1(null);
         };
 
         useEffect(() => {
@@ -97,7 +97,7 @@ function Formations() {
                     headers: {Authorization: token}
                 })
                   setFormation({...formation, err: '', success: res.data.msg})
-                  navigate(`/test/${formation.titre}`);
+                  navigate(`/formation/${formation.titre}`);
                   setOpen2(true);
 
               } catch (err) {
@@ -120,6 +120,24 @@ function Formations() {
               setOpen3(true);
           }
           } 
+
+          const archiverFormation = async(id) => {
+            try {
+              if(formation._id !== id){
+                axios.patch(`/archiveFormation/${id}`,{archiver},{
+                  headers: {Authorization: token}
+              })
+                setFormation({...formation, err: '' , success: "Formation archivé !"})
+                setArchiver(true)
+                setOpen2(true);
+                window.location.reload(false);
+              
+         } }catch (err) {
+                setFormation({...formation, err: err.response.data.msg , success: ''})
+                setOpen3(true);
+              
+            }
+          }
 
         const columns = [
           {
@@ -184,14 +202,13 @@ function Formations() {
               renderCell: (params) =>{
                 return(
                   <> 
-                  {console.log(currentRow)}
-                  <a href={`/maFormation/${params.row.titre}`}><img src="images/eye.png" alt="" className='icon-visible'/></a>
+                  <a href={`/maFormation/${params.row.titre}`}><VisibilityIcon className='icon-action'/></a>
                   <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                     <Popover
                           id={id}
-                          open={open}
-                          anchorEl={anchorEl}
-                          onClose={handleClose1}
+                          open={open4}
+                          anchorEl={anchorEl1}
+                          onClose={handleClose4}
                           anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'center',
@@ -202,6 +219,8 @@ function Formations() {
                           }}
                         >
                         <Nav.Link className="actionNav">Dépublier formation</Nav.Link>
+                        <Divider />
+                        <Nav.Link className="actionNav" onClick={() => archiverFormation(params.row.id)}>Archiver formation</Nav.Link>
                         <Divider />
                         <Nav.Link className="actionNav" onClick={() => handleDelete(currentRow.id)}>Supprimer formation</Nav.Link>
                     </Popover>     
@@ -234,8 +253,6 @@ function Formations() {
           <Modal.Title>Nommez votre formation</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            {err && ShowErrMsg(err)}
-            {success && ShowSuccessMsg(success)}
         <p>Quel nom désirez-vous donner à votre formation ?</p>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" >
@@ -256,7 +273,7 @@ function Formations() {
           </Form>
         </Modal.Body>
       </Modal>
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
+        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert onClose={handleClose2} severity="success">
                 {success}
@@ -267,7 +284,7 @@ function Formations() {
                 <Alert onClose={handleClose3} severity="error">
                 {err}
                 </Alert>
-            </Snackbar>
+        </Snackbar>
     </div>
   )
 }

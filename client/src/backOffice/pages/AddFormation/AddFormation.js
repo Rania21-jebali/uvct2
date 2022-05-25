@@ -10,7 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import PlanifierCours from './PlanifierCours';
 import PublierCours from './PublierCours';
 import Programme from './Programme/Programme';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader';
+import { useParams } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -46,6 +47,7 @@ export default function AddFormation() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+  const {titre1} = useParams();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -61,7 +63,7 @@ export default function AddFormation() {
 
   return (
     <div className='content-formation'>
-    <a href="/mes-formations"><ChevronLeftIcon />Revenir aux formations</a>
+      <BreadcrumbHeader item="Mes formations" link="/mes-formations" active={titre1}/>
       <div className='addFormation'>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (

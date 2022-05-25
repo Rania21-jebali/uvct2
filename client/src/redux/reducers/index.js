@@ -11,6 +11,7 @@ import categorie from './categorieReducer'
 import sousCategorie from './sousCategorieReducer'
 import reclamations from './reclamationReducer'
 import histories from './historyReducer'
+import coupons from './couponReducer'
 
 
 export default combineReducers({
@@ -26,4 +27,5 @@ export default combineReducers({
     sousCategorie,
     reclamations,
     histories,
+    coupons,
 })

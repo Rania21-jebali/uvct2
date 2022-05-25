@@ -14,6 +14,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import AddIcon from '@material-ui/icons/Add';
 
 const { confirm } = Modal;
 function Alert(props) {
@@ -88,7 +89,7 @@ function AdministrateurList() {
           setData({...data, err: err.response.data.msg , success: ''})
           setOpen2(true);
       }
-  }
+    }
 
     const columns = [
         {
@@ -121,7 +122,7 @@ function AdministrateurList() {
           flex:2,
           renderCell(params){
             return(
-              <DayJS format="dddd, MMMM D, YYYY h:mm A">{params.row.date}</DayJS>
+              <DayJS format="DD-MM-YYYY / HH:mm:ss">{params.row.date}</DayJS>
             );
           }
         },
@@ -198,7 +199,7 @@ function AdministrateurList() {
         <div className="header-admin">
           <h1 className='title-admin'>Liste administrateurs</h1>
           <Button className='btn-add-admin' href="/addAdmin">
-            <img src="images/add-square.png" className="add-icon" alt=""/>Administrateur
+            <AddIcon />Administrateur
           </Button>
        </div>
         <div style={{ height: 550}}  className="tableau">

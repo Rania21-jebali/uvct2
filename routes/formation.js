@@ -27,6 +27,10 @@ router.patch('/updateFormationById/:id', auth, formationCtrl.updateFormationById
 
 router.patch('/archiveFormation/:id', auth, formationCtrl.archiveFormationById)
 
+router.patch('/publierFormation/:id', auth, formationCtrl.publierFormationById)
+
+router.patch('/depublierFormation/:id', auth, formationCtrl.depublierFormationById)
+
 router.patch('/unarchiveFormation/:id', auth, formationCtrl.unarchiveFormationById)
 
 module.exports=router

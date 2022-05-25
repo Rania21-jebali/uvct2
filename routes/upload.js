@@ -12,7 +12,7 @@ router.post('/upload_avatar', uploadImage, auth, uploadCtrl.uploadAvatar)
 router.post('/uploadAffiche', uploadImage, auth, uploadCtrl.uploadAffiche)
 router.post('/uploadCV', uploadCV, uploadFileCtrl.uploadCV)
 router.post('/uploadFile', uploadFile, auth, uploadFileCtrl.uploadFile)
-router.post('/uploadVideo', uploadVideo, auth, uploadVideoCtrl.uploadVideo)
+router.post('/uploadVideo', auth, uploadVideoCtrl.uploadVideo)
 
 
 

@@ -44,7 +44,13 @@ const formationSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+    archiver:{
+        //archiver
+        type:Boolean,
+        default:false,
+    },
     statut:{
+        //publier
         type:Boolean,
         default:false,
     }

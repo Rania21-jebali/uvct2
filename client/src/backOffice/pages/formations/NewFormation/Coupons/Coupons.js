@@ -6,6 +6,7 @@ import AllCoupons from './allCoupons/AllCoupons';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useParams } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -70,7 +71,7 @@ function Coupons() {
 }
   return (
     <div className="coupon">
-      <Button className='btn-event' onClick={handleShow}>Ajouter un nouveau coupon</Button>
+      <Button className='btn-event' onClick={handleShow}><AddIcon />Ajouter un nouveau coupon</Button>
       <AllCoupons />
       <Modal show={show} onHide={handleClose}>
        <Modal.Header closeButton>
@@ -99,7 +100,7 @@ function Coupons() {
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Code de coupon</Form.Label>
-            <Form.Control type="number"
+            <Form.Control type="text"
             placeholder="Entrez votre code"
             name="code"
             value={code}
@@ -141,13 +142,13 @@ function Coupons() {
         </Modal.Body>
       </Modal>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
                 <Alert onClose={handleClose2} severity="success">
                 {success}
                 </Alert>
         </Snackbar>
         <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose3}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
                 <Alert onClose={handleClose3} severity="error">
                 {err}
                 </Alert>

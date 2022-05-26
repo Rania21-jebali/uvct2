@@ -51,6 +51,30 @@ updateCouponById: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
+//Activer coupon by id
+activerCouponById: async (req, res) => {
+    try {
+
+        await Coupon.findByIdAndUpdate({_id:req.params.id}, {
+            statut:true
+        })
+        res.json({msg: "Coupon activé !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//Désactiver coupon by id
+desactiverCouponById: async (req, res) => {
+    try {
+
+        await Coupon.findByIdAndUpdate({_id:req.params.id}, {
+            statut:false
+        })
+        res.json({msg: "Coupon déactivé !"})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
 // supprimer coupon
 deleteCoupon: async (req, res) => {
     try {

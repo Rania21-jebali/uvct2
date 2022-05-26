@@ -102,13 +102,13 @@ function AddReclamation() {
           </Form>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'  }}>
                 <Alert onClose={handleClose} severity="success">
                 {success}
                 </Alert>
         </Snackbar>
         <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
                 <Alert onClose={handleClose1} severity="error">
                 {err}
                 </Alert>

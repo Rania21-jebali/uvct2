@@ -66,7 +66,8 @@ justify-content: center;
     }
 .p-formation{
     color:#454545;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 10px;
 }
 .btn-action{
     background: white;

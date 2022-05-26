@@ -190,7 +190,7 @@ function InstructeurList() {
         disableSelectionOnClick
       />
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert onClose={handleClose} severity="error">
           {err}
         </Alert>

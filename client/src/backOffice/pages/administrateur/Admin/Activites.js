@@ -162,7 +162,7 @@ function  Activities() {
                 checkboxSelection
             />
         <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                 <Alert onClose={handleClose2} severity="error">
                 {err}
                 </Alert>

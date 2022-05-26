@@ -425,9 +425,9 @@ updateUserInfo: async (req, res) => {
 //update profil instructeur
 updateProfilInstr: async (req, res) => {
     try {
-        const {name, avatar,tele,site,info} = req.body
+        const {name, avatar,tele,site,description} = req.body
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            name, avatar,tele,site,info
+            name, avatar,tele,site,description
         })
         res.json({msg: "Profile modifié !"})
     } catch (err) {

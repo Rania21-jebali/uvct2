@@ -39,7 +39,7 @@ const initialState = {
     name: '',
     tele:'',
     site:'',
-    info:'',
+    description:'',
     err: '',
     success: ''
 }
@@ -49,7 +49,7 @@ function Profil() {
     const token = useSelector(state => state.token)
     const {user,isInstr} = auth
     const [data, setData] = useState(initialState)
-    const {name,tele,site,info, err, success} = data
+    const {name,tele,site,description, err, success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = React.useState(false);
@@ -111,7 +111,7 @@ function Profil() {
                 avatar: avatar ? avatar : user.avatar,
                 tele: tele ? tele : user.tele,
                 site: site ? site : user.site,
-                info: info ? info : user.info,
+                description:  description ?  description : user.description,
 
             }, { headers: {Authorization: token} })
             setData({...data, err: '' , success: "Profile modifié!"})
@@ -185,8 +185,8 @@ function Profil() {
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Sur moi</Form.Label>
                   <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
-                    name="info" 
-                    defaultValue={user.info}
+                    name="description" 
+                    defaultValue={user.description}
                     onChange={handleChange}
                 />
               </Form.Group>
@@ -199,13 +199,13 @@ function Profil() {
         </Form>
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
         <Alert onClose={handleClose} severity="success">
           {success}
         </Alert>
       </Snackbar>
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
         <Alert onClose={handleClose2} severity="error">
           {err}
         </Alert>

@@ -42,6 +42,12 @@ const userSchema = new mongoose.Schema({
     tele:{
         type:String,
     },
+    site:{
+        type:String,
+    },
+    description:{
+        type:String,
+    },
     statut:{
         type:Boolean,
         default:false,//débloquer

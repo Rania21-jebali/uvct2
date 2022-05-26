@@ -223,13 +223,13 @@ function AjoutEvent() {
     </Form>
   </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert onClose={handleClose} severity="success">
           {success}
         </Alert>
       </Snackbar>
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
         <Alert onClose={handleClose2} severity="error">
           {err}
         </Alert>

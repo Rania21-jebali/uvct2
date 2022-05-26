@@ -35,6 +35,7 @@ function Formations() {
   const token = useSelector(state => state.token)
   const [formation, setFormation] = useState(initialState)
   const [archiver, setArchiver] = useState(false)
+  const [statut, setStatut] = useState(false)
   const formations = useSelector(state => state.formations)
   const {titre, err, success} = formation
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function Formations() {
         titre:formation?.titre,
         prix:formation?.prix,
         affiche:formation?.affiche,
-        status:formation?.status,
+        statut:formation?.statut,
         date:formation?.createdAt,
         inscription:0,
     }
@@ -139,6 +140,42 @@ function Formations() {
             }
           }
 
+          const publierFormation = async(id) => {
+            try {
+              if(formation._id !== id){
+                axios.patch(`/publierFormation/${id}`,{statut},{
+                  headers: {Authorization: token}
+              })
+                setFormation({...formation, err: '' , success: "Formation publié !"})
+                setStatut(true)
+                setOpen2(true);
+                window.location.reload(false);
+              
+         } }catch (err) {
+                setFormation({...formation, err: err.response.data.msg , success: ''})
+                setOpen3(true);
+              
+            }
+          }
+
+          const depublierFormation = async(id) => {
+            try {
+              if(formation._id !== id){
+                axios.patch(`/depublierFormation/${id}`,{statut},{
+                  headers: {Authorization: token}
+              })
+                setFormation({...formation, err: '' , success: "Formation dépublié !"})
+                setStatut(false)
+                setOpen2(true);
+                window.location.reload(false);
+              
+         } }catch (err) {
+                setFormation({...formation, err: err.response.data.msg , success: ''})
+                setOpen3(true);
+              
+            }
+          }
+
         const columns = [
           {
             field: 'affiche',
@@ -170,7 +207,7 @@ function Formations() {
           },
           {
             field: 'prix',
-            headerName: 'Ventes',
+            headerName: 'Prix',
             flex:1,
           },
           {
@@ -179,15 +216,15 @@ function Formations() {
             flex:1,
           },
           {
-            field: 'status',
+            field: 'statut',
             headerName: 'Status',
             flex:1,
             sorting:false,
             renderCell: (params) =>{
               return(
-                <div className={`${params.row.status ? "status-formation1" : "status-formation2"}`}> 
+                <div className={`${params.row.statut ? "status-formation1" : "status-formation2"}`}> 
                 {
-                  params.row.status ? 
+                  params.row.statut ? 
                   <p className='p-formation'>PUBLIÉ</p> :
                   <p className='p-formation'>INÉDIT</p>
                 }
@@ -218,7 +255,12 @@ function Formations() {
                             horizontal: 'center',
                           }}
                         >
-                        <Nav.Link className="actionNav">Dépublier formation</Nav.Link>
+                        {
+                          params.row.statut ? 
+                          <Nav.Link className="actionNav" onClick={() => depublierFormation(currentRow.id)}>Dépublier formation</Nav.Link>
+                         :
+                         <Nav.Link className="actionNav" onClick={() => publierFormation(currentRow.id)}>Publier formation</Nav.Link>
+                        }
                         <Divider />
                         <Nav.Link className="actionNav" onClick={() => archiverFormation(params.row.id)}>Archiver formation</Nav.Link>
                         <Divider />
@@ -248,7 +290,7 @@ function Formations() {
                     isRowSelectable={(params) => setCurrentRow(params.row)}
                   />
           </div>
-       <Modal show={show} onHide={handleClose}>
+       <Modal show={show} onHide={handleClose} centered>
        <Modal.Header closeButton>
           <Modal.Title>Nommez votre formation</Modal.Title>
         </Modal.Header>
@@ -274,13 +316,13 @@ function Formations() {
         </Modal.Body>
       </Modal>
         <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'  }}>
                 <Alert onClose={handleClose2} severity="success">
                 {success}
                 </Alert>
         </Snackbar>
         <Snackbar open={open3} autoHideDuration={6000} onClose={handleClose3}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                 <Alert onClose={handleClose3} severity="error">
                 {err}
                 </Alert>

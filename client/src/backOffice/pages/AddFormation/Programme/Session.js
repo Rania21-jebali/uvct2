@@ -75,26 +75,17 @@ const sessionState = {
         const [session, setSession] = useState(sessionState);
         const [video, setVideo] = useState(false);
         const [loading, setLoading] = useState(false);
-
+        
         const changeVideo = async(e) => {
           e.preventDefault()
           try {
-              const file = e.target.files[0]
-    
-              if(!file) return setSession({...session, err: "No files were uploaded." , success: ''})
-    
-              if(file.size > 1024 * 1024)
-                  return setSession({...session, err: "Size too large." , success: ''})
-    
-              if(file.type !== 'image/jpeg' && file.type !== 'image/png')
-                  return setSession({...session, err: "File format is incorrect." , success: ''})
-    
+              const file2 = e.target.files[0]
               let formData =  new FormData()
-              formData.append('file', file)
+              formData.append('file2', file2)
     
               setLoading(true)
-              const res = await axios.post('/api/uploadAffiche', formData, {
-                  headers: {'content-type': 'multipart/form-data', Authorization: token}
+              const res = await axios.post('/api/uploadVideo', formData, {
+                headers: {'content-type': 'multipart/form-data', Authorization: token}
               })
     
               setLoading(false)

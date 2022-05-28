@@ -176,7 +176,7 @@ function Header() {
         </Modal.Body>
       </Modal>
       <Button className="button-inscription" onClick={handleShow1} variant="light">S'inscrire</Button>
-      <Modal show={show1} onHide={handleClose1} animation={true}>
+      <Modal centered show={show1} onHide={handleClose1} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>
           <h2 className='title-inscri'>S'inscrire</h2>

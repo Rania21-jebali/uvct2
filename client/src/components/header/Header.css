@@ -4,6 +4,7 @@
     backdrop-filter: blur(4px);
     position: sticky;
     top:0;
+    width: 100%;
     z-index: 9999;
     background-color: rgba(255, 255, 255, 0.4);
 }
@@ -24,12 +25,25 @@
     border: 1px solid #20384D;
     box-sizing: border-box;
     border-radius: 2px;
+    outline: none;
 }
 .button-connexion:hover{
+    transform: scale(1.1);
     color:#20384D;
+    margin-right: 10px;
+    background: #FFFFFF;
+    border: 1px solid #20384D;
+    box-sizing: border-box;
+    border-radius: 2px;
+    outline: none;
 }
 .button-inscription:hover{
-    color:#20384D;
+    transform: scale(1.1);
+    margin-right: 20px;
+    background: #20384D;
+    border-radius: 2px;
+    font-style: normal;
+    color: #FFFFFF;
 }
 .button-inscription{
     margin-right: 20px;

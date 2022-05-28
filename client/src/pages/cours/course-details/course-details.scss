@@ -208,8 +208,57 @@
           text-align: right;
           color: #64748B;
         }
+        .section-duration{
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          /* identical to box height */
+          text-align: right;
+          color: #64748B;
+        }
+        .section-title{
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 17px;
+          /* identical to box height */
+          color: #334155;
+          padding-bottom: 16px;
+        }
       }
     }
-
+    .instructor{
+      padding-bottom: 83px;
+      .section-title{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 160%;
+        /* identical to box height, or 32px */
+        color: #1D1D1D;
+      }
+    }
+    .ratings{
+      .section-title{
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 160%;
+        /* identical to box height, or 32px */
+        color: #1D1D1D;
+      }
+    }
+    .comments{
+      .load-more-comments{
+        width: 307px;
+        height: 48px;
+        background: #FFFFFF;
+        /* Secondaire */
+        border: 1px solid #8D1630;
+        border-radius: 2px;
+        color: #8D1630;
+        margin-block: 40px;
+        margin-left: 158px;
+      }
+    }
   }
 }

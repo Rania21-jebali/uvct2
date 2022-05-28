@@ -1,9 +1,12 @@
 import './course-details.scss'
 import {QuickNavigation} from "../../../components/quick-navigation/quick-navigation";
 import {Button, Collapse, Typography} from "antd";
-import {StarSharp} from "@material-ui/icons";
+import {StarSharp, YouTube} from "@material-ui/icons";
 import React, {useState} from "react";
 import {ShareOutlined, ShieldOutlined} from "@mui/icons-material";
+import {UserInfo} from "../components/user-info/user-info";
+import {RatingComponent} from "../components/rating-component/rating-component";
+import {CommentComponent} from "../components/comment-component/comment-component";
 
 export const CourseDetails = () => {
     const [activeAccordion, setActiveAccordion] = useState('0');
@@ -68,13 +71,44 @@ export const CourseDetails = () => {
                               courseAccordionElements.map(({title,extraDetails}, index) => {
                                   return(
                                       <Collapse.Panel header={CollapseHeader({title, extraDetails})} key={index}>
-                                          <p>{'Le programme offre aux participants la possibilité de développer, de développer '}</p>
+                                          {
+                                              [1,2,3,4,5].map(()=> {
+                                                  return(
+                                                      <div className={'flex-row align-items-center space-between'}>
+                                                          <Typography className={'section-title'}>
+                                                              <YouTube fontSize={"small"}/>
+                                                              {'\t Le programme offre aux participants la possibilité de développer, de développer '}
+                                                          </Typography>
+                                                          <Typography className={'section-duration'}>
+                                                             20:00
+                                                          </Typography>
+                                                      </div>
+                                                  )
+                                              })
+                                          }
                                       </Collapse.Panel>
                                   )
                               })
                           }
                       </Collapse>
                   </div>
+              </div>
+              <div className={'instructor'}>
+                  <Typography className={'section-title'}>Formateur :</Typography>
+                  <UserInfo/>
+              </div>
+              <div className={'ratings'}>
+                  <Typography className={'section-title'}>Avis :</Typography>
+                  <RatingComponent />
+              </div>
+
+              <div className={'comments'}>
+                  {[1,2,3,4,5].map(()=> {
+                      return(
+                          <CommentComponent/>
+                      )
+                  })}
+                  <Button className={'load-more-comments'}>Afficher plus d’avis</Button>
               </div>
           </div>
       </div>

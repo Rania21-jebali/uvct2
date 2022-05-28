@@ -24,18 +24,27 @@ function BannerSection() {
           <Carousel.Caption className='caption-poster'>
             <h1 className='title-carousel'>Transformez votre vie grâce à l'apprentissage</h1>
               <h2 className={'description-carousel' }>Développez de nouvelles compétences et améliorez-les avec des cours et des certificats d'instructeurs de classe mondiale.</h2>
-              <div className={'flex-row justify-center'}>
+              <div style={{marginTop: 30}} className={'flex-row justify-center'}>
                   <div className='caption-rect'>
-                      <p className="captionTitle"><BusinessIcon className="captionIcon"/> Business et solutions</p>
-                      <a href="/" className='link-rect'>Voir plus <MdNavigateNext /> </a>
+                      <BusinessIcon className="captionIcon"/>
+                      <div style={{textAlign: 'left', height: '100%', display: "grid"}}>
+                          <p className="captionTitle"> Business et solutions</p>
+                          <a href="/" className='link-rect'>Voir plus <MdNavigateNext /> </a>
+                      </div>
                   </div>
                   <div className='caption-rect'>
-                      <p className="captionTitle"> <PersonIcon className="captionIcon"/>Developpement personel</p>
-                      <a href="/" className='link-rect'>Voir plus <MdNavigateNext /> </a>
+                      <PersonIcon className="captionIcon"/>
+                      <div style={{textAlign: 'left', height: '100%', display: "grid"}}>
+                          <p className="captionTitle">Developpement personel</p>
+                          <a href="/" className='link-rect'>Voir plus <MdNavigateNext /> </a>
+                      </div>
                   </div>
                   <div className='caption-rect'>
-                      <p className="captionTitle"><AccountBalanceIcon className="captionIcon"/>Education et l’enseigenement</p>
-                      <a href="/" className='link-rect'>Voir plus <MdNavigateNext /> </a>
+                      <AccountBalanceIcon className="captionIcon"/>
+                      <div style={{textAlign: 'left', height: '100%', display: "grid"}}>
+                          <p className="captionTitle">Education et l’enseigenement</p>
+                          <a href="/" className='link-rect'>Voir plus<MdNavigateNext /></a>
+                      </div>
                   </div>
               </div>
           </Carousel.Caption>

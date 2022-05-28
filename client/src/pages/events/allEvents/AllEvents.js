@@ -75,7 +75,6 @@ export const eventsScaffolding: event[] = [
         eventType: "Online",
         contentCreator: "Ahmed Sbai",
         date: new Date().toISOString().substring(0,10)
-
     },
     {
         id: 4,

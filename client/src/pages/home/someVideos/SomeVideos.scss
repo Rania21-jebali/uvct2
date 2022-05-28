@@ -43,6 +43,11 @@
           .category-link{
             text-decoration: none;
             color: inherit;
+            user-select: none;
+            cursor: pointer;
+          }
+          .category-selected{
+            text-decoration: underline;
           }
         }
       }

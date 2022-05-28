@@ -103,7 +103,7 @@ function Header() {
       <div className='categorie-content'>
         <a href="/musique" className="categorie-lien">Musique</a>
       </div>
-      </Popover>  
+      </Popover>
       <Form className="flex-auto ">
         <FormControl
           style={{
@@ -116,18 +116,18 @@ function Header() {
         />
       </Form>
       {
-        (!isAdmin && !isSuperAdmin && !isInstr) && 
+        (!isAdmin && !isSuperAdmin && !isInstr) &&
         <Nav.Link href="/devenir-instructeur" className="link-postuler-enseigner">Devenir instructeur</Nav.Link>
       }
       {
-        (!isAdmin && !isSuperAdmin) && 
+        (!isAdmin && !isSuperAdmin) &&
         <a href="/panier" className="shoppingIcon">
         <ShoppingCartIcon   href="/panier"/>
         </a>
       }
       {
                     isLogged
-                    ? 
+                    ?
                     (<>
                     { (!isInstr && !isAdmin && !isSuperAdmin ) && (
                       <div>
@@ -158,14 +158,14 @@ function Header() {
       <div className='categorie-content'>
         <p onClick={handleLogout} className="categorie-lien">Se déconnecter</p>
       </div>
-      </Popover>       
+      </Popover>
 
 </>)
                     :
-        (   
+        (
           <>
       <Button  className="button-connexion" onClick={handleShow} variant="light">Se connecter</Button>
-      <Modal show={show} onHide={handleClose} animation={true}>
+      <Modal centered show={show} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>
           <h2 className='title-inscri'>Bienvenue</h2>
@@ -190,7 +190,7 @@ function Header() {
       </>
         )}
   </Navbar>
- 
+
 </div>
   )
 }

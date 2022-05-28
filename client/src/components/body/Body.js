@@ -57,6 +57,8 @@ import { Instructeurs1 } from '../../pages/instructeurs/Instructeurs';
 import InstructeurDetails from '../../pages/instructeurs/instructeurDetails/InstructeurDetails';
 import UpdateEvent from '../../backOffice/pages/evenements/updateEvent/UpdateEvent';
 import Candidat from '../../backOffice/pages/instructeurs/candidat/Candidat';
+import {CoursPage} from "../../pages/cours/cours";
+import {CourseDetails} from "../../pages/cours/course-details/course-details";
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -115,22 +117,27 @@ function Body() {
             </LeftList>
             ) :
             (
-                <Routes>
-            <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
-            <Route path="/devenir-instructeur" element={<HeaderInstructeur />}/>
-            <Route path="/connexion" element={isLogged ? <NotFound /> : <Connexion />} />
-            <Route path="/inscrire" element={isLogged ? <NotFound /> : <Inscrire />}/>
-            <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
-            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
-            <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
-            <Route path="/panier" element={<Panier />} />
-            <Route path="/events" element={<AllEvents />} />
-            <Route path="/event/:id" element={<EventDetails />} />
-            <Route path="/partner" element={<PartnerPage />} />
-            <Route path="/allInstructeurs" element={<Instructeurs1 />} />
-            <Route path="/instructeurDet" element={<InstructeurDetails />} />
-                
-              </Routes>
+                <>
+                    <Routes>
+                        <Route path="/" element={isAdmin ? <NotFound /> : <Home />}/>
+                        <Route path="/devenir-instructeur" element={<HeaderInstructeur />}/>
+                        <Route path="/connexion" element={isLogged ? <NotFound /> : <Connexion />} />
+                        <Route path="/inscrire" element={isLogged ? <NotFound /> : <Inscrire />}/>
+                        <Route path="/forgot_password" element={isLogged ? <NotFound /> : <ForgotPassword />}/>
+                        <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+                        <Route path="/user/reset/:token" element={isLogged ? <NotFound /> : <ResetPassword />}/>
+                        <Route path="/panier" element={<Panier />} />
+                        <Route path="/events" element={<AllEvents />} />
+                        <Route path="/cours" element={<CoursPage />} />
+                        <Route path="/event/:id" element={<EventDetails />} />
+                        <Route path="/cours/:id" element={<CourseDetails />} />
+                        <Route path="/partner" element={<PartnerPage />} />
+                        <Route path="/allInstructeurs" element={<Instructeurs1 />} />
+                        <Route path="/instructeurDet" element={<InstructeurDetails />} />
+                    </Routes>
+                    <Footer/>
+                </>
+
             )
             }
         </section>

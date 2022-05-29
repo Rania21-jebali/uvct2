@@ -52,10 +52,13 @@
   }
   .left-section{
     width: 400px;
-    padding-left: 24px;
     height: 800px;
     overflow-y: scroll;
+    .selected-video{
+      background: #CBD5E1!important;
+    }
     .topic{
+      padding-left: 24px;
       font-style: normal;
       font-weight: 500;
       font-size: 16px;

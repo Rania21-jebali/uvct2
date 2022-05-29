@@ -31,6 +31,7 @@ export const CourseVideos = () => {
     const [editorState, setEditorState] = useState(() =>
         RichTextEditor.createEmptyValue(),
     );
+    const [selectedVideo, setSelectedVideo] = useState({sectionIndex: 0, videoIndex: 0})
 
   return(
       <div className={'course-videos'}>
@@ -41,9 +42,14 @@ export const CourseVideos = () => {
                         <div>
                             <Typography className={'topic'}>{topic}</Typography>
                             {
-                                sidebarScaffold[topic].map(subject=> {
+                                sidebarScaffold[topic].map((subject, index)=> {
                                     return(
-                                        <div className={'flex-row align-items-center'}>
+                                        <div onClick={()=> {
+                                            setSelectedVideo({
+                                                sectionIndex: topicIndex,
+                                                videoIndex: index
+                                            })
+                                        }} className={`flex-row align-items-center pointer p-l-24 ${selectedVideo.videoIndex === index && selectedVideo.sectionIndex === topicIndex ?'selected-video': ''}`}>
                                             {topicIndex === 0 ?<CheckCircle style={{fontSize: 13, marginRight: 9, color: '#10B981'}}/>: <CircleOutlined style={{fontSize: 13, marginRight: 9, color: '#334155'}}/>}
                                             <Typography className={'subject'}>{subject}</Typography>
                                         </div>

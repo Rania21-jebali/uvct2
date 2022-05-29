@@ -44,3 +44,10 @@ code {
 .justify-center{
   justify-content: center;
 }
+
+.p-l-24{
+  padding-left: 24px;
+}
+.pointer{
+  cursor: pointer;
+}

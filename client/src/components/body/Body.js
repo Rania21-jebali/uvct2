@@ -59,6 +59,7 @@ import UpdateEvent from '../../backOffice/pages/evenements/updateEvent/UpdateEve
 import Candidat from '../../backOffice/pages/instructeurs/candidat/Candidat';
 import {CoursPage} from "../../pages/cours/cours";
 import {CourseDetails} from "../../pages/cours/course-details/course-details";
+import {CourseVideos} from "../../pages/cours/course-videos/course-videos";
 
 function Body() {
    const auth = useSelector(state => state.auth)
@@ -131,6 +132,7 @@ function Body() {
                         <Route path="/cours" element={<CoursPage />} />
                         <Route path="/event/:id" element={<EventDetails />} />
                         <Route path="/cours/:id" element={<CourseDetails />} />
+                        <Route path="/cours/:id/videos" element={<CourseVideos />} />
                         <Route path="/partner" element={<PartnerPage />} />
                         <Route path="/allInstructeurs" element={<Instructeurs1 />} />
                         <Route path="/instructeurDet" element={<InstructeurDetails />} />

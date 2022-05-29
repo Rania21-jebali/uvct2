@@ -1,0 +1,140 @@
+
+.carousel-poster{
+    margin-top: -60px;
+    display: flex;
+}
+.navbar-poster{
+    z-index: 999;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-size: large;
+}
+.title-carousel{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 132%;
+    padding-top: 133px;
+    margin-left: 133px;
+    color: #FFFFFF;
+    animation-duration: 1s;
+    animation-name: slidein;
+    margin-bottom: 50px;
+    max-width: 719px;
+    text-align: left;
+}
+.title-carousel:hover{
+    color:#F59E0B;
+}
+.caption-poster{
+    display: flex;
+    flex-direction: column;
+    height: 1000px;
+}
+.caption-rect{
+    width: 240px;
+    height: 98px;
+    background: #000000;
+    opacity: 0.8;
+    border-radius: 5px;
+    margin-inline: 5px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    transform: scale(1);
+    transition: transform 330ms ease-in-out;
+}
+.caption-rect:hover{
+    opacity: 1;
+    transition: opacity 330ms ease-in-out;
+}
+
+.caption-rect:hover .captionTitle {
+    /*do anything with this child*/
+    transform: scale(1.1)!important;
+    transition: transform 330ms ease-in-out;
+}
+
+.caption-rect:hover .captionIcon {
+    /*do anything with this child*/
+    transform: scale(1.1)!important;
+    transition: transform 330ms ease-in-out;
+}
+
+.captionIcon{
+    margin-right: 25px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px!important;
+    line-height: 140%;
+    /* or 22px */
+    color: #F59E0B;
+}
+.captionTitle{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    /* or 22px */
+    color: #FFFFFF;
+}
+.link-rect{
+    border: 0;
+    border-radius: 0;
+    text-transform: uppercase;
+    padding: 0;
+    margin-top: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #F59E0B;
+}
+.link-rect:hover{
+    color:#F59E0B;
+}
+.description-carousel{
+    animation: slidein;
+    animation-duration: 2s;
+    user-select: none;
+    max-width: 622px;
+    text-align: left;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 160%;
+    /* or 38px */
+    color: #FFFFFF;
+    margin-left: 133px;
+}
+.explore-courses-button{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    /* identical to box height */
+    width: 150px!important;
+    height: 40px!important;
+    background: #20384D!important;
+    border-radius: 2px!important;
+    color: #FFFFFF!important;
+    border: none!important;
+    margin-left: 133px;
+}
+@keyframes slidein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.poster{
+    .ant-carousel .slick-list .slick-slide > div > div{
+        height: 800px;
+        padding-right: 133px;
+    }
+}

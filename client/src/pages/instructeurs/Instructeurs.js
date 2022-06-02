@@ -3,10 +3,11 @@ import React from 'react'
 import {ArrowDropDown, SearchOutlined} from "@material-ui/icons";
 import {QuickNavigation} from "../../components/quick-navigation/quick-navigation";
 import InstructeurCard from "./components/instructeurCard";
+import './instructors.scss'
 
 export const Instructeurs1 = () => {
  return(
-     <div className={'events-container'}>
+     <div className={'instructors-container'}>
          <QuickNavigation/>
          <div className={'filter-container'} >
              <div className={'search-input-container'}>
@@ -29,12 +30,14 @@ export const Instructeurs1 = () => {
                      </Select>
              </div>
          </div>
-         <div className={'all-events-container'} >
-           <InstructeurCard />
-           <InstructeurCard />
-           <InstructeurCard />
-           <InstructeurCard />
-
+         <div className={'all-instructors-container'} >
+             {
+                 [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map(()=> {
+                     return(
+                         <InstructeurCard />
+                     )
+                 })
+             }
          </div>
      </div>
  )

@@ -2,6 +2,8 @@ import { Typography } from 'antd'
 import React from 'react'
 import { QuickNavigation } from '../../../components/quick-navigation/quick-navigation'
 import './InstructeurDetails.scss'
+import {EventCard} from "../../events/components/event-card/event-card";
+import {eventsScaffolding} from "../../events/allEvents/AllEvents";
 
 function InstructeurDetails() {
   return (
@@ -46,6 +48,15 @@ function InstructeurDetails() {
             </div>
         </div>
         <Typography className={'formations-list'}>Liste des formations proposées</Typography>
+        <div className={'flex-row'}>
+            {
+                eventsScaffolding.slice(0,3).map(element=> {
+                    return(
+                        <EventCard {...element} />
+                    )
+                })
+            }
+        </div>
     </div>
   )
 }

@@ -3,7 +3,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {fetchAllAdmin, dispatchGetAllAdmin} from '../../../redux/actions/usersAction'
 import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
-import {DataGrid} from '@mui/x-data-grid';
 import { Nav} from 'react-bootstrap';
 import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
@@ -12,14 +11,11 @@ import './Adminstrateur.css'
 import { Button, Modal} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import AddIcon from '@material-ui/icons/Add';
+import Table from '../../components/table/Table';
+import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 
 const { confirm } = Modal;
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 const initialState = {
   name: '',
   email:'',
@@ -52,14 +48,6 @@ function AdministrateurList() {
           date:user?.createdAt,
       }
   })
-
-      const handleClose2 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen2(false);
-      };
-
       const handleClick = (event) => {
           setAnchorEl(event.currentTarget);
         };
@@ -203,19 +191,9 @@ function AdministrateurList() {
           </Button>
        </div>
         <div style={{ height: 550}}  className="tableau">
-            <DataGrid
-                rows={rowData}
-                columns={columns}
-                pageSize={8}
-                checkboxSelection
-            />
+        <Table row={rowData} columns={columns}/>
         </div> 
-        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
-                <Alert onClose={handleClose2} severity="error">
-                {err}
-                </Alert>
-        </Snackbar>
+    <SnackbarErr err={err} open2={open2}/>
       </div>
   )
 }

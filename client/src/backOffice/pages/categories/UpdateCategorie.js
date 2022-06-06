@@ -1,18 +1,15 @@
 import React ,{useState} from 'react'
 import { Button , Form, Spinner } from 'react-bootstrap'
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { useParams } from 'react-router-dom'
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import {fetchCategorie, dispatchGetCategorie} from '../../../redux/actions/categorieAction'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import SnackbarErr from '../../components/Snackbar/SnackbarErr';
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 const categorieState = {
     titre:'',
     motCles:'',
@@ -25,12 +22,12 @@ function UpdateCategorie(props){
     const [data, setData] = useState(categorieState)
     const {titre,motCles,description,err,success} = data
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const {id} = useParams();
     const [image, setImage] = useState(false);
     const [loading, setLoading] = useState(false);
     const categories = useSelector(state => state.categorie)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
     
     useEffect(() => {
@@ -38,21 +35,7 @@ function UpdateCategorie(props){
             dispatch(dispatchGetCategorie(res))
         })
     },[id, dispatch, callback])
-
-    const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-    };
-
-    const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-    };
-
+   
     const handleChange = e => {
                     const {name, value} = e.target
                     setData({...data, [name]:value, err:'', success: ''})
@@ -85,7 +68,7 @@ function UpdateCategorie(props){
                         
                     } catch (err) {
                         setImage({...data, err: err.response.data.msg , success: ''})
-                        setOpen1(true);
+                        setOpen2(true);
                     }
     }
 
@@ -102,7 +85,7 @@ function UpdateCategorie(props){
                   
                } catch (err) {
                     setData({...data, err: err.response.data.msg , success: ''})
-                    setOpen1(true);
+                    setOpen2(true);
                 }
     }
       
@@ -164,18 +147,8 @@ function UpdateCategorie(props){
                 <Button  className='btn-confirme'  onClick={handleUpdate}>Modifier catégorie</Button>
               </div>
               </Form>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-          </Snackbar>
-          <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-              anchorOrigin={{vertical: 'bottom', horizontal: 'center' }}>
-                  <Alert onClose={handleClose1} severity="error">
-                  {err}
-                  </Alert>
-          </Snackbar>
+          <SnackbarSuccess success={success} open={open}/>
+          <SnackbarErr err={err} open2={open2}/>
       </div>
         </div>
     )

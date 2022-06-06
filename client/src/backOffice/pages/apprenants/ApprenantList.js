@@ -5,13 +5,13 @@ import axios from 'axios'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Avatar1 from '../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
-import {DataGrid} from '@mui/x-data-grid';
 import {OverlayTrigger,Tooltip} from 'react-bootstrap';
 import { Modal, Button } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import AddIcon from '@material-ui/icons/Add';
 import './Apprenants.css'
+import Table from '../../components/table/Table';
 
 const { confirm } = Modal;
 
@@ -135,11 +135,7 @@ function ApprenantList() {
         <AddIcon />Apprenants</Button>
       </div>
             <div style={{ height: 550 }} className="tableau">
-              <DataGrid
-                  rows={rowData}
-                  columns={columns}
-                  pageSize={8}
-              />
+            <Table row={rowData} columns={columns}/>
             </div> 
       </div>
   )

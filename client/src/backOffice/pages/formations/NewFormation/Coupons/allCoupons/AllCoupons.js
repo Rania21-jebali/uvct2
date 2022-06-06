@@ -305,8 +305,8 @@ function AllCoupons() {
                         >
                         {
                           params.row.statut ?
-                          <Nav.Link className="actionNav" onClick={() => activerCoupon(params.row.id)}>Activé coupon</Nav.Link>:
-                          <Nav.Link className="actionNav" onClick={() => desactiverCoupon(params.row.id)}>Désactivé coupon</Nav.Link>
+                          <Nav.Link className="actionNav" onClick={() => desactiverCoupon(params.row.id)}>Désactivé coupon</Nav.Link>:
+                          <Nav.Link className="actionNav" onClick={() => activerCoupon(params.row.id)}>Activé coupon</Nav.Link>
                         }
                         <Divider />
                         <Nav.Link className="actionNav" onClick={() => handleDelete(params.row.id)}>Supprimer coupon</Nav.Link>

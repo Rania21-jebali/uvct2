@@ -2,7 +2,6 @@ import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchCategories, dispatchCategories} from '../../../redux/actions/categorieAction'
 import DayJS from 'react-dayjs';
-import {DataGrid} from '@mui/x-data-grid';
 import { Modal, Button} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -11,6 +10,7 @@ import axios from 'axios'
 import ListIcon from '@material-ui/icons/List';
 import AddIcon from '@material-ui/icons/Add';
 import './Categories.css'
+import Table from '../../components/table/Table';
 
 const { confirm } = Modal;
 const initialState = {
@@ -117,13 +117,7 @@ function Categories() {
             </Button>
         </div>
         <div  style={{ height: 550 }} className="tableau" >
-            <DataGrid
-                rows={rowData}
-                columns={columns}
-                pageSize={8}
-                checkboxSelection
-                disableSelectionOnClick
-         />
+        <Table row={rowData} columns={columns}/>
        </div> 
       </div>
   )

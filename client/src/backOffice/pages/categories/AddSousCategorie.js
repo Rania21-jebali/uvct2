@@ -2,16 +2,13 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux'
 import {isEmpty} from '../../../components/utils/validation/Validation'
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { Button, Form, Spinner } from 'react-bootstrap'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader';
 import { useParams } from 'react-router-dom'
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
+import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 
-  function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
   const initialState = {
     titre: '',
     image:'',
@@ -28,22 +25,8 @@ function AddSousCategorie() {
     const [image, setImage] = useState(false);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const {id} = useParams()
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen(false);
-    };
-
-    const handleClose1 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen1(false);
-      };
 
     const handleChangeInput = e => {
         const {name, value} = e.target
@@ -77,7 +60,7 @@ function AddSousCategorie() {
             
         } catch (err) {
             setImage({...data, err: err.response.data.msg , success: ''})
-            setOpen1(true);
+            setOpen2(true);
         }
       }
     
@@ -97,7 +80,7 @@ function AddSousCategorie() {
         } catch (err) {
             err.response.data.msg && 
             setData({...data, err: err.response.data.msg, success: ''})
-            setOpen1(true);
+            setOpen2(true);
         }
       }
       
@@ -156,18 +139,8 @@ function AddSousCategorie() {
             </Button>
             </div>
           </Form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{vertical: 'bottom', horizontal: 'center' }}>
-                <Alert onClose={handleClose1} severity="error">
-                {err}
-                </Alert>
-            </Snackbar>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
     </div>
     </div>
   )

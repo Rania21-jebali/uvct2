@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../components/utils/notifications/Nofification'
 import {isEmpty, isEmail, isLength} from '../../../components/utils/validation/Validation'
 import { Button,Form} from 'react-bootstrap'
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader'
 import axios from 'axios'
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 
 const initialState = {
     name: '',
@@ -20,7 +21,8 @@ function ApprenantAdd() {
     const [data, setData] = useState(initialState)
     const {name, tele, email, password,cf_password, err, success} = data
     const token = useSelector(state => state.token)
-
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
         const handleChangeInput = e => {
             const {name, value} = e.target
             setData({...data, [name]:value, err: '', success: ''})
@@ -45,18 +47,18 @@ function ApprenantAdd() {
               })
     
               setData({...data, err: '', success: res.data.msg})
+              setOpen(true)
     
           } catch (err) {
               err.response.data.msg && 
               setData({...data, err: err.response.data.msg, success: ''})
+              setOpen2(false)
           }
         }
    
   return (
     <div className="profile">
     <BreadcrumbHeader item="Liste apprenants" link="/apprenants" active="Ajouter apprenant"/>
-            {err && ShowErrMsg(err)}
-            {success && ShowSuccessMsg(success)}
       <div className='content-profil'>
        <Form className='form-profil' onSubmit={handleSubmit}>
           <Form.Group className="mb-3" >
@@ -110,6 +112,8 @@ function ApprenantAdd() {
           </div>
         </Form>
       </div>
+         <SnackbarSuccess success={success} open={open}/>
+         <SnackbarErr err={err} open2={open2}/>
     </div>
   )
 }

@@ -4,10 +4,9 @@ import {useSelector} from 'react-redux'
 import { Button, Form, Spinner } from 'react-bootstrap'
 import BreadcrumbHeader from '../../../components/breadcrumb/BreadcrumbHeader'
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import './AjoutEvent.css'
-import { useNavigate } from 'react-router-dom'
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 
     const initialState = {
       titre:'',
@@ -21,10 +20,6 @@ import { useNavigate } from 'react-router-dom'
       err: '',
       success: ''
     }
-    function Alert(props) {
-      return <MuiAlert elevation={6} variant="filled" {...props} />;
-    }
-
 function AjoutEvent() {
     const token = useSelector(state => state.token)
     const [event, setEvent] = useState(initialState)
@@ -36,23 +31,7 @@ function AjoutEvent() {
     const [surPlace, setSurPlace] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
-    const navigate = useNavigate()
-
-      const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen(false);
-      };
-
-      const handleClose2 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-
-        setOpen2(false);
-      };
-
+     
       const handleChangeInput = e => {
         const {name, value} = e.target
         setEvent({...event, [name]:value, err: '', success: ''})
@@ -100,7 +79,6 @@ function AjoutEvent() {
 
               setEvent({...event, err: '', success: res.data.msg})
               setOpen(true);
-              navigate("/mes-evenements")
 
           } catch (err) {
               err.response.data.msg && 
@@ -149,6 +127,7 @@ function AjoutEvent() {
             <Form.Control type="file" id="file"
                 onChange={changeAffiche}
                 style={{display:"none"}}
+                required
           />
           </Form.Group>
           <Form.Group className="mb-3" >
@@ -222,18 +201,8 @@ function AjoutEvent() {
       </div>
     </Form>
   </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleClose} severity="success">
-          {success}
-        </Alert>
-      </Snackbar>
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleClose2} severity="error">
-          {err}
-        </Alert>
-      </Snackbar>
+  <SnackbarSuccess success={success} open={open}/>
+  <SnackbarErr err={err} open2={open2}/>
   </div>
   )
 }

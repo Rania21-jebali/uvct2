@@ -4,20 +4,16 @@ import {fetchAllInstr, dispatchGetAllInstr} from '../../../../redux/actions/user
 import axios from 'axios'
 import Avatar1 from '../../../../components/Avatar/Avatar';
 import DayJS from 'react-dayjs';
-import {DataGrid} from '@mui/x-data-grid';
 import {Nav } from 'react-bootstrap';
 import Popover from '@material-ui/core/Popover';
 import { Divider } from '@material-ui/core'
 import { Modal, Button} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Table from '../../../components/table/Table';
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
 
 const { confirm } = Modal;
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 function InstructeurList() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -32,14 +28,7 @@ function InstructeurList() {
     const {err} = data
     const dispatch = useDispatch()
     const [open2, setOpen2] = React.useState(false);
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen2(false);
-    };
-
+    
       const handleClick = (event) => {
           setAnchorEl(event.currentTarget);
         };
@@ -181,25 +170,11 @@ function InstructeurList() {
         })
 
   return (
-  <div style={{ height: 550, width: '100%' }} >
-      <DataGrid
-        rows={rowData}
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleClose} severity="error">
-          {err}
-        </Alert>
-      </Snackbar>
-    </div> 
-    
+    <div style={{ height: 550, width: '100%' }} >
+      <Table row={rowData} columns={columns}/>
+      <SnackbarErr err={err} open2={open2}/>
+    </div>  
   )
 }
-
-
 
 export default InstructeurList

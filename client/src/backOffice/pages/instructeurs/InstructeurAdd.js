@@ -4,12 +4,8 @@ import {isEmpty, isEmail, isLength, isMatch} from '../../../components/utils/val
 import { Button,Form} from 'react-bootstrap'
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader'
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 
 const initialState = {
     name: '',
@@ -26,21 +22,7 @@ function InstructeurAdd() {
     const {name, tele, email, specialite, password,cf_password, err, success} = data
     const token = useSelector(state => state.token)
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen(false);
-    };
-
-    const handleClose1 = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen1(false);
-    };
+    const [open2, setOpen2] = React.useState(false);
 
         const handleChangeInput = e => {
             const {name, value} = e.target
@@ -74,7 +56,7 @@ function InstructeurAdd() {
         } catch (err) {
             err.response.data.msg && 
             setData({...data, err: err.response.data.msg, success: ''})
-            setOpen1(true);
+            setOpen2(true);
         }
       }
    
@@ -153,18 +135,8 @@ function InstructeurAdd() {
           </div>
         </Form>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleClose} severity="success">
-          {success}
-        </Alert>
-      </Snackbar>
-      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleClose1} severity="error">
-          {err}
-        </Alert>
-      </Snackbar>
+      <SnackbarSuccess success={success} open={open}/>
+      <SnackbarErr err={err} open2={open2}/>
     </div>
   )
 }

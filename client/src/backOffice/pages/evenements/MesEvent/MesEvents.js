@@ -3,7 +3,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios'
 import {fetchMyEvents, dispatchGetMyEvents} from '../../../../redux/actions/eventsAction'
 import { Modal} from 'antd';
-import {DataGrid} from '@mui/x-data-grid';
 import { Input, Button} from 'antd';
 import { List, Avatar } from 'antd';
 import DayJS from 'react-dayjs';
@@ -14,6 +13,8 @@ import AddIcon from '@material-ui/icons/Add';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Table from '../../../components/table/Table';
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
 
 const initialState = {
   err: '',
@@ -80,13 +81,6 @@ function MesEvents() {
         setOpen(false);
       };
 
-      const handleClose2 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen2(false);
-      };
-   
       useEffect(() => {
               fetchMyEvents(token).then(res =>{
                   dispatch(dispatchGetMyEvents(res))
@@ -178,12 +172,7 @@ function MesEvents() {
       )
     }
   <div style={{ height: 550, width: '100%' , backgroundColor:'white'}}>
-      <DataGrid
-              rows={rowData}
-              columns={columns}
-              pageSize={8}
-              disableSelectionOnClick 
-            />
+    <Table row={rowData} columns={columns}/>
   </div> 
       <Modal title="Participants" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
    <Search placeholder="Rechercher des participants" allowClear onSearch={onSearch}  />
@@ -206,12 +195,7 @@ function MesEvents() {
           {success}
         </Alert>
       </Snackbar>
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleClose2} severity="error">
-          {err}
-        </Alert>
-      </Snackbar>
+  <SnackbarErr err={err} open2={open2}/>
 </div>
      
   )

@@ -1,18 +1,15 @@
 import React ,{useState} from 'react'
 import { Button , Form, Spinner } from 'react-bootstrap'
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { useParams } from 'react-router-dom'
 import BreadcrumbHeader from '../../../components/breadcrumb/BreadcrumbHeader';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import {fetchEvent, dispatchGetEvent} from '../../../../redux/actions/eventsAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess';
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 const initialState = {
     titre:'',
     details:'',
@@ -32,14 +29,14 @@ function UpdateEvent(props){
     const {titre,details,dateDebut,dateFin, nbTicket, prix, typeEvent, err, success} = event
     const [affiche, setAffiche] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [gratuit, setGratuit] = useState(false);
-    const [enLigne, setEnLigne] = useState(false);
-    const [surPlace, setSurPlace] = useState(false);
+    const [setGratuit] = useState(false);
+    const [setEnLigne] = useState(false);
+    const [setSurPlace] = useState(false);
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const events1 = useSelector(state => state.events);
     const {id} = useParams()
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
 
         useEffect(() => {
@@ -47,21 +44,7 @@ function UpdateEvent(props){
                 dispatch(dispatchGetEvent(res))
             })
         },[id, dispatch, callback])
-
-        const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-        };
-
-        const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-          };
-
+        
         const handleChange = e => {
             const {name, value} = e.target
             setEvent({...event, [name]:value, err:'', success: ''})
@@ -94,7 +77,7 @@ function UpdateEvent(props){
                         
                     } catch (err) {
                         setAffiche({...event, err: err.response.data.msg , success: ''})
-                        setOpen1(true);
+                        setOpen2(true);
                     }
         }
 
@@ -118,7 +101,7 @@ function UpdateEvent(props){
                   
                } catch (err) {
                     setEvent({...event, err: err.response.data.msg , success: ''})
-                    setOpen1(true);
+                    setOpen2(true);
                 }
         }
       
@@ -239,18 +222,8 @@ function UpdateEvent(props){
           </div>
         </Form>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-            <Alert onClose={handleClose} severity="success">
-              {success}
-            </Alert>
-          </Snackbar>
-          <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-            <Alert onClose={handleClose1} severity="error">
-              {err}
-            </Alert>
-          </Snackbar>
+          <SnackbarSuccess success={success} open={open}/>
+          <SnackbarErr err={err} open2={open2}/>
         </div>
     )
 }

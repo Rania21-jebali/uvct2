@@ -5,11 +5,11 @@ import { useParams } from 'react-router-dom'
 import { Button, Modal } from 'antd';
 import AddIcon from '@material-ui/icons/Add';
 import DayJS from 'react-dayjs';
-import {DataGrid} from '@mui/x-data-grid';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import axios from 'axios'
+import Table from '../../components/table/Table';
 
 const { confirm } = Modal;
 
@@ -100,13 +100,7 @@ function SousCategorie() {
                 </Button>
             </div>
             <div style={{ height: 550 }} className="tableau">
-              <DataGrid
-                  rows={rowData}
-                  columns={columns}
-                  pageSize={8}
-                  checkboxSelection
-                  disableSelectionOnClick
-              />
+            <Table row={rowData} columns={columns}/>
            </div> 
           </div>
       )

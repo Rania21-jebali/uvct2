@@ -2,21 +2,17 @@ import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchHistoryByAdmin, dispatchHistoryByAdmin} from '../../../../redux/actions/historyAction'
 import DayJS from 'react-dayjs';
-import {DataGrid} from '@mui/x-data-grid';
 import axios from 'axios'
 import { Modal} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import {useParams} from 'react-router-dom'
 import Avatar1 from '../../../../components/Avatar/Avatar';
 import { fetchUserById ,dispatchGetAllUserById} from '../../../../redux/actions/usersAction';
+import Table from '../../../components/table/Table';
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 
 const { confirm } = Modal;
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 const initialState = {
   name: '',
   email:'',
@@ -46,14 +42,7 @@ function  Activities() {
           date:history?.createdAt,
       }
     })
-    
-    const handleClose2 = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen2(false);
-    };
-
+   
       useEffect(() => {
         fetchHistoryByAdmin(id).then(res =>{
                 dispatch(dispatchHistoryByAdmin(res))
@@ -83,7 +72,7 @@ function  Activities() {
           renderCell: (params) =>{
             function Instructeur(instructeur){
                 const users = useSelector(state => state.users)
-                const [callback1, setCallback1] = useState(false)
+                const [callback1] = useState(false)
                 const dispatch1 = useDispatch()
                 useEffect(() => {
                     fetchUserById(instructeur).then(res =>{
@@ -155,18 +144,8 @@ function  Activities() {
 
   return (
         <div style={{ height: 550}}>
-            <DataGrid
-                rows={rowData}
-                columns={columns}
-                pageSize={8}
-                checkboxSelection
-            />
-        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-                <Alert onClose={handleClose2} severity="error">
-                {err}
-                </Alert>
-        </Snackbar>
+         <Table row={rowData} columns={columns}/>
+        <SnackbarErr err={err} open2={open2}/>
         </div>
   )
 }

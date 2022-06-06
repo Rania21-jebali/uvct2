@@ -1,9 +1,9 @@
 import React ,{useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchAllFormations, dispatchGetAllFormations} from '../../../../redux/actions/formationsAction'
-import {DataGrid} from '@mui/x-data-grid';
 import "../Formation.css"
 import DayJS from 'react-dayjs';
+import Table from '../../../components/table/Table';
 
 function FormationList() { 
     const token = useSelector(state => state.token)
@@ -86,13 +86,7 @@ function FormationList() {
           <h1 className="title-event">Liste des formations</h1>
         </div>
             <div style={{ height: 550, width: '100%',background:"white",marginTop:"20px"}} >
-              <DataGrid
-                      rows={data}
-                      columns={columns}
-                      pageSize={8}
-                      checkboxSelection
-                      disableSelectionOnClick
-                    />
+            <Table row={data} columns={columns}/>
             </div>
       </div>
     )

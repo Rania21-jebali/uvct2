@@ -1,6 +1,6 @@
 import React from 'react'
 import './Favoris.css'
-import {DataGrid} from '@mui/x-data-grid';
+import Table from '../../components/table/Table';
 
 const columns = [
     {
@@ -31,13 +31,7 @@ function Favoris() {
     <div className="favoris">
     <h1 className="title-favoris1">Mes favoris</h1>
     <div style={{ height: 550, width: '100%' , backgroundColor:'white'}}>
-      <DataGrid
-              rows={rowData}
-              columns={columns}
-              pageSize={8}
-              checkboxSelection
-              disableSelectionOnClick       
-      />
+    <Table row={rowData} columns={columns}/>
      </div> 
     </div>
   )

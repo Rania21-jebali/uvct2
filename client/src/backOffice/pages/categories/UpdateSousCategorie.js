@@ -1,17 +1,14 @@
 import React ,{useState,  useEffect} from 'react'
 import { Button , Form, Spinner } from 'react-bootstrap'
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { useParams } from 'react-router-dom'
 import BreadcrumbHeader from '../../components/breadcrumb/BreadcrumbHeader';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import {fetchSousCategorie, dispatchGetSousCategorie} from '../../../redux/actions/sousCategorieAction'
 import { useDispatch, useSelector } from 'react-redux';
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
+import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
     const souscategorieState = {
     titre:'',
     motCles:'',
@@ -24,12 +21,12 @@ function UpdateSousCategorie(props){
     const [data, setData] = useState(souscategorieState)
     const {titre,motCles,description,err,success} = data
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const {id} = useParams();
     const [image, setImage] = useState(false);
     const [loading, setLoading] = useState(false);
     const souscategories3 = useSelector(state => state.sousCategorie)
-    const [callback3, setCallback3] = useState(false)
+    const [setCallback3] = useState(false)
     const dispatch3 = useDispatch()
     
     useEffect(() => {
@@ -37,20 +34,6 @@ function UpdateSousCategorie(props){
             dispatch3(dispatchGetSousCategorie(res))
         })
     },[id, dispatch3, setCallback3])
-
-    const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-    };
-
-    const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-    };
 
     const handleChange = e => {
                     const {name, value} = e.target
@@ -84,7 +67,7 @@ function UpdateSousCategorie(props){
                         
                     } catch (err) {
                         setImage({...data, err: err.response.data.msg , success: ''})
-                        setOpen1(true);
+                        setOpen2(true);
                     }
     }
 
@@ -101,7 +84,7 @@ function UpdateSousCategorie(props){
                     
                 } catch (err) {
                         setData({...data, err: err.response.data.msg , success: ''})
-                        setOpen1(true);
+                        setOpen2(true);
                     }
     }
         
@@ -163,18 +146,8 @@ function UpdateSousCategorie(props){
                 <Button  className='btn-confirme'  onClick={handleUpdate}>Modifier catégorie</Button>
               </div>
               </Form>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-          </Snackbar>
-          <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-              anchorOrigin={{vertical: 'bottom', horizontal: 'center' }}>
-                  <Alert onClose={handleClose1} severity="error">
-                  {err}
-                  </Alert>
-          </Snackbar>
+          <SnackbarSuccess success={success} open={open}/>
+          <SnackbarErr err={err} open2={open2}/>
       </div>
         </div>
     )

@@ -6,20 +6,15 @@ import {OverlayTrigger, Tooltip } from 'react-bootstrap';
 import axios from 'axios';
 import DayJS from 'react-dayjs';
 import {isEmail} from '../../../../components/utils/validation/Validation'
-import {DataGrid} from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Modal } from 'antd';
 import '../Instructeurs.css'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
+import Table from '../../../components/table/Table';
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess';
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
 const { confirm } = Modal;
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 function CandidatList() {
     const auth = useSelector(state => state.auth)
@@ -31,22 +26,8 @@ function CandidatList() {
     const {success,err} = data
     const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
-
-      const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen(false);
-      };
-
-      const handleClose1 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen1(false);
-      };
-
+    const [open2, setOpen2] = React.useState(false);
+     
       useEffect(() => {
           if(isAdmin|| isSuperAdmin ){
             fetchAllCond(token).then(res =>{
@@ -65,7 +46,7 @@ function CandidatList() {
                     } 
               } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
-            setOpen1(true);
+            setOpen2(true);
           }
         }
 
@@ -84,7 +65,7 @@ function CandidatList() {
                 }  
             } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
-            setOpen1(true);
+            setOpen2(true);
           }
         }
      
@@ -186,23 +167,9 @@ function CandidatList() {
   return (
 
       <div style={{ height: 550, width: '100%' }} >
-        <DataGrid
-          rows={rowData}
-          columns={columns}
-          pageSize={8}
-        />
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'  }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center'  }}>
-                <Alert onClose={handleClose1} severity="error">
-                {err}
-                </Alert>
-        </Snackbar>
+       <Table row={rowData} columns={columns}/>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
       </div> 
   )
 }

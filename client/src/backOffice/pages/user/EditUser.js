@@ -6,14 +6,11 @@ import {isLength, isMatch} from '../../../components/utils/validation/Validation
 import { Button,Form, Spinner } from 'react-bootstrap'
 import { makeStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import './EditUser.css'
+import SnackbarErr from '../../components/Snackbar/SnackbarErr'
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
         const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
@@ -52,26 +49,11 @@ function EditUser() {
     const {name,tele,email,specialite,password, cf_password, err, success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpen(false);
-    };
-    const handleClose1= (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpen1(false);
-    };
+    const [open2, setOpen2] = React.useState(false);
 
         useEffect(() => {
           fetchUserDetails(token,id).then(res =>{
@@ -113,7 +95,7 @@ function EditUser() {
                 
             } catch (err) {
                 setData({...data, err: err.response.data.msg , success: ''})
-                setOpen1(true);
+                setOpen2(true);
 
             }
         }
@@ -136,7 +118,7 @@ function EditUser() {
                 window.location.reload(false);
             } catch (err) {
                 setData({...data, err: err.response.data.msg , success: ''})
-                setOpen1(true);
+                setOpen2(true);
             }
         }
 
@@ -248,18 +230,8 @@ function EditUser() {
                   <Button disabled={loading} onClick={handleUpdate} className='btn-confirme'>Sauvegarder les modifications</Button>
            </div>
         </Form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-        <Alert onClose={handleClose} severity="success">
-          {success}
-        </Alert>
-      </Snackbar>
-      <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-        <Alert onClose={handleClose1} severity="error">
-          {err}
-        </Alert>
-      </Snackbar>
+      <SnackbarSuccess success={success} open={open}/>
+      <SnackbarErr err={err} open2={open2}/>
     </div>
   )
 }

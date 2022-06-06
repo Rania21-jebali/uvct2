@@ -11,12 +11,8 @@ import './Reclamations.css'
 import ReplyIcon from '@material-ui/icons/Reply';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
+import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 
 const initialState = {
     message:'',
@@ -36,22 +32,7 @@ function Reclamation() {
     const dispatch1 = useDispatch()
     const [open, setOpen] = useState(false);
     const token = useSelector(state => state.token)
-    const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(false);
-
-    const handleClose1 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen1(false);
-      };
-  
-      const handleClose2 = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen2(false);
-        };
 
       useEffect(() => {
         fetchReclamation(id).then(res =>{
@@ -79,7 +60,7 @@ function Reclamation() {
             const res = await axios.post('/addReclamation', {message}, { headers: {Authorization: token} })
   
             setReclamation({...reclamation, err: '', success: res.data.msg})
-            setOpen1(true);
+            setOpen(true);
   
         } catch (err) {
             err.response.data.msg && 
@@ -124,18 +105,8 @@ function Reclamation() {
                         Envoyer
                     </Button>
                    </Form>
-                   <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
-                <Alert onClose={handleClose1} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-                <Alert onClose={handleClose2} severity="error">
-                {err}
-                </Alert>
-            </Snackbar>
+            <SnackbarSuccess success={success} open={open}/>
+            <SnackbarErr err={err} open2={open2}/>
                 </div>
             )
         }

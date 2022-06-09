@@ -1,10 +1,10 @@
 const mongoose= require('mongoose')
 
 const categorieSchema = new mongoose.Schema({
-    titre: {
+    title: {
         type: String,
     },
-    motCles: {
+    keywords: {
         type: String,
     },
     image: {

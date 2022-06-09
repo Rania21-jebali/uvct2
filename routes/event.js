@@ -11,6 +11,10 @@ router.get('/myArchiveEvents',auth,eventCtrl.getAllArchiveEvent)
 
 router.get('/events',eventCtrl.getAllEvents)
 
+router.get('/events/:title',eventCtrl.searchAllEventByTitle)
+
+router.get('/allEvents/:dateStart',eventCtrl.getAllEvents)
+
 router.get('/archiveEvents',eventCtrl.getArchiveEvents)
 
 router.get('/event/:id',eventCtrl.getEventById)

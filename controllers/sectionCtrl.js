@@ -6,11 +6,11 @@ const sectionCtrl = {
 //   Ajout section
 addSection: async (req, res) => {
     try {
-        const {titre,objectif} = req.body
-        const formation1 = await Formation.findOne({titre:req.params.titre})
+        const {title,objectif} = req.body
+        const formation1 = await Formation.findOne({title:req.params.titre})
          const {id} = formation1.id
         const newSection = {
-            titre , objectif, formation: formation1.id
+            title , objectif, formation: formation1.id
         }
         const section2 = new Section(newSection);
          await section2.save();
@@ -44,7 +44,7 @@ updateSectionById: async (req, res) => {
         const {titre , objectif} = req.body
 
         await Section.findByIdAndUpdate({_id:req.params.id}, {
-            titre, objectif
+            title, objectif
         })
         res.json({msg: "Section ajoutée !"})
     } catch (err) {

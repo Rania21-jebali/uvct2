@@ -4,9 +4,9 @@ const categorieCtrl = {
 //   Ajout catégorie
 addCategorie: async (req, res) => {
     try {
-        const {titre,image,description,motCles} = req.body
+        const {title,image,description,keywords} = req.body
         const newCategorie = {
-            titre , image, description, motCles
+            title , image, description,keywords
         }
         const categorie = new Categorie(newCategorie);
          await categorie.save();
@@ -27,10 +27,10 @@ getAllCategorie: async (req, res) => {
 //update catégorie by id
 updateCategorieById: async (req, res) => {
     try {
-        const {titre, image, description, motCles} = req.body
+        const {title, image, description, keywords} = req.body
 
         await Categorie.findByIdAndUpdate({_id:req.params.id}, {
-            titre, image, description, motCles
+            title, image, description, keywords
         })
         res.json({msg: "Catégorie modifié !"})
     } catch (err) {

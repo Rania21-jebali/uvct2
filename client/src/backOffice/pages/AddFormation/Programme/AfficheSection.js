@@ -37,7 +37,7 @@ function AfficheSection() {
             sections.map((section,i) => 
             (
               <div className='content-section' key={i+1}>
-                    <Section num={i+1}  titre={section.titre} id={section._id}/>
+                    <Section num={i+1}  titre={section.title} id={section._id}/>
               </div> 
             ))
            }

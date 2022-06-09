@@ -10,12 +10,12 @@ function Messages() {
     <div>
       <div className='eventTitleContainer'>
         <h1 className="title-event">Mes messages</h1>
-        <a href="/ajout-evenement">
+        <a href="/">
         <Button className='btn-event'><AddIcon />Nouveau message</Button>
         </a>
       </div>
       <div className="scrollTab">
-     <ScrollTab label1="Boite réception" label2="Messages envoyés" label3="Archives"
+     <ScrollTab label1="Boite réception" label2="Messages envoyés" 
         item1={<BoiteReception />}
         item2={<MessageEnvoyer />}
     />

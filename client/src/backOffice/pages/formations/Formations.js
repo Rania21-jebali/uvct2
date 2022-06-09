@@ -21,7 +21,7 @@ function Alert(props) {
 const { Search } = Input;
 const onSearch = value => console.log(value);
 const initialState = {
-  titre:'',
+  title:'',
   err: '',
   success: ''
 }
@@ -37,7 +37,7 @@ function Formations() {
   const [archiver, setArchiver] = useState(false)
   const [statut, setStatut] = useState(false)
   const formations = useSelector(state => state.formations)
-  const {titre, err, success} = formation
+  const {title, err, success} = formation
   const navigate = useNavigate();
   const [callback, setCallback] = useState(false)
   const dispatch = useDispatch()
@@ -47,8 +47,8 @@ function Formations() {
   const data= formations?.map(formation => {
     return{
         id:formation?._id,
-        titre:formation?.titre,
-        prix:formation?.prix,
+        title:formation?.title,
+        price:formation?.price,
         affiche:formation?.affiche,
         statut:formation?.statut,
         date:formation?.createdAt,
@@ -93,12 +93,12 @@ function Formations() {
               e.preventDefault()
               try {
                   const res = await axios.post('/addFormation', {
-                    titre
+                    title
                   },{
                     headers: {Authorization: token}
                 })
                   setFormation({...formation, err: '', success: res.data.msg})
-                  navigate(`/formation/${formation.titre}`);
+                  navigate(`/formation/${formation.title}`);
                   setOpen2(true);
 
               } catch (err) {
@@ -190,7 +190,7 @@ function Formations() {
             }
           },
           {
-            field: 'titre',
+            field: 'title',
             headerName: 'Titre',
             flex:2,
           },
@@ -206,7 +206,7 @@ function Formations() {
             }
           },
           {
-            field: 'prix',
+            field: 'price',
             headerName: 'Prix',
             flex:1,
           },
@@ -239,7 +239,7 @@ function Formations() {
               renderCell: (params) =>{
                 return(
                   <> 
-                  <a href={`/maFormation/${params.row.titre}`}><VisibilityIcon className='icon-action'/></a>
+                  <a href={`/maFormation/${params.row.title}`}><VisibilityIcon className='icon-action'/></a>
                   <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                     <Popover
                           id={id}
@@ -300,8 +300,8 @@ function Formations() {
             <Form.Group className="mb-3" >
              <Form.Control type="text" 
               placeholder="par exemple “Stratégies marketing avancées”"
-              name="titre"
-              value={titre}
+              name="title"
+              value={title}
               onChange={handleChangeInput} 
               required
               />

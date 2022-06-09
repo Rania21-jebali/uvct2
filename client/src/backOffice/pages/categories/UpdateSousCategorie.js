@@ -10,8 +10,8 @@ import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
 import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 
     const souscategorieState = {
-    titre:'',
-    motCles:'',
+    title:'',
+    keywords:'',
     description:'',
     err: '',
     success: ''
@@ -19,7 +19,7 @@ import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 
 function UpdateSousCategorie(props){
     const [data, setData] = useState(souscategorieState)
-    const {titre,motCles,description,err,success} = data
+    const {title,keywords,description,err,success} = data
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const {id} = useParams();
@@ -74,8 +74,8 @@ function UpdateSousCategorie(props){
     const updateInfor = async() => {
                     try {
                         axios.patch(`/updateSousCategorie/${id}`, {
-                        titre: titre ? titre : souscategories3.titre,
-                        motCles: motCles ? motCles : souscategories3.motCles,
+                        titre: title ? title : souscategories3.titre,
+                        motCles: keywords ? keywords : souscategories3.motCles,
                         description: description ? description : souscategories3.description,
 
                         })
@@ -101,9 +101,9 @@ function UpdateSousCategorie(props){
                   <Form.Label className="label">Titre du sous catégorie</Form.Label>
                       <Form.Control type="text" 
                       placeholder="Enter un titre" 
-                      name="titre"
+                      name="title"
                       required 
-                      defaultValue={souscategories3.titre}
+                      defaultValue={souscategories3.title}
                       onChange={handleChange} 
                       />
                   </Form.Group>
@@ -111,9 +111,9 @@ function UpdateSousCategorie(props){
                   <Form.Label className="label">Mot clés</Form.Label>
                       <Form.Control type="text" 
                       placeholder="mot clés" 
-                      name="motCles"
+                      name="keywords"
                       required 
-                      defaultValue={souscategories3.motCles}
+                      defaultValue={souscategories3.keywords}
                       onChange={handleChange} 
                       />
                   </Form.Group>

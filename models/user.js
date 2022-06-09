@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     message:{
         type:String
     },
-    specialite:{
+    speciality:{
         type:String
     },
     cv:{
@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
-    tele:{
+    phone:{
         type:String,
     },
     site:{

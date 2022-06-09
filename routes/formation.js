@@ -13,15 +13,19 @@ router.get('/formations',formationCtrl.getFormations)
 
 router.get('/formationsArchive',formationCtrl.getFormationsArchive)
 
-router.get('/myFormation/:titre',auth,formationCtrl.getFormationByTitre)
+router.get('/myFormation/:title',auth,formationCtrl.getFormationByTitre)
 
 router.get('/formation/:id',formationCtrl.getFormationById)
 
 router.get('/formations/:categorie',formationCtrl.getFormationsByCategorie)
 
+router.get('/formations/:level',formationCtrl.searchFormationsByLevel)
+
+router.get('/formations/:title',formationCtrl.searchFormationsByTitle)
+
 router.delete('/deleteFormation/:id', auth, formationCtrl.deleteFormation)
 
-router.patch('/updateFormation/:titre', auth, formationCtrl.updateFormationByTitre)
+router.patch('/updateFormation/:title', auth, formationCtrl.updateFormationByTitre)
 
 router.patch('/updateFormationById/:id', auth, formationCtrl.updateFormationById)
 

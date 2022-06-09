@@ -68,7 +68,7 @@ function MesEvents() {
       const rowData= events?.map(event => {
         return{
             id:event?._id,
-            titre:event?.titre,
+            title:event?.title,
             affiche:event?.affiche,
             date:event?.dateDebut,
         }
@@ -118,7 +118,7 @@ function MesEvents() {
           }
         },
           {
-            field: 'titre',
+            field: 'title',
             headerName: 'Titre',
             flex:1,
           },

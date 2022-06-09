@@ -6,11 +6,11 @@ const couponCtrl = {
 //   Ajout coupon
 addCoupon: async (req, res) => {
     try {
-        const {code, remise, nbRemise, dateDebut, dateFin, statut} = req.body
+        const {code, discount, number, dateStart, dateEnd, statut} = req.body
         const formation1 = await Formation.findOne({titre:req.params.titre})
          const {id} = formation1.id
         const newCoupon = {
-            code, remise, nbRemise, dateDebut, dateFin, statut, formation: formation1.id
+            code, discount, number, dateStart, dateEnd, statut, formation: formation1.id
         }
         const coupon2 = new Coupon(newCoupon);
          await coupon2.save();
@@ -41,7 +41,7 @@ getCouponById: async (req, res) => {
 //update coupon by id
 updateCouponById: async (req, res) => {
     try {
-        const {code, remise, nbRemise, dateDebut, dateFin, statut} = req.body
+        const {code, discount, number, dateStart, dateEnd, statut} = req.body
 
         await Coupon.findByIdAndUpdate({_id:req.params.id}, {
             code, remise, nbRemise, dateDebut, dateFin, statut

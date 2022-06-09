@@ -1,12 +1,12 @@
 const mongoose= require('mongoose')
 
 const formationSchema = new mongoose.Schema({
-    titre: {
+    title: {
         type: String,
         unique: true,
         trim: true
     },
-    sousTitre:{
+    subTitle:{
         type:String
     },
     description:{
@@ -15,10 +15,10 @@ const formationSchema = new mongoose.Schema({
     categorie: {
         type: String,
     },
-    prix: {
+    price: {
         type: String,
     },
-    niveau: {
+    level: {
         type: String,
     },
     videopromo: {
@@ -33,14 +33,14 @@ const formationSchema = new mongoose.Schema({
     prerequis: {
         type: String,
     },
-    destinerA: {
+    intendedFor: {
         type: String,
     },
     postedBy:{
         type:Object,
         ref: 'Users'
     },
-    gratuit:{
+    free:{
         type:Boolean,
         default:false,
     },

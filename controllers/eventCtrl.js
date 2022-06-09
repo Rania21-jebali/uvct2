@@ -7,9 +7,9 @@ const eventCtrl = {
 //   Ajout event
 addEvent: async (req, res) => {
     try {
-        const {titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace} = req.body
+        const {title, details, dateStart,dateEnd,nbTicket,price,typeEvent,affiche,free,online} = req.body
         const newEvent = {
-            titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace,
+            title, details, dateStart,dateEnd,nbTicket,price,typeEvent,affiche,free,online,
             postedBy:req.user.id
         }
         const event = new Event(newEvent);
@@ -23,6 +23,24 @@ addEvent: async (req, res) => {
 getAllEvent: async (req, res) => {
     try {
         const event = await Event.find({ postedBy: req.user.id , statut:false})
+        res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  Search All events by title
+searchAllEventByTitle: async (req, res) => {
+    try {
+        const event = await Event.find({ title:req.params.title, statut:false})
+        res.json(event)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  Search All events by date
+searchAllEventByDate: async (req, res) => {
+    try {
+        const event = await Event.find({ dateStart:req.params.dateStart, statut:false})
         res.json(event)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -99,10 +117,10 @@ deleteEvent: async (req, res) => {
 //update event by id
 updateEventById: async (req, res) => {
     try {
-        const {titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace} = req.body
+        const {title, details, dateStart,dateEnd,nbTicket,price,typeEvent,affiche,free,online} = req.body
 
         await Event.findByIdAndUpdate({_id:req.params.id}, {
-            titre, details, dateDebut,dateFin,nbTicket,prix,typeEvent,affiche,gratuit,enLigne,surPlace
+            title, details, dateStart,dateEnd,nbTicket,price,typeEvent,affiche,free,online
         })
         res.json({msg: "Événement modifié !"})
     } catch (err) {

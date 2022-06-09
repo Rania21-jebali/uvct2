@@ -3,37 +3,18 @@ import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchUserDetails, dispatchGetUserDetails} from '../../../redux/actions/authAction'
 import {isLength, isMatch} from '../../../components/utils/validation/Validation'
-import { Button,Form, Spinner } from 'react-bootstrap'
-import { makeStyles } from '@material-ui/core/styles';
+import { Button,Form} from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import './EditUser.css'
 import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
 
-        const useStyles = makeStyles((theme) => ({
-        root: {
-            display: 'flex',
-            '& > *': {
-            margin: theme.spacing(1),
-            border:" 0.5px solid #999999",
-            padding:"5px",
-            boxSizing: "border-box",
-            },
-        },
-        large: {
-            width: theme.spacing(20),
-            height: theme.spacing(20),
-            borderRadius:"50%",
-
-        },
-        }));
-
         const initialState = {
             name: '',
-            tele:'',
+            phone:'',
             email:'',
-            specialite:'',
+            speciality:'',
             password:'',
             cf_password: '',
             err: '',
@@ -41,12 +22,11 @@ import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
         }
 
 function EditUser() {
-    const classes = useStyles();
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const {admin} = auth
     const [data, setData] = useState(initialState)
-    const {name,tele,email,specialite,password, cf_password, err, success} = data
+    const {name,phone,email,speciality,password, cf_password, err, success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [callback] = useState(false)
@@ -105,9 +85,9 @@ function EditUser() {
                 axios.patch(`/user/updateInfo/${id}`, {
                     name: name ? name : admin.name,
                     avatar: avatar ? avatar : admin.avatar,
-                    tele: tele ? tele : admin.tele,
+                    phone: phone ? phone : admin.phone,
                     email: email ? email: admin.email,
-                    specialite: email ? email: admin.specialite,
+                    speciality: speciality ? speciality: admin.speciality,
 
                 },{
                     headers: {Authorization: token}
@@ -141,7 +121,7 @@ function EditUser() {
     }
 
     const handleUpdate = () => {
-        if(name || avatar || tele || specialite || email) updateInfor()
+        if(name || avatar || phone || speciality || email) updateInfor()
         if(password) updatePassword()
     }
 
@@ -149,17 +129,18 @@ function EditUser() {
       <div className='content-user'>
        <h3 className='title-photo'>Photo de profile</h3>
        <Form className='form-profil'>
-         <Form.Group className="mb-3" >
-         {loading && <Spinner animation="border" variant="secondary" />}
-          <div className={classes.root}>
-           <img src={avatar ? avatar : admin.avatar} alt="" className={classes.large} />
-          </div>
-          <Form.Label htmlFor="file"> 
-           <PhotoCameraIcon />
+       <Form.Group>
+         <div className='profile-pic-div'>
+         <img src={avatar ? avatar : admin.avatar} alt="" className="avatar-img" />
+           <div className="uploadBtn">
+           <Form.Label htmlFor="file"> 
+            <PhotoCameraIcon className='icon-camera'/>
            </Form.Label>
-            <Form.Control type="file"  id="file"
+           </div>
+         </div>
+         <Form.Control type="file"  id="file"
               name="avatar"
-             defaultValue={admin.avatar}
+              defaultValue={admin.avatar}
               onChange={changeAvatar}
               style={{display:"none"}}
           />
@@ -184,18 +165,18 @@ function EditUser() {
           <Form.Group className="mb-3" >
             <Form.Label className="label">Numéro de téléphone</Form.Label>
               <Form.Control type="text" placeholder="Entrer numéro de téléphone" 
-                name="tele" 
-              defaultValue={admin.tele}
+                name="phone" 
+              defaultValue={admin.phone}
               onChange={handleChange}
             />
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Spécialité</Form.Label>
             <Form.Select
-              name="specialite"
+              name="speciality"
               required 
               onChange={handleChange}>
-              <option defaultValue={admin.specialite}>{admin.specialite}</option>
+              <option defaultValue={admin.speciality}>{admin.speciality}</option>
               <option value="développement web">développement web</option>
               <option value="développement mobile">développement mobile</option>
               <option value="développement personnel">développement personnel</option>

@@ -22,7 +22,7 @@ function SousCategorie() {
     const rowData= sousCategories2?.map(sousCategorie => {
       return{
           id:sousCategorie?._id,
-          titre:sousCategorie?.titre,
+          title:sousCategorie?.title,
           date:sousCategorie?.createdAt,
       }
      })
@@ -47,7 +47,7 @@ function SousCategorie() {
 
         const columns = [
             {
-              field: 'titre',
+              field: 'title',
               headerName: 'Sous catégorie',
               flex:1,
             },

@@ -2,7 +2,7 @@ const router= require('express').Router()
 const sectionCtrl = require('../controllers/sectionCtrl')
 const auth = require('../middleware/auth')
 
-router.post('/ajoutsect/:titre',auth, sectionCtrl.addSection)
+router.post('/ajoutsect/:title',auth, sectionCtrl.addSection)
 
 router.get('/allSection/:id',auth, sectionCtrl.getAllSections)
 

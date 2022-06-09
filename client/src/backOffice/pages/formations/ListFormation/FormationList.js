@@ -8,9 +8,8 @@ import Table from '../../../components/table/Table';
 function FormationList() { 
     const token = useSelector(state => state.token)
     const formationss = useSelector(state => state.formations)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
-           
   
           useEffect(() => {
                 fetchAllFormations(token).then(res =>{
@@ -72,7 +71,7 @@ function FormationList() {
           const data= formationss?.map(formation => {
             return{
                 id:formation?._id,
-                titre:formation?.titre,
+                title:formation?.title,
                 affiche:formation?.affiche,
                 categorie:formation?.categorie,
                 instructeur:formation?.postedBy,

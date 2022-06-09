@@ -9,12 +9,12 @@ import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess'
 import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 
     const initialState = {
-      titre:'',
+      title:'',
       details:'',
-      dateDebut:'',
-      dateFin:'',
+      dateStart:'',
+      dateEnd:'',
       nbTicket:'',
-      prix:'',
+      price:'',
       typeEvent:'',
       affiche:'',
       err: '',
@@ -23,11 +23,11 @@ import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 function AjoutEvent() {
     const token = useSelector(state => state.token)
     const [event, setEvent] = useState(initialState)
-    const {titre,details,dateDebut,dateFin, nbTicket, prix, typeEvent, err, success} = event
+    const {title,details,dateStart,dateEnd, nbTicket, price, typeEvent, err, success} = event
     const [affiche, setAffiche] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [gratuit, setGratuit] = useState(false);
-    const [enLigne, setEnLigne] = useState(false);
+    const [free, setFree] = useState(false);
+    const [online, setOnline] = useState(false);
     const [surPlace, setSurPlace] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
@@ -70,8 +70,8 @@ function AjoutEvent() {
           e.preventDefault()
           try {
               const res = await axios.post('/addEvent', {
-                titre,details,dateDebut,dateFin, nbTicket, prix, typeEvent, affiche, gratuit,
-                enLigne, surPlace
+                title,details,dateStart,dateEnd, nbTicket, price, typeEvent, affiche, free,
+                online, surPlace
               },{
 
                 headers: {Authorization: token}
@@ -96,8 +96,8 @@ function AjoutEvent() {
              <Form.Label className="label">Titre d'événement</Form.Label>
               <Form.Control type="text" 
               placeholder="Entrer le titre de votre événements" 
-              name="titre"
-              value={titre}
+              name="title"
+              value={title}
               onChange={handleChangeInput} 
               required 
               />
@@ -133,8 +133,8 @@ function AjoutEvent() {
           <Form.Group className="mb-3" >
             <Form.Label className="label">Date de début</Form.Label>
             <Form.Control type="datetime-local" 
-                name="dateDebut"
-                value={dateDebut}
+                name="dateStart"
+                value={dateStart}
                 onChange={handleChangeInput} 
                 required 
             />
@@ -142,8 +142,8 @@ function AjoutEvent() {
           <Form.Group className="mb-3" >
             <Form.Label className="label">Date de fin</Form.Label>
             <Form.Control type="datetime-local"
-                name="dateFin"
-                value={dateFin}
+                name="dateEnd"
+                value={dateEnd}
                 onChange={handleChangeInput} 
                 required  />
           </Form.Group>
@@ -163,22 +163,22 @@ function AjoutEvent() {
             type="switch"
             id="custom-switch"
             label="Gratuit"
-            value={gratuit}
-            onChange={(e) => setGratuit(e.target.checked)}
+            value={free}
+            onChange={(e) => setFree(e.target.checked)}
           />
           </Form.Label>
             <Form.Control type="number"
             placeholder="0,000 Dt"
-            name="prix"
-            value={prix}
+            name="price"
+            value={price}
             onChange={handleChangeInput} 
             />
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Type d'événement</Form.Label>
             <Form.Check type="radio" label="En ligne" 
-              value={enLigne}
-            onChange={(e) => setEnLigne(e.target.checked)}
+              value={online}
+            onChange={(e) => setOnline(e.target.checked)}
             />
             <Form.Control type="text" placeholder="Lien de la réunion en ligne"
             name="typeEvent"

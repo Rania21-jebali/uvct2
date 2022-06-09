@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
 import {isLength, isMatch} from '../../../../components/utils/validation/Validation'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../../components/utils/notifications/Nofification'
 import {fetchAllUsers, dispatchGetAllUsers} from '../../../../redux/actions/usersAction'
 import { Button, Form } from 'react-bootstrap'
 import '../Parametres.css'
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 
 const initialState = {
   password: '',
@@ -19,8 +20,10 @@ function MotdePasse() {
     const { isAdmin} = auth
     const [data, setData] = useState(initialState)
     const { password, cf_password, err, success} = data
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
 
     useEffect(() => {
         if(isAdmin){
@@ -47,8 +50,10 @@ function MotdePasse() {
           })
 
           setData({...data, err: '' , success: "Updated Success!"})
+          setOpen(true)
       } catch (err) {
           setData({...data, err: err.response.data.msg , success: ''})
+          setOpen2(true)
       }
   }
 
@@ -57,8 +62,6 @@ function MotdePasse() {
   }
   return (
     <div className='motDePasse'>
-     {err && ShowErrMsg(err)}
-     {success && ShowSuccessMsg(success)}
       <Form>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Mot de passe actuel</Form.Label>
@@ -89,6 +92,8 @@ function MotdePasse() {
         <Button className='btn-confirme' onClick={handleUpdate}>Changer le mot de passe</Button>
         </div>
       </Form>
+      <SnackbarSuccess success={success} open={open}/>
+      <SnackbarErr err={err} open2={open2}/> 
     </div>
   )
 }

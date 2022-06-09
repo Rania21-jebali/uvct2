@@ -11,13 +11,13 @@ import { useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 
 const initialState = {
-  titre:'',
+  title:'',
   description:'',
   affiche:'',
   videopromo:'',
-  prix:'',
+  price:'',
   categorie:'',
-  niveau:'',
+  level:'',
   err: '',
   success: ''
 }
@@ -25,9 +25,9 @@ const initialState = {
 function Informations() {
     const token = useSelector(state => state.token)
     const [data, setData] = useState(initialState)
-    const {description,prix,categorie,niveau, err, success} = data
+    const {description,price,categorie,level, err, success} = data
     const {titre1} = useParams();
-    const [gratuit, setGratuit] = useState(false);
+    const [free, setFree] = useState(false);
     const [affiche, setAffiche] = useState(false);
     const [videopromo, setVideopromo] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -102,10 +102,10 @@ function Informations() {
             if(data.titre !== titre1){
               axios.patch(`/updateFormation/${titre1}`, {
                  description: description ? description : formations.description,
-                   prix : prix ? prix : formations.prix, 
+                   price : price ? price : formations.price, 
                    categorie : categorie ? categorie : formations.categorie,
-                   niveau : niveau ? niveau : formations.niveau ,
-                   gratuit : gratuit ? gratuit : formations.gratuit, 
+                   level : level ? level : formations.level ,
+                   free : free ? free : formations.free, 
                    affiche , videopromo,
               }, { headers: {Authorization: token} })
               setData({...data, err: '' , success: "Success!"})
@@ -127,7 +127,7 @@ function Informations() {
                 <Form.Label className="label">Titre du formation</Form.Label>
                   <Form.Control type="text" 
                   defaultValue={titre1}
-                  name="titre"
+                  name="title"
                   disabled
                   />
             </Form.Group>
@@ -193,10 +193,10 @@ function Informations() {
                 <Form.Label className="label">Niveau</Form.Label>
                 <Form.Select 
                     required 
-                    name="niveau"
+                    name="level"
                     onChange={handleChange}
                     >
-                    <option defaultValue={formations.niveau}>{formations.niveau}</option>
+                    <option defaultValue={formations.level}>{formations.level}</option>
                     <option value="Débutant">Débutant</option>
                     <option value="développement mobile">Expert</option>
             </Form.Select>
@@ -207,14 +207,14 @@ function Informations() {
                 type="switch"
                 id="custom-switch"
                 label="Gratuit"
-                defaultValue={formations.gratuit}
-                onChange={(e) => setGratuit(e.target.checked)}
+                defaultValue={formations.free}
+                onChange={(e) => setFree(e.target.checked)}
               />
               </Form.Label>
                 <Form.Control type="number"
                 placeholder="0,000 Dt"
                 name="prix"
-                defaultValue={formations.prix}
+                defaultValue={formations.price}
                 onChange={handleChange}
                 />
               </Form.Group>

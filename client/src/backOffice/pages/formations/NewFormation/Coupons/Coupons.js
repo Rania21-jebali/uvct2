@@ -13,10 +13,10 @@ function Alert(props) {
 }
 const initialState = {
   code:'', 
-  nbRemise:'',
-  remise:'',
-  dateDebut:'',
-  dateFin:'',
+  number:'',
+  discount:'',
+  dateStart:'',
+  dateEnd:'',
   err: '',
   success: ''
 }
@@ -24,7 +24,7 @@ const initialState = {
 function Coupons() {
     const token = useSelector(state => state.token)
     const [coupon, setCoupon ]= useState(initialState);
-    const { code,nbRemise,remise,dateDebut,dateFin,err, success} = coupon
+    const { code,number,discount,dateStart,dateEnd,err, success} = coupon
     const [open, setOpen] = React.useState(false);
     const [open1, setOpen1] = React.useState(false);
     const [show, setShow] = useState(false);
@@ -55,7 +55,7 @@ function Coupons() {
       e.preventDefault()
       try {
           const res = await axios.post(`/ajoutCoupon/${titre1}`, {
-            code,nbRemise,remise,dateDebut,dateFin
+            code,number,discount,dateStart,dateEnd
           },{
             headers: {Authorization: token}
         })
@@ -83,8 +83,8 @@ function Coupons() {
             <Form.Label className="label">Pourcentage de remise</Form.Label>
             <Form.Select    
                 required 
-                name="remise"
-                value={remise}
+                name="discount"
+                value={discount}
                 onChange={handleChangeInput} 
                 >
                 <option value="5%">5%</option>
@@ -111,24 +111,24 @@ function Coupons() {
             <Form.Label className="label">Nombre de remises</Form.Label>
             <Form.Control type="number"
             placeholder="100"
-            name="nbRemise"
-            value={nbRemise}
+            name="number"
+            value={number}
             onChange={handleChangeInput} 
             />
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Valable après</Form.Label>
             <Form.Control type="datetime-local"
-                name="dateDebut"
-                value={dateDebut}
+                name="dateStart"
+                value={dateStart}
                 onChange={handleChangeInput} 
                 required/>
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Valable jusqu'au</Form.Label>
             <Form.Control type="datetime-local"
-                name="dateFin"
-                value={dateFin}
+                name="dateEnd"
+                value={dateEnd}
                 onChange={handleChangeInput}  
                 required  />
           </Form.Group>

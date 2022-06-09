@@ -26,12 +26,11 @@ const initialState = {
 function UpdateEvent(props){
     const token = useSelector(state => state.token)
     const [event, setEvent] = useState(initialState)
-    const {titre,details,dateDebut,dateFin, nbTicket, prix, typeEvent, err, success} = event
+    const {title,details,dateStart,dateEnd, nbTicket, price, typeEvent, err, success} = event
     const [affiche, setAffiche] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [setGratuit] = useState(false);
-    const [setEnLigne] = useState(false);
-    const [setSurPlace] = useState(false);
+    const [setFree] = useState(false);
+    const [setOnline] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const events1 = useSelector(state => state.events);
@@ -84,12 +83,12 @@ function UpdateEvent(props){
         const updateInfor = async() => {
                 try {
                     axios.patch(`/updateEvent/${id}`, {
-                       titre: titre ? titre : events1.titre,
+                       title: title ? title : events1.title,
                        details: details ? details : events1.details,
-                       dateDebut: dateDebut ? dateDebut : events1.dateDebut,
-                       dateFin: dateFin ? dateFin : events1.dateFin,
+                       datStart: dateStart ? dateStart : events1.dateStart,
+                       date: dateEnd ? dateEnd : events1.dateEnd,
                        nbTicket:  nbTicket ?  nbTicket : events1.nbTicket,
-                       prix:  prix ?  prix : events1.prix,
+                       price:  price ?  price : events1.price,
                        typeEvent:  typeEvent ?  typeEvent : events1.typeEvent,
                        affiche:  affiche ?  affiche : events1.affiche,
                     },{
@@ -118,8 +117,8 @@ function UpdateEvent(props){
                  <Form.Label className="label">Titre d'événement</Form.Label>
                   <Form.Control type="text" 
                   placeholder="Entrer le titre de votre événements" 
-                  name="titre"
-                  defaultValue={events1.titre}
+                  name="title"
+                  defaultValue={events1.title}
                   onChange={handleChange} 
                   required 
                   />
@@ -154,8 +153,8 @@ function UpdateEvent(props){
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Date de début</Form.Label>
                 <Form.Control type="datetime-local" 
-                    name="dateDebut"
-                    defaultValue={events1.dateDebut}
+                    name="dateStart"
+                    defaultValue={events1.dateStart}
                     onChange={handleChange} 
                     required 
                 />
@@ -163,8 +162,8 @@ function UpdateEvent(props){
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Date de fin</Form.Label>
                 <Form.Control type="datetime-local"
-                    name="dateFin"
-                    defaultValue={events1.dateFin}
+                    name="dateEnd"
+                    defaultValue={events1.dateEnd}
                     onChange={handleChange} 
                     required  />
               </Form.Group>
@@ -183,15 +182,15 @@ function UpdateEvent(props){
                 <Form.Check 
                 type="switch"
                 id="custom-switch"
-                label="Gratuit"
+                label="free"
                 defaultValue={events1.gratuit}
-                onChange={(e) => setGratuit(e.target.checked)}
+                onChange={(e) => setFree(e.target.checked)}
               />
               </Form.Label>
                 <Form.Control type="number"
                 placeholder="0,000 Dt"
-                name="prix"
-                defaultValue={events1.prix}
+                name="price"
+                defaultValue={events1.price}
                 onChange={handleChange} 
                 />
               </Form.Group>
@@ -199,22 +198,13 @@ function UpdateEvent(props){
                 <Form.Label className="label">Type d'événement</Form.Label>
                 <Form.Check type="radio" label="En ligne" 
                   defaultValue={events1.enLigne}
-                onChange={(e) => setEnLigne(e.target.checked)}
+                onChange={(e) => setOnline(e.target.checked)}
                 />
                 <Form.Control type="text" placeholder="Lien de la réunion en ligne"
                 name="typeEvent"
                 defaultValue={events1.typeEvent}
                 onChange={handleChange} 
                   />
-                <Form.Check type="radio" label="Sur place" 
-                  defaultValue={events1.surPlace}
-                  onChange={(e) => setSurPlace(e.target.checked)}
-                />
-                <Form.Control type="text" placeholder="Adresse..." 
-                  name="typeEvent"
-                  defaultValue={events1.typeEvent}
-                  onChange={handleChange} 
-                />
               </Form.Group>
           <div className="content-btn">
               <Button className='btn-annnuler'>Annuler</Button>

@@ -5,9 +5,9 @@ const sessionCtrl = {
 //   Ajout session
 addSession: async (req, res) => {
     try {
-        const {titre,section} = req.body
+        const {title,section} = req.body
         const newSession = {
-            titre , section
+            title , section
         }
         const session = new Session(newSession);
          await session.save();
@@ -32,7 +32,7 @@ updateSessionById: async (req, res) => {
         const {titre,description,file,article,video} = req.body
 
         await Session.findByIdAndUpdate({_id:req.params.id}, {
-             titre,description,file,article,video
+             title,description,file,article,video
         })
         res.json({msg: "Session modifiée!"})
     } catch (err) {

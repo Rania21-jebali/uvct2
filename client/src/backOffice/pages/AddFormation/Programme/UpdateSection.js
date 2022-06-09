@@ -5,14 +5,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import '../AddFormation.css'
 import { dispatchGetSection, fetchSection } from '../../../../redux/actions/sectionAction'
 import { useEffect } from 'react'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
     const sectionState = {
-    titre:'',
+    title:'',
     formation:'',
     objectif:'',
     err: '',
@@ -21,28 +18,14 @@ function Alert(props) {
 
 function UpdateSection(props){
     const [section, setSection] = useState(sectionState)
-    const {objectif,titre,err,success} = section
+    const {objectif,title,err,success} = section
     const sections5 = useSelector(state => state.sections)
     const token = useSelector(state => state.token)
     const [callback, setCallback] = useState(false)
     const dispatch = useDispatch()
     const {id} = props.id
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
-
-        const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-        };
-
-        const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-          };
+    const [open2, setOpen2] = React.useState(false);
         
             useEffect(() => {
                     fetchSection(token,id).then(res =>{
@@ -58,13 +41,15 @@ function UpdateSection(props){
               const updateInfor = async() => {
                 try {
                     axios.patch(`/updatesection/${props.id}`, {
-                       titre: titre ? titre : section.description,
+                       titre: title ? title : section.description,
                        objectif : objectif ? objectif : section.objectif, 
                     }, { headers: {Authorization: token} })
                     setSection({...section, err: '' , success: "Success!"})
+                    setOpen(true)
                   
                } catch (err) {
                     setSection({...section, err: err.response.data.msg , success: ''})
+                    setOpen2(true)
                 }
               }
       
@@ -79,9 +64,9 @@ function UpdateSection(props){
                 <Form.Label className="label">Titre du section</Form.Label>
                     <Form.Control type="text" 
                     placeholder="Enter un titre" 
-                    name="titre"
+                    name="title"
                     required 
-                    defaultValue={sections5[0].titre}
+                    defaultValue={sections5[0].title}
                     onChange={handleChange} 
                     />
                 </Form.Group>
@@ -99,18 +84,8 @@ function UpdateSection(props){
               <Button  className='btn-confirme'  onClick={handleUpdate}>Enregistrer la section</Button>
             </div>
           </Form>
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose1} severity="error">
-                {err}
-                </Alert>
-        </Snackbar>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
       </>
     )
 }

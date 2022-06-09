@@ -14,7 +14,7 @@ import Table from '../../components/table/Table';
 
 const { confirm } = Modal;
 const initialState = {
-    titre:'',
+    title:'',
     err: '',
     success: ''
   }
@@ -27,7 +27,7 @@ function Categories() {
     const rowData= categories1?.map(categorie => {
       return{
           id:categorie?._id,
-          titre:categorie?.titre,
+          titre:categorie?.title,
           date:categorie?.createdAt,
       }
   })

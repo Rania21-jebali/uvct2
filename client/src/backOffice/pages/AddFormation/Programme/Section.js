@@ -15,7 +15,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 const { confirm } = Modal;
 
     const sectionState = {
-    titre:'',
+    title:'',
     formation:'',
     objectif:'',
     err: '',
@@ -63,7 +63,7 @@ function Section(props) {
          <div onMouseEnter={() => setEdit(true)}  onMouseLeave={() => setEdit(false)} >
                     Section {props.num}:  
                     <DescriptionIcon className="icon-prog" />
-                    {props.titre}
+                    {props.title}
                     {edit && (
                       <>
                       <EditIcon className="icon-prog" onClick={() => setModifier(true)}/> 

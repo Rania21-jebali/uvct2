@@ -7,23 +7,19 @@ import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual'
 import MovieIcon from '@material-ui/icons/Movie';
 import { useNavigate, useParams } from 'react-router-dom'
 import './AddFormation.css'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import ReactPlayer from 'react-player'
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 
 const initialState = {
-  titre:'',
-  sousTitre:'',
+  title:'',
+  subTitle:'',
   description:'',
   affiche:'',
   videopromo:'',
-  prix:'',
+  price:'',
   categorie:'',
-  niveau:'',
+  level:'',
   err: '',
   success: ''
 }
@@ -31,32 +27,18 @@ const initialState = {
 function PublierCours() {
     const token = useSelector(state => state.token)
     const [data, setData] = useState(initialState)
-    const {sousTitre,description,prix,categorie,niveau, err, success} = data
+    const {subTitle,description,price,categorie,level, err, success} = data
     const {titre1} = useParams();
-    const [gratuit, setGratuit] = useState(false);
+    const [free, setFree] = useState(false);
     const [affiche, setAffiche] = useState(false);
     const [videopromo, setVideopromo] = useState(false);
     const [loading, setLoading] = useState(false);
     const formations = useSelector(state => state.formations)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const navigate= useNavigate()
-
-        const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-        };
-
-        const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-          };
         
         useEffect(() => {
           fetchFormation(token,titre1).then(res =>{
@@ -95,7 +77,7 @@ function PublierCours() {
               
           } catch (err) {
               setAffiche({...data, err: err.response.data.msg , success: ''})
-              setOpen1(true);
+              setOpen2(true);
           }
         }
  
@@ -117,7 +99,7 @@ function PublierCours() {
               
           } catch (err) {
               setVideopromo({...data, err: err.response.data.msg , success: ''})
-              setOpen1(true)
+              setOpen2(true)
           }
         }
 
@@ -125,12 +107,12 @@ function PublierCours() {
           try {
             if(data.titre !== titre1){
               axios.patch(`/updateFormation/${titre1}`, {
-                sousTitre: sousTitre ? sousTitre : formations.sousTitre,
+                subTitle: subTitle ? subTitle : formations.subTitle,
                  description: description ? description : formations.description,
-                   prix : prix ? prix : formations.prix, 
+                   price : price ? price : formations.price, 
                    categorie : categorie ? categorie : formations.categorie,
-                   niveau : niveau ? niveau : formations.niveau ,
-                   gratuit : gratuit ? gratuit : formations.gratuit, 
+                   level : level ? level : formations.level ,
+                   free : free ? free : formations.free, 
                    affiche , videopromo
               }, { headers: {Authorization: token} })
               setData({...data, err: '' , success: "Formation sauvegardée!"})
@@ -139,7 +121,7 @@ function PublierCours() {
             }
          } catch (err) {
               setData({...data, err: err.response.data.msg , success: ''})
-              setOpen1(true)
+              setOpen2(true)
           }
         }
 
@@ -155,7 +137,7 @@ function PublierCours() {
                 <Form.Label className="label">Titre du cours</Form.Label>
                   <Form.Control type="text" 
                   defaultValue={titre1}
-                  name="titre"
+                  name="title"
                   disabled
                   style={{ width: '500px' }}
                   />
@@ -164,9 +146,9 @@ function PublierCours() {
                 <Form.Label className="label">Sous-titre du cours</Form.Label>
                   <Form.Control type="text" 
                     placeholder="Saisissez le sous-titre de votre cours." 
-                    name="sousTitre"
+                    name="subTitle"
                     onChange={handleChange}
-                    defaultValue={formations.sousTitre}
+                    defaultValue={formations.subTitle}
                     required 
                   />
             </Form.Group>
@@ -233,7 +215,7 @@ function PublierCours() {
                 <Form.Label className="label">Niveau</Form.Label>
                 <Form.Select 
                     required 
-                    name="niveau"
+                    name="level"
                     onChange={handleChange}
                     >
                     <option defaultValue="--Séléctionner le niveau--">--Séléctionner le niveau--</option>
@@ -248,15 +230,15 @@ function PublierCours() {
                 <Form.Check 
                 type="switch"
                 id="custom-switch"
-                label="Gratuit"
-                defaultValue={formations.gratuit}
-                onChange={(e) => setGratuit(e.target.checked)}
+                label="gratuit"
+                defaultValue={formations.free}
+                onChange={(e) => setFree(e.target.checked)}
               />
               </Form.Label>
                 <Form.Control type="number"
                 placeholder="0,000 Dt"
-                name="prix"
-                defaultValue={formations.prix}
+                name="price"
+                defaultValue={formations.price}
                 onChange={handleChange}
                 />
               </Form.Group>
@@ -265,18 +247,8 @@ function PublierCours() {
               <Button  className='btn-confirme' disabled={loading} onClick={handleUpdate}>Confirmer</Button>
           </div>
         </Form>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose1} severity="error">
-                {err}
-                </Alert>
-        </Snackbar>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
     </div>
   )
 }

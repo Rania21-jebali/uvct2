@@ -5,11 +5,11 @@ const formationCtrl = {
 //   Ajout formation
 addFormation: async (req, res) => {
     try {
-        const {titre} = req.body
-        const formation = await Formation.findOne({titre})
+        const {title} = req.body
+        const formation = await Formation.findOne({title})
         if(formation) return res.status(400).json({msg: "This titre already exists."})
         const newFormation = {
-            titre, postedBy:req.user.id
+            title, postedBy:req.user.id
         }
         const formation2 = new Formation(newFormation);
          await formation2.save();
@@ -63,10 +63,28 @@ getAllFormationsAdmin: async (req, res) => {
         return res.status(500).json({msg: err.message})
     }
 },
-//  get formations by categorie
+//  search formations by title
+searchFormationsByTitle: async (req, res) => {
+    try {
+        const formation = await Formation.find({title:req.params.title, archiver:false})
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  search formations by level
+searchFormationsByLevel: async (req, res) => {
+    try {
+        const formation = await Formation.find({level:req.params.level, archiver:false})
+        res.json(formation)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+},
+//  search formations by categorie
 getFormationsByCategorie: async (req, res) => {
     try {
-        const formation = await Formation.find({categorie:req.params.categorie})
+        const formation = await Formation.find({categorie:req.params.categorie, archiver:false})
         res.json(formation)
     } catch (err) {
         return res.status(500).json({msg: err.message})
@@ -75,12 +93,12 @@ getFormationsByCategorie: async (req, res) => {
 //update formation by titre
 updateFormationByTitre: async (req, res) => {
     try {
-        const {titre, sousTitre,description, affiche, videopromo, categorie, niveau, 
-            prix, gratuit,objectif,destinerA,prerequis} = req.body
+        const {title, subTitle,description, affiche, videopromo, categorie, level, 
+            price, free,objectif,intendedFor,prerequis} = req.body
 
         await Formation.findOneAndUpdate({titre: req.params.titre}, {
-            titre,sousTitre, description, affiche, videopromo, categorie, niveau,
-             prix, gratuit,objectif,destinerA,prerequis
+            title,subTitle, description, affiche, videopromo, categorie, level,
+             price, free,objectif,intendedFor,prerequis
         })
         res.json({msg: "Formation modifiée !"})
     } catch (err) {
@@ -90,11 +108,12 @@ updateFormationByTitre: async (req, res) => {
 //update formation by id
 updateFormationById: async (req, res) => {
     try {
-        const {titre, sousTitre, description, affiche, videopromo, categorie, niveau,
-             prix, gratuit,objectif,destinerA,prerequis} = req.body
+        const {title, subTitle, description, affiche, videopromo, categorie, level,
+             price, free,objectif,intendedFor,prerequis} = req.body
 
         await Formation.findByIdAndUpdate({_id:req.params.id}, {
-            titre, description, affiche, videopromo, categorie, niveau, prix, gratuit
+            title, subTitle, description, affiche, videopromo, categorie, level, price, free
+            ,objectif,intendedFor,prerequis
         })
         res.json({msg: "Formation modifiée !"})
     } catch (err) {
@@ -158,7 +177,7 @@ getFormationById: async (req, res) => {
 //get Formation by title
 getFormationByTitre: async (req, res) => {
     try {
-        const formation = await Formation.findOne({titre:req.params.titre})
+        const formation = await Formation.findOne({title:req.params.title})
 
         res.json(formation)
     } catch (err) {

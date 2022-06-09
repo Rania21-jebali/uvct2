@@ -9,17 +9,17 @@ import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
 import SnackbarErr from '../../components/Snackbar/SnackbarErr';
  
   const initialState = {
-    titre: '',
+    title: '',
     image:'',
     description:'',
-    motCles:'',
+    keywords:'',
     err: '',
     success: ''
   }
 
 function AddCategorie() {
     const [data, setData] =useState(initialState);
-    const {titre,description,motCles, err, success} = data
+    const {title,description,keywords, err, success} = data
     const token = useSelector(state => state.token)
     const [image, setImage] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -64,12 +64,12 @@ function AddCategorie() {
     
       const handleSubmit = async e => {
         e.preventDefault()
-        if(isEmpty(titre) || isEmpty(description) || isEmpty(motCles))
+        if(isEmpty(title) || isEmpty(description) || isEmpty(keywords))
                 return setData({...data, err: "Please fill in all fields.", success: ''})
   
         try {
             const res = await axios.post('/ajoutcateg', {
-              titre, description, image, motCles
+              title, description, image, keywords
             })
   
             setData({...data, err: '', success: res.data.msg})
@@ -90,8 +90,8 @@ function AddCategorie() {
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Titre</Form.Label>
                   <Form.Control type="text" placeholder="Exemple: Dévéloppement web" 
-                    name="titre" 
-                    value={titre}
+                    name="title" 
+                    value={title}
                     onChange={handleChangeInput} 
                     required 
                   />
@@ -99,8 +99,8 @@ function AddCategorie() {
             <Form.Group className="mb-3" >
                 <Form.Label className="label">Mot clés</Form.Label>
                   <Form.Control type="text" placeholder="Citez mots clés de catégories" 
-                    name="motCles" 
-                    value={motCles}
+                    name="keywords" 
+                    value={keywords}
                     onChange={handleChangeInput} 
                     required 
                 />

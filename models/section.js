@@ -1,7 +1,7 @@
 const mongoose= require('mongoose')
 
 const sectionSchema = new mongoose.Schema({
-    titre: {
+    title: {
         type: String,
     },
     objectif: {

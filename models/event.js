@@ -1,7 +1,7 @@
 const mongoose= require('mongoose')
 
 const eventSchema = new mongoose.Schema({
-    titre: {
+    title: {
         type: String,
         required: true,
     },
@@ -9,11 +9,11 @@ const eventSchema = new mongoose.Schema({
         type:String,
         required: true,
     },
-    dateDebut:{
+    dateStart:{
         type: String,
         required: true,
     },
-    dateFin: {
+    dateEnd: {
         type: String,
         required: true,
     },
@@ -21,11 +21,11 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    prix: {
+    price: {
         type: String,
         required: true,
     },
-    gratuit: {
+    free: {
         type: Boolean,
     },
     typeEvent: {
@@ -35,10 +35,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    enLigne: {
-        type: Boolean,
-    },
-    surPlace: {
+    online: {
         type: Boolean,
     },
     postedBy:{

@@ -11,8 +11,8 @@ import SnackbarErr from '../../components/Snackbar/SnackbarErr';
 import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess';
 
 const categorieState = {
-    titre:'',
-    motCles:'',
+    title:'',
+    keywords:'',
     description:'',
     err: '',
     success: ''
@@ -20,7 +20,7 @@ const categorieState = {
 
 function UpdateCategorie(props){
     const [data, setData] = useState(categorieState)
-    const {titre,motCles,description,err,success} = data
+    const {title,keywords,description,err,success} = data
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const {id} = useParams();
@@ -75,8 +75,8 @@ function UpdateCategorie(props){
     const updateInfor = async() => {
                 try {
                     axios.patch(`/updateCategorie/${id}`, {
-                       titre: titre ? titre : categories.titre,
-                       motCles: motCles ? motCles : categories.motCles,
+                       title: title ? title : categories.title,
+                       keywords: keywords ? keywords : categories.keywords,
                        description: description ? description : categories.description,
 
                     })
@@ -102,9 +102,9 @@ function UpdateCategorie(props){
                   <Form.Label className="label">Titre du catégorie</Form.Label>
                       <Form.Control type="text" 
                       placeholder="Enter un titre" 
-                      name="titre"
+                      name="title"
                       required 
-                      defaultValue={categories.titre}
+                      defaultValue={categories.title}
                       onChange={handleChange} 
                       />
                   </Form.Group>
@@ -112,9 +112,9 @@ function UpdateCategorie(props){
                   <Form.Label className="label">Mot clés</Form.Label>
                       <Form.Control type="text" 
                       placeholder="mot clés" 
-                      name="motCles"
+                      name="keywords"
                       required 
-                      defaultValue={categories.motCles}
+                      defaultValue={categories.keywords}
                       onChange={handleChange} 
                       />
                   </Form.Group>

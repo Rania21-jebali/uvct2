@@ -4,22 +4,19 @@ import {fetchFormations, dispatchGetFormations} from '../../../../redux/actions/
 import {fetchUserById, dispatchGetAllUserById} from '../../../../redux/actions/usersAction'
 import Avatar1 from '../../../../components/Avatar/Avatar';
 import { Modal} from 'antd';
-import {DataGrid} from '@mui/x-data-grid';
 import "./Formation.css"
 import DayJS from 'react-dayjs';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import axios from 'axios'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import QueueIcon from '@material-ui/icons/Queue';
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess';
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
+import Table from '../../../components/table/Table';
 
 const { confirm } = Modal;
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 const initialState = {
   err: '',
   success: ''
@@ -33,33 +30,18 @@ function Formation() {
   const { err, success} = formation
   const [callback, setCallback] = useState(false)
   const dispatch = useDispatch()
+  const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
-  const [open3, setOpen3] = React.useState(false);
   const data= formations?.map(formation => {
     return{
         id:formation?._id,
-        titre:formation?.titre,
+        title:formation?.title,
         affiche:formation?.affiche,
         date:formation?.createdAt,
         categorie:formation?.categorie,
         instructeur:formation?.postedBy,  
     }
   })
-
-
-        const handleClose2 = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen2(false);
-        };
-
-        const handleClose3 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen3(false);
-          };
       
         useEffect(() => {
                   fetchFormations().then(res =>{
@@ -90,11 +72,11 @@ function Formation() {
             })
               setArchiver(true)
               setFormation({...formation, err: '' , success: "Formation archivé !"})
-              setOpen2(true);
+              setOpen(true);
             
         }catch (err) {
               setFormation({...formation, err: err.response.data.msg , success: ''})
-              setOpen3(true);
+              setOpen2(true);
             
           }
         }
@@ -113,7 +95,7 @@ function Formation() {
             }
           },
           {
-            field: 'titre',
+            field: 'title',
             headerName: 'Titre',
             flex:1,
           },
@@ -123,7 +105,7 @@ function Formation() {
             renderCell: (params) =>{
                 function Instructeur(instructeur){
                     const users = useSelector(state => state.users)
-                    const [callback1, setCallback1] = useState(false)
+                    const [callback1] = useState(false)
                     const dispatch1 = useDispatch()
                     useEffect(() => {
                         fetchUserById(instructeur).then(res =>{
@@ -220,24 +202,10 @@ function Formation() {
   return (
     <div >
           <div style={{ height: 550, width: '100%'}} >
-            <DataGrid
-                    rows={data}
-                    columns={columns}
-                    pageSize={8}
-                  />
+          <Table row={data} columns={columns}/>
           </div>
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose2} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open3} autoHideDuration={6000} onClose={handleClose3}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose3} severity="error">
-                {err}
-                </Alert>
-            </Snackbar>
+            <SnackbarSuccess success={success} open={open}/>
+            <SnackbarErr err={err} open2={open2}/>
     </div>
   )
 }

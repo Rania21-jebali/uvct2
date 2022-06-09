@@ -71,9 +71,9 @@ AcceptInstr: async (req, res) => {
 //Register instructeur
 registerInstructeur: async (req, res) => {
     try {
-        const {name, email,specialite,password,tele} = req.body
+        const {name, email,speciality,password,phone} = req.body
 
-       if(!name || !email || !specialite || !tele || !password )
+       if(!name || !email || !speciality || !phone || !password )
             return res.status(400).json({msg: "Merci de remplir tous les champs."})
 
         if(!validateEmail(email))
@@ -87,7 +87,7 @@ registerInstructeur: async (req, res) => {
             const passwordHash = await bcrypt.hash(password, 12)
             
         const newUser = {
-            name, email,specialite,tele,password: passwordHash, accept:true
+            name, email,speciality,phone,password: passwordHash, accept:true
         }
       
         const user1 = new Users(newUser);
@@ -102,9 +102,9 @@ registerInstructeur: async (req, res) => {
 //Devenir instructeur
 devenirInstructeur: async (req, res) => {
     try {
-        const {name, email,specialite,tele,message,cv} = req.body
+        const {name, email,speciality,phone,message,cv} = req.body
 
-       if(!name || !email || !specialite || !tele || !message )
+       if(!name || !email || !speciality || !phone || !message )
             return res.status(400).json({msg: "Merci de remplir tous les champs."})
 
         if(!validateEmail(email))
@@ -113,7 +113,7 @@ devenirInstructeur: async (req, res) => {
             if(user) return res.status(400).json({msg: "Cet email existe déjà."})
             
         const newUser = {
-            name, email,specialite,tele,message,cv
+            name, email,speciality,phone,message,cv
         }
       
         const user1 = new Users(newUser);
@@ -127,9 +127,9 @@ devenirInstructeur: async (req, res) => {
 //Register Admin
 registerAdmin: async (req, res) => {
     try {
-        const {name, email, tele, password} = req.body
+        const {name, email, phone, password} = req.body
         
-        if(!name || !email || !tele || !password)
+        if(!name || !email || !phone || !password)
             return res.status(400).json({msg: "Merci de remplir tous les champs."})
 
         if(!validateEmail(email))
@@ -144,7 +144,7 @@ registerAdmin: async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 12)
 
         const newUser = {
-            name, email, tele,password: passwordHash
+            name, email, phone,password: passwordHash
         }
         const user1 = new Users(newUser);
         user1.role="admin";
@@ -159,9 +159,9 @@ registerAdmin: async (req, res) => {
 //Register Apprenant
 registerApprenant: async (req, res) => {
     try {
-        const {name, email, tele, password} = req.body
+        const {name, email, phone, password} = req.body
         
-        if(!name || !email || !tele || !password)
+        if(!name || !email || !phone || !password)
             return res.status(400).json({msg: "Merci de remplir tous les champs."})
 
         if(!validateEmail(email))
@@ -176,7 +176,7 @@ registerApprenant: async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 12)
 
         const newUser = {
-            name, email, tele,password: passwordHash
+            name, email, phone,password: passwordHash
         }
         const user1 = new Users(newUser);
         user1.role="user";
@@ -191,9 +191,9 @@ registerApprenant: async (req, res) => {
 //Add instructeur
 AddInstructeur: async (req, res) => {
     try {
-        const {name, email, tele, specialite, password} = req.body
+        const {name, email, phone, speciality, password} = req.body
         
-        if(!name || !email || !tele || !specialite ||!password)
+        if(!name || !email || !phone || !speciality ||!password)
             return res.status(400).json({msg: "Merci de remplir tous les champs."})
 
         if(!validateEmail(email))
@@ -208,7 +208,7 @@ AddInstructeur: async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 12)
 
         const newUser = {
-            name, email, tele, specialite, password: passwordHash
+            name, email, phone, speciality, password: passwordHash
         }
         const user1 = new Users(newUser);
         user1.role="instructeur";
@@ -399,9 +399,9 @@ logout: async (req, res) => {
 //update user
 updateUser: async (req, res) => {
     try {
-        const {name, avatar,email,tele} = req.body
+        const {name, avatar,email,phone} = req.body
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            name, avatar,email,tele
+            name, avatar,email,phone
         })
 
         res.json({msg: "Profile modifié !"})
@@ -412,9 +412,9 @@ updateUser: async (req, res) => {
 //update user
 updateUserInfo: async (req, res) => {
     try {
-        const {name, avatar,email,tele} = req.body
+        const {name, avatar,email,phone} = req.body
         await Users.findOneAndUpdate({_id: req.params.id}, {
-            name, avatar,email,tele
+            name, avatar,email,phone
         })
 
         res.json({msg: "Profile modifié !"})
@@ -427,7 +427,7 @@ updateProfilInstr: async (req, res) => {
     try {
         const {name, avatar,tele,site,description} = req.body
         await Users.findOneAndUpdate({_id: req.user.id}, {
-            name, avatar,tele,site,description
+            name, avatar,phone,site,description
         })
         res.json({msg: "Profile modifié !"})
     } catch (err) {

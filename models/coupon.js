@@ -4,16 +4,16 @@ const couponSchema = new mongoose.Schema({
     code: {
         type: String,
     },
-    remise: {
+    discount: {
         type: String,
     },
-    nbRemise: {
+    number: {
         type: String,
     },
-    dateDebut: {
+    dateStart: {
         type: String,
     },
-    dateFin: {
+    dateEnd: {
         type: String,
     },
     statut: {

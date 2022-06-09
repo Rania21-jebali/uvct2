@@ -6,11 +6,11 @@ const sousCategorieCtrl = {
 //   Ajout sous catégorie
 addSousCategorie: async (req, res) => {
     try {
-        const {titre,image,description,motCles} = req.body
+        const {title,image,description,keywords} = req.body
         const categorie1 = await Categorie.findOne({_id:req.params.id})
          const {id} = categorie1.id
         const newSousCategorie = {
-            titre , image, description, motCles, categorie: categorie1.id
+            title , image, description, keywords, categorie: categorie1.id
         }
         const sousCategorie = new SousCategorie(newSousCategorie);
          await sousCategorie.save();
@@ -31,7 +31,7 @@ getAllSousCategorie: async (req, res) => {
 //update sous catégorie by id
 updateSousCategorieById: async (req, res) => {
     try {
-        const {titre, image, description, motCles} = req.body
+        const {title, image, description,keywords} = req.body
 
         await SousCategorie.findByIdAndUpdate({_id:req.params.id}, {
             titre, image, description, motCles

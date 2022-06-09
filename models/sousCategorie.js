@@ -1,14 +1,14 @@
 const mongoose= require('mongoose')
 
 const sousCategorieSchema = new mongoose.Schema({
-    titre: {
+    title: {
         type: String,
     },
     categorie:{
         type:Object,
         ref: 'Categorie'
     },
-    motCles:{
+    keywords:{
         type: String,
     },
     image:{

@@ -11,3 +11,9 @@
     line-height: 34px;
     color: #0F172A;
 }
+.course-favoris{
+    height: 550;
+    width: 100%;
+    background-color:white;
+    padding: 20px;
+}

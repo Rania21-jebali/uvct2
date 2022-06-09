@@ -16,7 +16,7 @@ import {useSelector} from 'react-redux'
 const { confirm } = Modal;
 
 const sessionState = {
-  titre:'',
+  title:'',
   description:'',
   article:'',
   err: '',
@@ -378,7 +378,7 @@ function Session(props) {
                       modifier ? (
                       <div className='content-section'>
                         <CloseIcon onClick={() => setModifier(!modifier)} className="icon-add"/>
-                          <UpdateSession  id={props.id} titre={props.titre}/>
+                          <UpdateSession  id={props.id} titre={props.title}/>
                       </div>
                       )  :
                       (

@@ -5,9 +5,9 @@ const compteCtrl = {
 //   Ajout compte
 addCompte: async (req, res) => {
     try {
-        const {devise,typeCompte,paysCompte,nomCompte,numCompte} = req.body
+        const {currency,type,country,name,number} = req.body
         const newCompte = {
-            devise,typeCompte,paysCompte,nomCompte,numCompte,
+            currency,type,country,name,number,
             userId:req.user.id,
             exist:true
         }

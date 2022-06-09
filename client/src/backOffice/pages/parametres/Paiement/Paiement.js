@@ -1,33 +1,34 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useSelector, useDispatch} from 'react-redux'
-import {ShowSuccessMsg, ShowErrMsg} from '../../../../components/utils/notifications/Nofification'
 import {fetchMyCompte, dispatchGetMyCompte} from '../../../../redux/actions/compteAction'
 import { Button, Form,Modal } from 'react-bootstrap'
 import '../Parametres.css'
-import { useNavigate } from 'react-router-dom'
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
 
 const initialState = {
-  nomCompte: '',
-  numCompte:'',
-  typeCompte:'',
-  paysCompte:'',
-  devise:'',
+  name: '',
+  number:'',
+  type:'',
+  country:'',
+  currency:'',
   err: '',
   success: ''
 }
 function Paiement() {
     const token = useSelector(state => state.token)
     const [compte, setCompte] = useState(initialState)
-    const {nomCompte,numCompte,typeCompte,paysCompte,devise, err, success} = compte
+    const {name,number,type,country,currency, err, success} = compte
     const comptes = useSelector(state => state.comptes)
     const [callback, setCallback] = useState(false)
-    const [exist, setExist] = useState(false)
+    const [exist] = useState(false)
     const dispatch = useDispatch()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const navigate = useNavigate();
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
 
             useEffect(() => {
                   fetchMyCompte(token).then(res =>{
@@ -43,15 +44,16 @@ function Paiement() {
               e.preventDefault()
               try {
                   const res = await axios.post('/addCompte', {
-                    nomCompte,numCompte,typeCompte,paysCompte,devise
+                    name,number,type,country,currency
                   },{
                     headers: {Authorization: token}
                 })
                   setCompte({...compte, err: '', success: res.data.msg})
-                 // window.location.reload(false);
+                 setOpen(true)
               } catch (err) {
                   err.response.data.msg && 
                   setCompte({...compte, err: err.response.data.msg, success: ''})
+                  setOpen2(true)
               }
           }
           const handleDelete = async (id) => {
@@ -102,14 +104,12 @@ function Paiement() {
         <Modal.Title>Ajouter un compte</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {err && ShowErrMsg(err)}
-        {success && ShowSuccessMsg(success)}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className="label">Devise de compte</Form.Label>
               <Form.Select 
               required 
-              name="devise"
+              name="currency"
               onChange={handleChange}>
               <option value="TND">TND</option>
               <option value="EUR">EUR</option>
@@ -119,7 +119,7 @@ function Paiement() {
           <Form.Label className="label">Type de compte</Form.Label>
             <Form.Select 
             required 
-            name="typeCompte"
+            name="type"
             onChange={handleChange}>
             <option value="Compte bancaire">Compte bancaire</option>
           </Form.Select>
@@ -128,7 +128,7 @@ function Paiement() {
         <Form.Label className="label">Pays de compte bancaire</Form.Label>
           <Form.Select 
           required 
-          name="paysCompte"
+          name="country"
           onChange={handleChange}>
           <option value="Tunisie">Tunisie</option>
         </Form.Select>
@@ -137,8 +137,8 @@ function Paiement() {
         <Form.Label className="label">Nom du compte</Form.Label>
           <Form.Control type="text" placeholder="Entrer le nom de votre carte" 
             required 
-            name="nomCompte"
-          value={nomCompte}
+            name="name"
+          value={name}
           onChange={handleChange}
           />
       </Form.Group>
@@ -146,8 +146,8 @@ function Paiement() {
         <Form.Label className="label">Numéro de carte</Form.Label>
           <Form.Control type="number" placeholder="Entrer votre numéro de carte" 
             required 
-            name="numCompte"
-          value={numCompte}
+            name="number"
+          value={number}
           onChange={handleChange}
           />
       </Form.Group>
@@ -158,6 +158,8 @@ function Paiement() {
     </Form>
   </Modal.Body>
 </Modal>
+            <SnackbarSuccess success={success} open={open}/>
+            <SnackbarErr err={err} open2={open2}/> 
 </div>
   )
 }

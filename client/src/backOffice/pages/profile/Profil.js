@@ -3,72 +3,36 @@ import axios from 'axios'
 import {useSelector} from 'react-redux'
 import './Profil.css'
 import { Button,Form} from 'react-bootstrap'
-import { makeStyles } from '@material-ui/core/styles';
 import { message } from 'antd';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 
 const key = 'updatable';
-
 const openMessage = () => {
   message.loading({ content: 'Loading...', key });
   setTimeout(() => {
     message.success({ content: 'Loaded!', key, duration: 2 });
   }, 1000);
 };
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-      display: 'flex',
-      overflow:"hidden",
-      flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(1),
-      padding:"5px",
-      boxSizing: "border-box",
-
-    },
-  }
-}));
 const initialState = {
     name: '',
-    tele:'',
+    phone:'',
     site:'',
     description:'',
     err: '',
     success: ''
 }
 function Profil() {
-    const classes = useStyles();
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const {user,isInstr} = auth
     const [data, setData] = useState(initialState)
-    const {name,tele,site,description, err, success} = data
+    const {name,site,phone,description, err, success} = data
     const [avatar, setAvatar] = useState(false)
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-  const handleClose2 = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen2(false);
-  };
 
       const handleChange = e => {
 
@@ -109,7 +73,7 @@ function Profil() {
             axios.patch('/user/updateInstr', {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar,
-                tele: tele ? tele : user.tele,
+                phone: phone ? phone : user.phone,
                 site: site ? site : user.site,
                 description:  description ?  description : user.description,
 
@@ -130,17 +94,17 @@ function Profil() {
       <div className='content-profil'>
        <h3 className='title-photo'>Photo de profile</h3>
        <Form className='form-profil'>
-         <Form.Group className="mb-3" >
+         <Form.Group>
          {loading && openMessage() }
-          <div className={classes.root}>
-           <img src={avatar ? avatar : user.avatar} alt="" className="avatar-img" />
-           <div className='icon-camera'>
-           <Form.Label htmlFor="file" > 
-            <PhotoCameraIcon />
+         <div className='profile-pic-div'>
+         <img src={avatar ? avatar : user.avatar} alt="" className="avatar-img" />
+           <div className="uploadBtn">
+           <Form.Label htmlFor="file"> 
+            <PhotoCameraIcon className='icon-camera'/>
            </Form.Label>
            </div>
-          </div>
-            <Form.Control type="file"  id="file"
+         </div>
+         <Form.Control type="file"  id="file"
               name="avatar"
               defaultValue={user.avatar}
               onChange={changeAvatar}
@@ -167,8 +131,8 @@ function Profil() {
           <Form.Group className="mb-3" >
             <Form.Label className="label">Numéro de téléphone</Form.Label>
               <Form.Control type="text" placeholder="Entrer votre numéro de téléphone" 
-                name="tele" 
-                defaultValue={user.tele}
+                name="phone" 
+                defaultValue={user.phone}
                 onChange={handleChange}
             />
           </Form.Group>
@@ -198,18 +162,8 @@ function Profil() {
            </div>
         </Form>
       </div>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
-        <Alert onClose={handleClose} severity="success">
-          {success}
-        </Alert>
-      </Snackbar>
-      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
-        <Alert onClose={handleClose2} severity="error">
-          {err}
-        </Alert>
-      </Snackbar>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
     </div>
   )
 }

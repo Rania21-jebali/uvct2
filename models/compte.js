@@ -1,19 +1,19 @@
 const mongoose= require('mongoose')
 
 const compteSchema = new mongoose.Schema({
-    devise:{
+    currency:{
         type:String,
     },
-    typeCompte:{
+    type:{
         type:String,
     },
-    paysCompte:{
+    country:{
         type:String,
     },
-    nomCompte:{
+    name:{
         type:String,
     },
-    numCompte:{
+    number:{
         type:String,
     },
     exist:{

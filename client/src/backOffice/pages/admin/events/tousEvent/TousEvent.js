@@ -5,7 +5,6 @@ import {fetchEvents, dispatchGetEvents} from '../../../../../redux/actions/event
 import {fetchUserById, dispatchGetAllUserById} from '../../../../../redux/actions/usersAction'
 import Avatar1 from '../../../../../components/Avatar/Avatar';
 import { Modal} from 'antd';
-import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
 import { List } from 'antd';
 import DayJS from 'react-dayjs';
@@ -13,18 +12,16 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ListIcon from '@material-ui/icons/List';
 import ArchiveIcon from '@material-ui/icons/Archive';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import SnackbarSuccess from '../../../../components/Snackbar/SnackbarSuccess';
+import SnackbarErr from '../../../../components/Snackbar/SnackbarErr';
+import Table from '../../../../components/table/Table';
 
 const { confirm } = Modal;
 const { Search } = Input;
 const initialState = {
   err: '',
   success: ''
-}
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 const participants = [
     { 
@@ -66,29 +63,13 @@ const participants = [
   const rowData= events?.map(event => {
     return{
         id:event?._id,
-        titre:event?.titre,
-        prix:event?.prix,
+        title:event?.title,
+        price:event?.price,
         affiche:event?.affiche,
         postedBy:event?.postedBy,
         date:event?.dateDebut,
     }
   })
-
-      const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-        setOpen(false);
-      };
-
-      const handleClose2 = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-
-        setOpen2(false);
-      };
-
       useEffect(() => {
               fetchEvents(token).then(res =>{
                   dispatch(dispatchGetEvents(res))
@@ -105,6 +86,7 @@ const participants = [
             } 
         } catch (err) {
                 setEvent({...event, err: err.response.data.msg, success: ''})
+                setOpen2(true)
         }
       } 
 
@@ -119,6 +101,7 @@ const participants = [
             setOpen(true);
         }}catch (err) {
             setEvent({...event, err: err.response.data.msg , success: ''})
+            setOpen2(true)
         }
       }
 
@@ -136,7 +119,7 @@ const participants = [
             }
           },
         {
-          field: 'titre',
+          field: 'title',
           headerName: 'Titre',
           flex:1,
         },
@@ -233,13 +216,7 @@ const participants = [
   return (
   <>
         <div style={{ height: 550, width: '100%'}}>
-          <DataGrid
-            rows={rowData}
-            columns={columns}
-            pageSize={8}
-            disableSelectionOnClick
-            
-          />
+        <Table row={rowData} columns={columns}/>
         </div> 
         <Modal title="Participants" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Search placeholder="Rechercher des participants" allowClear onSearch={onSearch}  />
@@ -256,18 +233,8 @@ const participants = [
             )}
           />
         </Modal>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} 
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-          <Alert onClose={handleClose} severity="success">
-            {success}
-          </Alert>
-        </Snackbar>
-        <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-          <Alert onClose={handleClose2} severity="error">
-            {err}
-          </Alert>
-        </Snackbar>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
   </> 
   )
 }

@@ -5,7 +5,6 @@ import {fetchArchiveEvents, dispatchGetArchiveEvents} from '../../../../../redux
 import {fetchUserById, dispatchGetAllUserById} from '../../../../../redux/actions/usersAction'
 import Avatar1 from '../../../../../components/Avatar/Avatar';
 import { Modal} from 'antd';
-import {DataGrid} from '@mui/x-data-grid';
 import { Input} from 'antd';
 import { List } from 'antd';
 import DayJS from 'react-dayjs';
@@ -14,6 +13,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import ListIcon from '@material-ui/icons/List';
 import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import Table from '../../../../components/table/Table';
 
 
 const { confirm } = Modal;
@@ -59,8 +59,8 @@ const participants = [
   const rowData= events?.map(event => {
     return{
         id:event?._id,
-        titre:event?.titre,
-        prix:event?.prix,
+        title:event?.title,
+        price:event?.price,
         affiche:event?.affiche,
         postedBy:event?.postedBy,
         date:event?.dateDebut,
@@ -116,7 +116,7 @@ const participants = [
             }
           },
         {
-          field: 'titre',
+          field: 'title',
           headerName: 'Titre',
           flex:1,
         },
@@ -212,12 +212,7 @@ const participants = [
   return (
     <>
         <div style={{ height: 550, width: '100%'}}>
-                <DataGrid
-                rows={rowData}
-                columns={columns}
-                pageSize={8}
-                disableSelectionOnClick
-                 />
+        <Table row={rowData} columns={columns}/>
         </div> 
         <Modal title="Participants" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
         <Search placeholder="Rechercher des participants" allowClear onSearch={onSearch}  />

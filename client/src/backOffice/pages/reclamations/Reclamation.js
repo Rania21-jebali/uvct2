@@ -23,12 +23,12 @@ const initialState = {
 function Reclamation() {
     const [reclamation, setReclamation] = useState(initialState)
     const reclamations2 = useSelector(state => state.reclamations)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
     const {message,err,success} = reclamation
     const users = useSelector(state => state.users)
-    const [callback1, setCallback1] = useState(false)
+    const [callback1] = useState(false)
     const dispatch1 = useDispatch()
     const [open, setOpen] = useState(false);
     const token = useSelector(state => state.token)
@@ -91,7 +91,7 @@ function Reclamation() {
             open &&
             (
                 <div className='add-reponse'>
-                   <Form>
+                   <Form onSubmit={handleSubmit}>
                    <Form.Group className="mb-3" >
                     <Form.Label className="label">Message</Form.Label>
                     <Form.Control type="text" placeholder="Ecrire ici..." as="textarea" rows={3}

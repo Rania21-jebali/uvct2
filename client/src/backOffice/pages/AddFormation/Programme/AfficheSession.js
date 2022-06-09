@@ -24,7 +24,7 @@ function AfficheSession(props) {
         <div className='affiche-session' key={i+1}>
         {
           (session.section === props.id) &&
-          <Session id={session._id} titre={session.titre} num={i+1} description={session.description}/>
+          <Session id={session._id} titre={session.title} num={i+1} description={session.description}/>
         }
         </div>
         ))}

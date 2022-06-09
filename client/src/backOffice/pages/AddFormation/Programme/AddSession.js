@@ -3,15 +3,11 @@ import { Button , Form } from 'react-bootstrap'
 import {useSelector} from 'react-redux'
 import axios from 'axios'
 import '../AddFormation.css'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import SnackbarErr from '../../../components/Snackbar/SnackbarErr'
+import SnackbarSuccess from '../../../components/Snackbar/SnackbarSuccess'
 
     const sessionState = {
-      titre:'',
+      title:'',
       section:'',
       err: '',
       success: ''
@@ -20,24 +16,10 @@ function Alert(props) {
       function AddSession(props){
         const token = useSelector(state => state.token)
         const [session, setSession] = useState(sessionState)
-        const {titre, err, success} = session
+        const {title, err, success} = session
         const [open, setOpen] = React.useState(false);
-        const [open1, setOpen1] = React.useState(false);
-
-        const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-        };
-
-        const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-          };
-
+        const [open2, setOpen2] = React.useState(false);
+        
           const handleChangeInput = e => {
             const {name, value} = e.target
             setSession({...session, [name]:value, err: '', success: ''})
@@ -47,7 +29,7 @@ function Alert(props) {
             e.preventDefault()
             try {  if(idS !== props.id){
                 const res = await axios.post("/ajoutSession",
-                {titre, section: props.id }, {headers: {Authorization: token}
+                {title, section: props.id }, {headers: {Authorization: token}
             })
                 setSession({...session, err: '', success: res.data.msg})
                 setOpen(true);
@@ -56,7 +38,7 @@ function Alert(props) {
           catch (err) { 
             err.response.data.msg &&
             setSession({...session, err: err.response.data.msg, success: ''})
-            setOpen1(true);
+            setOpen2(true);
             }
         }
 
@@ -67,8 +49,8 @@ function Alert(props) {
                     <Form.Label className="label">Nouvelle session</Form.Label>
                         <Form.Control type="text" 
                         placeholder="Entrer un titre" 
-                        name="titre"
-                        value={titre}
+                        name="title"
+                        value={title}
                         onChange={handleChangeInput}
                         />
                     </Form.Group>
@@ -77,18 +59,8 @@ function Alert(props) {
                   <Button  className='btn-confirme'  type="submit">Ajouter une session</Button>
                 </div>
               </Form>
-              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-               anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-              </Snackbar>
-              <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'center'}}>
-                      <Alert onClose={handleClose1} severity="error">
-                      {err}
-                      </Alert>
-              </Snackbar>
+              <SnackbarSuccess success={success} open={open}/>
+              <SnackbarErr err={err} open2={open2}/>
         </div>
       )
     }

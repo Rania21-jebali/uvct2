@@ -5,17 +5,13 @@ import {fetchFormation, dispatchGetFormation} from '../../../redux/actions/forma
 import './AddFormation.css'
 import { Button, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import SnackbarSuccess from '../../components/Snackbar/SnackbarSuccess'
+import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 
 const initialState = {
     objectif:'',
     prerequis:'',
-    destinerA:'',
+    intendedFor:'',
     err: '',
     success: ''
   }
@@ -23,27 +19,13 @@ const initialState = {
 function PlanifierCours() {
     const token = useSelector(state => state.token)
     const [data, setData] = useState(initialState)
-    const {objectif,prerequis,destinerA, err, success} = data
+    const {objectif,prerequis,intendedFor, err, success} = data
     const {titre1} = useParams();
     const formations = useSelector(state => state.formations)
-    const [callback, setCallback] = useState(false)
+    const [callback] = useState(false)
     const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
-    const [open1, setOpen1] = React.useState(false);
-
-        const handleClose = (event, reason) => {
-          if (reason === 'clickaway') {
-            return;
-          }
-          setOpen(false);
-        };
-
-        const handleClose1 = (event, reason) => {
-            if (reason === 'clickaway') {
-              return;
-            }
-            setOpen1(false);
-          };
+    const [open2, setOpen2] = React.useState(false);
 
         useEffect(() => {
             fetchFormation(token,titre1).then(res =>{
@@ -62,7 +44,7 @@ function PlanifierCours() {
                 axios.patch(`/updateFormation/${titre1}`, {
                      objectif: objectif ? objectif : formations.objectif,
                      prerequis : prerequis ? prerequis : formations.prerequis, 
-                     destinerA : destinerA ? destinerA : formations.destinerA,
+                     intendedFor : intendedFor ? intendedFor : formations.intendedFor,
                      
                 }, { headers: {Authorization: token} })
                 setData({...data, err: '' , success: "Success!"})
@@ -70,7 +52,7 @@ function PlanifierCours() {
               }
            } catch (err) {
                 setData({...data, err: err.response.data.msg , success: ''})
-                setOpen1(true);
+                setOpen2(true);
             }
           }
   
@@ -127,11 +109,11 @@ function PlanifierCours() {
           </>
           <Form.Group className="mb-3" >
             <Form.Control type="text" 
-              name="destinerA"
+              name="intendedFor"
               placeholder="Exemple : développeurs Python débutants intéressés par la science des données" 
               style={{ width: '80%' }}
               onChange={handleChange}
-              defaultValue={formations.destinerA}
+              defaultValue={formations.intendedFor}
               required 
             />
           </Form.Group>
@@ -140,18 +122,8 @@ function PlanifierCours() {
               <Button  className='btn-confirme'  onClick={handleUpdate}>Confirmer</Button>
             </div>
       </Form>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose} severity="success">
-                {success}
-                </Alert>
-        </Snackbar>
-        <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert onClose={handleClose1} severity="error">
-                {err}
-                </Alert>
-        </Snackbar>
+        <SnackbarSuccess success={success} open={open}/>
+        <SnackbarErr err={err} open2={open2}/>
     </div> 
   )
 }

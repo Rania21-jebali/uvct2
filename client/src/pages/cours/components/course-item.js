@@ -3,14 +3,14 @@ import {Typography} from "antd";
 import React from "react";
 import {StarSharp} from "@material-ui/icons";
 
-export const CourseItem = ({image, name, contentCreator}) => {
+export const CourseItem = ({_id, affiche, titre, postedBy, prix, objectif}) => {
   return(
-    <div className={'course-item'}>
-        <img alt={`couse ${name}`} src={image}/>
+    <div key={_id} className={'course-item'}>
+        <img alt={`couse ${titre}`} src={affiche}/>
         <div className={'course-info-container'}>
-            <Typography className={'course-name'}>{name}</Typography>
-            <Typography className={'course-owner'}>{contentCreator}</Typography>
-            <Typography className={'course-quote'}>{"« HR Management » Pour ceux qui souhaitent entrer dans les zones administratives les plus fortes.\n"}</Typography>
+            <Typography className={'course-name'}>{titre}</Typography>
+            <Typography className={'course-owner'}>{postedBy}</Typography>
+            <Typography className={'course-quote'}>{objectif}</Typography>
             <Typography className={'course-stars'}>
                 {[1,2,3,4,5].map(()=> {
                     return <StarSharp style={{color:'#F2AF12'}}/>
@@ -21,7 +21,7 @@ export const CourseItem = ({image, name, contentCreator}) => {
                 28 heures au total - 21 leçons - Tous les niveaux
             </Typography>
         </div>
-        <Typography className={'price'}>499 TND</Typography>
+        <Typography className={'price'}>{prix} TND</Typography>
     </div>
   )
 }

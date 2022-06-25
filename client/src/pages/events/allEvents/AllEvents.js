@@ -1,17 +1,33 @@
 import {Select} from "antd";
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./AllEvents.scss"
 import {ArrowDropDown, SearchOutlined} from "@material-ui/icons";
 import {QuickNavigation} from "../../../components/quick-navigation/quick-navigation";
 import {EventCard} from "../components/event-card/event-card";
+import axios from "axios";
+import {ChangeEvent} from "react";
 
 export const AllEvents = () => {
+    const [data, setData] =  useState([])
+    const [search, setSearch] =  useState('')
+
+    useEffect(()=> {
+        axios({url: 'http://localhost:5000/events', method:'GET'})
+            .then(response => {
+                console.log(response.data)
+                setData(response.data)
+            })
+    }, [])
+
+    const handleSearchContent = (event) => {
+        setSearch(event.target.value)
+    }
  return(
      <div className={'events-container'}>
          <QuickNavigation/>
          <div className={'filter-container'}>
              <div className={'search-input-container'}>
-                 <input className={"search-input"} placeholder="Rechercher des événements" />
+                 <input onChange={handleSearchContent} className={"search-input"} placeholder="Rechercher des événements" />
                  <div className={'search-input-icon'}>
                      <SearchOutlined/>
                  </div>
@@ -30,7 +46,7 @@ export const AllEvents = () => {
          </div>
          <div className={'all-events-container'} >
              {
-             eventsScaffolding.map((event)=> {
+             data.filter(item=> item.titre.toLowerCase().includes(search.toLowerCase().trim())).map((event)=> {
                  return(
                     <EventCard {...event} />
                  )

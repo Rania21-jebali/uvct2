@@ -5,19 +5,19 @@ import './event-card.scss'
 import '../../allEvents/AllEvents.scss'
 import {Link} from "react-router-dom";
 
-export const EventCard = ({id, image, date, eventType, name, contentCreator}) => {
+export const EventCard = ({_id, affiche, dateDebut, enLigne, titre, postedBy}) => {
  return (
-     <React.Fragment key={id}>
+     <React.Fragment key={_id}>
         <Card className={`event-card`}
               hoverable
-              cover={<img height={224} style={{objectFit: "cover"}} alt="example" src={image} />}
+              cover={<img height={224} style={{objectFit: "cover"}} alt="example" src={affiche} />}
               bordered={false}
         >
-            <Typography className={'event-date-type-text'}>{date} - {eventType}{'\n'}</Typography>
-            <Typography className={'title'}>{name}</Typography>
-            <Typography className={'content-creator'}>{contentCreator}</Typography>
+            <Typography className={'event-date-type-text'}>{dateDebut} - {enLigne? 'on ligne': 'sur site'}{'\n'}</Typography>
+            <Typography className={'title'}>{titre}</Typography>
+            <Typography className={'content-creator'}>{postedBy}</Typography>
             <div className={'card-footer'}>
-                <Link to={'/event/'+id}>
+                <Link to={'/event/'+_id}>
                     <Button className={'event-details-info'}>Plus d'information</Button>
                 </Link>
                 <Button icon={<ShoppingCart/>} className={'price-details-info'}/>

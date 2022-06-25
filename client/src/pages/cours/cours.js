@@ -2,11 +2,22 @@ import './cours.scss'
 import {QuickNavigation} from "../../components/quick-navigation/quick-navigation";
 import {ArrowDropDown, SearchOutlined} from "@material-ui/icons";
 import {Pagination, Select} from "antd";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {CourseItem} from "./components/course-item";
-import {eventsScaffolding} from "../events/allEvents/AllEvents";
+import axios from "axios";
 
 export const CoursPage = () => {
+
+    const [data, setData] = useState([])
+
+    useEffect(()=> {
+        axios({url: 'http://localhost:5000/formations', method:'GET'})
+            .then(response => {
+                setData(response.data)
+                console.log(response.data)
+            })
+            .catch()
+    }, [])
   return (
       <div className={'cours-page'}>
           <QuickNavigation/>
@@ -41,14 +52,14 @@ export const CoursPage = () => {
               </div>
           </div>
           <div className={'courses-container'}>
-                  {eventsScaffolding.map(course=> {
+                  {data.map(course=> {
                       return(
                           <CourseItem {...course}/>
                       )
                   })}
           </div>
           <div className={'pagination-container'}>
-              <Pagination size={'default'} className={'pagination'} total={40}/>
+              <Pagination size={'default'} className={'pagination'} total={data.length}/>
           </div>
       </div>
   )

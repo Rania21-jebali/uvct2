@@ -46,7 +46,7 @@ export const AllEvents = () => {
          </div>
          <div className={'all-events-container'} >
              {
-             data.filter(item=> item.titre.toLowerCase().includes(search.toLowerCase().trim())).map((event)=> {
+             data.filter(item=> item.title.toLowerCase().includes(search.toLowerCase().trim())).map((event)=> {
                  return(
                     <EventCard {...event} />
                  )

@@ -63,7 +63,7 @@ function Profil() {
 
             setLoading(false)
             setAvatar(res.data.url)
-            
+
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
         }
@@ -75,11 +75,12 @@ function Profil() {
                 avatar: avatar ? avatar : user.avatar,
                 phone: phone ? phone : user.phone,
                 site: site ? site : user.site,
-                description:  description ?  description : user.description,
+                description: description ? description : user.description,
 
-            }, { headers: {Authorization: token} })
-            setData({...data, err: '' , success: "Profile modifié!"})
-            setOpen(true);
+            }, {headers: {Authorization: token}}).then(r =>{
+                setData({...data, err: '' , success: "Profile modifié!"})
+                setOpen(true);
+            })
         } catch (err) {
             setData({...data, err: err.response.data.msg , success: ''})
             setOpen2(true);
@@ -97,60 +98,59 @@ function Profil() {
          <Form.Group>
          {loading && openMessage() }
          <div className='profile-pic-div'>
-         <img src={avatar ? avatar : user.avatar} alt="" className="avatar-img" />
+         <img src={avatar ? avatar : user?.avatar} alt="" className="avatar-img" />
            <div className="uploadBtn">
-           <Form.Label htmlFor="file"> 
+           <Form.Label htmlFor="file">
             <PhotoCameraIcon className='icon-camera'/>
            </Form.Label>
            </div>
          </div>
          <Form.Control type="file"  id="file"
               name="avatar"
-              defaultValue={user.avatar}
               onChange={changeAvatar}
               style={{display:"none"}}
           />
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Nom complet</Form.Label>
-              <Form.Control type="text" placeholder="Entrer votre nom et prénom" 
-                name="name" 
-                required 
-                defaultValue={user.name}
+              <Form.Control type="text" placeholder="Entrer votre nom et prénom"
+                name="name"
+                required
+                defaultValue={user?.name}
                 onChange={handleChange}
               />
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Adresse e-mail</Form.Label>
-              <Form.Control type="email" placeholder="nom@email.com" 
-                name="email" 
-                defaultValue={user.email}
-                disabled 
+              <Form.Control type="email" placeholder="nom@email.com"
+                name="email"
+                defaultValue={user?.email}
+                disabled
             />
           </Form.Group>
           <Form.Group className="mb-3" >
             <Form.Label className="label">Numéro de téléphone</Form.Label>
-              <Form.Control type="text" placeholder="Entrer votre numéro de téléphone" 
-                name="phone" 
-                defaultValue={user.phone}
+              <Form.Control type="text" placeholder="Entrer votre numéro de téléphone"
+                name="phone"
+                defaultValue={user?.phone}
                 onChange={handleChange}
             />
           </Form.Group>
-          { isInstr && 
+          { isInstr &&
             (<>
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Site web personnel</Form.Label>
-                  <Form.Control type="text" placeholder="Enter votre URL" 
-                    name="site" 
-                    defaultValue={user.site}
+                  <Form.Control type="text" placeholder="Enter votre URL"
+                    name="site"
+                    defaultValue={user?.site}
                     onChange={handleChange}
                 />
              </Form.Group>
               <Form.Group className="mb-3" >
                 <Form.Label className="label">Sur moi</Form.Label>
-                  <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..." 
-                    name="description" 
-                    defaultValue={user.description}
+                  <Form.Control as="textarea" rows={3} placeholder="Ecrire ici..."
+                    name="description"
+                    defaultValue={user?.description}
                     onChange={handleChange}
                 />
               </Form.Group>

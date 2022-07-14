@@ -1,54 +1,56 @@
-const mongoose= require('mongoose')
-
-const eventSchema = new mongoose.Schema({
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
+const eventSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    details:{
-        type:String,
-        required: true,
+    details: {
+      type: String,
+      required: true,
     },
-    dateStart:{
-        type: String,
-        required: true,
+    dateStart: {
+      type: String,
+      required: true,
     },
     dateEnd: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     nbTicket: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     price: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     free: {
-        type: Boolean,
+      type: Boolean,
     },
     typeEvent: {
-        type: String,
+      type: String,
     },
     affiche: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     online: {
-        type: Boolean,
+      type: Boolean,
     },
-    postedBy:{
-        type:Object,
-        ref: 'Users'
+    postedBy: {
+      type: Object,
+      ref: "Users",
     },
     statut: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
-
-}, {
-    timestamps: true
-})
-
-module.exports = mongoose.model("Event", eventSchema)
+  },
+  {
+    timestamps: true,
+  }
+);
+eventSchema.plugin(mongoosePaginate);
+module.exports = mongoose.model("Event", eventSchema);

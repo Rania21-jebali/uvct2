@@ -1,32 +1,29 @@
-const router= require('express').Router()
-const eventCtrl= require('../controllers/eventCtrl')
-const auth = require('../middleware/auth')
+const router = require("express").Router();
+const eventCtrl = require("../controllers/eventCtrl");
+const auth = require("../middleware/auth");
 
+router.post("/addEvent", eventCtrl.addEvent);
 
-router.post('/addEvent',auth,eventCtrl.addEvent)
+router.get("/myEvents", auth, eventCtrl.getAllEvent);
 
-router.get('/myEvents',auth,eventCtrl.getAllEvent)
+router.get("/myArchiveEvents", auth, eventCtrl.getAllArchiveEvent);
 
-router.get('/myArchiveEvents',auth,eventCtrl.getAllArchiveEvent)
+router.get("/events", eventCtrl.getAllEvents);
 
-router.get('/events',eventCtrl.getAllEvents)
+router.get("/events/:title", eventCtrl.searchAllEventByTitle);
 
-router.get('/events/:title',eventCtrl.searchAllEventByTitle)
+router.get("/allEvents/:dateStart", eventCtrl.getAllEvents);
 
-router.get('/allEvents/:dateStart',eventCtrl.getAllEvents)
+router.get("/archiveEvents", eventCtrl.getArchiveEvents);
 
-router.get('/archiveEvents',eventCtrl.getArchiveEvents)
+router.get("/event/:id", eventCtrl.getEventById);
 
-router.get('/event/:id',eventCtrl.getEventById)
+router.patch("/updateEvent/:id", auth, eventCtrl.updateEventById);
 
-router.patch('/updateEvent/:id',auth,eventCtrl.updateEventById)
+router.patch("/archiveEvent/:id", auth, eventCtrl.archiveEventById);
 
-router.patch('/archiveEvent/:id', auth, eventCtrl.archiveEventById)
+router.patch("/unarchiveEvent/:id", auth, eventCtrl.unarchiveEventById);
 
-router.patch('/unarchiveEvent/:id', auth, eventCtrl.unarchiveEventById)
+router.delete("/deleteEvent/:id", auth, eventCtrl.deleteEvent);
 
-router.delete('/deleteEvent/:id', auth, eventCtrl.deleteEvent)
-
-
-
-module.exports=router
+module.exports = router;

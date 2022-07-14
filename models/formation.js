@@ -1,62 +1,66 @@
-const mongoose= require('mongoose')
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
-const formationSchema = new mongoose.Schema({
+const formationSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        unique: true,
-        trim: true
+      type: String,
+      unique: true,
+      trim: true,
     },
-    subTitle:{
-        type:String
+    subTitle: {
+      type: String,
     },
-    description:{
-        type:String
+    description: {
+      type: String,
     },
     categorie: {
-        type: String,
+      type: String,
     },
     price: {
-        type: String,
+      type: String,
     },
     level: {
-        type: String,
+      type: String,
     },
     videopromo: {
-        type: String,
+      type: String,
     },
     affiche: {
-        type: String,
+      type: String,
     },
     objectif: {
-        type: String,
+      type: String,
     },
     prerequis: {
-        type: String,
+      type: String,
     },
     intendedFor: {
-        type: String,
+      type: String,
     },
-    postedBy:{
-        type:Object,
-        ref: 'Users'
+    postedBy: {
+      type: Object,
+      ref: "Users",
     },
-    free:{
-        type:Boolean,
-        default:false,
+    free: {
+      type: Boolean,
+      default: false,
     },
-    archiver:{
-        //archiver
-        type:Boolean,
-        default:false,
+    archiver: {
+      //archiver
+      type: Boolean,
+      default: false,
     },
-    statut:{
-        //publier
-        type:Boolean,
-        default:false,
-    }
+    statut: {
+      //publier
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+formationSchema.plugin(mongoosePaginate);
 
-}, {
-    timestamps: true
-})
-
-module.exports = mongoose.model("Formation", formationSchema)
+module.exports = mongoose.model("Formation", formationSchema);

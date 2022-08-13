@@ -15,6 +15,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Table from '../../../components/table/Table';
 import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
+import { Link } from 'react-router-dom';
 
 const initialState = {
   err: '',
@@ -70,7 +71,7 @@ function MesEvents() {
             id:event?._id,
             title:event?.title,
             affiche:event?.affiche,
-            date:event?.dateDebut,
+            date:event?.dateStart,
         }
       })
 
@@ -149,9 +150,9 @@ function MesEvents() {
               renderCell: (params) =>{
                 return(
                   <>  
-                  <a href={`/events/${params.row.id}`}>
+                  <Link to={`/events/${params.row.id}`}>
                           <VisibilityIcon className='icon-action'/>
-                    </a>
+                    </Link>
                       <ArchiveIcon className='icon-action'/>
                       <DeleteOutlineIcon onClick={() => handleDelete(params.row.id)} className="icon-delete"/>
                   </>

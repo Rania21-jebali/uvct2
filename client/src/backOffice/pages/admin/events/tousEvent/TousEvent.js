@@ -59,17 +59,7 @@ const participants = [
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  const rowData= events?.map(event => {
-    return{
-        id:event?._id,
-        title:event?.title,
-        price:event?.price,
-        affiche:event?.affiche,
-        postedBy:event?.postedBy,
-        date:event?.dateDebut,
-    }
-  })
+  
       useEffect(() => {
               fetchEvents(token).then(res =>{
                   dispatch(dispatchGetEvents(res))
@@ -140,7 +130,7 @@ const participants = [
             }
             return(
                 <> 
-                
+                hello
                 </>
             )
           }
@@ -212,6 +202,17 @@ const participants = [
             }
           },
       ];
+      const rowData= events?.map(event => {
+        return{
+            id:event?._id,
+            title:event?.title,
+            price:event?.price,
+            affiche:event?.affiche,
+            instructeur3:event?.postedBy,
+            date:event?.dateDebut,
+        }
+      })
+      console.log(events)
    
   return (
   <>

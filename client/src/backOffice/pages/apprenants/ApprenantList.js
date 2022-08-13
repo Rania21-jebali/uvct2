@@ -30,7 +30,7 @@ function ApprenantList() {
           email:user?.email,
           avatar:user?.avatar,
           date:user?.createdAt,
-          tele:user?.tele,
+          tele:user?.phone,
       }
      })
     

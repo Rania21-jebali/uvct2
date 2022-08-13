@@ -4,15 +4,16 @@ import ScrollTab from '../../components/ScrollTab/ScrollTab'
 import MesEvents from './MesEvent/MesEvents'
 import AddIcon from '@material-ui/icons/Add';
 import './Evenements.css'
+import { Link } from 'react-router-dom';
 
 function Evenements() {
   return (
     <div>
       <div className='eventTitleContainer'>
         <h1 className="title-event">Mes événements</h1>
-        <a href="/ajout-evenement">
+        <Link to="/ajout-evenement">
         <Button className='btn-event'> <AddIcon />Événements</Button>
-        </a>
+        </Link>
       </div>
       <div className="scrollTab">
      <ScrollTab label1="Tous" label2="Mes événements" 

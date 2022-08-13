@@ -20,45 +20,38 @@ import StarsIcon from "@material-ui/icons/Stars";
 import { Link } from "react-router-dom";
 
 // Routes instructeur
-const routes = [
+const routes0 = [
   {
-    key: "1",
     icon: <PersonIcon />,
     name: "Profile",
     path: "/profile",
   },
   {
-    key: "2",
     icon: <DescriptionIcon />,
     name: "Mes formations",
     path: "/mes-formations",
   },
   {
-    key: "3",
     icon: <EventIcon />,
     name: "Mes événements",
     path: "/mes-evenements",
   },
   {
-    key: "4",
     icon: <MonetizationOnIcon />,
     name: "Mes gains",
     path: "/mes-gains",
   },
   {
-    key: "5",
     icon: <ShopIcon />,
     name: "Mes achats",
     path: "/mes-achats",
   },
   {
-    key: "6",
     icon: <SettingsIcon />,
     name: "Paramétres",
     path: "/parametres",
   },
   {
-    key: "7",
     icon: <ExitToAppIcon />,
     name: "Se déconnecter",
   },
@@ -66,43 +59,36 @@ const routes = [
 // Routes apprenant
 const routes1 = [
   {
-    key: "1",
     icon: <PersonIcon />,
     name: "Profile",
     path: "/profile",
   },
   {
-    key: "2",
     icon: <ShopIcon />,
     name: "Mes achats",
     path: "/mes-achats",
   },
   {
-    key: "3",
     icon: <StarsIcon />,
     name: "Mes favoris",
     path: "/mes-favoris",
   },
   {
-    key: "4",
     icon: <MessageIcon />,
     name: "Messages",
     path: "/messages",
   },
   {
-    key: "5",
     icon: <SmsFailedIcon />,
     name: "Réclamtions",
     path: "/reclamations",
   },
   {
-    key: "6",
     icon: <SettingsIcon />,
     name: "Paramétres",
     path: "/parametres",
   },
   {
-    key: "8",
     icon: <ExitToAppIcon />,
     name: "Se déconnecter",
     path: "/se-deconnecter",
@@ -111,55 +97,46 @@ const routes1 = [
 // Routes admin
 const routes2 = [
   {
-    key: "1",
     icon: <DashboardIcon />,
     name: "Tableau du bord",
     path: "/tableau-bord",
   },
   {
-    key: "2",
     icon: <PersonIcon />,
     name: "Profile",
     path: "/profile",
   },
   {
-    key: "3",
     icon: <BusinessCenterIcon />,
     name: "Instructeurs",
-    path: "/instructeur",
+    path: "/instructeurs",
   },
   {
-    key: "4",
     icon: <SchoolIcon />,
     name: "Apprenants",
     path: "/apprenants",
   },
   {
-    key: "5",
     icon: <DescriptionIcon />,
     name: "Formations",
     path: "/all-formations",
   },
   {
-    key: "6",
     icon: <EventIcon />,
     name: "Événements",
     path: "/evenements",
   },
   {
-    key: "7",
     icon: <SmsFailedIcon />,
     name: "Réclamtions",
     path: "/all-reclamation",
   },
   {
-    key: "8",
     icon: <SettingsIcon />,
     name: "Paramétres",
     path: "/parametres",
   },
   {
-    key: "9",
     icon: <ExitToAppIcon />,
     name: "Se déconnecter",
     path: "/se-deconnecter",
@@ -168,75 +145,64 @@ const routes2 = [
 // Routes super admin
 const routes3 = [
   {
-    key: "1",
     icon: <DashboardIcon />,
     name: "Tableau du bord",
     path: "/tableau-bord",
   },
   {
-    key: "2",
     icon: <PersonIcon />,
     name: "Profile",
     path: "/profile",
   },
   {
-    key: "3",
     icon: <SecurityIcon />,
     name: "Administrateur",
     path: "/administrateurs",
   },
   {
-    key: "4",
     icon: <BusinessCenterIcon />,
     name: "Instructeurs",
-    path: "/instructeur",
+    path: "/instructeurs",
   },
   {
-    key: "5",
     icon: <SchoolIcon />,
     name: "Apprenants",
     path: "/apprenants",
   },
   {
-    key: "6",
     icon: <CategoryIcon />,
     name: "Catégories",
     path: "/categories",
   },
   {
-    key: "7",
     icon: <DescriptionIcon />,
     name: "Formations",
     path: "/all-formations",
   },
   {
-    key: "8",
     icon: <EventIcon />,
     name: "Événements",
     path: "/evenements",
   },
   {
-    key: "9",
     icon: <SmsFailedIcon />,
     name: "Réclamtions",
     path: "/all-reclamation",
   },
   {
-    key: "10",
     icon: <SettingsIcon />,
     name: "Paramétres",
     path: "/parametres",
   },
   {
-    key: "11",
     icon: <ExitToAppIcon />,
     name: "Se déconnecter",
     path: "/se-deconnecter",
   },
 ];
 function mapping(x) {
-  return x.map((routes) => (
-    <Menu.Item key={routes.key} icon={routes.icon} className="menu-item-left">
+  return x.map((routes,i) => (
+    <Menu.Item key={i} icon={routes.icon} className="menu-item-left">
       <Link to={routes.path} className="menu-title-item">
         {routes.name}
       </Link>
@@ -255,7 +221,6 @@ export default function LeftList({ children }) {
           mode="inline"
           style={{ backgroundColor: "#F6F7F8", marginTop: "20px" }}
         >
-          {isInstr && mapping(routes)}
           {isLogged &&
             !isInstr &&
             !isSuperAdmin &&
@@ -263,6 +228,7 @@ export default function LeftList({ children }) {
             mapping(routes1)}
           {isAdmin && mapping(routes2)}
           {isSuperAdmin && mapping(routes3)}
+          {isInstr && mapping(routes0)}
         </Menu>
       </div>
       <main className="children-content">{children}</main>

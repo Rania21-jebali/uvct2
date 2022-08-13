@@ -62,6 +62,7 @@ import { CourseVideos } from "../../pages/cours/course-videos/course-videos";
 
 // CSS FILES 
 import "./Body.css";
+import AddMessage from "../../backOffice/pages/messages/addMessage/AddMessage";
 
 
 function Body() {
@@ -70,14 +71,11 @@ function Body() {
 
   return (
     <section className={`${isLogged ? "body" : ""} ${isAdmin ? "body" : ""}`}>
-      {isLogged ? (
+        <>
         <LeftList>
           <Routes>
-            <Route path="/" element={isAdmin ? <NotFound /> : <Home />} />
-            <Route
-              path="/profile"
-              element={isLogged ? <Profil /> : <NotFound />}
-            />
+          <Route path="/" element={isAdmin ? <NotFound /> : <Home />} />
+            <Route exact path="/profile" element={<Profil />} />
             <Route path="/mes-formations" element={<Formations />} />
             <Route path="/mes-evenements" element={<MesEvents />} />
             <Route path="/evenements" element={<Evenements />} />
@@ -85,18 +83,10 @@ function Body() {
             <Route path="/events/:id" element={<UpdateEvent />} />
             <Route path="/parametres" element={<Parametres />} />
             <Route path="/mes-achats" element={<Achats />} />
-            <Route
-              path="/mes-gains"
-              element={isInstr ? <Gains /> : <NotFound />}
-            />
+            <Route path="/mes-gains" element={isInstr ? <Gains /> : <NotFound />}/>
             <Route path="/new-formation/:titre1" element={<NewFormation />} />
             <Route path="/maFormation/:titre1" element={<NewFormation />} />
-            <Route
-              path="/apprenants"
-              element={
-                isAdmin || isSuperAdmin ? <ApprenantList /> : <NotFound />
-              }
-            />
+            <Route path="/apprenants" element={isAdmin || isSuperAdmin ? <ApprenantList /> : <NotFound />}/>
             <Route
               path="/apprenant/:id"
               element={isAdmin || isSuperAdmin ? <Apprenant /> : <NotFound />}
@@ -142,12 +132,6 @@ function Body() {
               element={isSuperAdmin ? <AddAdmin /> : <NotFound />}
             />
             <Route
-              path="/instructeur"
-              element={
-                isAdmin || isSuperAdmin ? <Instructeurs /> : <NotFound />
-              }
-            />
-            <Route
               path="/instructeur/:id"
               element={isAdmin || isSuperAdmin ? <Instructeur /> : <NotFound />}
             />
@@ -175,6 +159,7 @@ function Body() {
             />
             <Route path="/mes-favoris" element={<Favoris />} />
             <Route path="/messages" element={<Messages />} />
+            <Route path="/newMessage" element={<AddMessage />} />
             <Route path="/reclamations" element={<Reclamations />} />
             <Route
               path="/user/reset/:token"
@@ -208,7 +193,8 @@ function Body() {
             <Route path="/reclamationdt/:id" element={<Reclamation1 />} />
           </Routes>
         </LeftList>
-      ) : (
+            
+            </>
         <>
           <Routes>
             <Route path="/" element={isAdmin ? <NotFound /> : <Home />} />
@@ -248,7 +234,6 @@ function Body() {
           </Routes>
           <Footer />
         </>
-      )}
     </section>
   );
 }

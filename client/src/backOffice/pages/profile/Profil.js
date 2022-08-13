@@ -70,7 +70,7 @@ function Profil() {
     }
     const updateInfor = () => {
         try {
-            axios.patch('/user/updateInstr', {
+            axios.patch('/user/update', {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar,
                 phone: phone ? phone : user.phone,

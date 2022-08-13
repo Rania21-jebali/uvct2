@@ -158,8 +158,8 @@ function CandidatList() {
               id:user?._id,
               name:user?.name,
               email:user?.email,
-              specialite:user?.specialite,
-              tele:user?.tele,
+              specialite:user?.speciality,
+              tele:user?.phone,
               date:user?.createdAt,
           }
       })

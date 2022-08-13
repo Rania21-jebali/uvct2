@@ -46,9 +46,19 @@ function AddMessage() {
 
   return (
   <div className='ajout-event'>
-    <BreadcrumbHeader item="Mes événements" link="/evenements" active="Ajouter un nouveau événement"/>
+    <BreadcrumbHeader item="Mes messages" link="/messages" active="Ajouter un nouveau message"/>
       <div className='content-ajout'>
         <Form className="form-event" onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" >
+             <Form.Label className="label">Destinataire</Form.Label>
+              <Form.Control type="text" 
+              placeholder="À" 
+              name="titre"
+              value={titre}
+              onChange={handleChangeInput} 
+              required 
+              />
+          </Form.Group>
           <Form.Group className="mb-3" >
              <Form.Label className="label">Message</Form.Label>
               <Form.Control type="text" 

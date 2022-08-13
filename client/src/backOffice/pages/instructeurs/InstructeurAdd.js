@@ -9,17 +9,17 @@ import SnackbarErr from '../../components/Snackbar/SnackbarErr'
 
 const initialState = {
     name: '',
-    tele:'',
+    phone:'',
     email:'',
     password:'',
     cf_password: '',
-    specialite:'',
+    speciality:'',
     err: '',
     success: ''
 }
 function InstructeurAdd() {
     const [data, setData] = useState(initialState)
-    const {name, tele, email, specialite, password,cf_password, err, success} = data
+    const {name, phone, email, speciality, password,cf_password, err, success} = data
     const token = useSelector(state => state.token)
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
@@ -31,7 +31,7 @@ function InstructeurAdd() {
 
       const handleSubmit = async e => {
         e.preventDefault()
-        if(isEmpty(name) || isEmpty(password) || isEmpty(tele))
+        if(isEmpty(name) || isEmpty(password) || isEmpty(phone))
                 return setData({...data, err: "Please fill in all fields.", success: ''})
   
         if(!isEmail(email))
@@ -45,7 +45,7 @@ function InstructeurAdd() {
   
         try {
             const res = await axios.post('/user/addInstructeur', {
-                name, email, tele, specialite, password
+                name, email, phone, speciality, password
             },{
               headers: {Authorization: token}
             })
@@ -87,7 +87,7 @@ function InstructeurAdd() {
             <Form.Label className="label">Numéro de téléphone</Form.Label>
               <Form.Control type="text" placeholder="Entrer son numéro de téléphone" 
                 name="tele" 
-                value={tele}
+                value={phone}
                 required 
                 onChange={handleChangeInput}
             />
@@ -97,7 +97,7 @@ function InstructeurAdd() {
               <Form.Select aria-label="Default select example"
                 name="specialite"
                 required
-                value={specialite}
+                value={speciality}
                 onChange={handleChangeInput}>
                 <option>Séléctionnez votre spécialité</option>
                 <option value="Développement web">Développement web</option>

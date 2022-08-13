@@ -12,6 +12,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Table from '../../../components/table/Table';
 import SnackbarErr from '../../../components/Snackbar/SnackbarErr';
+import { Link } from 'react-router-dom';
 
 const { confirm } = Modal;
 
@@ -22,12 +23,22 @@ function InstructeurList() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const {user, isAdmin, isSuperAdmin } = auth
-    const users1 = useSelector(state => state.users)
+    const users = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
     const [data, setData] =useState([]);
     const {err} = data
     const dispatch = useDispatch()
     const [open2, setOpen2] = React.useState(false);
+    const rowData= users?.map(user => {
+      return{
+          id:user?._id,
+          avatar:user?.avatar,
+          name:user?.name,
+          email:user?.email,
+          date:user?.createdAt,
+          tele:user?.phone,
+      }
+     })
     
       const handleClick = (event) => {
           setAnchorEl(event.currentTarget);
@@ -116,7 +127,7 @@ function InstructeurList() {
             renderCell: (params) =>{
               function showDeleteConfirm() {
                 confirm({
-                  title: 'Êtes-vous sûr de vouloir supprimer ce compte apprenant?',
+                  title: 'Êtes-vous sûr de vouloir supprimer ce compte instructeur?',
                   icon: <ExclamationCircleOutlined />,
                   okText: 'Supprimer',
                   okType: 'danger',
@@ -131,9 +142,9 @@ function InstructeurList() {
               }
               return(
                 <>
-                 <a href={`/instructeur/${params.row.id}`}>
+                 <Link to={`/instructeur/${params.row.id}`}>
                  <VisibilityIcon className='icon-action'/>
-                 </a>
+                 </Link>
                     <Button aria-describedby={id} className="btn-action" onClick={handleClick}>⋮</Button>
                         <Popover
                               id={id}
@@ -158,16 +169,7 @@ function InstructeurList() {
             }
           },
       ];
-    const rowData= users1?.map(user => {
-        return{
-            id:user?._id,
-            name:user?.name,
-            email:user?.email,
-            avatar:user?.avatar,
-            tele:user?.tele,
-            date:user?.createdAt,
-          }
-        })
+        
 
   return (
     <div style={{ height: 550, width: '100%' }} >

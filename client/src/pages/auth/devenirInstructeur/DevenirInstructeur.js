@@ -12,16 +12,16 @@ import {arrow} from "../../../assets";
 const initialState = {
     name: '',
     email: '',
-    specialite:'',
+    speciality:'',
     message:'',
-    tele:'',
+    phone:'',
     err: '',
     success: ''
 }
 
 function DevenirInstructeur() {
     const [user, setUser] = useState(initialState)
-    const {name, email, specialite,message,tele,err, success} = user
+    const {name, email, speciality,message,phone,err, success} = user
     const navigate = useNavigate();
     // const [file, setFile] = useState(false);
 
@@ -33,15 +33,15 @@ function DevenirInstructeur() {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        if(isEmpty(name) || isEmpty(specialite) || isEmpty(tele) || isEmpty(message))
+        if(isEmpty(name) || isEmpty(speciality) || isEmpty(phone) || isEmpty(email) || isEmpty(message))
                 return setUser({...user, err: "Merci de remplir tous les champs.", success: ''})
 
         if(!isEmail(email))
             return setUser({...user, err: "Invalid emails.", success: ''})
 
         try {
-            const res = await axios.post('/user/registerInstr', {
-                name, email, specialite,message,tele
+            const res = await axios.post('/user/devenirInstr', {
+                name, email, speciality,message,phone
             })
 
             setUser({...user, err: '', success: res.data.msg})
@@ -73,7 +73,7 @@ function DevenirInstructeur() {
       </Form.Group>
       <Form.Group  controlId="formBasicEmail" >
       <Form.Label className='labelForm'>Adresse E-mail</Form.Label>
-        <Form.Control type="email" placeholder="nom@eamil.com"
+        <Form.Control type="email" placeholder="nom@email.com"
         name="email"
         required
         value={email}
@@ -83,9 +83,9 @@ function DevenirInstructeur() {
       <Form.Group  controlId="formBasicEmail" >
       <Form.Label className='labelForm'>Téléphone</Form.Label>
         <Form.Control type="number" placeholder="21 212 212"
-        name="tele"
+        name="phone"
         required
-        value={tele}
+        value={phone}
         onChange={handleChangeInput}
          />
       </Form.Group>
@@ -98,9 +98,9 @@ function DevenirInstructeur() {
       <Form.Group className="mb-3" >
       <Form.Label className='labelForm'>Spécialité</Form.Label>
         <Form.Select aria-label="Default select example"
-          name="specialite"
+          name="speciality"
           required
-          value={specialite}
+          value={speciality}
           onChange={handleChangeInput}>
           <option>Séléctionnez votre spécialité</option>
           <option value="développement web">développement web</option>

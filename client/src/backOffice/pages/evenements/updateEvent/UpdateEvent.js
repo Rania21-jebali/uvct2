@@ -86,7 +86,7 @@ function UpdateEvent(props){
                        title: title ? title : events1.title,
                        details: details ? details : events1.details,
                        datStart: dateStart ? dateStart : events1.dateStart,
-                       date: dateEnd ? dateEnd : events1.dateEnd,
+                       dateEnd: dateEnd ? dateEnd : events1.dateEnd,
                        nbTicket:  nbTicket ?  nbTicket : events1.nbTicket,
                        price:  price ?  price : events1.price,
                        typeEvent:  typeEvent ?  typeEvent : events1.typeEvent,

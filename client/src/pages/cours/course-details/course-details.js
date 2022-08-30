@@ -10,7 +10,7 @@ import {CommentComponent} from "../components/comment-component/comment-componen
 
 export const CourseDetails = () => {
     const [activeAccordion, setActiveAccordion] = useState('0');
-
+//hello
   return(
       <div className={'course-details'}>
           <div className={'gray-container'}>

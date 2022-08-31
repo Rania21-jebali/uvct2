@@ -13,10 +13,8 @@ export const fetchAllCond = async (token) => {
     })
     return res
 }
-export const fetchAllInstr = async (token) => {
-    const res = await axios.get('/user/allInstr', {
-        headers: {Authorization: token}
-    })
+export const fetchAllInstr = async () => {
+    const res = await axios.get('/user/allInstr')
     return res
 }
 

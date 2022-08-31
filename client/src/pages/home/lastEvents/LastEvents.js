@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {  Autoplay } from 'swiper';
 import './LastEvents.scss'
+import axios from 'axios';
 
 function LastEvents(){
+  const [events, setEvents] =  useState([])
 
-
+  useEffect(()=> {
+      axios({url: 'http://localhost:5000/events', method:'GET'})
+          .then(response => {
+              console.log(response.data)
+              setEvents(response.data)
+          })
+  })
+console.log(events)
     function EventCard({img, date, hour, title, username, avatar, link, info}) {
       return(
         <div className="events-card">
@@ -65,36 +74,18 @@ function LastEvents(){
                     onSlideChangeTransitionStart={()=>console.log('start')}
                     onSlidePrevTransitionEnd={()=>console.log('start')}
                     onSwiper={(swiper) => console.log(swiper)}>
-                    <SwiperSlide>
+                    {events.map((event1) => {
+                      <SwiperSlide>
                       <EventCard
-                        img="./images/Rectangle88.png"
-                        date="06/04/2022"
-                        hour="22H:00"
-                        title="Selling from A to Z"
-                        avatar="./images/Instruteur1.png"
-                        username="Omar Abdelrahman"
+                        img={event1.affiche}
+                        date={event1.dateStart}
+                        hour={event1.dateEnd}
+                        title={event1.title}
+                        avatar={event1.avatar}
+                        username={event1.avatar}
                       />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EventCard
-                        img="./images/Rectangle881.png"
-                        date="06/04/2022"
-                        hour="22H:00"
-                        title="Selling from A to Z"
-                        avatar="./images/Instruteur1.png"
-                        username="Omar Abdelrahman"
-                      />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EventCard
-                        img="./images/Rectangle882.png"
-                        date="06/04/2022"
-                        hour="22H:00"
-                        title="Selling from A to Z"
-                        avatar="./images/Instruteur1.png"
-                        username="Omar Abdelrahman"
-                      />
-                    </SwiperSlide>
+                      </SwiperSlide>
+                      })}
                   </Swiper>
                 </div>
               </div>

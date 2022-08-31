@@ -15,7 +15,7 @@ export const CourseItem = ({
     <div key={_id} className={"course-item"}>
       <img alt={`course ${title}`} src={affiche} />
       <div className={"course-info-container"}>
-        <img src={affiche} className={"course-owner-image"} />
+        <img src={affiche} className={"course-owner-image"} alt=""/>
         <Typography className={"course-name"}>{title}</Typography>
         <Typography className={"course-owner"}>{postedBy}</Typography>
         <Typography className={"course-quote"}>{objectif}</Typography>

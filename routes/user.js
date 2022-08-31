@@ -38,7 +38,7 @@ router.get("/allCond", auth, userCtrl.getCondAllInfor);
 
 router.get("/allAdmin", auth, userCtrl.getAdminAllInfor);
 
-router.get("/allInstr", auth, userCtrl.getInstrAllInfor);
+router.get("/allInstr", userCtrl.getInstrAllInfor);
 
 router.get("/logout", userCtrl.logout);
 

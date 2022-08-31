@@ -17,7 +17,7 @@ export const EventCard = ({_id, affiche, dateStart, enLigne, title, postedBy}) =
             <Typography className={'title'}>{title}</Typography>
             <Typography className={'content-creator'}>{postedBy}</Typography>
             <div className={'card-footer'}>
-                <Link to={'/event/'+_id}>
+                <Link to={'/evenement/'+_id}>
                     <Button className={'event-details-info'}>Plus d'information</Button>
                 </Link>
                 <Button icon={<ShoppingCart/>} className={'price-details-info'}/>

@@ -1,11 +1,21 @@
 import {Select} from "antd";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {ArrowDropDown, SearchOutlined} from "@material-ui/icons";
 import {QuickNavigation} from "../../components/quick-navigation/quick-navigation";
 import InstructeurCard from "./components/instructeurCard";
 import './instructors.scss'
+import axios from "axios";
 
 export const Instructeurs1 = () => {
+    const [user, setUser] =  useState({})
+
+    useEffect(()=> {
+        axios({url: 'http://localhost:5000/user/allInstr', method:'GET'})
+            .then(response => {
+                console.log(response.data)
+                setUser(response.data)
+            })
+    })
  return(
      <div className={'instructors-container'}>
          <QuickNavigation/>
@@ -32,9 +42,9 @@ export const Instructeurs1 = () => {
          </div>
          <div className={'all-instructors-container'} >
              {
-                 [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map(()=> {
+                 user.map((user1)=> {
                      return(
-                         <InstructeurCard />
+                         <InstructeurCard {...user1} />
                      )
                  })
              }

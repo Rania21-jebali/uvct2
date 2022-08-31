@@ -16,7 +16,7 @@ export const CoursPage = () => {
         console.log(response.data);
       })
       .catch();
-  }, []);
+  });
 
   return (
     <div className={"cours-page"}>

@@ -70,7 +70,7 @@ function Body() {
   const { isLogged, isAdmin, isInstr, isSuperAdmin } = auth;
 
   return (
-    <section className={`${isLogged ? "body" : ""} ${isAdmin ? "body" : ""}`}>
+    <section className={`${isLogged ? "body" : ""}`}>
         <>
         <LeftList>
           <Routes>
@@ -87,76 +87,21 @@ function Body() {
             <Route path="/new-formation/:titre1" element={<NewFormation />} />
             <Route path="/maFormation/:titre1" element={<NewFormation />} />
             <Route path="/apprenants" element={isAdmin || isSuperAdmin ? <ApprenantList /> : <NotFound />}/>
-            <Route
-              path="/apprenant/:id"
-              element={isAdmin || isSuperAdmin ? <Apprenant /> : <NotFound />}
-            />
-            <Route
-              path="/user/:id"
-              element={isAdmin || isSuperAdmin ? <EditUser /> : <NotFound />}
-            />
-            <Route
-              path="/admin/:id"
-              element={
-                isAdmin || isSuperAdmin ? <Administrateur /> : <NotFound />
-              }
-            />
-            <Route
-              path="/ajout-apprenant"
-              element={
-                isAdmin || isSuperAdmin ? <ApprenantAdd /> : <NotFound />
-              }
-            />
-            <Route
-              path="/formations"
-              element={
-                isAdmin || isSuperAdmin ? <FormationList /> : <NotFound />
-              }
-            />
-            <Route
-              path="/all-formations"
-              element={isAdmin || isSuperAdmin ? <Formations1 /> : <NotFound />}
-            />
-            <Route
-              path="/instructeurs"
-              element={
-                isAdmin || isSuperAdmin ? <Instructeurs /> : <NotFound />
-              }
-            />
-            <Route
-              path="/administrateurs"
-              element={isSuperAdmin ? <AdministrateurList /> : <NotFound />}
-            />
-            <Route
-              path="/addAdmin"
-              element={isSuperAdmin ? <AddAdmin /> : <NotFound />}
-            />
-            <Route
-              path="/instructeur/:id"
-              element={isAdmin || isSuperAdmin ? <Instructeur /> : <NotFound />}
-            />
-            <Route
-              path="/ajouter-instructeur"
-              element={
-                isAdmin || isSuperAdmin ? <InstructeurAdd /> : <NotFound />
-              }
-            />
-            <Route
-              path="/candidat/:id"
-              element={isAdmin || isSuperAdmin ? <Candidat /> : <NotFound />}
-            />
-            <Route
-              path="/tableau-bord"
-              element={isAdmin || isSuperAdmin ? <Dashbord /> : <NotFound />}
-            />
-            <Route
-              path="/categories"
-              element={isSuperAdmin ? <Categories /> : <NotFound />}
-            />
-            <Route
-              path="/addcategorie"
-              element={isSuperAdmin ? <AddCategorie /> : <NotFound />}
-            />
+            <Route path="/apprenant/:id" element={isAdmin || isSuperAdmin ? <Apprenant /> : <NotFound />}/>
+            <Route path="/user/:id" element={isAdmin || isSuperAdmin ? <EditUser /> : <NotFound />}/>
+            <Route path="/admin/:id" element={isAdmin || isSuperAdmin ? <Administrateur /> : <NotFound />}/>
+            <Route path="/ajout-apprenant" element={isAdmin || isSuperAdmin ? <ApprenantAdd /> : <NotFound />}/>
+            <Route path="/formations" element={isAdmin || isSuperAdmin ? <FormationList /> : <NotFound />}/>
+            <Route path="/all-formations" element={isAdmin || isSuperAdmin ? <Formations1 /> : <NotFound />}/>
+            <Route path="/instructeurs" element={isAdmin || isSuperAdmin ? <Instructeurs /> : <NotFound />}/>
+            <Route path="/administrateurs" element={isSuperAdmin ? <AdministrateurList /> : <NotFound />}/>
+            <Route path="/addAdmin" element={isSuperAdmin ? <AddAdmin /> : <NotFound />}/>
+            <Route path="/instructeur/:id" element={isAdmin || isSuperAdmin ? <Instructeur /> : <NotFound />}/>
+            <Route path="/ajouter-instructeur" element={isAdmin || isSuperAdmin ? <InstructeurAdd /> : <NotFound />}/>
+            <Route path="/candidat/:id" element={isAdmin || isSuperAdmin ? <Candidat /> : <NotFound />} />
+            <Route path="/tableau-bord" element={isAdmin || isSuperAdmin ? <Dashbord /> : <NotFound />}/>
+            <Route path="/categories" element={isSuperAdmin ? <Categories /> : <NotFound />} />
+            <Route path="/addcategorie" element={isSuperAdmin ? <AddCategorie /> : <NotFound />}/>
             <Route path="/mes-favoris" element={<Favoris />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/newMessage" element={<AddMessage />} />
@@ -223,9 +168,9 @@ function Body() {
               element={isLogged ? <NotFound /> : <ResetPassword />}
             />
             <Route path="/panier" element={<Panier />} />
-            <Route path="/events" element={<AllEvents />} />
+            <Route path="/evenements" element={<AllEvents />} />
             <Route path="/cours" element={<CoursPage />} />
-            <Route path="/event/:id" element={<EventDetails />} />
+            <Route path="/evenement/:id" element={<EventDetails />} />
             <Route path="/cours/:id" element={<CourseDetails />} />
             <Route path="/cours/:id/videos" element={<CourseVideos />} />
             <Route path="/partner" element={<PartnerPage />} />

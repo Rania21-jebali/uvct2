@@ -30,7 +30,7 @@ const routes = [
     {name: "Accueil", route: "/"},
     {name: "Cours", route: "/cours"},
     {name: "Instructeurs", route: "/allInstructeurs"},
-    {name: "Événements", route: "/events"},
+    {name: "Événements", route: "/evenements"},
     {name: "Offres", route: "/"},
     {name: "À propos", route: "/"},
     {name: "Blog", route: "/"},

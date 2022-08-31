@@ -8,16 +8,16 @@ import axios from "axios";
 import {ChangeEvent} from "react";
 
 export const AllEvents = () => {
-    const [data, setData] =  useState([])
+    const [events, setEvents] =  useState([])
     const [search, setSearch] =  useState('')
 
     useEffect(()=> {
         axios({url: 'http://localhost:5000/events', method:'GET'})
             .then(response => {
                 console.log(response.data)
-                setData(response.data)
+                setEvents(response.data)
             })
-    }, [])
+    })
 
     const handleSearchContent = (event) => {
         setSearch(event.target.value)
@@ -46,9 +46,9 @@ export const AllEvents = () => {
          </div>
          <div className={'all-events-container'} >
              {
-             data.filter(item=> item.title.toLowerCase().includes(search.toLowerCase().trim())).map((event)=> {
+             events.filter(item=> item.title.toLowerCase().includes(search.toLowerCase().trim())).map((event1)=> {
                  return(
-                    <EventCard {...event} />
+                    <EventCard {...event1} />
                  )
              })
          }

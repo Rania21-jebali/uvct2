@@ -22,7 +22,7 @@ function InstructeurList() {
     const id= open ? 'simple-popover' : undefined;
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
-    const {user, isAdmin, isSuperAdmin } = auth
+    const {user} = auth
     const users = useSelector(state => state.users)
     const [callback, setCallback] = useState(false)
     const [data, setData] =useState([]);
@@ -49,11 +49,10 @@ function InstructeurList() {
         };
 
       useEffect(() => {
-        if(isAdmin|| isSuperAdmin ){
-              fetchAllInstr(token).then(res =>{
+              fetchAllInstr().then(res =>{
                   dispatch(dispatchGetAllInstr(res))
               })
-         }},[token,isAdmin, isSuperAdmin, dispatch, callback])
+            },[ dispatch, callback])
 
       const handleDelete = async (id) => {
           try {

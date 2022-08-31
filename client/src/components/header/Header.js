@@ -178,6 +178,7 @@ function Header() {
               open={open}
               anchorEl={anchorEl}
               onClose={handleClose2}
+              anchorPosition={{ top: 200, left: 400 }}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center",

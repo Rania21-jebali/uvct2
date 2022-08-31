@@ -209,7 +209,15 @@ function mapping(x) {
     </Menu.Item>
   ));
 }
-
+function mapping2(x) {
+  return x.map((routes,i) => (
+    <Menu.Item key={i} icon={routes.icon} className="menu-item-left">
+      <a href={routes.path} className="menu-title-item">
+        {routes.name}
+      </a>
+    </Menu.Item>
+  ));
+}
 export default function LeftList({ children }) {
   const auth = useSelector((state) => state.auth);
   const { isLogged, isAdmin, isInstr, isSuperAdmin } = auth;
@@ -228,7 +236,7 @@ export default function LeftList({ children }) {
             mapping(routes1)}
           {isAdmin && mapping(routes2)}
           {isSuperAdmin && mapping(routes3)}
-          {isInstr && mapping(routes0)}
+          {isInstr && mapping2(routes0)}
         </Menu>
       </div>
       <main className="children-content">{children}</main>
